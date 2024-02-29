@@ -3,7 +3,7 @@ import './main.css'
 
 const { kakao } = window;
 
-const MainPage=()=>{
+const Main=()=>{
 
     useEffect(()=>{
         const geoLocation=()=>{
@@ -34,4 +34,4 @@ const MainPage=()=>{
         </div>
     )
 }
-export default MainPage;
+export default Main;
