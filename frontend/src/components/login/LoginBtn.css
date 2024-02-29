@@ -1,0 +1,30 @@
+.login-btn {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px 20px;
+}
+.login-btn img {
+    width: 25px;
+    display: block;
+    margin-top: 1px;
+    height: 25px;
+}
+
+.login-btn span {
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    width:150px;
+    text-align: left;
+}
+
+.login-btn {
+    margin-top: 20px;
+}
+.wrapper2 {
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+}

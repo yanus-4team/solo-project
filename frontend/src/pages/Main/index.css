@@ -1,0 +1,54 @@
+:root {
+    --main-color: #CDF0ED;
+    --primary-color: #0B7F7B;
+}
+
+body {
+    background-color: var(--main-color);
+}
+.login-page{
+    width: 500px;
+    margin:0 auto;
+}
+.top {
+    text-align: center;
+}
+
+.top-header {
+    margin-top: 80px;
+}
+.main-logo {
+    width: 200px;
+}
+.wrapper {
+    padding: 0 60px;
+}
+.top-description {
+    text-align: left;
+    color: var(--primary-color);
+}
+
+.top-description h1 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.underline {
+    background-color: var(--primary-color);
+    height: 4px;
+    width: 100%
+}
+
+.top-description p {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 30px;
+}
+.no-login{
+    padding:20px;
+    text-align: center;
+}
+.no-login a{
+    text-decoration: none;
+    color:black;
+}
