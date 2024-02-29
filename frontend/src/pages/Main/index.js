@@ -1,9 +1,11 @@
-import { useEffect } from "react";
-import './main.css'
+import { useEffect, useState } from "react";
+import './main.css';
+import menuImage from '../../assets/hamburger-menu-icon.png'
+import user from '../../assets/user.png'
 
 const { kakao } = window;
 
-const MainPage=()=>{
+const Main = () => {
 
     useEffect(()=>{
         const geoLocation=()=>{
@@ -28,10 +30,37 @@ const MainPage=()=>{
         geoLocation();
     },[])
 
-    return(
-        <div>
-            <div id="map"></div>
+
+    const [isOpen, setIsOpen ] = useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
+    return (
+        <div id={`map`}>
+            <div className={`menu-toggle-btn-box   ${isOpen ? "open": ""}` }>
+                            <button className="hamberger-btn" onClick={toggleMenu}>
+                                <img src={menuImage} alt="Menu" className="menu-image" />
+                            </button>
+                        </div>
+            <div className={`menu ${isOpen ? "open": ""} `}>
+               
+                {isOpen && (
+                    <div>
+                        
+                        <div className="user-container">
+                            <img src={user} alt="User" className="user-image" />
+                        </div>
+                        <div className="text1">yanus 님</div>
+                        <div className="text2">마이페이지</div>
+                        <div className="text2">방문 기록</div>
+                        <div className="text2">내 리뷰</div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
-export default MainPage;
+
+export default Main;
