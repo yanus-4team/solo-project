@@ -1,31 +1,48 @@
+body{
+    margin : 0;
+    padding: 0;
+}
+
+
 #map{
     width: 100vw;
     height: 100vh;
 }
 
+.menu.open{
+    right: 0;
+}
 
-
-
+.menu-toggle-btn-box.open{
+    right:200px;
+}
 
 .menu {
     position: absolute;
     top: 0;
-    right: -200px;
     width: 194px;
     height: 100vh;
     background-color: #CDF0ED;
     border-left: 2px solid black;
-    z-index: 5;
-    
+    z-index: 7;
+    right: -200px;
+    transition: right 0.5s ease;
+
 }
 
-.menu-container {
-    float: right;
-    position: relative;
+.hamberger-btn{
+    background-color: transparent;
+}
+
+.menu-toggle-btn-box {
+    position: absolute;
     margin-right: 30px;
     margin-top: 30px;
     width: 40px;
     height: 40px;
+    z-index: 5;
+    right:0;
+    transition: right 0.5s ease;
 }
 
 .menu-image {

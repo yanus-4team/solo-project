@@ -5,16 +5,31 @@ import user from '../../assets/user.png'
 
 const { kakao } = window;
 
-const MainPage = () => {
+const Main = () => {
 
-    useEffect(() => {
-        const container = document.getElementById('map');
-        const options = {
-            center: new kakao.maps.LatLng(37.354352, 127.545641),
-            level: 3
+    useEffect(()=>{
+        const geoLocation=()=>{
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition((position)=>{
+                    const lat=position.coords.latitude;
+                    const lng=position.coords.longitude;
+
+                    const container=document.getElementById('map');
+                    const options={
+                        center:new kakao.maps.LatLng(lat,lng),
+                        level:3
+                    };
+                    const map = new kakao.maps.Map(container,options);
+                },(error)=>{
+                    console.error("failed : "+error.message);
+                });
+            }else{
+                console.error("Geolocation is not supported bt this browser.");
+            }
         };
-        const map = new kakao.maps.Map(container, options);
-    }, [])
+        geoLocation();
+    },[])
+
 
     const [isOpen, setIsOpen ] = useState(false);
 
@@ -23,15 +38,17 @@ const MainPage = () => {
     }
 
     return (
-        <div id="map">
-            <div className="menu">
-                <div className="menu-container">
-                    <button onClick={toggleMenu}>
-                        <img src={menuImage} alt="Menu" className="menu-image" />
-                    </button>
-                </div>
+        <div id={`map`}>
+            <div className={`menu-toggle-btn-box   ${isOpen ? "open": ""}` }>
+                            <button className="hamberger-btn" onClick={toggleMenu}>
+                                <img src={menuImage} alt="Menu" className="menu-image" />
+                            </button>
+                        </div>
+            <div className={`menu ${isOpen ? "open": ""} `}>
+               
                 {isOpen && (
                     <div>
+                        
                         <div className="user-container">
                             <img src={user} alt="User" className="user-image" />
                         </div>
@@ -46,4 +63,4 @@ const MainPage = () => {
     )
 }
 
-export default MainPage;
+export default Main;
