@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "./index.css";
+import "./login.css";
 import MainLogo from "../../assets/main_logo.png";
 import LoginBtn from "../../components/login/LoginBtn";
 import { Link } from "react-router-dom";
