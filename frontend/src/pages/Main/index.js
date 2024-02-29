@@ -1,37 +1,49 @@
-import { useEffect } from "react";
-import './main.css'
+import { useEffect, useState } from "react";
+import './main.css';
+import menuImage from '../../assets/hamburger-menu-icon.png'
+import user from '../../assets/user.png'
 
 const { kakao } = window;
 
-const MainPage=()=>{
+const MainPage = () => {
 
-    useEffect(()=>{
-        const geoLocation=()=>{
-            if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition((position)=>{
-                    const lat=position.coords.latitude;
-                    const lng=position.coords.longitude;
-
-                    const container=document.getElementById('map');
-                    const options={
-                        center:new kakao.maps.LatLng(lat,lng),
-                        level:3
-                    };
-                    const map = new kakao.maps.Map(container,options);
-                },(error)=>{
-                    console.error("failed : "+error.message);
-                });
-            }else{
-                console.error("Geolocation is not supported bt this browser.");
-            }
+    useEffect(() => {
+        const container = document.getElementById('map');
+        const options = {
+            center: new kakao.maps.LatLng(37.354352, 127.545641),
+            level: 3
         };
-        geoLocation();
-    },[])
+        const map = new kakao.maps.Map(container, options);
+    }, [])
 
-    return(
-        <div>
-            <div id="map"></div>
+    const [isOpen, setIsOpen ] = useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
+    return (
+        <div id="map">
+            <div className="menu">
+                <div className="menu-container">
+                    <button onClick={toggleMenu}>
+                        <img src={menuImage} alt="Menu" className="menu-image" />
+                    </button>
+                </div>
+                {isOpen && (
+                    <div>
+                        <div className="user-container">
+                            <img src={user} alt="User" className="user-image" />
+                        </div>
+                        <div className="text1">yanus 님</div>
+                        <div className="text2">마이페이지</div>
+                        <div className="text2">방문 기록</div>
+                        <div className="text2">내 리뷰</div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
+
 export default MainPage;
