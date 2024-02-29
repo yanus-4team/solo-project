@@ -19,7 +19,7 @@ function LoginBtn(props) {
         const GOOGLE_AUTH_URL=""
         console.log(type[1])
         if (type[1]==="이메일"){
-            navigate("/login")
+            navigate("/")
         }
         else if (type[1]==="네이버"){
             window.location.href=NAVER_AUTH_URL
