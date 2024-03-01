@@ -1,4 +1,6 @@
-.menu {
+import styled from "styled-components";
+
+export const Container = styled.div`
     position: fixed;
     top: 0;
     right: -200px;
@@ -6,23 +8,14 @@
     height: 100vh;
     background-color: #CDF0ED;
     border-left: 2px solid black;
-}
+    transition: right 0.5s ease;
+    z-index: 7;
+    &.open {
+        right: 0;
+    }
+`;
 
-.menu-container {
-    float: right;
-    position: relative;
-    margin-right: 30px;
-    margin-top: 30px;
-    width: 40px;
-    height: 40px;
-}
-
-.menu-image {
-    width: 100%;
-    height: 100%;
-}
-
-.user-container {
+export const UserContainer = styled.div`
     position: absolute;
     top: calc(100px);
     right: 50%;
@@ -31,19 +24,19 @@
     align-items: center;
     width: 100px;
     height: 100px;
-}
+`;
 
-.user-image {
+export const UserImage = styled.img`
     width: 100%;
     height: 100%;
-}
+`;
 
-.text1 {
+export const Text1 = styled.div`
     text-align: center;
     margin-top: 265px;
-}
+`;
 
-.text2 {
+export const Text2 = styled.div`
     text-align: center;
-    margin-top: 20px
-}
+    margin-top: 20px;
+`;

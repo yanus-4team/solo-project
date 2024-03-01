@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import './main.css';
-import menuImage from '../../assets/hamburger-menu-icon.png'
-import user from '../../assets/user.png'
-import Menu from '../../components/Menu'
+import React, { useEffect, useState } from "react";
+import * as S from "./styles"; // 스타일 파일 가져오기
+import menuImage from '../../assets/hamburger-menu-icon.png';
+import Menu from '../../components/Menu';
 
 const { kakao } = window;
 
@@ -24,7 +23,7 @@ const Main = () => {
                     console.error("failed : "+error.message);
                 });
             }else{
-                console.error("Geolocation is not supported bt this browser.");
+                console.error("Geolocation is not supported by this browser.");
             }
         };
         geoLocation();
@@ -38,21 +37,15 @@ const Main = () => {
     }
 
     return (
-        <div id="map">
-            <div className={`menu-toggle-btn-box   ${isOpen ? "open": ""}` }>
-                            <button className="hamberger-btn" onClick={toggleMenu}>
-                                <img src={menuImage} alt="Menu" className="menu-image" />
-                            </button>
-                        </div>
-            <div className={`menu ${isOpen ? "open": ""} `}>
-               
-                {isOpen && (
-                    <Menu />
-                )}
-            </div>
-        </div>
+        <S.MapContainer id="map">
+            <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
+                <S.MenuToggleBtn onClick={toggleMenu}>
+                    <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
+                </S.MenuToggleBtn>
+            </S.MenuToggleBtnBox>
+            <Menu isOpen={isOpen} />
+        </S.MapContainer>
     )
 }
-
 
 export default Main;

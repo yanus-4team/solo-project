@@ -15,4 +15,6 @@
 
 body {
     background-color: var(--main-color);
+    margin : 0;
+    padding: 0;
 }

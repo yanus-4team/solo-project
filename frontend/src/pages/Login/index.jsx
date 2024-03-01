@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
-import { PageContainer,TopHeader, TopContainer, TopDescription, Underline, BottomContainer, Welcome, Text, NoLoginContainer, NoLoginLink, MainLogo, Wrapper, LoginBtnList } from "./styles";
+import * as S from "./styles";
 
 function LoginPage() {
     const [oauthLogin, setOauthLogin] = useState([
@@ -27,32 +27,32 @@ function LoginPage() {
         }
     ])
     return (
-        <PageContainer>
-            <TopContainer>
-                <TopHeader>
-                    <MainLogo src={MainLogoSrc} alt="" />
-                </TopHeader>
-                <Wrapper>
-                    <TopDescription >
-                        <Welcome>WELCOME !</Welcome>
-                        <Underline className="underline"></Underline>
-                        <Text>같이 놀거나 여행갈 사람이 필요할 땐</Text>
-                    </TopDescription>
-                </Wrapper>
-            </TopContainer>
-            <BottomContainer>
-                <Wrapper>
-                    <LoginBtnList>
+        <S.PageContainer>
+            <S.TopContainer>
+                <S.TopHeader>
+                    <S.MainLogo src={MainLogoSrc} alt="" />
+                </S.TopHeader>
+                <S.Wrapper>
+                    <S.TopDescription >
+                        <S.Welcome>WELCOME !</S.Welcome>
+                        <S.Underline className="underline"></S.Underline>
+                        <S.Text>같이 놀거나 여행갈 사람이 필요할 땐</S.Text>
+                    </S.TopDescription>
+                </S.Wrapper>
+            </S.TopContainer>
+            <S.BottomContainer>
+                <S.Wrapper>
+                    <S.LoginBtnList>
                         {oauthLogin.map((value, index) => (
                             <LoginBtn loginType={value} key={index} />
                         ))}
-                    </LoginBtnList>
-                </Wrapper>
-                <NoLoginContainer>
-                    <NoLoginLink to={'/'}>로그인 없이 이용하기</NoLoginLink>
-                 </NoLoginContainer>
-            </BottomContainer>
-        </PageContainer>
+                    </S.LoginBtnList>
+                </S.Wrapper>
+                <S.NoLoginContainer>
+                    <S.NoLoginLink to={'/'}>로그인 없이 이용하기</S.NoLoginLink>
+                 </S.NoLoginContainer>
+            </S.BottomContainer>
+        </S.PageContainer>
     );
 }
 
