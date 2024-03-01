@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import './main.css';
 import menuImage from '../../assets/hamburger-menu-icon.png'
 import user from '../../assets/user.png'
+import Menu from '../../components/Menu'
 
 const { kakao } = window;
 
 const Main = () => {
-
     useEffect(()=>{
         const geoLocation=()=>{
             if(navigator.geolocation){
@@ -47,20 +47,12 @@ const Main = () => {
             <div className={`menu ${isOpen ? "open": ""} `}>
                
                 {isOpen && (
-                    <div>
-                        
-                        <div className="user-container">
-                            <img src={user} alt="User" className="user-image" />
-                        </div>
-                        <div className="text1">yanus 님</div>
-                        <div className="text2">마이페이지</div>
-                        <div className="text2">방문 기록</div>
-                        <div className="text2">내 리뷰</div>
-                    </div>
+                    <Menu />
                 )}
             </div>
         </div>
     )
 }
+
 
 export default Main;

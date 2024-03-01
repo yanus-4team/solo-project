@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../pages/Main";
-import LoginPage from "../pages/Login";
+import Login from "../pages/Login";
 
 export const router=createBrowserRouter([
-    {path:'/main',Component:Main},
-    {path:'/',Component:LoginPage},
+    {path:'/',Component:Main},
+    {path:'/login',Component:Login},
 ])
