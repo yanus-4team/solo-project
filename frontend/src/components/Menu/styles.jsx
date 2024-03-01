@@ -17,18 +17,16 @@ export const Container = styled.div`
 
 export const UserContainer = styled.div`
     position: absolute;
-    top: calc(100px);
-    right: 26%;
+    top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: 100%;
 `;
 
 export const UserImage = styled.img`
-    width: 100%;
-    height: 100%;
+    width: 100px;
+    height: 100px;
 `;
 
 export const Text1 = styled.div`
