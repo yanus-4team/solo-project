@@ -1,4 +1,4 @@
-package com.app.backend;
+package com.tutorial.jwtsecurity;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
