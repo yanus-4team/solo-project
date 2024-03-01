@@ -18,7 +18,7 @@ export const Container = styled.div`
 export const UserContainer = styled.div`
     position: absolute;
     top: calc(100px);
-    right: 50%;
+    right: 26%;
     display: flex;
     justify-content: center;
     align-items: center;
