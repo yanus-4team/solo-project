@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
 import menuImage from '../../assets/hamburger-menu-icon.png';
+import closeImage from '../../assets/close-icon.png'; // X 아이콘 이미지 import
 import Menu from '../../components/Menu';
 
 const { kakao } = window;
 
 const Main = () => {
+    const [isOpen, setIsOpen ] = useState(false);
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+
     useEffect(()=>{
         const geoLocation=()=>{
             if(navigator.geolocation){
@@ -29,18 +36,11 @@ const Main = () => {
         geoLocation();
     },[])
 
-
-    const [isOpen, setIsOpen ] = useState(false);
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
-
     return (
         <S.MapContainer id="map">
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
                 <S.MenuToggleBtn onClick={toggleMenu}>
-                    <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
+                    <S.MenuImage src={isOpen ? closeImage : menuImage} alt="Menu" className="menu-image" />
                 </S.MenuToggleBtn>
             </S.MenuToggleBtnBox>
             <Menu isOpen={isOpen} />
