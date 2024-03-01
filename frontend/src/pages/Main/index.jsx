@@ -38,7 +38,7 @@ const Main = () => {
     }
 
     return (
-        <div id={`map`}>
+        <div id="map">
             <div className={`menu-toggle-btn-box   ${isOpen ? "open": ""}` }>
                             <button className="hamberger-btn" onClick={toggleMenu}>
                                 <img src={menuImage} alt="Menu" className="menu-image" />

@@ -1,11 +1,14 @@
 import './App.css';
-import {BrowserRouter, Route, RouterProvider, Routes} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import {router} from './routes/router'
-
+import { theme } from './theme/theme';
 
 function App() {
   return (
-    <RouterProvider router={router}/>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router}/>
+    </ThemeProvider>
   );
 }
 

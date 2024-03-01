@@ -7,3 +7,12 @@
 *{
     font-family: 'yg-jalnan';
 }
+
+:root {
+    --main-color: #CDF0ED;
+    --primary-color: #0B7F7B;
+}
+
+body {
+    background-color: var(--main-color);
+}
