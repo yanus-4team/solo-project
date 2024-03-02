@@ -8,7 +8,7 @@ function Menu({ isOpen }) { // isOpen prop 받기
             <Styled.UserContainer>
                 <Styled.UserImage src={user} alt="User" />
             </Styled.UserContainer>
-            <Styled.Text1>yanus 님</Styled.Text1>
+            <Styled.Text1>로그인을 해주세요</Styled.Text1>
             <Styled.Text2>마이페이지</Styled.Text2>
             <Styled.Text2>방문 기록</Styled.Text2>
             <Styled.Text2>내 리뷰</Styled.Text2>
