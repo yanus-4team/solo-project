@@ -8,6 +8,7 @@ import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.s
 import useInput from '../../customHook/useInput';
 import Input from "../../components/Input";
 import { Form } from "react-router-dom";
+import SearchIcon from "../../components/Search";
 
 const { kakao } = window;
 
@@ -114,6 +115,7 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
+            <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
                 <S.MenuToggleBtn onClick={toggleMenu}>
                     <S.MenuImage src={isOpen ? closeImage : menuImage} alt="Menu" className="menu-image" />

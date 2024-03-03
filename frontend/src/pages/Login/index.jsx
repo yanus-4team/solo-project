@@ -1,10 +1,21 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import * as S from "./styles";
 
 function LoginPage() {
-    const [oauthLogin, setOauthLogin] = useState([
+    const [showLogin, setShowLogin] = useState(false);
+
+    const handleLoginClick = () => {
+        setShowLogin(true);
+    }
+
+    const handleNoLoginClick = () => {
+        setShowLogin(false);
+    }
+
+    const oauthLogin = [
         {
             id: 1,
             logoUrl: "email_logo.png",
@@ -25,7 +36,8 @@ function LoginPage() {
             logoUrl: "google_logo.png",
             text: "구글"
         }
-    ])
+    ];
+
     return (
         <S.PageContainer>
             <S.TopContainer>
@@ -49,7 +61,7 @@ function LoginPage() {
                     </S.LoginBtnList>
                 </S.Wrapper>
                 <S.NoLoginContainer>
-                    <S.NoLoginLink to={'/'}>로그인 없이 이용하기</S.NoLoginLink>
+                    <S.NoLoginLink onClick={handleLoginClick}>로그인 없이 이용하기</S.NoLoginLink>
                  </S.NoLoginContainer>
             </S.BottomContainer>
         </S.PageContainer>
