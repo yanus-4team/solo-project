@@ -7,6 +7,7 @@ import pinImage from '../../assets/place-icon.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import useInput from '../../customHook/useInput';
 import Input from "../../components/Input";
+import { Form } from "react-router-dom";
 
 const { kakao } = window;
 
@@ -127,7 +128,8 @@ const Main = () => {
             <S.LoginModal isOpen={isModalOpen}>
                 <S.ModalContent>
                     <S.CloseButton onClick={closeModal}>X</S.CloseButton>
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
+                        <S.Text>로그인을 해주세요</S.Text>
                     <Input
                         type="email"
                         placeholder="Enter your email"
@@ -143,8 +145,8 @@ const Main = () => {
                         onChange={passwordInput.onChange}
                         isValid={passwordInput.valid}
                     />
-
-                </form>
+                    <S.Button>로그인</S.Button>
+                </Form>
                 </S.ModalContent>
             </S.LoginModal>
             <S.OpenModalButton onClick={openModal}>로그인</S.OpenModalButton>

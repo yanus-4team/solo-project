@@ -72,10 +72,12 @@ export const LoginModal = styled.div`
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    border:2px solid black;
 `;
 
 export const ModalContent = styled.div`
-    // 내용 스타일링을 추가할 수 있습니다.
+    padding: 30px;
+
 `;
 
 export const CloseButton = styled.button`
@@ -101,3 +103,14 @@ export const OpenModalButton = styled.button`
     cursor: pointer;
     z-index: 10;
 `;
+export const Button = styled.button`
+    background-color:  #CDF0ED;
+    width: 100%;
+`;
+
+export const Text = styled.text`
+    text-align: center;
+    display: block;
+    margin:10px;
+    font-size: 30px;
+`
