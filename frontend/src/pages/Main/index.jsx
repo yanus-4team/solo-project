@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
-import menuImage from '../../assets/hamburger-menu-icon.png';
-import closeImage from '../../assets/close-icon.png'; // X 아이콘 이미지 import
+import menuImage from '../../assets/hamburger-icon.svg';
 import Menu from '../../components/Menu';
 import pinImage from '../../assets/place-icon.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import useInput from '../../customHook/useInput';
 import Input from "../../components/Input";
+import { Form } from "react-router-dom";
 import SearchIcon from "../../components/Search";
 
 const { kakao } = window;
@@ -114,10 +114,11 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
+            {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
                 <S.MenuToggleBtn onClick={toggleMenu}>
-                    <S.MenuImage src={isOpen ? closeImage : menuImage} alt="Menu" className="menu-image" />
+                    <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
                 </S.MenuToggleBtn>
             </S.MenuToggleBtnBox>
             <Menu isOpen={isOpen} />
@@ -129,7 +130,8 @@ const Main = () => {
             <S.LoginModal isOpen={isModalOpen}>
                 <S.ModalContent>
                     <S.CloseButton onClick={closeModal}>X</S.CloseButton>
-                    <form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit}>
+                        <S.Text>로그인을 해주세요</S.Text>
                     <Input
                         type="email"
                         placeholder="Enter your email"
@@ -145,11 +147,10 @@ const Main = () => {
                         onChange={passwordInput.onChange}
                         isValid={passwordInput.valid}
                     />
-
-                </form>
+                    <S.Button>로그인</S.Button>
+                </Form>
                 </S.ModalContent>
             </S.LoginModal>
-            <S.OpenModalButton onClick={openModal}>로그인</S.OpenModalButton>
         </S.MapContainer>
     )
 }

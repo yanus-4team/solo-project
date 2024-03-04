@@ -12,7 +12,7 @@ const useInput = (initValue = '', rule) => {
     if (rule) {
       setValid(() => rule(value));
     }
-  }, [value]);
+  }, [value,rule]);
   return {
     value,
     setValue,

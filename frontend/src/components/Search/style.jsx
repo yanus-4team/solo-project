@@ -6,8 +6,7 @@ export const SearchContainer = styled.div`
     justify-content: center;
     height: 5vh;
     padding-top: 3vh;
-    z-index: 10;
-    padding-left: 41.5%;
+    z-index: 5;
 `;
 
 export const SearchInput = styled.input`

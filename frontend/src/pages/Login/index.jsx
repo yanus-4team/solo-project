@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import * as S from "./styles";
@@ -48,7 +47,7 @@ function LoginPage() {
                     <S.TopDescription >
                         <S.Welcome>WELCOME !</S.Welcome>
                         <S.Underline className="underline"></S.Underline>
-                        <S.Text>같이 놀거나 여행갈 사람이 필요할 땐</S.Text>
+                        <S.Text>같이 놀거나 여행갈 사람이 필요할 땐 소로</S.Text>
                     </S.TopDescription>
                 </S.Wrapper>
             </S.TopContainer>

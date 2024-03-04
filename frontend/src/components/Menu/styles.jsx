@@ -38,3 +38,10 @@ export const Text2 = styled.div`
     text-align: center;
     margin-top: 20px;
 `;
+
+export const CloseBtn = styled.img`
+    position:absolute;
+    width:25px;
+    top:30px;
+    right:10px;
+`;
