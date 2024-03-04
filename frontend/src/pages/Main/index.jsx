@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
-import menuImage from '../../assets/hamburger-menu-icon.png';
-import closeImage from '../../assets/close-icon.png'; // X 아이콘 이미지 import
+import menuImage from '../../assets/hamburger-icon.svg';
 import Menu from '../../components/Menu';
 import pinImage from '../../assets/place-icon.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
@@ -115,10 +114,11 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
+            {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
                 <S.MenuToggleBtn onClick={toggleMenu}>
-                    <S.MenuImage src={isOpen ? closeImage : menuImage} alt="Menu" className="menu-image" />
+                    <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
                 </S.MenuToggleBtn>
             </S.MenuToggleBtnBox>
             <Menu isOpen={isOpen} />
@@ -151,7 +151,6 @@ const Main = () => {
                 </Form>
                 </S.ModalContent>
             </S.LoginModal>
-            <S.OpenModalButton onClick={openModal}>로그인</S.OpenModalButton>
         </S.MapContainer>
     )
 }
