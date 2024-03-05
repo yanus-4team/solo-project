@@ -51,3 +51,6 @@ export const Text = styled.p`
     color: #555;
     font-size: 0.9rem;
 `;
+export const CloseButton = styled.h1`
+
+`;
