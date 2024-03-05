@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
     const navigate = useNavigate();
-
-    const handleLoginClick = () => {
-    }
+    const [showModal,setShowModal]=useState(false);
 
     const handleNoLoginClick = () => {
         navigate('/');   
@@ -36,6 +34,10 @@ function LoginPage() {
             text: "구글"
         }
     ];
+    const showModalFn = () => {
+
+        showModal ? setShowModal(false) : setShowModal(true)
+    }
 
     return (
         <S.PageContainer>
@@ -55,7 +57,7 @@ function LoginPage() {
                 <S.Wrapper>
                     <S.LoginBtnList>
                         {oauthLogin.map((value, index) => (
-                            <LoginBtn loginType={value} key={index} />
+                            <LoginBtn showModal={showModalFn} showModalState={showModal} loginType={value} key={index} />
                         ))}
                     </S.LoginBtnList>
                 </S.Wrapper>
