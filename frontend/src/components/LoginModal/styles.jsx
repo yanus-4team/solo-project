@@ -13,6 +13,7 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginBox = styled.div`
+    position: relative;
     background-color: #fff;
     padding: 40px;
     border-radius: 30px;
@@ -23,7 +24,7 @@ export const LoginBox = styled.div`
 `;
 
 export const Title = styled.h1`
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     color: #333;
     font-weight: normal;
 `;
@@ -47,10 +48,33 @@ export const LoginButton = styled.button`
     cursor: pointer;
 `;
 
-export const Text = styled.p`
-    color: #555;
-    font-size: 0.9rem;
+export const TextContainer = styled.div`
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 `;
-export const CloseButton = styled.h1`
+
+export const Text = styled.span`
+  color: #555;
+  font-size: 0.9rem;
+  margin: 0 5px;
+`
+
+export const LinkText = styled.span`
+  color: #555;
+  font-size: 0.9rem;
+  margin: 0 5px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  `
+export const CloseButton = styled.img`
+    margin : 0;
+    width:15px;
+    position: absolute;
+    top: 25px;
+    right: 20px;
 
 `;
