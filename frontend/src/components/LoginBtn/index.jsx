@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Button, Wrapper, LogoImage, LoginText } from "./styles";
 import { useDispatch  } from "react-redux";
 import { showModal } from "../../redux/LoginSlice";
+import * as S from "./styles";
+
 function LoginBtn(props) {
     const [logoSrc, setLogoSrc] = useState();
     const navigate = useNavigate();
@@ -39,12 +41,12 @@ function LoginBtn(props) {
     };
 
     return (
-        <Button onClick={onClickLoginBtn}>
-            <Wrapper>
-                <LogoImage src={logoSrc} alt="" />
-                <LoginText>{props.loginType.text}로 로그인</LoginText>
-            </Wrapper>
-        </Button>
+        <S.Button onClick={onClickLoginBtn}>
+            <S.Wrapper>
+                <S.LogoImage src={logoSrc} alt="" />
+                <S.LoginText>{props.loginType.text}로 로그인</S.LoginText>
+            </S.Wrapper>
+        </S.Button>
     );
 }
 

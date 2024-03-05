@@ -4,6 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 *{
     font-family: 'yg-jalnan';
 }
@@ -15,4 +16,6 @@
 
 body {
     background-color: var(--main-color);
+    margin : 0;
+    padding: 0;
 }
