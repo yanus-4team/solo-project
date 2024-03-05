@@ -11,7 +11,7 @@ function LoginPage() {
     }
 
     const handleNoLoginClick = () => {
-        navigate('/');   
+        navigate("/");   
     }
 
     const oauthLogin = [
@@ -37,6 +37,24 @@ function LoginPage() {
         }
     ];
 
+    const onClickLoginBtn = (loginType) => {
+        const type = loginType.text;
+        const NAVER_AUTH_URL = "";
+        const KAKAO_AUTH_URL = "";
+        const GOOGLE_AUTH_URL = "";
+
+        // dispatch(showModal("true"))
+        if (type === "이메일") {
+            alert(type);
+        } else if (type === "네이버") {
+            window.location.href = NAVER_AUTH_URL;
+        } else if (type === "카카오") {
+            window.location.href = KAKAO_AUTH_URL;
+        } else if (type === "구글") {
+            window.location.href = GOOGLE_AUTH_URL;
+        }
+    };
+    
     return (
         <S.PageContainer>
             <S.TopContainer>
@@ -53,10 +71,14 @@ function LoginPage() {
             </S.TopContainer>
             <S.BottomContainer>
                 <S.Wrapper>
-                <S.LoginBtnList>
-                        {oauthLogin.map((value, index) => (
-                            <LoginBtn loginType={value} key={index} />
-                        ))}
+                    <S.LoginBtnList>
+                    {oauthLogin.map((loginType) => (
+                        <LoginBtn
+                            onClick={() => onClickLoginBtn(loginType)}
+                            loginType={loginType}
+                            key={loginType.id} 
+                        />
+                    ))}
                     </S.LoginBtnList>
                 </S.Wrapper>
                 <S.NoLoginContainer>

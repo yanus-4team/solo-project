@@ -2,8 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const PageContainer = styled.div`
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto;
+    width: 100%; // 추가된 부분
+
+    @media (max-width: 390px) {
+        width: 100%; // 추가된 부분
+        padding: 0 10px; // 추가된 부분
+    }
 `;
 
 export const TopContainer = styled.div`
@@ -37,6 +43,9 @@ export const MainLogo = styled.img`
 
 export const Wrapper = styled.div`
     padding: 0 60px;
+    @media (max-width: 390px) {
+        padding: 0 20px; // 수정된 부분
+    }
 `;
 
 export const TopHeader = styled.div`

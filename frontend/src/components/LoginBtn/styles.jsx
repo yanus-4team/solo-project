@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 
 export const Button = styled.button`
@@ -30,4 +29,5 @@ export const LoginText = styled.span`
     display: block;
     width: 150px;
     text-align: left;
-`;
+    color: black;
+    `;
