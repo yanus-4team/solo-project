@@ -2,8 +2,8 @@ import styled, { css } from "styled-components";
 
 const focusStyles = css`
 background-color: #f0efef; 
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
-transition: background-color 1s ease, box-shadow 1s ease;
+box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.8);
+transition: background-color 0.5s ease, box-shadow 0.5s ease;
 `;
 
 
@@ -27,6 +27,9 @@ export const MenuToggleBtnBox = styled.div`
     display:flex;
     padding:8px 3px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    &:hover {
+        ${focusStyles}
+    }
 `;
 
 export const MenuToggleBtn = styled.button`
@@ -56,6 +59,7 @@ export const CurrentLocationBtn = styled.button`
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); 
     &:hover {
         ${focusStyles}
+    }
 `;
 
 export const CurrentLocationImg = styled.img`

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import * as S from "./styles";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-    const [showLogin, setShowLogin] = useState(false);
+    const navigate = useNavigate();
 
     const handleLoginClick = () => {
-        setShowLogin(true);
     }
 
     const handleNoLoginClick = () => {
-        setShowLogin(false);
+        navigate('/');   
     }
 
     const oauthLogin = [
@@ -60,7 +60,7 @@ function LoginPage() {
                     </S.LoginBtnList>
                 </S.Wrapper>
                 <S.NoLoginContainer>
-                    <S.NoLoginLink onClick={handleLoginClick}>로그인 없이 이용하기</S.NoLoginLink>
+                    <S.NoLoginLink onClick={handleNoLoginClick}>로그인 없이 이용하기</S.NoLoginLink>
                  </S.NoLoginContainer>
             </S.BottomContainer>
         </S.PageContainer>
