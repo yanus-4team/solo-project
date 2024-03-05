@@ -3,13 +3,14 @@ import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "../../components/LoginModal";
 
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal,setShowModal]=useState(false);
 
     const handleNoLoginClick = () => {
-        navigate('/');   
+        navigate("/");   
     }
 
     const oauthLogin = [
@@ -39,6 +40,7 @@ function LoginPage() {
         showModal ? setShowModal(false) : setShowModal(true)
     }
 
+    
     return (
         <S.PageContainer>
             <S.TopContainer>
