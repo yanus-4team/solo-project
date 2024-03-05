@@ -3,10 +3,12 @@ import './main.css';
 import menuImage from '../../assets/hamburger-menu-icon.png'
 import user from '../../assets/user.png'
 import Menu from '../../components/Menu'
-
+import { useDispatch,useSelector } from 'react-redux'
 const { kakao } = window;
 
 const Main = () => {
+    // const dispatch = useDispatch()
+    // const isLoading = useSelector()
     useEffect(()=>{
         const geoLocation=()=>{
             if(navigator.geolocation){

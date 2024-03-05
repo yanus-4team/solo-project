@@ -1,10 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Button, Wrapper, LogoImage, LoginText } from "./styles";
-
+import { useDispatch  } from "react-redux";
+import { showModal } from "../../redux/LoginSlice";
 function LoginBtn(props) {
     const [logoSrc, setLogoSrc] = useState();
     const navigate = useNavigate();
+
+    // const dispatch = useDispatch();
+
+   
 
     const fetchLogo = async () => {
         const logo = await import(`../../assets/${props.loginType.logoUrl}`);
@@ -21,6 +26,7 @@ function LoginBtn(props) {
         const KAKAO_AUTH_URL = "";
         const GOOGLE_AUTH_URL = "";
 
+        // dispatch(showModal("true"))
         if (type === "이메일") {
             navigate("/");
         } else if (type === "네이버") {
