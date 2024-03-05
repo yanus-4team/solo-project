@@ -1,10 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit"
+// import {configureStore} from "@reduxjs/toolkit"
 
 
-const Store=configureStore({
-    reducer:{
-        
-    }
-})
+// const Store=configureStore({
+//     reducer:{
+//         login: loginSlice.reducer
+//     }
+// })
 
-export default Store
+// export default Store
