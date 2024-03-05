@@ -1,11 +1,14 @@
-// import React from "react"
-// const LoginModal=()=>{
+import "./loginModal.css";
 
+const LoginModal = () => {
+    return (
+        <div className="login-div">
+            <div className="login-box">
+                <h1>Login Modal</h1>
+            </div>
+        </div>
 
-//     return(
-//         <div>
-//             <h1>Login Modal</h1>
-//         </div>
-//     )
-// }
-// export default LoginModal
+    )
+}
+
+export default LoginModal;
