@@ -3,10 +3,14 @@ import * as S from "./styles";
 import closeIcon from "../../assets/close-icon.svg"
 import user from '../../assets/user.png';
 
-function Menu({ isOpen }) { // isOpen prop 받기
+function Menu({ isOpen, onClose }) { // onClose prop 추가
+    const handleClose = () => {
+        onClose(); // onClose 핸들러 호출
+    };
+
     return (
-        <S.Container className={`${isOpen ? "open": ""}`}> {/* isOpen에 따라 클래스 추가 */}
-            <S.CloseBtn src={closeIcon}/>
+        <S.Container className={`${isOpen ? "open": ""}`}>
+            <S.CloseBtn src={closeIcon} onClick={handleClose} /> {/* close-btn에 onClick 이벤트 추가 */}
             <S.UserContainer>
                 <S.UserImage src={user} alt="User" />
             </S.UserContainer>

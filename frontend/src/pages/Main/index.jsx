@@ -23,6 +23,11 @@ const Main = () => {
         setIsOpen(!isOpen)
     }
 
+    const handleCloseMenu = () => {
+        setIsOpen(false); // 메뉴 닫기
+    };
+
+
     useEffect(() => {
         const geoLocation = () => {
             if (navigator.geolocation) {
@@ -121,7 +126,7 @@ const Main = () => {
                     <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
                 </S.MenuToggleBtn>
             </S.MenuToggleBtnBox>
-            <Menu isOpen={isOpen} />
+            <Menu isOpen={isOpen} onClose={handleCloseMenu} />
             {isCurrentLocationVisible && map && ( // 현재 위치 버튼이 보이고 map이 정의되어 있을 때만 버튼을 렌더링합니다.
                 <S.CurrentLocationBtn onClick={moveToCurrentLocation}  className={`${isOpen ? "open": ""}` }>
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
