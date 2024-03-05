@@ -9,7 +9,7 @@ const LoginModal = () => {
                 <S.Input type="text" placeholder="이메일" />
                 <S.Input type="password" placeholder="비밀번호" />
                 <S.LoginButton>로그인</S.LoginButton>
-                <S.Text>아이디 / 비밀번호를 잊었어요 회원가입</S.Text>
+                <S.Text>아이디 / 비밀번호 찾기 회원가입</S.Text>
             </S.LoginBox>
         </S.LoginContainer>
     );
