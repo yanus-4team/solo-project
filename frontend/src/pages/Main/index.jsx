@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useDispatch,useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
 import menuImage from '../../assets/hamburger-icon.svg';
 import Menu from '../../components/Menu';

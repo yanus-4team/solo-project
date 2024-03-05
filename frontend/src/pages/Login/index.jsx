@@ -3,29 +3,14 @@ import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
+import LoginModal from "../../components/LoginModal";
 
 function LoginPage() {
     const navigate = useNavigate();
-
-    const handleLoginClick = (loginType) => {
-        const type = loginType.text;
-        const NAVER_AUTH_URL = "";
-        const KAKAO_AUTH_URL = "";
-        const GOOGLE_AUTH_URL = "";
-
-        if (type === "이메일") {
-            navigate("/");
-        } else if (type === "네이버") {
-            window.location.href = NAVER_AUTH_URL;
-        } else if (type === "카카오") {
-            window.location.href = KAKAO_AUTH_URL;
-        } else if (type === "구글") {
-            window.location.href = GOOGLE_AUTH_URL;
-        }
-    };
+    const [showModal,setShowModal]=useState(false);
 
     const handleNoLoginClick = () => {
-        navigate('/');
+        navigate("/");   
     }
 
     const oauthLogin = [
@@ -50,7 +35,12 @@ function LoginPage() {
             text: "구글"
         }
     ];
+    const showModalFn = () => {
 
+        showModal ? setShowModal(false) : setShowModal(true)
+    }
+
+    
     return (
         <S.PageContainer>
             <S.TopContainer>
@@ -68,12 +58,8 @@ function LoginPage() {
             <S.BottomContainer>
                 <S.Wrapper>
                     <S.LoginBtnList>
-                        {oauthLogin.map((loginType) => (
-                            <LoginBtn
-                                onClick={() => handleLoginClick(loginType)}
-                                loginType={loginType}
-                                key={loginType.id} 
-                            />
+                        {oauthLogin.map((value, index) => (
+                            <LoginBtn showModal={showModalFn} showModalState={showModal} loginType={value} key={index} />
                         ))}
                     </S.LoginBtnList>
                 </S.Wrapper>
