@@ -1,16 +1,17 @@
+// LoginPage 컴포넌트
 import React, { useState } from "react";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
+import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
-import LoginModal from "../../components/LoginModal";
 
 function LoginPage() {
     const navigate = useNavigate();
-    const [showModal,setShowModal]=useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handleNoLoginClick = () => {
-        navigate("/");   
+        navigate("/");
     }
 
     const oauthLogin = [
@@ -35,12 +36,16 @@ function LoginPage() {
             text: "구글"
         }
     ];
-    const showModalFn = () => {
 
-        showModal ? setShowModal(false) : setShowModal(true)
+    const showModalFn = () => {
+        setShowModal(!showModal); // showModal 상태 변경
     }
 
-    
+    // 모달 닫기 이벤트 핸들러
+    const handleCloseModal = () => {
+        setShowModal(false);
+    }
+
     return (
         <S.PageContainer>
             <S.TopContainer>
@@ -67,6 +72,8 @@ function LoginPage() {
                     <S.NoLoginLink onClick={handleNoLoginClick}>로그인 없이 이용하기</S.NoLoginLink>
                  </S.NoLoginContainer>
             </S.BottomContainer>
+            {/* showModal 상태에 따라 LoginModal을 조건부 렌더링 */}
+            {showModal && <LoginModal onClose={handleCloseModal} />} 
         </S.PageContainer>
     );
 }

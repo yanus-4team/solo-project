@@ -16,7 +16,7 @@ export const SearchInput = styled.input`
     border: 3px solid #000;
     width: 300px;
     background-image: url(${props => props.icon});
-    background-size: 20px 20px;
+    background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: 10px center;
     padding-left: 40px;
@@ -28,6 +28,6 @@ export const SearchIcon = styled.img`
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 `;

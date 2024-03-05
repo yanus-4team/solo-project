@@ -13,6 +13,7 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginBox = styled.div`
+    position: relative;
     background-color: #fff;
     padding: 40px;
     border-radius: 30px;
@@ -69,3 +70,11 @@ export const LinkText = styled.span`
     text-decoration: underline;
   }
   `
+export const CloseButton = styled.img`
+    margin : 0;
+    width:15px;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+
+`;
