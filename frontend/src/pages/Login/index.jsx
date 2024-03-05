@@ -7,11 +7,25 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
     const navigate = useNavigate();
 
-    const handleLoginClick = () => {
-    }
+    const handleLoginClick = (loginType) => {
+        const type = loginType.text;
+        const NAVER_AUTH_URL = "";
+        const KAKAO_AUTH_URL = "";
+        const GOOGLE_AUTH_URL = "";
+
+        if (type === "이메일") {
+            navigate("/");
+        } else if (type === "네이버") {
+            window.location.href = NAVER_AUTH_URL;
+        } else if (type === "카카오") {
+            window.location.href = KAKAO_AUTH_URL;
+        } else if (type === "구글") {
+            window.location.href = GOOGLE_AUTH_URL;
+        }
+    };
 
     const handleNoLoginClick = () => {
-        navigate('/');   
+        navigate('/');
     }
 
     const oauthLogin = [
@@ -54,8 +68,12 @@ function LoginPage() {
             <S.BottomContainer>
                 <S.Wrapper>
                     <S.LoginBtnList>
-                        {oauthLogin.map((value, index) => (
-                            <LoginBtn loginType={value} key={index} />
+                        {oauthLogin.map((loginType) => (
+                            <LoginBtn
+                                onClick={() => handleLoginClick(loginType)}
+                                loginType={loginType}
+                                key={loginType.id} 
+                            />
                         ))}
                     </S.LoginBtnList>
                 </S.Wrapper>
