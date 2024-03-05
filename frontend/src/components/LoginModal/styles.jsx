@@ -46,6 +46,11 @@ export const LoginButton = styled.button`
     color: black;
     margin-bottom: 1rem;
     cursor: pointer;
+    transition: filter 0.3s ease;
+  
+    &:hover {
+        filter: brightness(0.9) !important; /* !important 키워드 추가 */
+    }
 `;
 
 export const TextContainer = styled.div`
@@ -70,11 +75,16 @@ export const LinkText = styled.span`
     text-decoration: underline;
   }
   `
-export const CloseButton = styled.img`
-    margin : 0;
-    width:15px;
-    position: absolute;
-    top: 25px;
-    right: 20px;
+  export const CloseButton = styled.img`
+  margin : 0;
+  width:20px;
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  transition: filter 0.3s ease;
+  cursor: pointer;
 
+  &:hover {
+      filter: brightness(0.8) !important; /* !important 키워드 추가 */
+  }
 `;
