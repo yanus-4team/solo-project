@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 export const Container = styled.div`
@@ -30,9 +31,13 @@ export const UserImage = styled.img`
     height: 100px;
 `;
 
-export const Text1 = styled.div`
+export const GoLogin = styled(Link)`
     text-align: center;
     margin-top: 265px;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
 `;
 
 export const Text2 = styled.div`

@@ -14,7 +14,7 @@ function Menu({ isOpen, onClose }) { // onClose prop 추가
             <S.UserContainer>
                 <S.UserImage src={user} alt="User" />
             </S.UserContainer>
-            <S.Text1>로그인을 해주세요</S.Text1>
+            <S.GoLogin to="/login">로그인을 해주세요</S.GoLogin>
             <S.Text2>마이페이지</S.Text2>
             <S.Text2>방문 기록</S.Text2>
             <S.Text2>내 리뷰</S.Text2>
