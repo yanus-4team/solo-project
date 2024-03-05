@@ -9,7 +9,6 @@ export const Container = styled.div`
     width: 200px;
     height: 100vh;
     background-color: #CDF0ED;
-    border-left: 2px solid black;
     transition: right 0.5s ease;
     z-index: 7;
     &.open {
