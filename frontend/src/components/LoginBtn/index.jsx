@@ -1,14 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Button, Wrapper, LogoImage, LoginText } from "./styles";
-import { useDispatch  } from "react-redux";
-import { showModal } from "../../redux/LoginSlice";
-import * as S from "./styles";
 import LoginModal from "../LoginModal";
+import * as S from "./styles";
 
 function LoginBtn(props) {
     const [logoSrc, setLogoSrc] = useState();
-    const navigate = useNavigate();
 
     // const dispatch = useDispatch();
 
