@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as S from "./styles";
 import closeBtn from "../../assets/close-icon.svg"
 

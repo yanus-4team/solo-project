@@ -40,13 +40,3 @@ export const SearchInput = styled.input`
         }
     }
 `
-export const SearchIcon = styled.img`
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    stroke: red;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 25px;
-    fill:#077368;
-`;
