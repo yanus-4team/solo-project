@@ -1,15 +1,24 @@
 // LoginPage 컴포넌트
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
+import { useCookieManager } from '../../storage/cookieManager'; 
 
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const { getCookies } = useCookieManager();
 
+    // 페이지 로딩 시 쿠키 확인하여 로그인 여부 파악 후 자동으로 이동
+    useEffect(() => {
+        const { accessToken, refreshToken, accessTokenExpiresIn } = getCookies();
+        if (accessToken && refreshToken && accessTokenExpiresIn) {
+            navigate('/');
+        }
+    }, [navigate, getCookies]);
     const handleNoLoginClick = () => {
         navigate("/");
     }
