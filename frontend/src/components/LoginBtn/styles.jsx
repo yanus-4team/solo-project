@@ -35,3 +35,7 @@ export const LoginText = styled.span`
     text-align: left;
     color: black;
     `;
+
+
+
+    
