@@ -10,7 +10,7 @@ export const SearchContainer = styled.div`
     position: fixed;
     display: flex;
     justify-content: center;
-    top: 20px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -19,23 +19,26 @@ export const SearchContainer = styled.div`
 
 export const SearchInput = styled.input`
     padding: 10px;
-    font-size: 16px;
-    border-radius: 30px;
-    border: 3px solid #077368;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 3px solid #36454F;
     width: 400px;
     background-image: url(${props => props.icon});
-    background-size: 30px 30px;
+    background-size: 25px 25px;
     background-repeat: no-repeat;
-    background-position: 10px center;
+    background-position: 15px center;
     padding-left: 48px;
+    color: #36454F;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     outline: none;
-    transition: all 0.5s;
-    @media (max-width: 390px) {
+    transition: all 0.5s ease-in-out;
+    @media (max-width: 430px) {
         width: 48%;
     }
     &:focus{
         width:600px;
-        @media (max-width:390px){
+        box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+        @media (max-width:430px){
             width:200px;
         }
     }
@@ -47,5 +50,4 @@ export const SearchIcon = styled.img`
     transform: translateY(-50%);
     width: 25px;
     height: 25px;
-    fill:#077368;
 `;

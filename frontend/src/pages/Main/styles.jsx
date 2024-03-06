@@ -19,7 +19,7 @@ export const MenuToggleBtnBox = styled.div`
     height: fit-content;
     z-index: 5;
     right: 0;
-    top: 20px;
+    top: 43px;
     background-color: #fff;
     border-radius: 13px 0 0 13px;
     transition: right 0.5s ease;
