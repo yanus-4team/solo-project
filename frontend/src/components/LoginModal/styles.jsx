@@ -85,6 +85,6 @@ export const LinkText = styled.span`
   cursor: pointer;
 
   &:hover {
-      filter: brightness(0.8) !important; /* !important 키워드 추가 */
+      filter: brightness(0.8) !important; 
   }
 `;

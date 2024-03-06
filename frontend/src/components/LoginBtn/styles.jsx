@@ -7,6 +7,10 @@ export const Button = styled.button`
     padding: 15px 20px;
     margin-top: 20px;
     cursor: pointer;
+    transition: filter 0.3s ease;
+    &:hover {
+        filter: brightness(0.8) !important; 
+    }
 `;
 
 export const Wrapper = styled.div`
