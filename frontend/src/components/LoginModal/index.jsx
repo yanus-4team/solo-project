@@ -4,6 +4,7 @@ import Modal from "../../components/Modal";
 import closeBtn from "../../assets/close-icon.svg";
 import { useNavigate } from 'react-router-dom';
 import { useCookieManager } from '../../storage/cookieManager'; 
+import SignUpModal from '../SignUp';
 
 const LoginModal = (props) => {
     const [email, setEmail] = useState('');
@@ -13,6 +14,19 @@ const LoginModal = (props) => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { setCookies } = useCookieManager(); // 쿠키 설정 함수를 가져옵니다.
+    const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
+
+    // 회원가입 모달을 표시하는 함수
+    const handleSignUpClick = () => {
+        setIsSignUpModalVisible(true);
+    };
+
+    // 회원가입 모달을 숨기는 함수
+    const handleCloseSignUpModal = () => {
+        setIsSignUpModalVisible(false);
+    };
+
+
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -68,13 +82,14 @@ const LoginModal = (props) => {
                     <S.Text>/</S.Text>
                     <S.LinkText as="a" href="/find-password">비밀번호 찾기</S.LinkText>
                     <S.Text>|</S.Text>
-                    <S.LinkText as="a" href="/signup">회원가입</S.LinkText>
+                    <S.LinkText as="a" onClick={handleSignUpClick}>회원가입</S.LinkText>
                 </S.TextContainer>
             </S.LoginBox>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 {success && <S.SuccessMessage>{success}</S.SuccessMessage>}
             </Modal>
         </S.LoginContainer>
+        {isSignUpModalVisible && <SignUpModal onClose={handleCloseSignUpModal} />}
         </>
     );
 }
