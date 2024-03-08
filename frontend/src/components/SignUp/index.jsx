@@ -10,7 +10,6 @@ const SignUpModal = (props) => {
             <S.SignUpBox>
                 <S.CloseButton src={closeBtn} onClick={props.onClose}/>
                 <S.Title>회원가입</S.Title>
-                <S.Text>소셜 로그인시 추가 정보가 필요해요</S.Text>
                 <S.TitleEmail>이메일</S.TitleEmail>
                 <S.EmailInputButtonContainer>
                     <S.EmailInput type="text" placeholder="" />

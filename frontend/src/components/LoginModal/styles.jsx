@@ -88,3 +88,17 @@ export const LinkText = styled.span`
       filter: brightness(0.8) !important; 
   }
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+`;
+
+export const SuccessMessage = styled.p`
+  color: green;
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+`;

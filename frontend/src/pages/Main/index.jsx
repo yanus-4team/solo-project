@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
 import menuImage from '../../assets/hamburger-icon.svg';
 import Menu from '../../components/Menu';
-import pinImage from '../../assets/place-icon.png';
+import pinImage from '../../assets/current.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import SearchIcon from "../../components/Search";
 
