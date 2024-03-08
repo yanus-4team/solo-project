@@ -17,8 +17,3 @@ const SignComplete = (props) => {
 }
 
 export default SignComplete
-
-
-
-
-
