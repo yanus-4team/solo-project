@@ -19,6 +19,7 @@ const LoginModal = (props) => {
     // 회원가입 모달을 표시하는 함수
     const handleSignUpClick = () => {
         setIsSignUpModalVisible(true);
+        props.onClose();
     };
 
     // 회원가입 모달을 숨기는 함수
@@ -82,7 +83,7 @@ const LoginModal = (props) => {
                     <S.Text>/</S.Text>
                     <S.LinkText as="a" href="/find-password">비밀번호 찾기</S.LinkText>
                     <S.Text>|</S.Text>
-                    <S.LinkText as="a" onClick={handleSignUpClick}>회원가입</S.LinkText>
+                    <S.LinkText as="a" onClick={props.onSignUp}>회원가입</S.LinkText>
                 </S.TextContainer>
             </S.LoginBox>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
