@@ -119,9 +119,6 @@ export const TitleCerti = styled.h1`
 `;
 
 export const Titlepassword = styled.h1`
-    margin-bottom: 0rem;
-    margin-right: 1rem;
-    margin-left: -6rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -236,9 +233,10 @@ export const PasswordContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80px;
+    width: fit-content;
+    align-self: flex-start; /* 이 부분을 추가 */
+`;
 
-`
 
 export const CertiInputButtonContainer = styled.div`
     display: flex;
