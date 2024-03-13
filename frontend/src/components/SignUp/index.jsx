@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import * as S from "./style";
 import closeBtn from "../../assets/close-icon.svg"
+import SignComplete from "../SignComplete";
 
 const SignUpModal = (props) => {
     const [tooltipVisible, setTooltipVisible] = useState(false);
+
+    const [isSignUpComplete, setIsSignUpComplete] = useState(false);
+
+    const completeSignUp = () => {
+        setIsSignUpComplete(true);
+    };
+
+    if (isSignUpComplete) {
+        return <SignComplete onClose={props.onClose} />;
+    }
 
     return (
         <S.SignUpContainer>
@@ -39,10 +50,12 @@ const SignUpModal = (props) => {
                 <S.Titlecheck>비밀번호 확인</S.Titlecheck>
                 <S.CheckInput type="passwordcheck" placeholder="" />
                 <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
-                <S.SignButton>회원가입</S.SignButton>
+                <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
             </S.SignUpBox>
         </S.SignUpContainer>
     );
 };
 
 export default SignUpModal;
+
+
