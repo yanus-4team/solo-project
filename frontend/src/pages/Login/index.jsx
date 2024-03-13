@@ -6,6 +6,7 @@ import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
+import SignUpModal from '../../components/SignUp';
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -55,6 +56,13 @@ function LoginPage() {
         setShowModal(false);
     }
 
+    const [showSignUpModal, setShowSignUpModal] = useState(false);
+
+    const handleShowSignUp = () => {
+        setShowModal(false); // 로그인 모달 닫기
+        setShowSignUpModal(true); // 회원가입 모달 열기
+    };
+
     return (
         <S.PageContainer>
             <S.TopContainer>
@@ -82,7 +90,8 @@ function LoginPage() {
                  </S.NoLoginContainer>
             </S.BottomContainer>
             {/* showModal 상태에 따라 LoginModal을 조건부 렌더링 */}
-            {showModal && <LoginModal onClose={handleCloseModal} />} 
+            {showModal && <LoginModal onClose={handleCloseModal} onSignUp={handleShowSignUp} />}
+            {showSignUpModal && <SignUpModal onClose={() => setShowSignUpModal(false)} />}
         </S.PageContainer>
     );
 }
