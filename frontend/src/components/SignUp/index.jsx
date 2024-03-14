@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import closeBtn from "../../assets/close-icon.svg";
 import SignComplete from "../SignComplete";
@@ -12,28 +12,49 @@ const SignUpModal = (props) => {
   const [hovered, setHovered] = useState(false);
   const [emailFormatError, setEmailFormatError] = useState(false);
 
+  const emailInputRef = useRef(null);
+
   const completeSignUp = () => {
     setIsSignUpComplete(true);
   };
 
-  const sendEmail = () => {
-    const emailInput = document.getElementById("emailInput");
-    if (validateEmail(emailInput.value)) {
-      setIsEmailSent(true);
-      setTimer(180);
-      setShowCertification(true);
-      setEmailFormatError(false); // 형식 오류 초기화
+  const sendEmail = async () => {
+    if (validateEmail(emailInputRef.current.value)) {
+      try {
+        const response = await fetch("http://localhost:8080/auth/verifyEmail", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: emailInputRef.current.value,
+          });
+        if (response.ok) {
+          setIsEmailSent(true);
+          setTimer(180);
+          setShowCertification(true);
+          setEmailFormatError(false); // 형식 오류 초기화
+        } else {
+          const errorMessage = await response.text();
+          setEmailFormatError(errorMessage); // 백엔드에서 전달된 에러 메시지 표시
+          setIsEmailSent(false); // 이메일 전송 실패로 설정
+        }
+      } catch (error) {
+        console.error("Failed to send verification email:", error);
+        setEmailFormatError("Failed to send verification email."); // 네트워크 오류 등의 문제로 인한 에러 메시지 표시
+        setIsEmailSent(false); // 이메일 전송 실패로 설정
+      }
     } else {
-      setEmailFormatError(true); // 형식 오류 발생
+      setEmailFormatError("올바르지 않은 이메일 형식입니다."); // 이메일 형식 오류 메시지 표시
       setIsEmailSent(false); // 이메일 전송 실패로 설정
     }
   };
   
-  
+
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
+
   useEffect(() => {
     let intervalId;
     if (isEmailSent && timer > 0) {
@@ -41,15 +62,14 @@ const SignUpModal = (props) => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
     }
-    
+
     // 타이머가 0이 되면 clearInterval을 호출하여 타이머를 멈춤
     if (timer === 0) {
       clearInterval(intervalId);
     }
-  
+
     return () => clearInterval(intervalId);
   }, [isEmailSent, timer]);
-  
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -73,7 +93,7 @@ const SignUpModal = (props) => {
         <S.TitleEmail>이메일</S.TitleEmail>
         <S.EmailInputButtonContainer>
           <S.EmailInput
-            id="emailInput"
+            ref={emailInputRef}
             type="text"
             placeholder=""
             onChange={() => setEmailFormatError(false)} // 형식 오류 초기화
@@ -102,14 +122,14 @@ const SignUpModal = (props) => {
         <S.EmailAlreadyUseError>사용중인 이메일 입니다.</S.EmailAlreadyUseError>
         {isEmailSent && <S.EmailSended>인증 이메일을 전송하였습니다.</S.EmailSended>}
         {showCertification && (
-            <S.CertificationContainer visible={showCertification}>
-                <S.TitleCerti>인증번호</S.TitleCerti>
-                <S.CertiInputButtonContainer>
-                    <S.CertiInput type="text" placeholder="" />
-                    <S.CertiButton>확인</S.CertiButton>
-                </S.CertiInputButtonContainer>
-                <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
-            </S.CertificationContainer>
+          <S.CertificationContainer visible={showCertification ? "true" : "false"}>
+            <S.TitleCerti>인증번호</S.TitleCerti>
+            <S.CertiInputButtonContainer>
+              <S.CertiInput type="text" placeholder="" />
+              <S.CertiButton>확인</S.CertiButton>
+            </S.CertiInputButtonContainer>
+            <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
+          </S.CertificationContainer>
         )}
         <S.PasswordContainer>
           <S.Titlepassword>비밀번호</S.Titlepassword>

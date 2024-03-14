@@ -5,12 +5,17 @@ import com.tutorial.backend.controller.dto.LoginForm;
 import com.tutorial.backend.controller.dto.MemberResponseDto;
 import com.tutorial.backend.controller.dto.TokenDto;
 import com.tutorial.backend.controller.dto.TokenRequestDto;
+import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.service.AuthService;
+import com.tutorial.backend.service.MemberService;
+import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -19,6 +24,24 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
     private final AuthService authService;
+    private final MailService mailService;
+
+    @PostMapping("verifyEmail")
+    public ResponseEntity<?> emailCheck(@RequestBody String email) {
+        log.info(email);
+        Optional<Member> existingMember = authService.getMemberByEmail(email);
+        if (existingMember.isPresent()) {
+            return ResponseEntity.badRequest().body("Email already exists.");
+        } else {
+            try {
+                mailService.sendSimpleMessage(email);
+                return ResponseEntity.ok().body(HttpStatus.ACCEPTED);
+            } catch (Exception exception) {
+                log.error("Failed to send verification email.", exception);
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send verification email.");
+            }
+        }
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody LoginForm loginForm) {
