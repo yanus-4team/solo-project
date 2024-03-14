@@ -31,12 +31,12 @@ public class MailServiceImpl implements MailService {
         MimeMessage message = emailSender.createMimeMessage();
 
         message.addRecipients(MimeMessage.RecipientType.TO, to);// 보내는 대상
-        message.setSubject("티끌 회원가입 이메일 인증");// 제목
+        message.setSubject("소로 회원가입 이메일 인증");// 제목
 
         String msgg = "";
         msgg += "<div style='margin:100px;'>";
         msgg += "<h1> 안녕하세요</h1>";
-        msgg += "<h1> 소 입니다</h1>";
+        msgg += "<h1> 소로 입니다</h1>";
         msgg += "<br>";
         msgg += "<p>아래 코드를 회원가입 창으로 돌아가 입력해주세요<p>";
         msgg += "<br>";
@@ -48,7 +48,7 @@ public class MailServiceImpl implements MailService {
         msgg += "</div>";
         message.setText(msgg, "utf-8", "html");// 내용, charset 타입, subtype
         // 보내는 사람의 이메일 주소, 보내는 사람 이름
-        message.setFrom(new InternetAddress("ricky0130@naver.com", "Solo_admin"));// 보내는 사람
+        message.setFrom(new InternetAddress("ricky0130@naver.com", "solo_admin"));// 보내는 사람
 
         return message;
     }
