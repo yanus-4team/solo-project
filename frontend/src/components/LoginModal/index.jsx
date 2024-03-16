@@ -46,16 +46,15 @@ const LoginModal = (props) => {
             if (!response.ok) {
                 throw new Error('Network response was not ok.');
             }
-            const data = await response.json(); // JSON 형식으로 데이터를 가져옵니다.
-            console.log(data);
+            const data = await response.json(); 
             setError('');
-            setSuccess("로그인 성공!"); // 백엔드에서 받은 메시지를 성공 메시지로 설정합니다.
+            setSuccess("로그인 성공!"); 
 
-            // 쿠키에 저장
+        
             setCookies(data.accessToken, data.refreshToken, data.accessTokenExpiresIn);
 
             setIsModalOpen(true);
-            // 모달을 열고 2초 후에 로그인 페이지로 이동
+            
             setTimeout(() => {
                 setIsModalOpen(false);
                 navigate('/');

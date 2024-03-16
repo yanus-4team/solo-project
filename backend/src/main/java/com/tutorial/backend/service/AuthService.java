@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -27,6 +29,13 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
+
+
+    @Transactional
+    public Optional<Member> getMemberByEmail(String email) {
+        return Optional.ofNullable(memberRepository.findByMemberEmail(email));
+    }
+
 
     @Transactional
     public MemberResponseDto signup(LoginForm loginForm) {
@@ -92,4 +101,6 @@ public class AuthService {
         // 토큰 발급
         return tokenDto;
     }
+
+
 }

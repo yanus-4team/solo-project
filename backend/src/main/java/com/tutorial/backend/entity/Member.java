@@ -3,7 +3,7 @@ package com.tutorial.backend.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -19,13 +19,19 @@ public class Member {
 
     private String memberPassword;
 
+    private String memberName;
+
+    private String memberNickName;
+
+    private String memberPhone;
+
+    private LocalDateTime memberBirth;
+
+    @Enumerated(EnumType.STRING)
+    private StatusType status;
+
     @Enumerated(EnumType.STRING)
     private Authority authority;
-
-
-
-
-
 
     @Builder
     public Member(Long id, String memberEmail, String memberPassword, Authority authority) {

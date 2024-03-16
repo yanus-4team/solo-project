@@ -50,7 +50,7 @@ export const Text = styled.h1`
     font-weight: normal;
 `;
 
-export const EmailError = styled.h1`
+export const EmailAlreadyUseError = styled.h1`
     margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
@@ -58,7 +58,28 @@ export const EmailError = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 9.3rem;
+    display:none;
 `;
+export const EmailFormatError = styled.h1`
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 6.3rem;
+`;
+
+export const EmailSended = styled.h1`
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: green;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 7.3rem;
+`
+
 
 export const CertiError = styled.h1`
     margin-top: 1.2rem;
@@ -68,6 +89,7 @@ export const CertiError = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 9.6rem;
+    display:none;
 `;
 
 export const PasswordError1 = styled.h1`
@@ -78,6 +100,7 @@ export const PasswordError1 = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 7rem;
+    display: none;
 `;
 
 export const PasswordError2 = styled.h1`
@@ -88,6 +111,7 @@ export const PasswordError2 = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 2rem;
+    display: none;
 `;
 
 export const CheckError = styled.h1`
@@ -98,6 +122,7 @@ export const CheckError = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 7.2rem;
+    display: none;
 `;
 
 export const TitleEmail = styled.h1`
@@ -110,6 +135,7 @@ export const TitleEmail = styled.h1`
 `;
 
 export const TitleCerti = styled.h1`
+    margin-top: 20px;
     margin-bottom: -2rem;
     margin-right: 13rem;
     color: #333;
@@ -119,9 +145,7 @@ export const TitleCerti = styled.h1`
 `;
 
 export const Titlepassword = styled.h1`
-    margin-bottom: 0rem;
-    margin-right: 1rem;
-    margin-left: -6rem;
+    margin-top: 20px;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -129,6 +153,7 @@ export const Titlepassword = styled.h1`
 `;
 
 export const Titlecheck = styled.h1`
+    margin-top: 20px;
     margin-bottom: 0rem;
     margin-right: 10.6rem;
     color: #333;
@@ -170,6 +195,13 @@ export const CheckInput = styled.input`
     border: 1px solid #ccc;
     border-radius: 4px;
 `;
+export const CertificationContainer = styled.div`
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transform: translateY(${({ visible }) => (visible ? 0 : "-100px")});
+  transition: opacity 0.5s, transform 0.5s;
+`;
+
+
 
 export const EmailInputButtonContainer = styled.div`
     display: flex;
@@ -193,7 +225,7 @@ export const EmailButton = styled.button`
     transition: filter 0.3s ease;
   
     &:hover {
-        filter: brightness(0.9) !important; /* !important 키워드 추가 */
+        filter: brightness(0.9) !important;
     }
 `;
 
@@ -211,7 +243,7 @@ export const CertiButton = styled.button`
     transition: filter 0.3s ease;
   
     &:hover {
-        filter: brightness(0.9) !important; /* !important 키워드 추가 */
+        filter: brightness(0.9) !important;
     }
 `;
 
@@ -219,7 +251,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     border-radius: 30px;
     background-color: #CDF0ED;
     color: black;
@@ -228,7 +260,7 @@ export const SignButton = styled.button`
     transition: filter 0.3s ease;
   
     &:hover {
-        filter: brightness(0.9) !important; /* !important 키워드 추가 */
+        filter: brightness(0.9) !important;
     }
 `;
 
@@ -236,9 +268,10 @@ export const PasswordContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80px;
+    width: fit-content;
+    align-self: flex-start;
+`;
 
-`
 
 export const CertiInputButtonContainer = styled.div`
     display: flex;
@@ -251,12 +284,13 @@ export const CertiInputButtonContainer = styled.div`
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
-    padding: 6px;
+    padding: 2px 8px;
     font-size: 12px;
     cursor: pointer;
     position: relative;
     display: inline-block;
     margin-left: 1rem;
+    margin-top: 10px;
 `;
 
 export const Tooltip = styled.span`
@@ -290,4 +324,11 @@ export const Tooltip = styled.span`
     ${QuestionMark}:hover & {
         visibility: visible;
     }
+`;
+
+
+export const TimerText = styled.span`
+  color: #333;
+  font-size: 0.7rem;
+  font-weight: normal;
 `;

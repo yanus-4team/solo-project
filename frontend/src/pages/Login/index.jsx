@@ -12,14 +12,20 @@ function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const { getCookies } = useCookieManager();
+    const [initialCheckDone, setInitialCheckDone] = useState(false);
 
     // 페이지 로딩 시 쿠키 확인하여 로그인 여부 파악 후 자동으로 이동
     useEffect(() => {
-        const { accessToken, refreshToken, accessTokenExpiresIn } = getCookies();
-        if (accessToken && refreshToken && accessTokenExpiresIn) {
-            navigate('/');
+        // 이미 초기 체크가 완료되었다면, 이후의 변경사항에는 반응하지 않음
+        if (!initialCheckDone) {
+            const { accessToken, refreshToken, accessTokenExpiresIn } = getCookies();
+            if (accessToken && refreshToken && accessTokenExpiresIn) {
+                navigate('/');
+            }
+            setInitialCheckDone(true); // 초기 체크 완료 상태를 true로 설정
         }
-    }, [navigate, getCookies]);
+    }, [navigate, getCookies, initialCheckDone]); // 의존성 배열에 initialCheckDone 추가
+
     const handleNoLoginClick = () => {
         navigate("/");
     }
