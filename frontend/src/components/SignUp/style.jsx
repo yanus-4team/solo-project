@@ -13,6 +13,7 @@ export const SignUpContainer = styled.div`
 `;
 
 export const SignUpBox = styled.div`
+    min-height: 200px;
     position: relative;
     background-color: #fff;
     padding: 45px;
@@ -33,7 +34,7 @@ export const CloseButton = styled.img`
     cursor: pointer;
 
     &:hover {
-        filter: brightness(0.8) !important; /* !important 키워드 추가 */
+        filter: brightness(0.8) !important;
     }
 `;
 
@@ -122,6 +123,17 @@ export const CheckError = styled.h1`
     text-align: left;
     margin-right: 7.2rem;
     display: none;
+`;
+
+
+export const CertiRight = styled.h1`
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: green;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 9.6rem;
 `;
 
 export const TitleEmail = styled.h1`
@@ -225,6 +237,10 @@ export const EmailButton = styled.button`
     &:hover {
         filter: brightness(0.9) !important;
     }
+    &:disabled{
+        background-color: #b3b3b3;
+        color: black;
+    }
 `;
 
 export const CertiButton = styled.button`
@@ -242,6 +258,9 @@ export const CertiButton = styled.button`
   
     &:hover {
         filter: brightness(0.9) !important;
+    }
+    &:disabled{
+        background-color: #b3b3b3;
     }
 `;
 
