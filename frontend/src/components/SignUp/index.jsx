@@ -17,6 +17,8 @@ const SignUpModal = (props) => {
 
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
+  const certiButtonRef = useRef(null);
+  const emailButtonRef = useRef(null);
 
   const completeSignUp = () => {
     setIsSignUpComplete(true);
@@ -91,9 +93,11 @@ const SignUpModal = (props) => {
   };
 
   const handleCertificationCheck = () => {
-    console.log("잘됨.");
     if (certificationCode === emailCode) {
-      console.log("잘됨.");
+      emailInputRef.current.disabled = true;
+      emailButtonRef.current.disabled = true;
+      certiInputRef.current.disabled = true;
+      certiButtonRef.current.disabled = true;
       setIsCertificationCorrect(true);
     } else {
       setIsCertificationCorrect(false);
@@ -119,6 +123,7 @@ const SignUpModal = (props) => {
           />
           {isEmailSent ? (
             <S.EmailButton
+              ref={emailButtonRef}
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
               onClick={resetEmail}
@@ -132,7 +137,12 @@ const SignUpModal = (props) => {
               )}
             </S.EmailButton>
           ) : (
-            <S.EmailButton onClick={sendEmail}>이메일 인증</S.EmailButton>
+            <S.EmailButton
+              ref={emailButtonRef}
+              onClick={sendEmail}
+            >
+              이메일 인증
+            </S.EmailButton>
           )}
         </S.EmailInputButtonContainer>
         {emailFormatError && (
@@ -150,31 +160,36 @@ const SignUpModal = (props) => {
                 placeholder="" 
                 onChange={(e) => setCertificationCode(e.target.value)}
               />
-              <S.CertiButton disabled={!certificationCode || certificationCode !== emailCode} onClick={handleCertificationCheck}>
+              <S.CertiButton ref={certiButtonRef} onClick={handleCertificationCheck}>
                 확인
               </S.CertiButton>
             </S.CertiInputButtonContainer>
             {!isCertificationCorrect && <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>}
+            {isCertificationCorrect &&<S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>}
           </S.CertificationContainer>
         )}
-        <S.PasswordContainer>
-          <S.Titlepassword>비밀번호</S.Titlepassword>
-          <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
-            ?
-            {tooltipVisible && (
-              <S.Tooltip>
-                비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
-              </S.Tooltip>
-            )}
-          </S.QuestionMark>
-        </S.PasswordContainer>
-        <S.PasswordInput type="password" placeholder="" />
-        <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
-        <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
-        <S.Titlecheck>비밀번호 확인</S.Titlecheck>
-        <S.CheckInput type="passwordcheck" placeholder="" />
-        <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
+        {isCertificationCorrect && (
+          <>
+            <S.PasswordContainer>
+              <S.Titlepassword>비밀번호</S.Titlepassword>
+              <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
+                ?
+                {tooltipVisible && (
+                  <S.Tooltip>
+                    비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
+                  </S.Tooltip>
+                )}
+              </S.QuestionMark>
+            </S.PasswordContainer>
+            <S.PasswordInput type="password" placeholder="" />
+            <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
+            <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
+            <S.Titlecheck>비밀번호 확인</S.Titlecheck>
+            <S.CheckInput type="password" placeholder="" />
+            <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
         <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
+          </>
+        )}
       </S.SignUpBox>
     </S.SignUpContainer>
   );
