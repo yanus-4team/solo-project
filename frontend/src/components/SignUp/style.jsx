@@ -24,17 +24,17 @@ export const SignUpBox = styled.div`
 `;
 
 export const CloseButton = styled.img`
-margin : 0;
-width:20px;
-position: absolute;
-top: 25px;
-right: 20px;
-transition: filter 0.3s ease;
-cursor: pointer;
+    margin : 0;
+    width:20px;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    transition: filter 0.3s ease;
+    cursor: pointer;
 
-&:hover {
-    filter: brightness(0.8) !important; /* !important 키워드 추가 */
-}
+    &:hover {
+        filter: brightness(0.8) !important; /* !important 키워드 추가 */
+    }
 `;
 
 export const Title = styled.h1`
@@ -89,7 +89,6 @@ export const CertiError = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 9.6rem;
-    display:none;
 `;
 
 export const PasswordError1 = styled.h1`
@@ -195,13 +194,12 @@ export const CheckInput = styled.input`
     border: 1px solid #ccc;
     border-radius: 4px;
 `;
+
 export const CertificationContainer = styled.div`
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: translateY(${({ visible }) => (visible ? 0 : "-100px")});
-  transition: opacity 0.5s, transform 0.5s;
+    display: ${({ visible }) => (visible ? "flex" : "none")};
+    flex-direction: column;
+    align-items: center;
 `;
-
-
 
 export const EmailInputButtonContainer = styled.div`
     display: flex;

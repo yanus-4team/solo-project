@@ -11,8 +11,12 @@ const SignUpModal = (props) => {
   const [showCertification, setShowCertification] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [emailFormatError, setEmailFormatError] = useState(false);
+  const [emailCode, setEmailCode] = useState('');
+  const [certificationCode, setCertificationCode] = useState('');
+  const [isCertificationCorrect, setIsCertificationCorrect] = useState(false);
 
   const emailInputRef = useRef(null);
+  const certiInputRef = useRef(null);
 
   const completeSignUp = () => {
     setIsSignUpComplete(true);
@@ -29,6 +33,8 @@ const SignUpModal = (props) => {
             body: emailInputRef.current.value,
           });
         if (response.ok) {
+          const { resultData } = await response.json(); // JSON 형식의 응답을 파싱
+          setEmailCode(resultData);
           setIsEmailSent(true);
           setTimer(180);
           setShowCertification(true);
@@ -48,12 +54,15 @@ const SignUpModal = (props) => {
       setIsEmailSent(false); // 이메일 전송 실패로 설정
     }
   };
-  
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   };
+
+  useEffect(() => {
+    console.log(emailCode); // emailCode 값이 변경될 때마다 새로운 값 로그로 출력
+  }, [emailCode]);
 
   useEffect(() => {
     let intervalId;
@@ -79,6 +88,16 @@ const SignUpModal = (props) => {
 
   const resetEmail = () => {
     setTimer(180); // 타이머 초기화
+  };
+
+  const handleCertificationCheck = () => {
+    console.log("잘됨.");
+    if (certificationCode === emailCode) {
+      console.log("잘됨.");
+      setIsCertificationCorrect(true);
+    } else {
+      setIsCertificationCorrect(false);
+    }
   };
 
   if (isSignUpComplete) {
@@ -125,10 +144,17 @@ const SignUpModal = (props) => {
           <S.CertificationContainer visible={showCertification ? "true" : "false"}>
             <S.TitleCerti>인증번호</S.TitleCerti>
             <S.CertiInputButtonContainer>
-              <S.CertiInput type="text" placeholder="" />
-              <S.CertiButton>확인</S.CertiButton>
+              <S.CertiInput 
+                ref={certiInputRef}
+                type="text" 
+                placeholder="" 
+                onChange={(e) => setCertificationCode(e.target.value)}
+              />
+              <S.CertiButton disabled={!certificationCode || certificationCode !== emailCode} onClick={handleCertificationCheck}>
+                확인
+              </S.CertiButton>
             </S.CertiInputButtonContainer>
-            <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
+            {!isCertificationCorrect && <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>}
           </S.CertificationContainer>
         )}
         <S.PasswordContainer>

@@ -1,10 +1,7 @@
 package com.tutorial.backend.controller;
 
 
-import com.tutorial.backend.controller.dto.LoginForm;
-import com.tutorial.backend.controller.dto.MemberResponseDto;
-import com.tutorial.backend.controller.dto.TokenDto;
-import com.tutorial.backend.controller.dto.TokenRequestDto;
+import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.service.AuthService;
 import com.tutorial.backend.service.MemberService;
@@ -26,19 +23,21 @@ public class AuthController {
     private final AuthService authService;
     private final MailService mailService;
 
+
     @PostMapping("verifyEmail")
-    public ResponseEntity<?> emailCheck(@RequestBody String email) {
+    public ResponseEntity<ResultDto<String>> emailCheck(@RequestBody String email) {
         log.info(email);
         Optional<Member> existingMember = authService.getMemberByEmail(email);
         if (existingMember.isPresent()) {
-            return ResponseEntity.badRequest().body("Email already exists.");
+            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "Email already exists."));
         } else {
             try {
-                mailService.sendSimpleMessage(email);
-                return ResponseEntity.ok().body(HttpStatus.ACCEPTED);
+                String code = mailService.sendSimpleMessage(email);
+                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "Verification email sent successfully.", code));
             } catch (Exception exception) {
                 log.error("Failed to send verification email.", exception);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send verification email.");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to send verification email."));
             }
         }
     }
