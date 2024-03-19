@@ -384,3 +384,13 @@ export const TimerText = styled.span`
   font-size: 0.7rem;
   font-weight: normal;
 `;
+
+export const PasswordError = styled.h1`
+  margin-top: 1.2rem;
+  margin-bottom: 0rem;
+  color: red;
+  font-size: 0.7rem;
+  font-weight: normal;
+  text-align: left;
+  margin-right: 5rem;
+`;
