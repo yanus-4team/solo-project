@@ -4,7 +4,6 @@ package com.tutorial.backend.controller;
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.service.AuthService;
-import com.tutorial.backend.service.MemberService;
 import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,10 +42,10 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<String> signup(@RequestBody JoinForm joinForm) {
         try {
-            log.info(loginForm.toString());
-            MemberResponseDto member = authService.signup(loginForm);
+            log.info(joinForm.toString());
+            MemberResponseDto member = authService.signup(joinForm);
             return ResponseEntity.ok().body("회원가입을 축하합니다!");
         } catch (Exception e) {
             // 예외가 발생한 경우 처리
@@ -55,9 +54,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody LoginForm loginForm) {
-        log.info(authService.login(loginForm).toString());
-        return ResponseEntity.ok(authService.login(loginForm));
+    public ResponseEntity<TokenDto> login(@RequestBody JoinForm joinForm) {
+        log.info(authService.login(joinForm).toString());
+        return ResponseEntity.ok(authService.login(joinForm));
     }
 
     @PostMapping("/reissue")

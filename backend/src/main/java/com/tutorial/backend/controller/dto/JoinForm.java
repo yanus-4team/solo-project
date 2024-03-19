@@ -13,12 +13,14 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @NoArgsConstructor
-public class LoginForm {
+public class JoinForm {
     private String email;
     private String password;
+    private String name;
+
 
     @Builder
-    public LoginForm(String email, String password) {
+    public JoinForm(String email, String password) {
         this.email = email;
         this.password = password;
     }

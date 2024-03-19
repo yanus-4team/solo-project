@@ -182,7 +182,6 @@ export const TitleCheck = styled.h1`
 `;
 
 export const EmailInput = styled.input`
-    border: none;
     border-bottom: 1px solid #eeeeee;
     width: 130px;
     padding: 10px;
@@ -317,8 +316,6 @@ export const PasswordContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  opacity: 0;
-  max-height: 0;
   width: 100%;
   background-color: #fff;
 `;
@@ -333,14 +330,14 @@ export const CertiInputButtonContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-    display: ${({ isVisible }) => isVisible ? 'block' : 'none'};
+    display: ${({ isVisible }) => isVisible ? 'contents' : 'none'};
     animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 1s ease forwards` : 'none'};
-`
+`;
 
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
-    padding: 2px 8px;
+    padding: 0 8px;
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -352,6 +349,7 @@ export const QuestionMark = styled.span`
 export const Tooltip = styled.span`
     visibility: hidden;
     width: 280px;
+    font-size: 0.8rem;
     background-color: #e8e8e8;
     color: black;
     text-align: center;

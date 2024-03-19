@@ -21,9 +21,6 @@ const SignUpModal = (props) => {
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
   const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
-  const passwordHasNumber = /\d/; // 숫자 포함
-  const passwordHasUpperCase = /[A-Z]/; // 대문자 포함
-  const passwordHasLowerCase = /[a-z]/; // 소문자 포함
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
