@@ -100,7 +100,7 @@ export const PasswordError1 = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7rem;
+    margin-right: 5rem;
 `;
 
 export const PasswordError2 = styled.h1`
