@@ -5,7 +5,7 @@ import closeBtn from "../../assets/close-icon.svg";
 import { useNavigate } from 'react-router-dom';
 import { useCookieManager } from '../../storage/cookieManager'; 
 import SignUpModal from '../SignUp';
-
+import { toast } from 'react-toastify';
 const LoginModal = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,12 +15,6 @@ const LoginModal = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { setCookies } = useCookieManager(); // 쿠키 설정 함수를 가져옵니다.
     const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
-
-    // 회원가입 모달을 표시하는 함수
-    const handleSignUpClick = () => {
-        setIsSignUpModalVisible(true);
-        props.onClose();
-    };
 
     // 회원가입 모달을 숨기는 함수
     const handleCloseSignUpModal = () => {
@@ -49,7 +43,7 @@ const LoginModal = (props) => {
             const data = await response.json(); 
             setError('');
             setSuccess("로그인 성공!"); 
-
+            toast.success("로그인 성공!");
         
             setCookies(data.accessToken, data.refreshToken, data.accessTokenExpiresIn);
 

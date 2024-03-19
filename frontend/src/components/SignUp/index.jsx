@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import closeBtn from "../../assets/close-icon.svg";
 import SignComplete from "../SignComplete";
+import { toast } from 'react-toastify';
 
 const SignUpModal = (props) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -15,11 +16,36 @@ const SignUpModal = (props) => {
   const [certificationCode, setCertificationCode] = useState('');
   const [isCertificationCorrect, setIsCertificationCorrect] = useState(false);
   const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
-
+  const [password, setPassword] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
+  const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/;
+  const passwordSpecialCharRegex = /[^A-Za-z\d*?]/;
+  
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
   const certiButtonRef = useRef(null);
   const emailButtonRef = useRef(null);
+  const passwordInputRef = useRef(null);
+  
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+  
+    // 특수 문자 검사
+    if (passwordSpecialCharRegex.test(newPassword)) {
+      setIsSpecialCharValid(false);
+    } else {
+      setIsSpecialCharValid(true);
+    }
+  
+    // 길이 검사
+    if (passwordLengthRegex.test(newPassword)) {
+      setIsPasswordValid(true);
+    } else {
+      setIsPasswordValid(false);
+    }
+  };
 
   const completeSignUp = () => {
     setIsSignUpComplete(true);
@@ -36,6 +62,7 @@ const SignUpModal = (props) => {
             body: emailInputRef.current.value,
           });
         if (response.ok) {
+          toast.success("이메일이 전송되었습니다");
           const { resultData } = await response.json(); // JSON 형식의 응답을 파싱
           setEmailCode(resultData);
           setIsEmailSent(true);
@@ -44,6 +71,7 @@ const SignUpModal = (props) => {
           setEmailFormatError(false); // 형식 오류 초기화
         } else {
           const errorMessage = await response.text();
+          toast.error("이메일이 전송되었습니다");
           setEmailFormatError(errorMessage); // 백엔드에서 전달된 에러 메시지 표시
           setIsEmailSent(false); // 이메일 전송 실패로 설정
         }
@@ -91,6 +119,7 @@ const SignUpModal = (props) => {
 
   const resetEmail = () => {
     setTimer(180); // 타이머 초기화
+    setEmailCode('');
   };
 
   const handleCertificationCheck = () => {
@@ -131,18 +160,18 @@ const SignUpModal = (props) => {
           인증완료
         </S.EmailButton>
         : (
-        <S.EmailButton
+          <S.EmailButton
           ref={emailButtonRef}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          onClick={resetEmail}
+          onClick={timer === 0 ? resetEmail : sendEmail}
         >
-          {hovered ? (
-            "재전송"
-          ) : (
-            <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
-              {formatTime(timer)}
-            </S.TimerText>
+          {timer === 0 ? "재전송" : (
+            hovered ? "재전송" : (
+              <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
+                {formatTime(timer)}
+              </S.TimerText>
+            )
           )}
         </S.EmailButton>
       ) : (
@@ -184,7 +213,7 @@ const SignUpModal = (props) => {
         )}
         {isCertificationCorrect && (
           <>
-            <S.PasswordContainer>
+            <S.PasswordContainer isVisible={isCertificationCorrect}>
               <S.Titlepassword>비밀번호</S.Titlepassword>
               <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
                 ?
@@ -195,9 +224,17 @@ const SignUpModal = (props) => {
                 )}
               </S.QuestionMark>
             </S.PasswordContainer>
-            <S.PasswordInput type="password" placeholder="" />
-            <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
-            <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
+            <S.PasswordInput type="password" placeholder="" ref={passwordInputRef}  onChange={handlePasswordChange}/>
+            
+            {!isSpecialCharValid && 
+              <>
+                <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
+                <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
+              </>
+            }
+            {!isPasswordValid && 
+              <S.PasswordLengthError>비밀번호는 8~15자 사이여야 합니다.</S.PasswordLengthError>
+            }
             <S.Titlecheck>비밀번호 확인</S.Titlecheck>
             <S.CheckInput type="password" placeholder="" />
             <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
