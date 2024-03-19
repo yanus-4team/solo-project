@@ -340,7 +340,6 @@ export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
     padding: 2px 8px;
-    font-size: 12px;
     cursor: pointer;
     position: relative;
     display: inline-block;
