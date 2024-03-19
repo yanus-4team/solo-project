@@ -213,7 +213,7 @@ const SignUpModal = (props) => {
         )}
         {isCertificationCorrect && (
           <>
-            <S.PasswordContainer>
+            <S.PasswordContainer isVisible={isCertificationCorrect}>
               <S.Titlepassword>비밀번호</S.Titlepassword>
               <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
                 ?

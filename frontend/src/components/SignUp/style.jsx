@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 
 export const SignUpContainer = styled.div`
@@ -119,7 +119,7 @@ export const PasswordLengthError = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7rem;
+    margin-right: 5rem;
 `;
 
 export const CheckError = styled.h1`
@@ -153,7 +153,7 @@ export const TitleEmail = styled.h1`
 `;
 
 export const TitleCerti = styled.h1`
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: -2rem;
     margin-right: 13rem;
     color: #333;
@@ -163,11 +163,12 @@ export const TitleCerti = styled.h1`
 `;
 
 export const Titlepassword = styled.h1`
-    margin-top: 20px;
+    margin-top: 15px;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
     text-align: left;
+    margin-bottom: -35px;
 `;
 
 export const Titlecheck = styled.h1`
@@ -212,10 +213,22 @@ export const CheckInput = styled.input`
     border: 1px solid #ccc;
 `;
 
+const slideDown = keyframes`
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: 100px; // 최종 높이는 내용에 따라 조정하세요.
+    opacity: 1;
+  }
+`;
+
 export const CertificationContainer = styled.div`
-    display: ${({ visible }) => (visible ? "flex" : "none")};
-    flex-direction: column;
-    align-items: center;
+    display: ${({ visible }) => (visible ? "block" : "none")};
+    background-color: #fff; // 배경색 설정
+    animation: ${({ visible }) => visible ? css`${slideDown} 0.35s ease-out forwards` : "none"};
+    width: 100%; // 혹은 필요한 너비로 조정
 `;
 
 export const EmailInputButtonContainer = styled.div`
@@ -287,12 +300,27 @@ export const SignButton = styled.button`
     }
 `;
 
+const expandAndFadeIn = keyframes`
+  0% {
+    opacity: 0;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 300px; // 필요에 따라 조정
+  }
+`;
+
 export const PasswordContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: fit-content;
-    align-self: flex-start;
+  display: ${({ isVisible }) => isVisible ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: flex-start; // 왼쪽 정렬로 변경
+  justify-content: center;
+  opacity: 0;
+  max-height: 0;
+  width: 100%; // 혹은 필요한 너비로 조정
+  background-color: #fff;
+  animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
 `;
 
 
@@ -312,8 +340,9 @@ export const QuestionMark = styled.span`
     cursor: pointer;
     position: relative;
     display: inline-block;
-    margin-left: 1rem;
+    margin-left: 6rem;
     margin-top: 10px;
+    margin-bottom: 3px;
 `;
 
 export const Tooltip = styled.span`
@@ -325,7 +354,7 @@ export const Tooltip = styled.span`
     padding: 5px 0;
     border-radius: 6px;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
