@@ -1,9 +1,8 @@
 package com.tutorial.backend.controller;
 
-import com.tutorial.backend.controller.dto.LoginForm;
+import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.service.MemberService;
 import com.tutorial.backend.entity.Member;
-import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,7 +23,7 @@ public class MemberController {
     private final HttpSession httpSession;
 
     @PostMapping("join")
-    public ResponseEntity<?> join(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<?> join(@RequestBody JoinForm loginForm) {
         try {
             log.info(loginForm.toString());
             Member member = memberService.saveMember(loginForm);

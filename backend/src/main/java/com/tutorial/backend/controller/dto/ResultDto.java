@@ -25,9 +25,9 @@ public class ResultDto<T> {
 
     public static<T> ResultDto<T> res(final HttpStatus statusCode, final String resultMsg, final T t) {
         return ResultDto.<T>builder()
-                .resultData(t)
                 .statusCode(statusCode)
                 .resultMsg(resultMsg)
+                .resultData(t)
                 .build();
     }
 }

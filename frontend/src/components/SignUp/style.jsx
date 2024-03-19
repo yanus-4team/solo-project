@@ -162,7 +162,7 @@ export const TitleCerti = styled.h1`
     text-align: left;
 `;
 
-export const Titlepassword = styled.h1`
+export const TitlePassword = styled.h1`
     margin-top: 15px;
     color: #333;
     font-size: 1rem;
@@ -171,7 +171,7 @@ export const Titlepassword = styled.h1`
     margin-bottom: -35px;
 `;
 
-export const Titlecheck = styled.h1`
+export const TitleCheck = styled.h1`
     margin-top: 20px;
     margin-bottom: 0rem;
     margin-right: 10.6rem;
@@ -182,7 +182,6 @@ export const Titlecheck = styled.h1`
 `;
 
 export const EmailInput = styled.input`
-    border: none;
     border-bottom: 1px solid #eeeeee;
     width: 130px;
     padding: 10px;
@@ -230,6 +229,7 @@ export const CertificationContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDown} 0.35s ease-out forwards` : "none"};
     width: 100%; // 혹은 필요한 너비로 조정
 `;
+
 
 export const EmailInputButtonContainer = styled.div`
     display: flex;
@@ -312,15 +312,12 @@ const expandAndFadeIn = keyframes`
 `;
 
 export const PasswordContainer = styled.div`
-  display: ${({ isVisible }) => isVisible ? 'flex' : 'none'};
+  display: flex;
   flex-direction: column;
-  align-items: flex-start; // 왼쪽 정렬로 변경
+  align-items: flex-start;
   justify-content: center;
-  opacity: 0;
-  max-height: 0;
-  width: 100%; // 혹은 필요한 너비로 조정
+  width: 100%;
   background-color: #fff;
-  animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
 `;
 
 
@@ -332,11 +329,15 @@ export const CertiInputButtonContainer = styled.div`
     margin-bottom: -2rem;
 `;
 
+export const BottomContainer = styled.div`
+    display: ${({ isVisible }) => isVisible ? 'contents' : 'none'};
+    animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 1s ease forwards` : 'none'};
+`;
+
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
-    padding: 2px 8px;
-    font-size: 12px;
+    padding: 0 8px;
     cursor: pointer;
     position: relative;
     display: inline-block;
@@ -348,6 +349,7 @@ export const QuestionMark = styled.span`
 export const Tooltip = styled.span`
     visibility: hidden;
     width: 280px;
+    font-size: 0.8rem;
     background-color: #e8e8e8;
     color: black;
     text-align: center;
@@ -383,14 +385,4 @@ export const TimerText = styled.span`
   color: #333;
   font-size: 0.7rem;
   font-weight: normal;
-`;
-
-export const PasswordError = styled.h1`
-  margin-top: 1.2rem;
-  margin-bottom: 0rem;
-  color: red;
-  font-size: 0.7rem;
-  font-weight: normal;
-  text-align: left;
-  margin-right: 5rem;
 `;

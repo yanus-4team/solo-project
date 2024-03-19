@@ -21,9 +21,6 @@ const SignUpModal = (props) => {
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
   const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
-  const passwordHasNumber = /\d/; // 숫자 포함
-  const passwordHasUpperCase = /[A-Z]/; // 대문자 포함
-  const passwordHasLowerCase = /[a-z]/; // 소문자 포함
 
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
@@ -269,9 +266,9 @@ const SignUpModal = (props) => {
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
-      <>
-        <S.PasswordContainer isVisible={isCertificationCorrect}>
-        <S.Titlepassword>비밀번호</S.Titlepassword>
+      <S.BottomContainer isVisible={isCertificationCorrect}>
+        <S.PasswordContainer>
+        <S.TitlePassword>비밀번호</S.TitlePassword>
               <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
                 ?
                 {tooltipVisible && (
@@ -290,11 +287,11 @@ const SignUpModal = (props) => {
             </>
           )}
         </S.PasswordContainer>
-        <S.Titlecheck>비밀번호 확인</S.Titlecheck>
+        <S.TitleCheck>비밀번호 확인</S.TitleCheck>
         <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
         {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
         <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
-      </>
+      </S.BottomContainer>
     )}
       </S.SignUpBox>
     </S.SignUpContainer>

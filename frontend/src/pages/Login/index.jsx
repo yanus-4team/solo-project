@@ -79,7 +79,8 @@ function LoginPage() {
                     <S.TopDescription >
                         <S.Welcome>WELCOME !</S.Welcome>
                         <S.Underline className="underline"></S.Underline>
-                        <S.Text>같이 놀거나 여행갈 사람이 필요할 땐 소로</S.Text>
+                        <S.Text>매일 같은 길에서 벗어나 새로운 세상을 만나다</S.Text>
+
                     </S.TopDescription>
                 </S.Wrapper>
             </S.TopContainer>

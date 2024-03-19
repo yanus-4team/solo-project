@@ -1,6 +1,6 @@
 package com.tutorial.backend.service;
 
-import com.tutorial.backend.controller.dto.LoginForm;
+import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.controller.dto.MemberResponseDto;
 import com.tutorial.backend.controller.dto.TokenDto;
 import com.tutorial.backend.controller.dto.TokenRequestDto;
@@ -38,7 +38,7 @@ public class AuthService {
 
 
     @Transactional
-    public MemberResponseDto signup(LoginForm loginForm) {
+    public MemberResponseDto signup(JoinForm loginForm) {
         if (memberRepository.existsByMemberEmail(loginForm.getEmail())) {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
@@ -48,7 +48,7 @@ public class AuthService {
     }
 
     @Transactional
-    public TokenDto login(LoginForm loginForm) {
+    public TokenDto login(JoinForm loginForm) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken = loginForm.toAuthentication();
         log.info("들어옴");

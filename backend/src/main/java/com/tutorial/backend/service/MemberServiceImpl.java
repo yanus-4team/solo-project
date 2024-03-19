@@ -1,6 +1,6 @@
 package com.tutorial.backend.service;
 
-import com.tutorial.backend.controller.dto.LoginForm;
+import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class MemberServiceImpl  implements MemberService{
     }
 
     @Override
-    public Member saveMember(LoginForm loginForm) {
+    public Member saveMember(JoinForm loginForm) {
         memberRepository.save(toEntity(loginForm));
         return toEntity(loginForm);
     }
