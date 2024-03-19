@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const SignUpContainer = styled.div`
     position: fixed;
     top: 0;
@@ -174,11 +175,12 @@ export const Titlecheck = styled.h1`
 `;
 
 export const EmailInput = styled.input`
+    border: none;
+    border-bottom: 1px solid #eeeeee;
     width: 130px;
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
     margin-right: 1rem;
 `;
 
@@ -187,7 +189,6 @@ export const CertiInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
     margin-right: 1rem;
 `;
 
@@ -196,7 +197,6 @@ export const PasswordInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
 `;
 
 export const CheckInput = styled.input`
@@ -204,7 +204,6 @@ export const CheckInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
 `;
 
 export const CertificationContainer = styled.div`
@@ -238,8 +237,8 @@ export const EmailButton = styled.button`
         filter: brightness(0.9) !important;
     }
     &:disabled{
-        background-color: #b3b3b3;
-        color: black;
+        background-color: #dfdddd;
+        color: #a7a7a7;
     }
 `;
 
@@ -260,7 +259,8 @@ export const CertiButton = styled.button`
         filter: brightness(0.9) !important;
     }
     &:disabled{
-        background-color: #b3b3b3;
+        background-color: #dfdddd;
+        color: #a7a7a7;
     }
 `;
 

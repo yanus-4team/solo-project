@@ -14,6 +14,7 @@ const SignUpModal = (props) => {
   const [emailCode, setEmailCode] = useState('');
   const [certificationCode, setCertificationCode] = useState('');
   const [isCertificationCorrect, setIsCertificationCorrect] = useState(false);
+  const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
 
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
@@ -99,8 +100,10 @@ const SignUpModal = (props) => {
       certiInputRef.current.disabled = true;
       certiButtonRef.current.disabled = true;
       setIsCertificationCorrect(true);
+      setIsCertificationWrong(false); // 인증 성공 시 인증 실패 상태를 초기화
     } else {
       setIsCertificationCorrect(false);
+      setIsCertificationWrong(true); // 인증 실패 시 인증 실패 상태를 설정
     }
   };
 
@@ -121,29 +124,36 @@ const SignUpModal = (props) => {
             placeholder=""
             onChange={() => setEmailFormatError(false)} // 형식 오류 초기화
           />
-          {isEmailSent ? (
-            <S.EmailButton
-              ref={emailButtonRef}
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
-              onClick={resetEmail}
-            >
-              {hovered ? (
-                "재전송"
-              ) : (
-                <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
-                  {formatTime(timer)}
-                </S.TimerText>
-              )}
-            </S.EmailButton>
+          {isEmailSent ? isCertificationCorrect ?   <S.EmailButton
+          ref={emailButtonRef}
+          onClick={sendEmail}
+          >
+          인증완료
+        </S.EmailButton>
+        : (
+        <S.EmailButton
+          ref={emailButtonRef}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onClick={resetEmail}
+        >
+          {hovered ? (
+            "재전송"
           ) : (
-            <S.EmailButton
-              ref={emailButtonRef}
-              onClick={sendEmail}
-            >
-              이메일 인증
-            </S.EmailButton>
+            <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
+              {formatTime(timer)}
+            </S.TimerText>
           )}
+        </S.EmailButton>
+      ) : (
+        <S.EmailButton
+          ref={emailButtonRef}
+          onClick={sendEmail}
+        >
+          이메일 인증
+        </S.EmailButton>
+      )}
+
         </S.EmailInputButtonContainer>
         {emailFormatError && (
           <S.EmailFormatError>올바르지 않은 이메일 형식입니다.</S.EmailFormatError>
@@ -164,8 +174,12 @@ const SignUpModal = (props) => {
                 확인
               </S.CertiButton>
             </S.CertiInputButtonContainer>
-            {!isCertificationCorrect && <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>}
-            {isCertificationCorrect &&<S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>}
+            {isCertificationWrong && (
+              <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
+            )}
+            {isCertificationCorrect && (
+              <S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>
+            )}
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
@@ -187,7 +201,7 @@ const SignUpModal = (props) => {
             <S.Titlecheck>비밀번호 확인</S.Titlecheck>
             <S.CheckInput type="password" placeholder="" />
             <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
-        <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
+            <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
           </>
         )}
       </S.SignUpBox>
