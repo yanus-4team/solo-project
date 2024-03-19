@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const SignUpContainer = styled.div`
     position: fixed;
     top: 0;
@@ -100,7 +101,6 @@ export const PasswordError1 = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 7rem;
-    display: none;
 `;
 
 export const PasswordError2 = styled.h1`
@@ -111,7 +111,15 @@ export const PasswordError2 = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 2rem;
-    display: none;
+`;
+export const PasswordLengthError = styled.h1`
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 7rem;
 `;
 
 export const CheckError = styled.h1`
@@ -122,7 +130,6 @@ export const CheckError = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 7.2rem;
-    display: none;
 `;
 
 
@@ -174,11 +181,12 @@ export const Titlecheck = styled.h1`
 `;
 
 export const EmailInput = styled.input`
+    border: none;
+    border-bottom: 1px solid #eeeeee;
     width: 130px;
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
     margin-right: 1rem;
 `;
 
@@ -187,7 +195,6 @@ export const CertiInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
     margin-right: 1rem;
 `;
 
@@ -196,7 +203,6 @@ export const PasswordInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
 `;
 
 export const CheckInput = styled.input`
@@ -204,7 +210,6 @@ export const CheckInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
 `;
 
 export const CertificationContainer = styled.div`
@@ -238,8 +243,8 @@ export const EmailButton = styled.button`
         filter: brightness(0.9) !important;
     }
     &:disabled{
-        background-color: #b3b3b3;
-        color: black;
+        background-color: #dfdddd;
+        color: #a7a7a7;
     }
 `;
 
@@ -260,7 +265,8 @@ export const CertiButton = styled.button`
         filter: brightness(0.9) !important;
     }
     &:disabled{
-        background-color: #b3b3b3;
+        background-color: #dfdddd;
+        color: #a7a7a7;
     }
 `;
 
