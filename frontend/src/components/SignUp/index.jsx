@@ -212,9 +212,9 @@ const SignUpModal = (props) => {
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
-          <>
-            <S.PasswordContainer isVisible={isCertificationCorrect}>
-              <S.Titlepassword>비밀번호</S.Titlepassword>
+          <S.BottomContainer isVisible={isCertificationCorrect}>
+            <S.PasswordContainer>
+              <S.TitlePassword>비밀번호</S.TitlePassword>
               <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
                 ?
                 {tooltipVisible && (
@@ -235,11 +235,11 @@ const SignUpModal = (props) => {
             {!isPasswordValid && 
               <S.PasswordLengthError>비밀번호는 8~15자 사이여야 합니다.</S.PasswordLengthError>
             }
-            <S.Titlecheck>비밀번호 확인</S.Titlecheck>
+            <S.TitleCheck>비밀번호 확인</S.TitleCheck>
             <S.CheckInput type="password" placeholder="" />
             <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>
             <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
-          </>
+          </S.BottomContainer>
         )}
       </S.SignUpBox>
     </S.SignUpContainer>

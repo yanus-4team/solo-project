@@ -162,7 +162,7 @@ export const TitleCerti = styled.h1`
     text-align: left;
 `;
 
-export const Titlepassword = styled.h1`
+export const TitlePassword = styled.h1`
     margin-top: 15px;
     color: #333;
     font-size: 1rem;
@@ -171,7 +171,7 @@ export const Titlepassword = styled.h1`
     margin-bottom: -35px;
 `;
 
-export const Titlecheck = styled.h1`
+export const TitleCheck = styled.h1`
     margin-top: 20px;
     margin-bottom: 0rem;
     margin-right: 10.6rem;
@@ -312,15 +312,14 @@ const expandAndFadeIn = keyframes`
 `;
 
 export const PasswordContainer = styled.div`
-  display: ${({ isVisible }) => isVisible ? 'flex' : 'none'};
+  display: flex;
   flex-direction: column;
-  align-items: flex-start; // 왼쪽 정렬로 변경
+  align-items: flex-start;
   justify-content: center;
   opacity: 0;
   max-height: 0;
-  width: 100%; // 혹은 필요한 너비로 조정
+  width: 100%;
   background-color: #fff;
-  animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
 `;
 
 
@@ -331,6 +330,11 @@ export const CertiInputButtonContainer = styled.div`
     width: 270px;
     margin-bottom: -2rem;
 `;
+
+export const BottomContainer = styled.div`
+    display: ${({ isVisible }) => isVisible ? 'block' : 'none'};
+    animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 1s ease forwards` : 'none'};
+`
 
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
