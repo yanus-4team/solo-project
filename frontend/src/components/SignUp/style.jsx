@@ -231,6 +231,7 @@ export const CertificationContainer = styled.div`
     width: 100%; // 혹은 필요한 너비로 조정
 `;
 
+
 export const EmailInputButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
