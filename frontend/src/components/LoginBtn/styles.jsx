@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
     background-color: #fff;
+
     border-radius: 10px;
     width: 100%;
     padding: 15px 20px;
@@ -11,6 +12,7 @@ export const Button = styled.button`
     &:hover {
         filter: brightness(0.8) !important; 
     }
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 `;
 
 export const Wrapper = styled.div`

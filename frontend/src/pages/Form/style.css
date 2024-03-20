@@ -1,0 +1,51 @@
+.FormWrapper{
+    height: 100%;
+    padding:20px;
+}
+.Logo{
+    text-align: center;
+}
+.LogoImg{
+    width:160px;
+}
+.FormBox{
+    background-color: #ffffff;
+    border-radius: 5px;
+    width:500px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.FormBox label{
+    margin-left: 8px;;
+}
+[type="radio"]{
+    vertical-align: middle;
+    appearance: none;
+    border: max(2px,0.1em) solid gray;
+    border-radius: 50%;
+    width:16px;
+    height: 16px;
+    margin-bottom: 4px;
+    transition: border 0.2s ease-in-out;
+}
+[type="radio"]:checked{
+    border: 0.4em solid tomato;
+}
+.PastVisitInput{
+    margin-left: 4px;
+    border:none;
+    background-color: #f1f0f0;
+    border-radius: 5px;
+}
+.SearchBtn{
+    background-color: tomato;
+    color: #ffffff;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.ListBox {
+    border: 1px solid gray;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+}
