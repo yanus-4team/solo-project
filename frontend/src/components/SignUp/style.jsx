@@ -185,7 +185,7 @@ export const TitlePassword = styled.h1`
 `;
 
 export const TitleCheck = styled.h1`
-    margin-top: 8px;
+    margin-top: 20px;
     margin-bottom: 0rem;
     margin-right: 11.6rem;
     color: #333;
@@ -256,8 +256,9 @@ export const EmailButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color: var(--primary-color);
+
+    color: white;
     margin-bottom: 1rem;
     margin-top: 2rem;
     margin-left: -9rem;
@@ -278,8 +279,8 @@ export const CertiButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color: var(--primary-color);
+    color: white;
     margin-bottom: 1rem;
     margin-top: 2rem;
     margin-left: -10rem;
@@ -299,7 +300,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 11px;
+    margin-top: 20px;
     border-radius: 30px;
     background-color: #CDF0ED;
     color: black;

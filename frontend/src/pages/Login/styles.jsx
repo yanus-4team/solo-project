@@ -7,14 +7,13 @@ export const PageContainer = styled.div`
     width: 100%; // 추가된 부분
 
     @media (max-width: 390px) {
-        width: 100%; // 추가된 부분
-        padding: 0 10px; // 추가된 부분
+        width: 100%; 
+        padding: 0 10px; 
     }
 `;
 
 export const TopContainer = styled.div`
     text-align: center;
-
 `;
 
 export const TopDescription = styled.div`

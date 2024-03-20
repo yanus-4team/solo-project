@@ -142,6 +142,37 @@ const SignUpModal = (props) => {
     }
   };
 
+  
+  const handleSubmit = async (e) =>  {
+    e.preventDefault();
+    if (emailInputRef && password) {
+        try {
+            const response = await fetch('http://localhost:8080/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  
+                  email: emailInputRef.current.value,
+                   password: passwordInputRef.current.value 
+                  })
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const data = await response.text();
+            console.log('회원가입 성공:', data);
+            toast.success('회원가입이 완료되었습니다');
+            completeSignUp()
+        } catch (error) {
+            console.error('에러 발생:', error);
+            // 회원가입 실패 시 모달 열고 메시지 표시
+        }
+    }
+};
+
+
+
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -299,7 +330,7 @@ const SignUpModal = (props) => {
         <S.TitleCheck>비밀번호 확인</S.TitleCheck>
         <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
         {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-        <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
+        <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
       </S.BottomContainer>
     )}
       </S.SignUpBox>
