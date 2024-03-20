@@ -72,14 +72,27 @@ export const EmailFormatError = styled.h1`
     margin-right: 6.3rem;
 `;
 
-export const EmailSended = styled.h1`
+
+export const ExpiredMessage = styled.span`
     margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 6.3rem;
+`;
+
+
+
+export const EmailSended = styled.h1`
+    margin-top: 0;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7.3rem;
+    margin-right: 8.3rem;
 `
 
 
@@ -144,8 +157,8 @@ export const CertiRight = styled.h1`
 `;
 
 export const TitleEmail = styled.h1`
-    margin-bottom: -2rem;
-    margin-right: 13.9rem;
+    margin-bottom: -1.8rem;
+    margin-right: 14rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -154,7 +167,7 @@ export const TitleEmail = styled.h1`
 
 export const TitleCerti = styled.h1`
     margin-top: 10px;
-    margin-bottom: -2rem;
+    margin-bottom: -1.8rem;
     margin-right: 13rem;
     color: #333;
     font-size: 1rem;
@@ -168,13 +181,13 @@ export const TitlePassword = styled.h1`
     font-size: 1rem;
     font-weight: normal;
     text-align: left;
-    margin-bottom: -35px;
+    margin-bottom: -30px;
 `;
 
 export const TitleCheck = styled.h1`
-    margin-top: 20px;
+    margin-top: 8px;
     margin-bottom: 0rem;
-    margin-right: 10.6rem;
+    margin-right: 11.6rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -225,9 +238,9 @@ const slideDown = keyframes`
 
 export const CertificationContainer = styled.div`
     display: ${({ visible }) => (visible ? "block" : "none")};
-    background-color: #fff; // 배경색 설정
+    background-color: #fff; 
     animation: ${({ visible }) => visible ? css`${slideDown} 0.35s ease-out forwards` : "none"};
-    width: 100%; // 혹은 필요한 너비로 조정
+    width: 100%; 
 `;
 
 
@@ -236,7 +249,6 @@ export const EmailInputButtonContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 270px;
-    margin-bottom: -2rem;
 `;
 
 export const EmailButton = styled.button`
@@ -287,7 +299,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 1.5rem;
+    margin-top: 11px;
     border-radius: 30px;
     background-color: #CDF0ED;
     color: black;
@@ -321,6 +333,7 @@ export const PasswordContainer = styled.div`
 `;
 
 
+
 export const CertiInputButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -337,11 +350,11 @@ export const BottomContainer = styled.div`
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
-    padding: 0 8px;
+    padding: 0 6px;
     cursor: pointer;
     position: relative;
     display: inline-block;
-    margin-left: 6rem;
+    margin-left: 4rem;
     margin-top: 10px;
     margin-bottom: 3px;
 `;

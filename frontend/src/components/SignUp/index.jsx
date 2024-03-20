@@ -19,6 +19,7 @@ const SignUpModal = (props) => {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
+  const [isCodeExpired, setIsCodeExpired] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
   const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
 
@@ -123,9 +124,10 @@ const SignUpModal = (props) => {
           setTimer(180);
           setShowCertification(true);
           setEmailFormatError(false); // 형식 오류 초기화
+          setIsCodeExpired(false); // 코드 만료 상태를 초기화
         } else {
           const errorMessage = await response.text();
-          toast.error("이메일이 전송되었습니다");
+          toast.error("이메일 전송에 실패했습니다");
           setEmailFormatError(errorMessage); // 백엔드에서 전달된 에러 메시지 표시
           setIsEmailSent(false); // 이메일 전송 실패로 설정
         }
@@ -160,6 +162,7 @@ const SignUpModal = (props) => {
     // 타이머가 0이 되면 clearInterval을 호출하여 타이머를 멈춤
     if (timer === 0) {
       clearInterval(intervalId);
+      setIsCodeExpired(true); // 코드 만료 상태를 설정
     }
 
     return () => clearInterval(intervalId);
@@ -173,7 +176,8 @@ const SignUpModal = (props) => {
 
   const resetEmail = () => {
     setTimer(180); // 타이머 초기화
-    setEmailCode('');
+    setEmailCode(''); // 이메일 코드 초기화
+
   };
 
   const handleCertificationCheck = () => {
@@ -263,6 +267,11 @@ const SignUpModal = (props) => {
             {isCertificationCorrect && (
               <S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>
             )}
+            {isCodeExpired && (
+              <S.ExpiredMessage>
+                인증 코드가 만료되었습니다. 
+              </S.ExpiredMessage>
+        )}
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
