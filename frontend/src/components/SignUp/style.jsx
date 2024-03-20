@@ -79,7 +79,7 @@ export const EmailSended = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7.3rem;
+    margin-right: 8.4rem;
 `
 
 
@@ -94,13 +94,13 @@ export const CertiError = styled.h1`
 `;
 
 export const PasswordError1 = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 0rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 5rem;
+    margin-right: 2rem;
 `;
 
 export const PasswordError2 = styled.h1`
@@ -129,7 +129,7 @@ export const CheckError = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7.2rem;
+    margin-right: 8.5rem;
 `;
 
 
@@ -140,12 +140,12 @@ export const CertiRight = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.6rem;
+    margin-right: 9.4rem;
 `;
 
 export const TitleEmail = styled.h1`
-    margin-bottom: -2rem;
-    margin-right: 13.9rem;
+    margin-bottom: -1.8rem;
+    margin-right: 14.2rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -154,7 +154,7 @@ export const TitleEmail = styled.h1`
 
 export const TitleCerti = styled.h1`
     margin-top: 10px;
-    margin-bottom: -2rem;
+    margin-bottom: -1.8rem;
     margin-right: 13rem;
     color: #333;
     font-size: 1rem;
@@ -168,13 +168,13 @@ export const TitlePassword = styled.h1`
     font-size: 1rem;
     font-weight: normal;
     text-align: left;
-    margin-bottom: -35px;
+    margin-bottom: -30px;
 `;
 
 export const TitleCheck = styled.h1`
     margin-top: 20px;
-    margin-bottom: 0rem;
-    margin-right: 10.6rem;
+    margin-bottom: 0.1rem;
+    margin-right: 11.5rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -201,7 +201,7 @@ export const CertiInput = styled.input`
 export const PasswordInput = styled.input`
     width: 250px;
     padding: 10px;
-    margin-bottom: -1rem;
+    margin-bottom: 0rem;
     border: 1px solid #ccc;
 `;
 
@@ -318,6 +318,7 @@ export const PasswordContainer = styled.div`
   justify-content: center;
   width: 100%;
   background-color: #fff;
+  margin-top: -1.1rem;
 `;
 
 
@@ -385,4 +386,15 @@ export const TimerText = styled.span`
   color: #333;
   font-size: 0.7rem;
   font-weight: normal;
+`;
+
+
+export const ConfirmPasswordContainer = styled.div`
+  display: ${({ isVisible }) => isVisible ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
 `;
