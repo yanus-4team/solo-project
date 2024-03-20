@@ -8,7 +8,8 @@ export const Container = styled.div`
     right: -200px;
     width: 200px;
     height: 100vh;
-    background-color: #CDF0ED;
+    /* background-color: #CDF0ED; */
+    background-color: #fff;
     transition: right 0.5s ease;
     z-index: 7;
     &.open {
@@ -42,6 +43,7 @@ export const GoLogin = styled(Link)`
 export const Text2 = styled.div`
     text-align: center;
     margin-top: 20px;
+    color: black;
 `;
 
 export const CloseBtn = styled.img`

@@ -38,7 +38,9 @@ export const Text = styled.p`
 `
 
 export const MainLogo = styled.img`
-    width: 200px;
+    /* width: 200px; */
+    width: 160px;
+    margin-bottom: 20px;
 `
 
 export const Wrapper = styled.div`
@@ -68,4 +70,5 @@ export const NoLoginLink = styled(Link)`
 export const NoLoginContainer = styled.div`
     padding:20px;
     text-align: center;
+    margin-top: 8px;
 `;
