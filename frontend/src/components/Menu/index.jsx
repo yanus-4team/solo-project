@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./styles";
 import closeIcon from "../../assets/close-icon.svg"
 import user from '../../assets/user.png';
+import { Link } from "react-router-dom";
 
 function Menu({ isOpen, onClose }) { // onClose prop 추가
     const handleClose = () => {
@@ -15,7 +16,7 @@ function Menu({ isOpen, onClose }) { // onClose prop 추가
                 <S.UserImage src={user} alt="User" />
             </S.UserContainer>
             <S.GoLogin to="/login">로그인을 해주세요</S.GoLogin>
-            <S.Text2>마이페이지</S.Text2>
+            <Link to="/myPage"><S.Text2>마이페이지</S.Text2></Link>
             <S.Text2>방문 기록</S.Text2>
             <S.Text2>내 리뷰</S.Text2>
         </S.Container>
