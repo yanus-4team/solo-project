@@ -1,4 +1,3 @@
-// LoginPage 컴포넌트
 import React, { useState, useEffect} from "react";
 import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
@@ -7,7 +6,7 @@ import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import SignUpModal from '../../components/SignUp';
-
+import { toast } from 'react-toastify';
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -24,7 +23,7 @@ function LoginPage() {
             }
             setInitialCheckDone(true); // 초기 체크 완료 상태를 true로 설정
         }
-    }, [navigate, getCookies, initialCheckDone]); // 의존성 배열에 initialCheckDone 추가
+    }, [navigate, getCookies, initialCheckDone]);
 
     const handleNoLoginClick = () => {
         navigate("/");
@@ -69,8 +68,18 @@ function LoginPage() {
         setShowSignUpModal(true); // 회원가입 모달 열기
     };
 
+    const handleLoginBtnClick = (index) => {
+        if (oauthLogin[index].id === 1) { // 이메일로 로그인하기 버튼일 때만 showModal 함수 호출
+            showModalFn();
+        }else{
+            toast("준비중인 서비스입니다.");
+    };
+    
+    };
+    
+
     return (
-        <S.PageContainer>
+        <S.PageContainer> 
             <S.TopContainer>
                 <S.TopHeader>
                     <S.MainLogo src={MainLogoSrc} alt="" />
@@ -88,7 +97,7 @@ function LoginPage() {
                 <S.Wrapper>
                     <S.LoginBtnList>
                         {oauthLogin.map((value, index) => (
-                            <LoginBtn showModal={showModalFn} showModalState={showModal} loginType={value} key={index} />
+                            <LoginBtn onClick={() => handleLoginBtnClick(index)} showModalState={showModal} loginType={value} key={index} />
                         ))}
                     </S.LoginBtnList>
                 </S.Wrapper>
@@ -104,4 +113,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-

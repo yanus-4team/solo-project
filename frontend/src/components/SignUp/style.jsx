@@ -53,23 +53,22 @@ export const Text = styled.h1`
 `;
 
 export const EmailAlreadyUseError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top:-0.8rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.3rem;
-    display:none;
+    margin-right: 10.3rem;
 `;
 export const EmailFormatError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top:-0.8rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 6.3rem;
+    margin-right: 7.8rem;
 `;
 
 
@@ -86,7 +85,7 @@ export const ExpiredMessage = styled.span`
 
 
 export const EmailSended = styled.h1`
-    margin-top: 0;
+    margin-top: -0.8em;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
@@ -158,7 +157,7 @@ export const CertiRight = styled.h1`
 
 export const TitleEmail = styled.h1`
     margin-bottom: -1.8rem;
-    margin-right: 14rem;
+    margin-right: 14.3rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;

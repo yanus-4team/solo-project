@@ -64,6 +64,10 @@ export const BottomContainer = styled.div`
 export const NoLoginLink = styled(Link)`
     text-decoration: none;
     color: black;
+    &:hover {
+        text-decoration: underline;
+        font-weight: bold;
+    }
 `;
 
 export const NoLoginContainer = styled.div`
