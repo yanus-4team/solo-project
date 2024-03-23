@@ -224,22 +224,37 @@ export const CheckInput = styled.input`
     border: 1px solid #ccc;
 `;
 
-const slideDown = keyframes`
+const slideDownCertification = keyframes`
   from {
     height: 0;
+    display: none;
     opacity: 0;
   }
   to {
-    height: 100px; // 최종 높이는 내용에 따라 조정하세요.
+    height: 100px;
+    display: block;
+    opacity: 1;
+  }
+`;
+const slideDownBottom = keyframes`
+  from {
+    height: 0;
+    display: none;
+    opacity: 0;
+  }
+  to {
+    height: 200px;
+    display: block;
     opacity: 1;
   }
 `;
 
 export const CertificationContainer = styled.div`
-    display: ${({ visible }) => (visible ? "block" : "none")};
-    background-color: #fff; 
-    animation: ${({ visible }) => visible ? css`${slideDown} 0.35s ease-out forwards` : "none"};
-    width: 100%; 
+    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.35s ease-out forwards` : "none"};
+`;
+
+export const BottomContainer = styled.div`
+    animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.35s ease-out forwards` : "none"};
 `;
 
 
@@ -301,26 +316,16 @@ export const SignButton = styled.button`
     border: none;
     margin-top: 20px;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color:  var(--primary-color);
+    color: white;
     margin-bottom: 1rem;
     cursor: pointer;
     transition: filter 0.3s ease;
+    display:block;
   
     &:hover {
         filter: brightness(0.9) !important;
     }
-`;
-
-const expandAndFadeIn = keyframes`
-  0% {
-    opacity: 0;
-    max-height: 0;
-  }
-  100% {
-    opacity: 1;
-    max-height: 300px; // 필요에 따라 조정
-  }
 `;
 
 export const PasswordContainer = styled.div`
@@ -340,11 +345,6 @@ export const CertiInputButtonContainer = styled.div`
     align-items: center;
     width: 270px;
     margin-bottom: -2rem;
-`;
-
-export const BottomContainer = styled.div`
-    display: ${({ isVisible }) => isVisible ? 'contents' : 'none'};
-    animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 1s ease forwards` : 'none'};
 `;
 
 export const QuestionMark = styled.span`
