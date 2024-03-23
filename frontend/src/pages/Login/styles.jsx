@@ -7,14 +7,13 @@ export const PageContainer = styled.div`
     width: 100%; // 추가된 부분
 
     @media (max-width: 390px) {
-        width: 100%; // 추가된 부분
-        padding: 0 10px; // 추가된 부분
+        width: 100%; 
+        padding: 0 10px; 
     }
 `;
 
 export const TopContainer = styled.div`
     text-align: center;
-
 `;
 
 export const TopDescription = styled.div`
@@ -65,6 +64,10 @@ export const BottomContainer = styled.div`
 export const NoLoginLink = styled(Link)`
     text-decoration: none;
     color: black;
+    &:hover {
+        text-decoration: underline;
+        font-weight: bold;
+    }
 `;
 
 export const NoLoginContainer = styled.div`

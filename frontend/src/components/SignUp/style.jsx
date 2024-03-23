@@ -53,16 +53,26 @@ export const Text = styled.h1`
 `;
 
 export const EmailAlreadyUseError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top:-0.8rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.3rem;
-    display:none;
+    margin-right: 10.3rem;
 `;
 export const EmailFormatError = styled.h1`
+    margin-top:-0.8rem;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 7.8rem;
+`;
+
+
+export const ExpiredMessage = styled.span`
     margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
@@ -72,14 +82,16 @@ export const EmailFormatError = styled.h1`
     margin-right: 6.3rem;
 `;
 
+
+
 export const EmailSended = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: -0.8em;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7.3rem;
+    margin-right: 8.3rem;
 `
 
 
@@ -144,8 +156,8 @@ export const CertiRight = styled.h1`
 `;
 
 export const TitleEmail = styled.h1`
-    margin-bottom: -2rem;
-    margin-right: 13.9rem;
+    margin-bottom: -1.8rem;
+    margin-right: 14.3rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -154,7 +166,7 @@ export const TitleEmail = styled.h1`
 
 export const TitleCerti = styled.h1`
     margin-top: 10px;
-    margin-bottom: -2rem;
+    margin-bottom: -1.8rem;
     margin-right: 13rem;
     color: #333;
     font-size: 1rem;
@@ -168,13 +180,13 @@ export const TitlePassword = styled.h1`
     font-size: 1rem;
     font-weight: normal;
     text-align: left;
-    margin-bottom: -35px;
+    margin-bottom: -30px;
 `;
 
 export const TitleCheck = styled.h1`
     margin-top: 20px;
     margin-bottom: 0rem;
-    margin-right: 10.6rem;
+    margin-right: 11.6rem;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -212,22 +224,37 @@ export const CheckInput = styled.input`
     border: 1px solid #ccc;
 `;
 
-const slideDown = keyframes`
+const slideDownCertification = keyframes`
   from {
     height: 0;
+    display: none;
     opacity: 0;
   }
   to {
-    height: 100px; // 최종 높이는 내용에 따라 조정하세요.
+    height: 100px;
+    display: block;
+    opacity: 1;
+  }
+`;
+const slideDownBottom = keyframes`
+  from {
+    height: 0;
+    display: none;
+    opacity: 0;
+  }
+  to {
+    height: 200px;
+    display: block;
     opacity: 1;
   }
 `;
 
 export const CertificationContainer = styled.div`
-    display: ${({ visible }) => (visible ? "block" : "none")};
-    background-color: #fff; // 배경색 설정
-    animation: ${({ visible }) => visible ? css`${slideDown} 0.35s ease-out forwards` : "none"};
-    width: 100%; // 혹은 필요한 너비로 조정
+    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.35s ease-out forwards` : "none"};
+`;
+
+export const BottomContainer = styled.div`
+    animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.35s ease-out forwards` : "none"};
 `;
 
 
@@ -236,7 +263,6 @@ export const EmailInputButtonContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 270px;
-    margin-bottom: -2rem;
 `;
 
 export const EmailButton = styled.button`
@@ -244,8 +270,9 @@ export const EmailButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color: var(--primary-color);
+
+    color: white;
     margin-bottom: 1rem;
     margin-top: 2rem;
     margin-left: -9rem;
@@ -266,8 +293,8 @@ export const CertiButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color: var(--primary-color);
+    color: white;
     margin-bottom: 1rem;
     margin-top: 2rem;
     margin-left: -10rem;
@@ -287,28 +314,18 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 1.5rem;
+    margin-top: 20px;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color:  var(--primary-color);
+    color: white;
     margin-bottom: 1rem;
     cursor: pointer;
     transition: filter 0.3s ease;
+    display:block;
   
     &:hover {
         filter: brightness(0.9) !important;
     }
-`;
-
-const expandAndFadeIn = keyframes`
-  0% {
-    opacity: 0;
-    max-height: 0;
-  }
-  100% {
-    opacity: 1;
-    max-height: 300px; // 필요에 따라 조정
-  }
 `;
 
 export const PasswordContainer = styled.div`
@@ -321,6 +338,7 @@ export const PasswordContainer = styled.div`
 `;
 
 
+
 export const CertiInputButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -329,19 +347,14 @@ export const CertiInputButtonContainer = styled.div`
     margin-bottom: -2rem;
 `;
 
-export const BottomContainer = styled.div`
-    display: ${({ isVisible }) => isVisible ? 'contents' : 'none'};
-    animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 1s ease forwards` : 'none'};
-`;
-
 export const QuestionMark = styled.span`
     background-color: #e8e8e8;
     border-radius: 50%;
-    padding: 0 8px;
+    padding: 0 6px;
     cursor: pointer;
     position: relative;
     display: inline-block;
-    margin-left: 6rem;
+    margin-left: 4rem;
     margin-top: 10px;
     margin-bottom: 3px;
 `;

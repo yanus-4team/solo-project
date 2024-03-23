@@ -42,14 +42,15 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody JoinForm joinForm) {
+    public ResponseEntity<ResultDto<String>> signUp(@RequestBody JoinForm joinForm) {
         try {
             log.info(joinForm.toString());
             MemberResponseDto member = authService.signup(joinForm);
-            return ResponseEntity.ok().body("회원가입을 축하합니다!");
+            return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "회원가입을 축하합니다!"));
         } catch (Exception e) {
             // 예외가 발생한 경우 처리
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("가입 실패했어요");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "가입 실패했어요"));
         }
     }
 

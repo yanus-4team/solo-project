@@ -42,8 +42,9 @@ export const LoginButton = styled.button`
     padding: 10px;
     border: none;
     border-radius: 30px;
-    background-color: #CDF0ED;
-    color: black;
+    background-color: var(--primary-color);
+
+    color: white;
     margin-bottom: 1rem;
     cursor: pointer;
     transition: filter 0.3s ease;

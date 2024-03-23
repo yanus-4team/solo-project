@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 public class JoinForm {
     private String email;
     private String password;
-    private String name;
 
 
     @Builder
