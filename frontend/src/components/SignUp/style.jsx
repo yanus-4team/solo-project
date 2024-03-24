@@ -63,17 +63,17 @@ export const EmailAlreadyUseError = styled.h1`
     display:none;
 `;
 export const EmailFormatError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 6.3rem;
+    margin-right: 7.8rem;
 `;
 
 export const EmailSended = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
@@ -84,7 +84,7 @@ export const EmailSended = styled.h1`
 
 
 export const CertiError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1.3rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -134,8 +134,8 @@ export const CheckError = styled.h1`
 
 
 export const CertiRight = styled.h1`
-    margin-top: 1.2rem;
-    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-bottom: 0.rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
@@ -154,7 +154,7 @@ export const TitleEmail = styled.h1`
 
 export const TitleCerti = styled.h1`
     margin-top: 10px;
-    margin-bottom: -1.8rem;
+    margin-bottom: -2rem;
     margin-right: 13rem;
     color: #333;
     font-size: 1rem;
@@ -193,7 +193,7 @@ export const EmailInput = styled.input`
 export const CertiInput = styled.input`
     width: 150px;
     padding: 10px;
-    margin-bottom: -1rem;
+    margin-bottom: -1.5rem;
     border: 1px solid #ccc;
     margin-right: 1rem;
 `;
@@ -397,4 +397,10 @@ export const ConfirmPasswordContainer = styled.div`
   width: 100%;
   background-color: #fff;
   animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
+`;
+
+export const WarningMessage = styled.div`
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
 `;

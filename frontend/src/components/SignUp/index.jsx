@@ -37,74 +37,36 @@ const SignUpModal = (props) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
 
+    // 길이, 특수 문자, 소문자 검사
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
-    const hasSpecialChar = /[*?]/.test(newPassword); // 특수문자 * 또는 ? 포함
-    const hasLowerCase = /[a-z]/.test(newPassword); // 소문자 포함
+    const hasSpecialChar = /[*?]+/.test(newPassword);
+    const hasLowerCase = /[a-z]/.test(newPassword);
 
     setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-    setIsSpecialCharValid(hasSpecialChar);
-
-    // 특수 문자 검사
-    if (passwordSpecialCharRegex.test(newPassword)) {
-      setIsSpecialCharValid(false);
-    } else {
-      setIsSpecialCharValid(true);
-    }
-  
-    // 길이 검사
-    if (passwordLengthRegex.test(newPassword)) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
-    }
-  };
+};
 
 
   const handleConfirmPasswordChange = (event) => {
     const newConfirmPassword = event.target.value;
     setConfirmPassword(newConfirmPassword);
-    setIsConfirmPasswordValid(newConfirmPassword === password); // 비밀번호와 비밀번호 확인이 같은지 검사
-  };
 
-  const validatePassword = () => {
-    setPasswordError("");
-    setIsSpecialCharValid(true);
-    setIsConfirmPasswordValid(true);
+    // 비밀번호와 비밀번호 확인이 같은지 검사
+    setIsConfirmPasswordValid(newConfirmPassword === password);
+};
 
-    if (!password) {
-      setPasswordError("비밀번호를 입력하십시오.");
-      return false;
-    }
-    if (!(password.length >= 8 && password.length <= 15)) {
-      setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
-      return false;
-    }
-    if (!passwordSpecialCharRegex.test(password)) {
-      setIsSpecialCharValid(false); // 특수문자 유효성 실패
-      setPasswordError("비밀번호에는 특수문자(*, ?)가 최소 한 개 이상 포함되어야 합니다.");
-      return false;
-    }
-    if (!/[a-z]/.test(password)) {
-      setPasswordError("비밀번호에는 소문자가 포함되어야 합니다.");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      setIsConfirmPasswordValid(false);
-      setPasswordError("입력하신 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-      return false;
-    }
+const validatePassword = () => {
+  return password && isPasswordValid && confirmPassword && isConfirmPasswordValid;
+};
 
-    return true;
-  };
-
-  const completeSignUp = () => {
-    if (validatePassword()) {
-      // 비밀번호 유효성 검사 통과 시, 회원가입 완료 처리
-      setIsSignUpComplete(true);
-    } else {
-      // 실패 시, 유효성 검사에 따른 에러 메시지가 표시됩니다.
-    }
-  };
+const completeSignUp = () => {
+  if (!validatePassword()) {
+      // 조건을 충족하지 못한 경우 메시지 표시 로직
+      toast.error("비밀번호 조건을 확인해주세요.");
+      return;
+  }
+  // 회원가입 처리 로직
+  setIsSignUpComplete(true);
+};
 
   const sendEmail = async () => {
     if (validateEmail(emailInputRef.current.value)) {
