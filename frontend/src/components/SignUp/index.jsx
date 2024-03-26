@@ -178,9 +178,9 @@ const SignUpModal = (props) => {
               toast.error('회원가입에 실패했습니다.');
                 throw new Error('Network response was not ok.');
             }else{
-              const data = await response.text();
-              console.log('회원가입 성공:', data);
-              toast.success(data);
+              const { resultMsg } = await response.json();
+              console.log('회원가입 성공:', resultMsg);
+              toast.success(resultMsg);
               completeSignUp()
             }
         } catch (error) {
@@ -228,8 +228,14 @@ const SignUpModal = (props) => {
   const resetEmail = () => {
     setTimer(180); // 타이머 초기화
     setEmailCode(''); // 이메일 코드 초기화
-
+    setCertificationCode(''); // 인증 코드 입력 필드 초기화
+    setIsCertificationCorrect(false); // 인증 성공 상태 초기화
+    setIsCertificationWrong(false); // 인증 실패 상태 초기화
+    certiInputRef.current.disabled = false;
+    certiButtonRef.current.disabled = false;
+    setIsCodeExpired(false); // 코드 만료 상태 초기화
   };
+  
 
   const handleCertificationCheck = () => {
     if (certificationCode === emailCode) {
@@ -301,15 +307,20 @@ const SignUpModal = (props) => {
           <S.CertificationContainer visible={showCertification ? "true" : "false"}>
             <S.TitleCerti>인증번호</S.TitleCerti>
             <S.CertiInputButtonContainer>
-              <S.CertiInput 
-                ref={certiInputRef}
-                type="text" 
-                placeholder="" 
-                onChange={(e) => setCertificationCode(e.target.value)}
-              />
-              <S.CertiButton ref={certiButtonRef} onClick={handleCertificationCheck}>
-                확인
-              </S.CertiButton>
+            <S.CertiInput 
+              ref={certiInputRef}
+              type="text" 
+              placeholder="" 
+              onChange={(e) => setCertificationCode(e.target.value)}
+              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 입력 비활성화
+            />
+            <S.CertiButton 
+              ref={certiButtonRef} 
+              onClick={handleCertificationCheck} 
+              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 버튼 비활성화
+            >
+              확인
+            </S.CertiButton>
             </S.CertiInputButtonContainer>
             {isCertificationWrong && (
               <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>

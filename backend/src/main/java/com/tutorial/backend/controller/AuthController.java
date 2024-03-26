@@ -3,6 +3,7 @@ package com.tutorial.backend.controller;
 
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
+import com.tutorial.backend.exception.SpecificMailServiceException;
 import com.tutorial.backend.service.AuthService;
 import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,6 @@ public class AuthController {
     private final AuthService authService;
     private final MailService mailService;
 
-
     @PostMapping("verifyEmail")
     public ResponseEntity<ResultDto<String>> emailCheck(@RequestBody String email) {
         log.info(email);
@@ -32,11 +32,16 @@ public class AuthController {
         } else {
             try {
                 String code = mailService.sendSimpleMessage(email);
-                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "Verification email sent successfully.", code));
+                if (code != null) {
+                    return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "Verification email sent successfully.", code));
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to send verification email. Please try again later."));
+                }
             } catch (Exception exception) {
-                log.error("Failed to send verification email.", exception);
+                log.error("An unexpected error occurred while sending verification email.", exception);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to send verification email."));
+                        .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred. Please try again later."));
             }
         }
     }

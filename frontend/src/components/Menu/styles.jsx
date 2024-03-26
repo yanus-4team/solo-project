@@ -49,6 +49,24 @@ export const Text2 = styled.div`
 export const CloseBtn = styled.img`
     position:absolute;
     width:25px;
-    top:30px;
+    top:50px;
     right:10px;
+`;
+export const LogOutContainer = styled.div`
+position: absolute;
+bottom: 50px;
+left: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+`;
+export const LogOutIcon = styled.img`
+    width: 30px;
+    margin-right: 5px;
+`;
+export const LogOutText = styled.div`
+    color: black;
+
 `;
