@@ -24,6 +24,12 @@
     text-align: center;
     padding: 5px;
 }
+.CloseModal{
+    text-align: right;
+}
+.CloseModal img{
+    width: 20px;
+}
 .SearchPlaceBtn{
     background-color: tomato;
     color: #ffffff;
@@ -31,7 +37,7 @@
     margin-left: 10px;
     padding:4px;
 }
-.SearchPlaceBox > div{
+.Line{
     border: 1px solid #d0cfcf;
     margin-top: 10px;
 }
