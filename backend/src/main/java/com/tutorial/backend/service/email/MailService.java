@@ -1,6 +1,8 @@
 package com.tutorial.backend.service.email;
 
 
+import com.tutorial.backend.exception.MailSendingException;
+import com.tutorial.backend.exception.SpecificMailServiceException;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -19,5 +21,5 @@ public interface MailService {
     String createKey();
 
     // 메일 발송
-    String sendSimpleMessage(String to) throws Exception;
+    String sendSimpleMessage(String to) throws MailSendingException, UnsupportedEncodingException, MessagingException, SpecificMailServiceException;
 }
