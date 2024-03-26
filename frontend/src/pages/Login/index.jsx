@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import MainLogoSrc from "../../assets/main_logo.png";
+import MainLogoSrc from "../../assets/main_logo3.svg";
 import LoginBtn from "../../components/LoginBtn";
 import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
@@ -82,7 +82,7 @@ function LoginPage() {
         <S.PageContainer> 
             <S.TopContainer>
                 <S.TopHeader>
-                    <S.MainLogo src={MainLogoSrc} alt="" />
+                    <S.MainLogo src={MainLogoSrc} fill="tomato"alt="" />
                 </S.TopHeader>
                 <S.Wrapper>
                     <S.TopDescription >
