@@ -12,6 +12,7 @@ const SignUpModal = (props) => {
   const [showCertification, setShowCertification] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [emailFormatError, setEmailFormatError] = useState(false);
+  const [emailAlreadyUseError, setEmailAlreadyUseError] = useState(false);
   const [emailCode, setEmailCode] = useState('');
   const [certificationCode, setCertificationCode] = useState('');
   const [isCertificationCorrect, setIsCertificationCorrect] = useState(false);
@@ -19,17 +20,17 @@ const SignUpModal = (props) => {
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
+  const [isCodeExpired, setIsCodeExpired] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
   const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
-
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태 추가
   
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
-  const certiButtonRef = useRef(null);
   const emailButtonRef = useRef(null);
+  const certiButtonRef = useRef(null);
   const passwordInputRef = useRef(null);
 
 
@@ -43,7 +44,21 @@ const SignUpModal = (props) => {
     const hasLowerCase = /[a-z]/.test(newPassword);
 
     setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-};
+
+    // 특수 문자 검사
+    if (passwordSpecialCharRegex.test(newPassword)) {
+      setIsSpecialCharValid(false);
+    } else {
+      setIsSpecialCharValid(true);
+    }
+
+    // 길이 검사
+    if (passwordLengthRegex.test(newPassword)) {
+      setIsPasswordValid(true);
+    } else {
+      setIsPasswordValid(false);
+    }
+  };
 
 
   const handleConfirmPasswordChange = (event) => {
@@ -72,12 +87,12 @@ const completeSignUp = () => {
     if (validateEmail(emailInputRef.current.value)) {
       try {
         const response = await fetch("http://localhost:8080/auth/verifyEmail", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: emailInputRef.current.value,
-          });
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: emailInputRef.current.value,
+        });
         if (response.ok) {
           toast.success("이메일이 전송되었습니다");
           const { resultData } = await response.json(); // JSON 형식의 응답을 파싱
@@ -85,23 +100,75 @@ const completeSignUp = () => {
           setIsEmailSent(true);
           setTimer(180);
           setShowCertification(true);
-          setEmailFormatError(false); // 형식 오류 초기화
+          // 형식 오류 초기화
+          setEmailFormatError(false);
+          // 이미 사용 중인 이메일 에러 초기화
+          setEmailAlreadyUseError(false);
+          setIsCodeExpired(false); // 코드 만료 상태를 초기화
+        } else if (response.status === 400) {
+          // 이미 사용 중인 이메일
+          setEmailAlreadyUseError(true);
+          // 형식 오류 초기화
+          setEmailFormatError(false);
+          setIsEmailSent(false); // 이메일 전송 실패로 설정
         } else {
           const errorMessage = await response.text();
-          toast.error("이메일이 전송되었습니다");
-          setEmailFormatError(errorMessage); // 백엔드에서 전달된 에러 메시지 표시
+          toast.error("이메일 전송에 실패했습니다");
+          // 형식 오류 초기화
+          setEmailFormatError(false);
+          setEmailAlreadyUseError(false); // 이미 사용 중인 이메일 에러 초기화
           setIsEmailSent(false); // 이메일 전송 실패로 설정
         }
       } catch (error) {
         console.error("Failed to send verification email:", error);
-        setEmailFormatError("Failed to send verification email."); // 네트워크 오류 등의 문제로 인한 에러 메시지 표시
+        toast.error("이메일 전송에 실패했습니다");
+        // 형식 오류 초기화
+        setEmailFormatError(false);
+        setEmailAlreadyUseError(false); // 이미 사용 중인 이메일 에러 초기화
         setIsEmailSent(false); // 이메일 전송 실패로 설정
       }
     } else {
       setEmailFormatError("올바르지 않은 이메일 형식입니다."); // 이메일 형식 오류 메시지 표시
+      // 이미 사용 중인 이메일 에러 초기화
+      setEmailAlreadyUseError(false);
       setIsEmailSent(false); // 이메일 전송 실패로 설정
     }
   };
+  
+
+  
+  const handleSubmit = async (e) =>  {
+    e.preventDefault();
+    if (emailInputRef && password) {
+        try {
+            const response = await fetch('http://localhost:8080/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({  
+                  email: emailInputRef.current.value,
+                   password: passwordInputRef.current.value 
+                  })
+            });
+            if (!response.ok) {
+              toast.error('회원가입에 실패했습니다.');
+                throw new Error('Network response was not ok.');
+            }else{
+              const data = await response.text();
+              console.log('회원가입 성공:', data);
+              toast.success(data);
+              completeSignUp()
+            }
+        } catch (error) {
+            console.error('에러 발생:', error);
+            toast.error('회원가입에 실패했습니다.');
+            // 회원가입 실패 시 모달 열고 메시지 표시
+        }
+    }
+};
+
+
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -123,6 +190,7 @@ const completeSignUp = () => {
     // 타이머가 0이 되면 clearInterval을 호출하여 타이머를 멈춤
     if (timer === 0) {
       clearInterval(intervalId);
+      setIsCodeExpired(true); // 코드 만료 상태를 설정
     }
 
     return () => clearInterval(intervalId);
@@ -136,7 +204,8 @@ const completeSignUp = () => {
 
   const resetEmail = () => {
     setTimer(180); // 타이머 초기화
-    setEmailCode('');
+    setEmailCode(''); // 이메일 코드 초기화
+
   };
 
   const handleCertificationCheck = () => {
@@ -164,12 +233,9 @@ const completeSignUp = () => {
         <S.Title>회원가입</S.Title>
         <S.TitleEmail>이메일</S.TitleEmail>
         <S.EmailInputButtonContainer>
-          <S.EmailInput
-            ref={emailInputRef}
-            type="text"
-            placeholder=""
-            onChange={() => setEmailFormatError(false)} // 형식 오류 초기화
-          />
+
+          <S.EmailInput ref={emailInputRef} type="text" placeholder="" onChange={() => setEmailFormatError(false)}/* 형식 오류 초기화*/ /> 
+
           {isEmailSent ? isCertificationCorrect ?   <S.EmailButton
           ref={emailButtonRef}
           onClick={sendEmail}
@@ -204,7 +270,9 @@ const completeSignUp = () => {
         {emailFormatError && (
           <S.EmailFormatError>올바르지 않은 이메일 형식입니다.</S.EmailFormatError>
         )}
-        <S.EmailAlreadyUseError>사용중인 이메일 입니다.</S.EmailAlreadyUseError>
+        {emailAlreadyUseError && (
+          <S.EmailAlreadyUseError>사용중인 이메일 입니다.</S.EmailAlreadyUseError>
+        )}
         {isEmailSent && <S.EmailSended>인증 이메일을 전송하였습니다.</S.EmailSended>}
         {showCertification && (
           <S.CertificationContainer visible={showCertification ? "true" : "false"}>
@@ -226,10 +294,15 @@ const completeSignUp = () => {
             {isCertificationCorrect && (
               <S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>
             )}
+            {isCodeExpired && (
+              <S.ExpiredMessage>
+                인증 코드가 만료되었습니다. 
+              </S.ExpiredMessage>
+        )}
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
-      <S.BottomContainer isVisible={isCertificationCorrect}>
+      <S.BottomContainer visible={isCertificationCorrect ? "true" : "false"}>
         <S.PasswordContainer>
         <S.TitlePassword>비밀번호</S.TitlePassword>
               <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
@@ -240,7 +313,7 @@ const completeSignUp = () => {
                   </S.Tooltip>
                 )}
               </S.QuestionMark>
-          <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onChange={handlePasswordChange}/>
+          <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
           {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
           {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
           {!isSpecialCharValid && (
@@ -250,12 +323,10 @@ const completeSignUp = () => {
             </>
           )}
         </S.PasswordContainer>
-        <S.ConfirmPasswordContainer isVisible={isCertificationCorrect}>
-          <S.TitleCheck>비밀번호 확인</S.TitleCheck>
-          <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
-          {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-        </S.ConfirmPasswordContainer>
-        <S.SignButton onClick={completeSignUp}>회원가입</S.SignButton>
+        <S.TitleCheck>비밀번호 확인</S.TitleCheck>
+        <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
+        {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
+        <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
       </S.BottomContainer>
     )}
       </S.SignUpBox>
