@@ -1,3 +1,4 @@
+import closeIcon from "../../assets/close-icon.svg";
 import { useState } from "react";
 import "./style.css";
 const {kakao}=window;
@@ -6,15 +7,24 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
     const [searchQ, setSearchQ]=useState("");
     const [isSearch, setIsSearch]=useState(false);
     const [searchResult, setSearchResult]=useState([]);
+
     const ps= new kakao.maps.services.Places();
+
+    const closeModal=()=>{
+        showSearchModalClick(false);
+    }
 
     const placeSelect=(event)=>{
         const address=event.currentTarget.className.split(" ")
         const deleteClassName=address.slice(1);
         const result=deleteClassName.join(" ")
-        console.log(result);
-        searchPlaceResult(result);
-        showSearchModalClick(false);
+
+        const placeData=result.split("_")
+        const placeName=placeData[0]
+        const placeAddress=placeData[1]
+
+        searchPlaceResult(placeData);
+        // showSearchModalClick(false);
     }
     const onSearchQInput=(event)=>{
         setSearchQ(event.target.value);
@@ -32,7 +42,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
             const result=data.slice(0,8);
             setSearchResult(result);
             searchResult.map((value,index)=>{
-                console.log(value.place_url)
+                // console.log(value.place_url)
             })
         }
         if(status===kakao.maps.services.Status.ZERO_RESULT){
@@ -43,13 +53,14 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         <div className="SearchPlaceModalForm">
             <div className="SearchPlaceWrapper">
                 <div className="SearchPlaceBox">
+                    <div className="CloseModal"><img src={closeIcon} onClick={closeModal}/></div>
                     <input onChange={onSearchQInput} className="searchQ" name="searchQ" type="text" placeholder="상호명을 입력해주세요."/>
                     <button className="SearchPlaceBtn" onClick={searchBtnClick} type="button">검색</button>
-                    <div></div>
+                    <div className="Line"></div>
                     {
                         isSearch && searchResult.map((value,index)=>
                         (
-                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name} ${value.address_name}`}>
+                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}`}>
                                 <p>{value.place_name}</p>
                                 <p>지번주소 : {value.address_name}</p>
                                 <p>도로명 주소 : {value.road_address_name}</p>

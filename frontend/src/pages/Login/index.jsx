@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-import MainLogoSrc from "../../assets/main_logo.png";
 import LoginBtn from "../../components/LoginBtn";
 import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
@@ -7,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import SignUpModal from '../../components/SignUp';
 import { toast } from 'react-toastify';
+import Logo from "../../components/icons/Logo";
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -82,7 +82,7 @@ function LoginPage() {
         <S.PageContainer> 
             <S.TopContainer>
                 <S.TopHeader>
-                    <S.MainLogo src={MainLogoSrc} alt="" />
+                    <Logo  alt="logo" width="160px" height="160px" color1="tomato" color2="green"/>
                 </S.TopHeader>
                 <S.Wrapper>
                     <S.TopDescription >

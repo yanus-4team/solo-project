@@ -44,7 +44,7 @@ export const Title = styled.h1`
 `;
 
 export const Guest = styled.div`
-    margin-top: 1rem;
+    margin-top: 40px;
     margin-bottom: -0.5rem;
     color: #333;
     font-weight: normal;

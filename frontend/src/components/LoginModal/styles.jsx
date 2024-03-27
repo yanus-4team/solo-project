@@ -35,6 +35,11 @@ export const Input = styled.input`
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+    }
 `;
 
 export const LoginButton = styled.button`
@@ -50,7 +55,7 @@ export const LoginButton = styled.button`
     transition: filter 0.3s ease;
   
     &:hover {
-        filter: brightness(0.9) !important; /* !important 키워드 추가 */
+        filter: brightness(0.9) !important; 
     }
 `;
 

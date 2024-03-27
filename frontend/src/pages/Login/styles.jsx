@@ -36,10 +36,11 @@ export const Text = styled.p`
     font-size: 30px;
 `
 
-export const MainLogo = styled.img`
+export const MainLogo = styled.svg`
     /* width: 200px; */
     width: 160px;
     margin-bottom: 20px;
+    fill: tomato;
 `
 
 export const Wrapper = styled.div`

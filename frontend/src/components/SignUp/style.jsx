@@ -73,6 +73,7 @@ export const EmailFormatError = styled.h1`
 
 
 export const ExpiredMessage = styled.span`
+    display: block;
     margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
@@ -92,7 +93,7 @@ export const EmailSended = styled.h1`
     font-weight: normal;
     text-align: left;
     margin-right: 8.3rem;
-`
+`;
 
 
 export const CertiError = styled.h1`
@@ -194,12 +195,18 @@ export const TitleCheck = styled.h1`
 `;
 
 export const EmailInput = styled.input`
-    border-bottom: 1px solid #eeeeee;
     width: 130px;
     padding: 10px;
     margin-bottom: -1rem;
-    border: 1px solid #ccc;
     margin-right: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const CertiInput = styled.input`
@@ -254,7 +261,7 @@ export const CertificationContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-    animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.35s ease-out forwards` : "none"};
+    animation: ${({ visible }) => visible ? css`${slideDownBottom} 1s ease-out forwards` : "none"};
 `;
 
 
