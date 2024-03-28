@@ -250,7 +250,7 @@ const slideDownBottom = keyframes`
     opacity: 0;
   }
   to {
-    height: 200px;
+    height: 230px;
     display: block;
     opacity: 1;
   }

@@ -22,7 +22,7 @@ const SignUpModal = (props) => {
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
+  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태 추가
@@ -37,27 +37,34 @@ const SignUpModal = (props) => {
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
-
+  
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
     const hasSpecialChar = /[*?]/.test(newPassword); // 특수문자 * 또는 ? 포함
+    const isValidSpecialChar = newPassword.includes('*') || newPassword.includes('?');
     const hasLowerCase = /[a-z]/.test(newPassword); // 소문자 포함
-
+  
     setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-
+  
     // 특수 문자 검사
-    if (passwordSpecialCharRegex.test(newPassword)) {
+    if (!passwordSpecialCharRegex.test(newPassword)) {
       setIsSpecialCharValid(false);
     } else {
       setIsSpecialCharValid(true);
     }
-
+  
     // 길이 검사
     if (passwordLengthRegex.test(newPassword)) {
       setIsPasswordValid(true);
     } else {
       setIsPasswordValid(false);
+      if (!isValidLength) {
+        setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
+      } else if (!hasSpecialChar) {
+        setPasswordError("비밀번호에는 특수문자(*, ?)가 포함되어야 합니다.");
+      }
     }
   };
+  
 
 
   const handleConfirmPasswordChange = (event) => {
