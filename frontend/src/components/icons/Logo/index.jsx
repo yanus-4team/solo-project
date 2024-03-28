@@ -2,7 +2,7 @@
 import React from 'react';
 
 // SVG 아이콘 컴포넌트 생성
-const Logo = ({ width, height, color1,color2 }) => (
+const Logo = ({ width, height, color1, color2 }) => (
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width={width} height={height} viewBox="0 0 341.000000 341.000000"
  preserveAspectRatio="xMidYMid meet">
