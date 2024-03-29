@@ -80,24 +80,24 @@ export const ExpiredMessage = styled.span`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 7.8rem;
+    margin-right: 6.3rem;
 `;
 
 
 
 export const EmailSended = styled.h1`
-    margin-top: -0.8em;
+    margin-top: -1.2em;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 8.3rem;
+    margin-right: 8.4rem;
 `;
 
 
 export const CertiError = styled.h1`
-    margin-top: 1.3rem;
+    margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -107,13 +107,13 @@ export const CertiError = styled.h1`
 `;
 
 export const PasswordError1 = styled.h1`
-    margin-top: 0rem;
+    margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 2rem;
+    margin-right: 5rem;
 `;
 
 export const PasswordError2 = styled.h1`
@@ -142,18 +142,18 @@ export const CheckError = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 8.5rem;
+    margin-right: 7.2rem;
 `;
 
 
 export const CertiRight = styled.h1`
-    margin-top: 0rem;
-    margin-bottom: 0.rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.4rem;
+    margin-right: 9.6rem;
 `;
 
 export const TitleEmail = styled.h1`
@@ -212,7 +212,7 @@ export const EmailInput = styled.input`
 export const CertiInput = styled.input`
     width: 150px;
     padding: 10px;
-    margin-bottom: -1.5rem;
+    margin-bottom: -1rem;
     border: 1px solid #ccc;
     margin-right: 1rem;
 `;
@@ -220,7 +220,7 @@ export const CertiInput = styled.input`
 export const PasswordInput = styled.input`
     width: 250px;
     padding: 10px;
-    margin-bottom: 0rem;
+    margin-bottom: -1rem;
     border: 1px solid #ccc;
 `;
 
@@ -250,7 +250,7 @@ const slideDownBottom = keyframes`
     opacity: 0;
   }
   to {
-    height: 200px;
+    height: 230px;
     display: block;
     opacity: 1;
   }
@@ -342,7 +342,6 @@ export const PasswordContainer = styled.div`
   justify-content: center;
   width: 100%;
   background-color: #fff;
-  margin-top: -1.1rem;
 `;
 
 
@@ -408,19 +407,51 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
-
-export const ConfirmPasswordContainer = styled.div`
-  display: ${({ isVisible }) => isVisible ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+export const PersonalInfoContainer = styled.div`
   width: 100%;
-  background-color: #fff;
-  animation: ${({ isVisible }) => isVisible ? css`${expandAndFadeIn} 0.35s ease forwards` : 'none'};
+  animation: slideIn 0.5s ease-out;
 `;
 
-export const WarningMessage = styled.div`
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 5px;
+export const InputGroup = styled.div`
+  margin-bottom: 15px;
+`;
+
+export const InputLabel = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+export const TextInput = styled.input`
+  width: 250px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+
+
+export const SelectInput = styled.select`
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const DateInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; // 너비 계산에 padding과 border를 포함
 `;

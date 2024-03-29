@@ -22,7 +22,7 @@ const SignUpModal = (props) => {
   const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
   const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /[*?]/; // 특수 문자는 * 또는 ?만 유효
+  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태 추가
@@ -33,32 +33,43 @@ const SignUpModal = (props) => {
   const certiButtonRef = useRef(null);
   const passwordInputRef = useRef(null);
 
+  const [name, setName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [gender, setGender] = useState('');
+  
+
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
-
-    // 길이, 특수 문자, 소문자 검사
+  
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
-    const hasSpecialChar = /[*?]+/.test(newPassword);
-    const hasLowerCase = /[a-z]/.test(newPassword);
-
+    const hasSpecialChar = /[*?]/.test(newPassword); // 특수문자 * 또는 ? 포함
+    const isValidSpecialChar = newPassword.includes('*') || newPassword.includes('?');
+    const hasLowerCase = /[a-z]/.test(newPassword); // 소문자 포함
+  
     setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-
+  
     // 특수 문자 검사
-    if (passwordSpecialCharRegex.test(newPassword)) {
+    if (!passwordSpecialCharRegex.test(newPassword)) {
       setIsSpecialCharValid(false);
     } else {
       setIsSpecialCharValid(true);
     }
-
+  
     // 길이 검사
     if (passwordLengthRegex.test(newPassword)) {
       setIsPasswordValid(true);
     } else {
       setIsPasswordValid(false);
+      if (!isValidLength) {
+        setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
+      } else if (!hasSpecialChar) {
+        setPasswordError("비밀번호에는 특수문자(*, ?)가 포함되어야 합니다.");
+      }
     }
   };
+  
 
 
   const handleConfirmPasswordChange = (event) => {
@@ -257,7 +268,7 @@ const completeSignUp = () => {
         >
           {timer === 0 ? "재전송" : (
             hovered ? "재전송" : (
-              <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
+              <S.TimerText style={{ color: timer <= 60 ? "white" : "inherit" }}>
                 {formatTime(timer)}
               </S.TimerText>
             )
@@ -313,33 +324,57 @@ const completeSignUp = () => {
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
-      <S.BottomContainer visible={isCertificationCorrect ? "true" : "false"}>
-        <S.PasswordContainer>
-        <S.TitlePassword>비밀번호</S.TitlePassword>
-              <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
-                ?
-                {tooltipVisible && (
-                  <S.Tooltip>
-                    비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
-                  </S.Tooltip>
-                )}
-              </S.QuestionMark>
-          <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
-          {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-          {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-          {!isSpecialCharValid && (
-            <>
-              <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
-              <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
-            </>
-          )}
-        </S.PasswordContainer>
-        <S.TitleCheck>비밀번호 확인</S.TitleCheck>
-        <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
-        {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-        <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
-      </S.BottomContainer>
-    )}
+          <S.PersonalInfoContainer>
+            <S.InputGroup>
+              <S.InputLabel>이름</S.InputLabel>
+              <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.InputLabel>생년월일</S.InputLabel>
+              <S.DateInput
+                type="date"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+              />
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.InputLabel>성별</S.InputLabel>
+              <S.SelectInput value={gender} onChange={(e) => setGender(e.target.value)}>
+                <option value="">선택...</option>
+                <option value="male">남성</option>
+                <option value="female">여성</option>
+              </S.SelectInput>
+            </S.InputGroup>
+            {name && birthDate && gender && (
+              <S.BottomContainer visible="true">
+                <S.PasswordContainer>
+                  <S.TitlePassword>비밀번호</S.TitlePassword>
+                        <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
+                          ?
+                          {tooltipVisible && (
+                            <S.Tooltip>
+                              비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
+                            </S.Tooltip>
+                          )}
+                        </S.QuestionMark>
+                    <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
+                    {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
+                    {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
+                    {!isSpecialCharValid && (
+                      <>
+                        <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
+                        <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
+                      </>
+                    )}
+                  </S.PasswordContainer>
+                  <S.TitleCheck>비밀번호 확인</S.TitleCheck>
+                  <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
+                  {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
+                  <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
+              </S.BottomContainer>
+            )}
+          </S.PersonalInfoContainer>
+        )}
       </S.SignUpBox>
     </S.SignUpContainer>
   );
