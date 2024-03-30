@@ -12,7 +12,7 @@ export const Button = styled.button`
     &:hover {
         filter: brightness(0.8) !important; 
     }
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const Wrapper = styled.div`

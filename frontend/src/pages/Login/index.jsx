@@ -82,13 +82,14 @@ function LoginPage() {
         <S.PageContainer> 
             <S.TopContainer>
                 <S.TopHeader>
-                    <Logo  alt="logo" width="160px" height="160px" color1="tomato" color2="green"/>
+                    <Logo  alt="logo" width="160px" height="160px" color1="#F58319" color2="#EE1429"/>
                 </S.TopHeader>
                 <S.Wrapper>
                     <S.TopDescription >
                         <S.Welcome>WELCOME !</S.Welcome>
                         <S.Underline className="underline"></S.Underline>
-                        <S.Text>매일 같은 길에서 벗어나 새로운 세상을 만나다</S.Text>
+                        <S.Text>매일 같은 길에서 벗어나</S.Text>
+                        <S.Text2>새로운 세상을 만나다</S.Text2>
 
                     </S.TopDescription>
                 </S.Wrapper>

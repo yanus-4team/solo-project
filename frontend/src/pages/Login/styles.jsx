@@ -17,6 +17,7 @@ export const TopContainer = styled.div`
 `;
 
 export const TopDescription = styled.div`
+    margin-top: 60px;
     text-align: left;
     color: var(--primary-color);
 `
@@ -24,16 +25,25 @@ export const Welcome = styled.h1`
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 5px;
+    text-align: center;
 `
 export const Underline = styled.div`
     background-color: var(--primary-color);
     height: 4px;
     width: 100%;
+    margin: 8px 0;
 `
 export const Text = styled.p`
-    margin-top: 5px;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 28px;
+    margin: 0px;
+    text-align: center;
+`
+export const Text2 = styled.p`
+    font-weight: bold;
+    font-size: 28px;
+    margin: 0px;
+    text-align: center;
 `
 
 export const MainLogo = styled.svg`
@@ -60,6 +70,7 @@ export const LoginBtnList = styled.div`
 
 export const BottomContainer = styled.div`
     text-align: center;
+    margin-top: 40px;
 `;
 
 export const NoLoginLink = styled(Link)`
