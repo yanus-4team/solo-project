@@ -40,7 +40,7 @@ export const CloseButton = styled.img`
 `;
 
 export const Title = styled.h1`
-    margin-bottom: -0.5rem;
+    margin-bottom: 1rem;
     color: #333;
     font-weight: normal;
 `;
@@ -321,7 +321,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 30px;
     background-color:  var(--primary-color);
     color: white;
