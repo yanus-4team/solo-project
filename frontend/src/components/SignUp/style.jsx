@@ -103,11 +103,11 @@ export const CertiError = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.6rem;
+    margin-right: 1.6rem;
 `;
 
 export const PasswordError1 = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -118,7 +118,7 @@ export const PasswordError1 = styled.h1`
 
 export const PasswordError2 = styled.h1`
     margin-top: -0.2rem;
-    margin-bottom: 0rem;
+    margin-bottom: -1rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
@@ -136,8 +136,8 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
-    margin-top: 1.2rem;
-    margin-bottom: 0rem;
+    margin-top: 0.7rem;
+    margin-bottom: -1rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
@@ -257,11 +257,11 @@ const slideDownBottom = keyframes`
 `;
 
 export const CertificationContainer = styled.div`
-    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.35s ease-out forwards` : "none"};
+    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.5s ease-out forwards` : "none"};
 `;
 
 export const BottomContainer = styled.div`
-    animation: ${({ visible }) => visible ? css`${slideDownBottom} 1s ease-out forwards` : "none"};
+    animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
 `;
 
 
@@ -407,9 +407,23 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
+const slideDown = keyframes`
+  0% {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+    overflow: visible;
+  }
+`;
+
 export const PersonalInfoContainer = styled.div`
   width: 100%;
-  animation: slideIn 0.5s ease-out;
+  animation: ${slideDown} 0.8s ease-out forwards;
+  overflow: hidden;
 `;
 
 export const InputGroup = styled.div`

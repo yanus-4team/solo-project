@@ -295,20 +295,20 @@ const completeSignUp = () => {
           <S.CertificationContainer visible={showCertification ? "true" : "false"}>
             <S.TitleCerti>인증번호</S.TitleCerti>
             <S.CertiInputButtonContainer>
-            <S.CertiInput 
-              ref={certiInputRef}
-              type="text" 
-              placeholder="" 
-              onChange={(e) => setCertificationCode(e.target.value)}
-              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 입력 비활성화
-            />
-            <S.CertiButton 
-              ref={certiButtonRef} 
-              onClick={handleCertificationCheck} 
-              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 버튼 비활성화
-            >
-              확인
-            </S.CertiButton>
+              <S.CertiInput 
+                ref={certiInputRef}
+                type="text" 
+                placeholder="" 
+                onChange={(e) => setCertificationCode(e.target.value)}
+                disabled={isCodeExpired || isCertificationCorrect}
+              />
+              <S.CertiButton 
+                ref={certiButtonRef} 
+                onClick={handleCertificationCheck} 
+                disabled={isCodeExpired || isCertificationCorrect}
+              >
+                확인
+              </S.CertiButton>
             </S.CertiInputButtonContainer>
             {isCertificationWrong && (
               <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
@@ -316,11 +316,11 @@ const completeSignUp = () => {
             {isCertificationCorrect && (
               <S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>
             )}
-            {isCodeExpired && (
-              <S.ExpiredMessage>
-                인증 코드가 만료되었습니다. 
-              </S.ExpiredMessage>
-        )}
+            {isCodeExpired && !isCertificationCorrect && (
+              <S.CertiError>
+                인증 코드가 만료되었습니다. 재전송 버튼을 눌러주세요.
+              </S.CertiError>
+            )}
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
