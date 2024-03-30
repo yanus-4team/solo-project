@@ -381,3 +381,4 @@ const completeSignUp = () => {
 };
 
 export default SignUpModal;
+
