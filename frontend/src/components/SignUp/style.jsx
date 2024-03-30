@@ -40,7 +40,7 @@ export const CloseButton = styled.img`
 `;
 
 export const Title = styled.h1`
-    margin-bottom: -0.5rem;
+    margin-bottom: 1rem;
     color: #333;
     font-weight: normal;
 `;

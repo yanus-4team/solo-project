@@ -25,7 +25,7 @@ const SignUpModal = (props) => {
   const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
-  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태 추가
+  const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");
   
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
@@ -43,30 +43,22 @@ const SignUpModal = (props) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   
+    // 기존의 유효성 검사 로직...
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
-    const hasSpecialChar = /[*?]/.test(newPassword); // 특수문자 * 또는 ? 포함
-    const isValidSpecialChar = newPassword.includes('*') || newPassword.includes('?');
-    const hasLowerCase = /[a-z]/.test(newPassword); // 소문자 포함
+    const hasSpecialChar = /[*?]/.test(newPassword);
+    const hasLowerCase = /[a-z]/.test(newPassword);
   
-    setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-  
-    // 특수 문자 검사
-    if (!passwordSpecialCharRegex.test(newPassword)) {
-      setIsSpecialCharValid(false);
-    } else {
-      setIsSpecialCharValid(true);
-    }
-  
-    // 길이 검사
-    if (passwordLengthRegex.test(newPassword)) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
+    if (!isValidLength || !hasSpecialChar || !hasLowerCase) {
       if (!isValidLength) {
         setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
       } else if (!hasSpecialChar) {
-        setPasswordError("비밀번호에는 특수문자(*, ?)가 포함되어야 합니다.");
+        setPasswordError("특수문자(*, ?)가 포함되어야 합니다.");
+      } else if (!hasLowerCase) {
+        setPasswordError("비밀번호에는 최소 한 개의 소문자가 포함되어야 합니다.");
       }
+    } else {
+      // 유효성 검사를 통과했을 때 에러 메시지를 비워줌
+      setPasswordError("");
     }
   };
   
@@ -150,6 +142,10 @@ const completeSignUp = () => {
   
   const handleSubmit = async (e) =>  {
     e.preventDefault();
+    if (passwordError) {
+      toast.error(passwordError);
+      return;
+    }
     if (emailInputRef && password) {
         try {
             const response = await fetch('http://localhost:8080/auth/signup', {
@@ -178,7 +174,6 @@ const completeSignUp = () => {
         }
     }
 };
-
 
 
 const validateEmail = (email) => {
@@ -358,14 +353,7 @@ const validateEmail = (email) => {
                           )}
                         </S.QuestionMark>
                     <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
-                    {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-                    {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-                    {!isSpecialCharValid && (
-                      <>
-                        <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
-                        <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
-                      </>
-                    )}
+                    {passwordError && <S.PasswordError1>{passwordError}</S.PasswordError1>}
                   </S.PasswordContainer>
                   <S.TitleCheck>비밀번호 확인</S.TitleCheck>
                   <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
