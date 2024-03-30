@@ -28,20 +28,20 @@ public class AuthController {
         log.info(email);
         Optional<Member> existingMember = authService.getMemberByEmail(email);
         if (existingMember.isPresent()) {
-            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "Email already exists."));
+            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "이메일이 이미 존재합니다."));
         } else {
             try {
                 String code = mailService.sendSimpleMessage(email);
                 if (code != null) {
-                    return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "Verification email sent successfully.", code));
+                    return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "이메일을 보냈습니다", code));
                 } else {
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to send verification email. Please try again later."));
+                            .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "이메일을 보내지 못했습니다. 다시 시도해주세요"));
                 }
             } catch (Exception exception) {
                 log.error("An unexpected error occurred while sending verification email.", exception);
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred. Please try again later."));
+                        .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "예상치 못한 문제가 생겼습니다. 다시 시도해주세요"));
             }
         }
     }

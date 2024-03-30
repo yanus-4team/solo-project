@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignCompleteContainer = styled.div`
+export const SignCompleteContainer = styled.div`    
     position: fixed;
     top: 0;
     left: 0;
@@ -23,36 +23,37 @@ export const SignBox = styled.div`
     align-items: center;
 `
 
-export const CloseButton = styled.img`
-margin : 0;
-width:20px;
-position: absolute;
-top: 25px;
-right: 20px;
-transition: filter 0.3s ease;
-cursor: pointer;
-
-&:hover {
-    filter: brightness(0.8) !important; /* !important 키워드 추가 */
-}
-`;
-
 export const Title = styled.h1`
     margin-bottom: -0.5rem;
     color: #333;
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 1.7rem;
 `;
 
-export const Guest = styled.div`
-    margin-top: 40px;
-    margin-bottom: -0.5rem;
+export const TextBox = styled.div`
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+`;
+
+export const Text = styled.h1`
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     color: #333;
-    font-weight: normal;
+    font-size: 1.0rem;
+
 `
 
-export const Text = styled.div`
-    margin-top: 1rem;
-    margin-bottom: -0.5rem;
-    color: #333;
-    font-size: normal;
-`
+
+export const Button = styled.button`
+    background-color: #fff;
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    &:hover {
+        filter: brightness(0.8) !important; 
+    }
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+`;

@@ -86,13 +86,13 @@ export const ExpiredMessage = styled.span`
 
 
 export const EmailSended = styled.h1`
-    margin-top: -0.8em;
+    margin-top: -1.2em;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 8.3rem;
+    margin-right: 8.4rem;
 `;
 
 
@@ -103,11 +103,11 @@ export const CertiError = styled.h1`
     font-size: 0.7rem;
     font-weight: normal;
     text-align: left;
-    margin-right: 9.6rem;
+    margin-right: 1.6rem;
 `;
 
 export const PasswordError1 = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -118,7 +118,7 @@ export const PasswordError1 = styled.h1`
 
 export const PasswordError2 = styled.h1`
     margin-top: -0.2rem;
-    margin-bottom: 0rem;
+    margin-bottom: -1rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
@@ -136,8 +136,8 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
-    margin-top: 1.2rem;
-    margin-bottom: 0rem;
+    margin-top: 0.7rem;
+    margin-bottom: -1rem;
     color: red;
     font-size: 0.7rem;
     font-weight: normal;
@@ -250,18 +250,18 @@ const slideDownBottom = keyframes`
     opacity: 0;
   }
   to {
-    height: 200px;
+    height: 230px;
     display: block;
     opacity: 1;
   }
 `;
 
 export const CertificationContainer = styled.div`
-    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.35s ease-out forwards` : "none"};
+    animation: ${({ visible }) => visible ? css`${slideDownCertification} 0.5s ease-out forwards` : "none"};
 `;
 
 export const BottomContainer = styled.div`
-    animation: ${({ visible }) => visible ? css`${slideDownBottom} 1s ease-out forwards` : "none"};
+    animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
 `;
 
 
@@ -405,4 +405,67 @@ export const TimerText = styled.span`
   color: #333;
   font-size: 0.7rem;
   font-weight: normal;
+`;
+
+const slideDown = keyframes`
+  0% {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+    overflow: visible;
+  }
+`;
+
+export const PersonalInfoContainer = styled.div`
+  width: 100%;
+  animation: ${slideDown} 0.8s ease-out forwards;
+  overflow: hidden;
+`;
+
+export const InputGroup = styled.div`
+  margin-bottom: 15px;
+`;
+
+export const InputLabel = styled.label`
+  display: block;
+  margin-bottom: 5px;
+`;
+
+export const TextInput = styled.input`
+  width: 250px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+
+
+export const SelectInput = styled.select`
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const DateInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; // 너비 계산에 padding과 border를 포함
 `;
