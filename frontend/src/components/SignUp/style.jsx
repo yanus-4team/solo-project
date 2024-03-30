@@ -321,7 +321,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 30px;
     background-color:  var(--primary-color);
     color: white;
