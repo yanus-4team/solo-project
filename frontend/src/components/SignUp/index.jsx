@@ -181,10 +181,10 @@ const completeSignUp = () => {
 
 
 
-  const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
-  };
+const validateEmail = (email) => {
+  const re = /^\S+@(naver\.com|gmail\.com|daum\.net|nate\.com|outlook\.com)$/;
+  return re.test(email);
+};
 
   useEffect(() => {
     console.log(emailCode); // emailCode 값이 변경될 때마다 새로운 값 로그로 출력
