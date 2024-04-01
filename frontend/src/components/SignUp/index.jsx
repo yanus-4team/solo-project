@@ -357,6 +357,7 @@ const SignUpModal = (props) => {
           <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
           {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
           {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
+          
           {!isSpecialCharValid && (
             <>
               <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>

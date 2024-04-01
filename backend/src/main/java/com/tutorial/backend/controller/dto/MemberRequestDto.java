@@ -18,7 +18,7 @@ public class MemberRequestDto {
         return Member.builder()
                 .memberEmail(memberEmail)
                 .memberPassword(passwordEncoder.encode(memberPassword))
-                .authority(Authority.ROLE_USER)
+                .authority(Authority.USER)
                 .build();
     }
 
