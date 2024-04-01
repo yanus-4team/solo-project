@@ -1,8 +1,21 @@
 import "./style.css";
+import menuImage from '../../assets/hamburger-icon.svg';
+import Menu from '../../components/Menu';
 import MainLogo from "../../assets/main_logo.png";
 import { useState } from "react";
 import SearchPlaceModal from "../../components/SearchPlaceModal";
+import Logo from "../../components/icons/Logo";
 function Form(){
+    const [isOpen, setIsOpen ] = useState(false);
+    const [map, setMap] = useState(null); // map 변수 추가
+    const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
+    const toggleMenu = () => {
+        setIsOpen(!isOpen)
+    }
+    const handleCloseMenu = () => {
+        setIsOpen(false);
+    };
+
     const [showSearchModal,setShowSearchModal]=useState(false);
     const [searchPlaceResult,setSearchPlaceResult]=useState("")
     const [placeResultArr,setPlaceResultArr]=useState([]);
@@ -30,6 +43,13 @@ function Form(){
 
     return(
         <div className="FormWrapper">
+            {isOpen && <div className="ModalBackground" onClick={toggleMenu}></div>}
+            <div className={`MenuToggleBtnBox ${isOpen ? "open": ""}` }>
+                <div className="MenuToggleBtn" onClick={toggleMenu}>
+                    <img src={menuImage} alt="Menu" className="MenuImage" />
+                </div>
+            </div>
+            <Menu isOpen={isOpen} onClose={handleCloseMenu} />
             <dlv className="LOGO">
                 <img className="LogoImg" src={MainLogo} alt=""/>
             </dlv>
