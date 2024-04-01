@@ -36,6 +36,46 @@ const SignUpModal = (props) => {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('');
+
+  const [nickname, setNickname] = useState('');
+const [isNicknameValid, setIsNicknameValid] = useState(true);
+const [nicknameError, setNicknameError] = useState('');
+
+const handleNicknameChange = (event) => {
+  const newNickname = event.target.value;
+  setNickname(newNickname);
+  // 여기에 닉네임 유효성 검사 로직 추가 (예: 길이 제한)
+};
+
+const verifyNickname = async () => {
+  // 닉네임 인증 로직, 예를 들어 서버로 검증 요청을 보내고 응답을 처리
+  try {
+    const response = await fetch('/path-to-nickname-verification', {
+      method: 'POST',
+      body: JSON.stringify({ nickname }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    if (data.isAvailable) {
+      setIsNicknameValid(true);
+      setNicknameError('');
+    } else {
+      setIsNicknameValid(false);
+      setNicknameError('사용중인 닉네임 입니다.');
+    }
+  } catch (error) {
+    console.error('Failed to verify nickname:', error);
+    setNicknameError('닉네임 인증 중 에러가 발생했습니다.');
+  }
+};
+
   
 
 
@@ -323,6 +363,21 @@ const validateEmail = (email) => {
             <S.InputGroup>
               <S.InputLabel>이름</S.InputLabel>
               <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </S.InputGroup>
+            {isNicknameValid && nickname && (
+              <S.CertiRight>사용가능한 닉네임 입니다.</S.CertiRight>
+            )}
+            {!isNicknameValid && (
+              <S.CertiError>{nicknameError}</S.CertiError>
+            )}
+            <S.InputGroup>
+              <S.InputLabel>닉네임</S.InputLabel>
+              <S.TextInput2
+                type="text"
+                value={nickname}
+                onChange={handleNicknameChange}
+              />
+              <S.SignButton2 onClick={verifyNickname}>중복 확인</S.SignButton2>
             </S.InputGroup>
             <S.InputGroup>
               <S.InputLabel>생년월일</S.InputLabel>

@@ -442,6 +442,36 @@ export const TextInput = styled.input`
   border: 1px solid #ccc;
 `;
 
+export const TextInput2 = styled.input`
+  width: 130px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+`;
+
+export const SignButton2 = styled.button`
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+
+    color: white;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  
+    &:hover {
+        filter: brightness(0.9) !important;
+    }
+    &:disabled{
+        background-color: #dfdddd;
+        color: #a7a7a7;
+    }
+`;
+
 
 
 export const SelectInput = styled.select`
@@ -469,3 +499,4 @@ export const DateInput = styled.input`
   border: 1px solid #ccc;
   box-sizing: border-box; // 너비 계산에 padding과 border를 포함
 `;
+
