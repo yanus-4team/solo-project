@@ -208,22 +208,43 @@ export const CertiInput = styled.input`
     width: 150px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
     margin-right: 1rem;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const PasswordInput = styled.input`
     width: 250px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const CheckInput = styled.input`
     width: 250px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 const slideDownCertification = keyframes`
@@ -437,6 +458,12 @@ export const TextInput = styled.input`
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const TextInput2 = styled.input`
@@ -444,6 +471,12 @@ export const TextInput2 = styled.input`
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const SignButton2 = styled.button`
@@ -476,6 +509,12 @@ export const SelectInput = styled.select`
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 const slideIn = keyframes`
@@ -495,5 +534,11 @@ export const DateInput = styled.input`
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box; // 너비 계산에 padding과 border를 포함
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
