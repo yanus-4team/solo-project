@@ -6,7 +6,17 @@ function Form(){
     const [showSearchModal,setShowSearchModal]=useState(false);
     const [searchPlaceResult,setSearchPlaceResult]=useState("")
     const [placeResultArr,setPlaceResultArr]=useState([]);
-    const [birthdate, setBirthdate] = useState("");
+    const [currentPage,setCurrentPage]=useState(1);
+
+    const itemsPerPage=7;
+    const pages=Math.ceil(placeResultArr.length/itemsPerPage);
+    const startIndex=(currentPage-1)*itemsPerPage;
+    const endIndex=startIndex+itemsPerPage;
+    const currentItems=placeResultArr.slice(startIndex,endIndex);
+
+    const handlePageChange=(pageNumber)=>{
+        setCurrentPage(pageNumber)
+    }
     
     const showSearchModalClick=(childEvent)=>{
         setShowSearchModal(true);
@@ -16,45 +26,42 @@ function Form(){
         setSearchPlaceResult(childResult);
         setPlaceResultArr([...placeResultArr,childResult])
     }
-    const handleBirthdateChange = (event) => {
-        setBirthdate(event.target.value); // 생년월일 변경 핸들러
-      };
+
 
     return(
         <div className="FormWrapper">
-            <div className="Logo">
+            <dlv className="LOGO">
                 <img className="LogoImg" src={MainLogo} alt=""/>
-            </div>
+            </dlv>
             <div className="FormBox">
-                <label htmlFor="gender">성별 :
-                    <input type="radio" name="gender" value="male"/> 남
-                    <input type="radio" name="gender" value="female"/> 여
-                </label>
-                <br/>
-                <br/>
-                <label htmlFor="birthdate">생년월일 :
-                    <input type="date" name="birthdate" value={birthdate} onChange={handleBirthdateChange}></input>
-                </label>
-                <br/>
-                <br/>
-                <label htmlFor="pastVisit">
-                    최근 방문지 : 
-                    <input value={searchPlaceResult} defaultValue={searchPlaceResult} onClick={showSearchModalClick} className="PastVisitInput" name="pastVisit" type="text"/>
-                    <button className="SearchBtn" onClick={showSearchModalClick} type="button">검색</button>
-                </label>
-                {
-                    searchPlaceResult && placeResultArr.map((value,index)=>(
-                        <div className="ListBox">
-                            {value}    
-                        </div>
-                    ))
-                }
+                <div className="FormField">
+                    <input
+                    onClick={showSearchModalClick}
+                    className="InputField"
+                    name="pastVisit" type="text"
+                    placeholder="최근 방문지를 입력하세요."/>
+                    <button className="SearchBtn" onClick={showSearchModalClick}>검색</button>
+                </div>
+                    <div className="ResultContainer">
+                        {currentItems.map((value,index)=>(
+                            <div className="ListBox" key={index}>
+                                {value[0]} {value[1]}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="Pagination">
+                        {Array.from({length:pages},(_,i)=>i+1).map(number=>(
+                            <button key={number} onClick={()=>handlePageChange(number)}
+                                className={`PageButton ${currentPage===number ? "active":""}`}>
+                                {number}
+                            </button>
+                        ))}
+                    </div>
             </div>
             {
-                showSearchModal && <SearchPlaceModal showSearchModalClick={showSearchModalClick} searchPlaceResult={handleSearchPlaceResult}/>
+                 showSearchModal && <SearchPlaceModal showSearchModalClick={showSearchModalClick} searchPlaceResult={handleSearchPlaceResult}/>
             }
         </div>
     )
-
 }
 export default Form

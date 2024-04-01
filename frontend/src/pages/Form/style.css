@@ -1,51 +1,101 @@
-.FormWrapper{
-    height: 100%;
-    padding:20px;
+.FormWrapper {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: auto;
+    margin-top: 5vh;
 }
-.Logo{
-    text-align: center;
+
+.Logo {
+    margin-bottom: 40px;
 }
-.LogoImg{
-    width:160px;
+
+.LogoImg {
+    width: 140px;
 }
-.FormBox{
+
+.FormBox {
     background-color: #ffffff;
-    border-radius: 5px;
-    width:500px;
-    margin: 0 auto;
-    margin-top: 60px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
 }
-.FormBox label{
-    margin-left: 8px;;
+
+.FormField {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
 }
-[type="radio"]{
-    vertical-align: middle;
-    appearance: none;
-    border: max(2px,0.1em) solid gray;
-    border-radius: 50%;
-    width:16px;
-    height: 16px;
-    margin-bottom: 4px;
-    transition: border 0.2s ease-in-out;
+
+.InputField {
+    flex-grow: 1;
+    padding: 12px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
-[type="radio"]:checked{
-    border: 0.4em solid tomato;
+
+.InputField:focus {
+    border-color: #ff6347;
 }
-.PastVisitInput{
-    margin-left: 4px;
-    border:none;
-    background-color: #f1f0f0;
-    border-radius: 5px;
-}
-.SearchBtn{
-    background-color: tomato;
+
+.SearchBtn {
+    padding: 10px 20px;
+    background-color: #ff6347;
     color: #ffffff;
-    border-radius: 5px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
     margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.SearchBtn:hover {
+    background-color: #e55347;
+}
+
+.ResultContainer {
+    margin-top: 20px;
 }
 
 .ListBox {
-    border: 1px solid gray;
-    margin: 10px 0 10px 0;
-    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0; 
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    text-align: cent;
+}
+
+.ListBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.Pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.PageButton {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.PageButton:hover, .PageButton.active {
+    background-color: tomato;
+    color: #ffffff;
 }

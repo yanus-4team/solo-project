@@ -10,6 +10,13 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
 
     const ps= new kakao.maps.services.Places();
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+          searchBtnClick();
+          event.preventDefault();
+        }
+    };
+
     const closeModal=()=>{
         showSearchModalClick(false);
     }
@@ -54,7 +61,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
             <div className="SearchPlaceWrapper">
                 <div className="SearchPlaceBox">
                     <div className="CloseModal"><img src={closeIcon} onClick={closeModal}/></div>
-                    <input onChange={onSearchQInput} className="searchQ" name="searchQ" type="text" placeholder="상호명을 입력해주세요."/>
+                    <input onKeyDown={handleKeyPress} onChange={onSearchQInput} className="searchQ" name="searchQ" type="text" placeholder="상호명을 입력해주세요."/>
                     <button className="SearchPlaceBtn" onClick={searchBtnClick} type="button">검색</button>
                     <div className="Line"></div>
                     {
