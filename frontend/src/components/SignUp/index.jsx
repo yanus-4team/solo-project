@@ -25,7 +25,7 @@ const SignUpModal = (props) => {
   const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
-  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태 추가
+  const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");
   
   const emailInputRef = useRef(null);
   const certiInputRef = useRef(null);
@@ -33,35 +33,32 @@ const SignUpModal = (props) => {
   const certiButtonRef = useRef(null);
   const passwordInputRef = useRef(null);
 
+  const [name, setName] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [gender, setGender] = useState('');
+  
+
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   
+    // 기존의 유효성 검사 로직...
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
-    const hasSpecialChar = /[*?]/.test(newPassword); // 특수문자 * 또는 ? 포함
-    const isValidSpecialChar = newPassword.includes('*') || newPassword.includes('?');
-    const hasLowerCase = /[a-z]/.test(newPassword); // 소문자 포함
+    const hasSpecialChar = /[*?]/.test(newPassword);
+    const hasLowerCase = /[a-z]/.test(newPassword);
   
-    setIsPasswordValid(isValidLength && hasSpecialChar && hasLowerCase);
-  
-    // 특수 문자 검사
-    if (!passwordSpecialCharRegex.test(newPassword)) {
-      setIsSpecialCharValid(false);
-    } else {
-      setIsSpecialCharValid(true);
-    }
-  
-    // 길이 검사
-    if (passwordLengthRegex.test(newPassword)) {
-      setIsPasswordValid(true);
-    } else {
-      setIsPasswordValid(false);
+    if (!isValidLength || !hasSpecialChar || !hasLowerCase) {
       if (!isValidLength) {
         setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
       } else if (!hasSpecialChar) {
-        setPasswordError("비밀번호에는 특수문자(*, ?)가 포함되어야 합니다.");
+        setPasswordError("특수문자(*, ?)가 포함되어야 합니다.");
+      } else if (!hasLowerCase) {
+        setPasswordError("비밀번호에는 최소 한 개의 소문자가 포함되어야 합니다.");
       }
+    } else {
+      // 유효성 검사를 통과했을 때 에러 메시지를 비워줌
+      setPasswordError("");
     }
   };
   
@@ -70,48 +67,24 @@ const SignUpModal = (props) => {
   const handleConfirmPasswordChange = (event) => {
     const newConfirmPassword = event.target.value;
     setConfirmPassword(newConfirmPassword);
-    setIsConfirmPasswordValid(newConfirmPassword === password); // 비밀번호와 비밀번호 확인이 같은지 검사
-  };
 
-  const validatePassword = () => {
-    setIsSpecialCharValid(true);
-    setIsConfirmPasswordValid(true);
-    setPasswordError("");
+    // 비밀번호와 비밀번호 확인이 같은지 검사
+    setIsConfirmPasswordValid(newConfirmPassword === password);
+};
 
-    if (!password) {
-      setPasswordError("비밀번호를 입력하십시오.");
-      return false;
-    }
-    if (!(password.length >= 8 && password.length <= 15)) {
-      setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
-      return false;
-    }
-    if (!/[*?]/.test(password)) {
-      setPasswordError("비밀번호에는 특수문자(*, ?)가 포함되어야 합니다.");
-      setIsSpecialCharValid(false);
-      return false;
-    }
-    if (!/[a-z]/.test(password)) {
-      setPasswordError("비밀번호에는 소문자가 포함되어야 합니다.");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      setIsConfirmPasswordValid(false);
-      setPasswordError("입력하신 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-      return false;
-    }
+const validatePassword = () => {
+  return password && isPasswordValid && confirmPassword && isConfirmPasswordValid;
+};
 
-    return true;
-  };
-
-  const completeSignUp = () => {
-    if (validatePassword()) {
-      // 비밀번호 유효성 검사 통과 시, 회원가입 완료 처리
-      setIsSignUpComplete(true);
-    } else {
-      // 실패 시, 유효성 검사에 따른 에러 메시지가 표시됩니다.
-    }
-  };
+const completeSignUp = () => {
+  if (!validatePassword()) {
+      // 조건을 충족하지 못한 경우 메시지 표시 로직
+      toast.error("비밀번호 조건을 확인해주세요.");
+      return;
+  }
+  // 회원가입 처리 로직
+  setIsSignUpComplete(true);
+};
 
   const sendEmail = async () => {
     if (validateEmail(emailInputRef.current.value)) {
@@ -169,6 +142,10 @@ const SignUpModal = (props) => {
   
   const handleSubmit = async (e) =>  {
     e.preventDefault();
+    if (passwordError) {
+      toast.error(passwordError);
+      return;
+    }
     if (emailInputRef && password) {
         try {
             const response = await fetch('http://localhost:8080/auth/signup', {
@@ -199,11 +176,10 @@ const SignUpModal = (props) => {
 };
 
 
-
-  const validateEmail = (email) => {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
-  };
+const validateEmail = (email) => {
+  const re = /^\S+@(naver\.com|gmail\.com|daum\.net|nate\.com|outlook\.com)$/;
+  return re.test(email);
+};
 
   useEffect(() => {
     console.log(emailCode); // emailCode 값이 변경될 때마다 새로운 값 로그로 출력
@@ -287,7 +263,7 @@ const SignUpModal = (props) => {
         >
           {timer === 0 ? "재전송" : (
             hovered ? "재전송" : (
-              <S.TimerText style={{ color: timer <= 60 ? "red" : "inherit" }}>
+              <S.TimerText style={{ color: timer <= 60 ? "white" : "inherit" }}>
                 {formatTime(timer)}
               </S.TimerText>
             )
@@ -314,20 +290,20 @@ const SignUpModal = (props) => {
           <S.CertificationContainer visible={showCertification ? "true" : "false"}>
             <S.TitleCerti>인증번호</S.TitleCerti>
             <S.CertiInputButtonContainer>
-            <S.CertiInput 
-              ref={certiInputRef}
-              type="text" 
-              placeholder="" 
-              onChange={(e) => setCertificationCode(e.target.value)}
-              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 입력 비활성화
-            />
-            <S.CertiButton 
-              ref={certiButtonRef} 
-              onClick={handleCertificationCheck} 
-              disabled={isCodeExpired || isCertificationCorrect} // 만료되었거나 이미 인증 성공한 경우 버튼 비활성화
-            >
-              확인
-            </S.CertiButton>
+              <S.CertiInput 
+                ref={certiInputRef}
+                type="text" 
+                placeholder="" 
+                onChange={(e) => setCertificationCode(e.target.value)}
+                disabled={isCodeExpired || isCertificationCorrect}
+              />
+              <S.CertiButton 
+                ref={certiButtonRef} 
+                onClick={handleCertificationCheck} 
+                disabled={isCodeExpired || isCertificationCorrect}
+              >
+                확인
+              </S.CertiButton>
             </S.CertiInputButtonContainer>
             {isCertificationWrong && (
               <S.CertiError>인증번호가 틀렸습니다.</S.CertiError>
@@ -335,14 +311,15 @@ const SignUpModal = (props) => {
             {isCertificationCorrect && (
               <S.CertiRight>인증번호가 맞았습니다.</S.CertiRight>
             )}
-            {isCodeExpired && (
-              <S.ExpiredMessage>
-                인증 코드가 만료되었습니다. 
-              </S.ExpiredMessage>
-        )}
+            {isCodeExpired && !isCertificationCorrect && (
+              <S.CertiError>
+                인증 코드가 만료되었습니다. 재전송 버튼을 눌러주세요.
+              </S.CertiError>
+            )}
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
+<<<<<<< HEAD
       <S.BottomContainer visible={isCertificationCorrect ? "true" : "false"}>
         <S.PasswordContainer>
         <S.TitlePassword>비밀번호</S.TitlePassword>
@@ -371,9 +348,56 @@ const SignUpModal = (props) => {
         <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
       </S.BottomContainer>
     )}
+=======
+          <S.PersonalInfoContainer>
+            <S.InputGroup>
+              <S.InputLabel>이름</S.InputLabel>
+              <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.InputLabel>생년월일</S.InputLabel>
+              <S.DateInput
+                type="date"
+                value={birthDate}
+                onChange={(e) => setBirthDate(e.target.value)}
+              />
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.InputLabel>성별</S.InputLabel>
+              <S.SelectInput value={gender} onChange={(e) => setGender(e.target.value)}>
+                <option value="">선택...</option>
+                <option value="male">남성</option>
+                <option value="female">여성</option>
+              </S.SelectInput>
+            </S.InputGroup>
+            {name && birthDate && gender && (
+              <S.BottomContainer visible="true">
+                <S.PasswordContainer>
+                  <S.TitlePassword>비밀번호</S.TitlePassword>
+                        <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
+                          ?
+                          {tooltipVisible && (
+                            <S.Tooltip>
+                              비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
+                            </S.Tooltip>
+                          )}
+                        </S.QuestionMark>
+                    <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
+                    {passwordError && <S.PasswordError1>{passwordError}</S.PasswordError1>}
+                  </S.PasswordContainer>
+                  <S.TitleCheck>비밀번호 확인</S.TitleCheck>
+                  <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
+                  {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
+                  <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
+              </S.BottomContainer>
+            )}
+          </S.PersonalInfoContainer>
+        )}
+>>>>>>> f9f9cc54281aca99b910d79afad1e06578f17fed
       </S.SignUpBox>
     </S.SignUpContainer>
   );
 };
 
 export default SignUpModal;
+
