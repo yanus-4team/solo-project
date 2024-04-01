@@ -27,7 +27,7 @@ public class JoinForm {
         return Member.builder()
                 .memberEmail(email)
                 .memberPassword(passwordEncoder.encode(password))
-                .authority(Authority.ROLE_USER)
+                .authority(Authority.USER)
                 .build();
     }
 

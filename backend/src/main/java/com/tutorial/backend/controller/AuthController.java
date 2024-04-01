@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -69,4 +71,22 @@ public class AuthController {
     public ResponseEntity<TokenDto> reissue(@RequestBody TokenRequestDto tokenRequestDto) {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
+    @GetMapping("user")
+    public ResponseEntity<ResultDto<Member>> getUserDetails(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        // 사용자 정보를 기반으로 회원 정보를 조회하여 반환
+        try{
+            Optional<Member> member = authService.getMemberByEmail(userDetails.getUsername());
+            if(member.isPresent()){
+                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "회원정보를 조회해왔습니다", member.get()));
+            }else{
+                return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.NOT_FOUND, "회원이 존재하지 않습니다."));
+            }
+        } catch (Exception exception) {
+            log.error("An unexpected error occurred while sending verification email.", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "예상치 못한 문제가 생겼습니다. 다시 시도해주세요"));
+        }
+    }
+
 }

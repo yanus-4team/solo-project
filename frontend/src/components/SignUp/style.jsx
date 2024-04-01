@@ -107,6 +107,8 @@ export const CertiError = styled.h1`
 `;
 
 export const PasswordError1 = styled.h1`
+    position: absolute;
+    top: 60px;
     margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
@@ -116,15 +118,6 @@ export const PasswordError1 = styled.h1`
     margin-right: 5rem;
 `;
 
-export const PasswordError2 = styled.h1`
-    margin-top: -0.2rem;
-    margin-bottom: -1rem;
-    color: red;
-    font-size: 0.7rem;
-    font-weight: normal;
-    text-align: left;
-    margin-right: 2rem;
-`;
 export const PasswordLengthError = styled.h1`
     margin-top: 1.2rem;
     margin-bottom: 0rem;
@@ -136,6 +129,8 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
+    top: 146px;
+    position: absolute;
     margin-top: 0.7rem;
     margin-bottom: -1rem;
     color: red;
@@ -185,7 +180,7 @@ export const TitlePassword = styled.h1`
 `;
 
 export const TitleCheck = styled.h1`
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 0rem;
     margin-right: 11.6rem;
     color: #333;
@@ -213,22 +208,43 @@ export const CertiInput = styled.input`
     width: 150px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
     margin-right: 1rem;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const PasswordInput = styled.input`
     width: 250px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const CheckInput = styled.input`
     width: 250px;
     padding: 10px;
     margin-bottom: -1rem;
+    border-radius: 4px;
     border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 const slideDownCertification = keyframes`
@@ -262,6 +278,7 @@ export const CertificationContainer = styled.div`
 
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
+    position: relative;
 `;
 
 
@@ -336,12 +353,13 @@ export const SignButton = styled.button`
 `;
 
 export const PasswordContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  background-color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
 `;
 
 
@@ -422,7 +440,7 @@ const slideDown = keyframes`
 
 export const PersonalInfoContainer = styled.div`
   width: 100%;
-  animation: ${slideDown} 0.8s ease-out forwards;
+  animation: ${slideDown} 1s ease-out forwards;
   overflow: hidden;
 `;
 
@@ -440,6 +458,48 @@ export const TextInput = styled.input`
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
+`;
+
+export const TextInput2 = styled.input`
+  width: 130px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
+`;
+
+export const SignButton2 = styled.button`
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+
+    color: white;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+  
+    &:hover {
+        filter: brightness(0.9) !important;
+    }
+    &:disabled{
+        background-color: #dfdddd;
+        color: #a7a7a7;
+    }
 `;
 
 
@@ -449,6 +509,12 @@ export const SelectInput = styled.select`
   padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 const slideIn = keyframes`
@@ -468,4 +534,11 @@ export const DateInput = styled.input`
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box; // 너비 계산에 padding과 border를 포함
+  &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
+
