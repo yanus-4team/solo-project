@@ -107,6 +107,8 @@ export const CertiError = styled.h1`
 `;
 
 export const PasswordError1 = styled.h1`
+    position: absolute;
+    top: 60px;
     margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
@@ -116,15 +118,6 @@ export const PasswordError1 = styled.h1`
     margin-right: 5rem;
 `;
 
-export const PasswordError2 = styled.h1`
-    margin-top: -0.2rem;
-    margin-bottom: -1rem;
-    color: red;
-    font-size: 0.7rem;
-    font-weight: normal;
-    text-align: left;
-    margin-right: 2rem;
-`;
 export const PasswordLengthError = styled.h1`
     margin-top: 1.2rem;
     margin-bottom: 0rem;
@@ -136,6 +129,8 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
+    top: 146px;
+    position: absolute;
     margin-top: 0.7rem;
     margin-bottom: -1rem;
     color: red;
@@ -185,7 +180,7 @@ export const TitlePassword = styled.h1`
 `;
 
 export const TitleCheck = styled.h1`
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 0rem;
     margin-right: 11.6rem;
     color: #333;
@@ -262,6 +257,7 @@ export const CertificationContainer = styled.div`
 
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
+    position: relative;
 `;
 
 
@@ -336,12 +332,13 @@ export const SignButton = styled.button`
 `;
 
 export const PasswordContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  background-color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
 `;
 
 
@@ -422,7 +419,7 @@ const slideDown = keyframes`
 
 export const PersonalInfoContainer = styled.div`
   width: 100%;
-  animation: ${slideDown} 0.8s ease-out forwards;
+  animation: ${slideDown} 1s ease-out forwards;
   overflow: hidden;
 `;
 

@@ -26,4 +26,5 @@ public class MemberServiceImpl  implements MemberService{
         memberRepository.save(toEntity(loginForm));
         return toEntity(loginForm);
     }
+
 }

@@ -49,7 +49,7 @@ export const Text2 = styled.div`
 export const CloseBtn = styled.img`
     position:absolute;
     width:25px;
-    top:50px;
+    top:55px;
     right:10px;
 `;
 export const LogOutContainer = styled.div`

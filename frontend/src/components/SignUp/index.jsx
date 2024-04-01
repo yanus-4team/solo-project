@@ -126,6 +126,7 @@ const completeSignUp = () => {
   setIsSignUpComplete(true);
 };
 
+  // 이메일 인증 코드 전송
   const sendEmail = async () => {
     if (validateEmail(emailInputRef.current.value)) {
       try {
@@ -320,10 +321,10 @@ const validateEmail = (email) => {
 
         </S.EmailInputButtonContainer>
         {emailFormatError && (
-          <S.EmailFormatError>올바르지 않은 이메일 형식입니다.</S.EmailFormatError>
+          <S.EmailFormatError>올바르지 않은 이메일형식입니다.</S.EmailFormatError>
         )}
         {emailAlreadyUseError && (
-          <S.EmailAlreadyUseError>사용중인 이메일 입니다.</S.EmailAlreadyUseError>
+          <S.EmailAlreadyUseError>사용중인 이메일입니다.</S.EmailAlreadyUseError>
         )}
         {isEmailSent && <S.EmailSended>인증 이메일을 전송하였습니다.</S.EmailSended>}
         {showCertification && (

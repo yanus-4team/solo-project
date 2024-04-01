@@ -1,5 +1,11 @@
 package com.tutorial.backend.entity;
 
 public enum Authority {
-    ROLE_USER, ROLE_ADMIN
+    USER, ADMIN;
+
+    private static final String ROLE_PREFIX = "ROLE_";
+
+    public String getSecurityRole(){
+        return ROLE_PREFIX+name();
+    }
 }
