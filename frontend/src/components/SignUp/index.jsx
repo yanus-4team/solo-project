@@ -86,6 +86,7 @@ const completeSignUp = () => {
   setIsSignUpComplete(true);
 };
 
+  // 이메일 인증 코드 전송
   const sendEmail = async () => {
     if (validateEmail(emailInputRef.current.value)) {
       try {
@@ -280,10 +281,10 @@ const validateEmail = (email) => {
 
         </S.EmailInputButtonContainer>
         {emailFormatError && (
-          <S.EmailFormatError>올바르지 않은 이메일 형식입니다.</S.EmailFormatError>
+          <S.EmailFormatError>올바르지 않은 이메일형식입니다.</S.EmailFormatError>
         )}
         {emailAlreadyUseError && (
-          <S.EmailAlreadyUseError>사용중인 이메일 입니다.</S.EmailAlreadyUseError>
+          <S.EmailAlreadyUseError>사용중인 이메일입니다.</S.EmailAlreadyUseError>
         )}
         {isEmailSent && <S.EmailSended>인증 이메일을 전송하였습니다.</S.EmailSended>}
         {showCertification && (
@@ -319,36 +320,6 @@ const validateEmail = (email) => {
           </S.CertificationContainer>
         )}
         {isCertificationCorrect && (
-<<<<<<< HEAD
-      <S.BottomContainer visible={isCertificationCorrect ? "true" : "false"}>
-        <S.PasswordContainer>
-        <S.TitlePassword>비밀번호</S.TitlePassword>
-              <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
-                ?
-                {tooltipVisible && (
-                  <S.Tooltip>
-                    비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다
-                  </S.Tooltip>
-                )}
-              </S.QuestionMark>
-          <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange}/>
-          {passwordError === "비밀번호를 입력하십시오." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-          {passwordError === "비밀번호는 8~15자 사이여야 합니다." && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-          
-          {!isSpecialCharValid && (
-            <>
-              <S.PasswordError1>비밀번호 형식이 맞지 않습니다.</S.PasswordError1>
-              <S.PasswordError2>(특수문자는 *이나 ? 외엔 사용할 수 없습니다.)</S.PasswordError2>
-            </>
-          )}
-        </S.PasswordContainer>
-        <S.TitleCheck>비밀번호 확인</S.TitleCheck>
-        <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
-        {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-        <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
-      </S.BottomContainer>
-    )}
-=======
           <S.PersonalInfoContainer>
             <S.InputGroup>
               <S.InputLabel>이름</S.InputLabel>
@@ -393,7 +364,6 @@ const validateEmail = (email) => {
             )}
           </S.PersonalInfoContainer>
         )}
->>>>>>> f9f9cc54281aca99b910d79afad1e06578f17fed
       </S.SignUpBox>
     </S.SignUpContainer>
   );
