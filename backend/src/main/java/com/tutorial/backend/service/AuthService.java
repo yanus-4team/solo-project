@@ -4,6 +4,7 @@ import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.controller.dto.MemberResponseDto;
 import com.tutorial.backend.controller.dto.TokenDto;
 import com.tutorial.backend.controller.dto.TokenRequestDto;
+import com.tutorial.backend.entity.StatusType;
 import com.tutorial.backend.repository.MemberRepository;
 import com.tutorial.backend.repository.RefreshTokenRepository;
 import com.tutorial.backend.entity.Member;
@@ -44,6 +45,7 @@ public class AuthService {
         }
 
         Member member = loginForm.toMember(passwordEncoder);
+        member.setMemberStatus(StatusType.ABLE);
         return MemberResponseDto.of(memberRepository.save(member));
     }
 

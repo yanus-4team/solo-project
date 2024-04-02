@@ -142,6 +142,20 @@ export const CheckError = styled.h1`
 
 
 export const CertiRight = styled.h1`
+    position: absolute;
+    top: 260px;
+    margin-top: 1.2rem;
+    margin-bottom: 0rem;
+    color: green;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 9.6rem;
+`;
+
+export const NickNameRight = styled.h1`
+    position: absolute;
+    top: 430px;
     margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: green;
@@ -279,6 +293,7 @@ export const CertificationContainer = styled.div`
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
     position: relative;
+    overflow: hidden;
 `;
 
 
@@ -433,7 +448,7 @@ const slideDown = keyframes`
   }
   100% {
     opacity: 1;
-    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+    max-height: 552px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
     overflow: visible;
   }
 `;

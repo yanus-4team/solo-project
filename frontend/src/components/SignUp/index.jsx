@@ -19,10 +19,7 @@ const SignUpModal = (props) => {
   const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
-  const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");
@@ -32,7 +29,11 @@ const SignUpModal = (props) => {
   const emailButtonRef = useRef(null);
   const certiButtonRef = useRef(null);
   const passwordInputRef = useRef(null);
-
+  const nameInputRef = useRef(null);
+  const nicknameInputRef = useRef(null);
+  const birthDateInputRef = useRef(null);
+  const genderSelectRef = useRef(null);
+  
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [gender, setGender] = useState('');
@@ -76,14 +77,10 @@ const verifyNickname = async () => {
   }
 };
 
-  
-
-
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   
-    // 기존의 유효성 검사 로직...
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
     const hasSpecialChar = /[*?]/.test(newPassword);
     const hasLowerCase = /[a-z]/.test(newPassword);
@@ -196,7 +193,10 @@ const completeSignUp = () => {
                 },
                 body: JSON.stringify({  
                   email: emailInputRef.current.value,
-                   password: passwordInputRef.current.value 
+                  password: passwordInputRef.current.value,
+                  name: nameInputRef.current.value,
+                  nickName: nicknameInputRef.current.value,
+                  birth: birthDateInputRef.current.value,
                   })
             });
             if (!response.ok) {
@@ -224,7 +224,8 @@ const validateEmail = (email) => {
 
   useEffect(() => {
     console.log(emailCode); // emailCode 값이 변경될 때마다 새로운 값 로그로 출력
-  }, [emailCode]);
+    console.log(birthDate);
+  }, [emailCode,birthDate]);
 
   useEffect(() => {
     let intervalId;
@@ -363,11 +364,9 @@ const validateEmail = (email) => {
           <S.PersonalInfoContainer>
             <S.InputGroup>
               <S.InputLabel>이름</S.InputLabel>
-              <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              <S.TextInput type="text" value={name} ref={nameInputRef}onChange={(e) => setName(e.target.value)} />
             </S.InputGroup>
-            {isNicknameValid && nickname && (
-              <S.CertiRight>사용가능한 닉네임 입니다.</S.CertiRight>
-            )}
+            
             {!isNicknameValid && (
               <S.CertiError>{nicknameError}</S.CertiError>
             )}
@@ -376,21 +375,26 @@ const validateEmail = (email) => {
               <S.TextInput2
                 type="text"
                 value={nickname}
+                ref={nicknameInputRef}
                 onChange={handleNicknameChange}
               />
               <S.SignButton2 onClick={verifyNickname}>중복 확인</S.SignButton2>
+              {isNicknameValid && nickname && (
+              <S.NickNameRight>사용가능한 닉네임 입니다.</S.NickNameRight>
+            )}
             </S.InputGroup>
             <S.InputGroup>
               <S.InputLabel>생년월일</S.InputLabel>
               <S.DateInput
                 type="date"
+                ref={birthDateInputRef}
                 value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
               />
             </S.InputGroup>
             <S.InputGroup>
               <S.InputLabel>성별</S.InputLabel>
-              <S.SelectInput value={gender} onChange={(e) => setGender(e.target.value)}>
+              <S.SelectInput value={gender} ref={genderSelectRef} onChange={(e) => setGender(e.target.value)}>
                 <option value="">선택...</option>
                 <option value="male">남성</option>
                 <option value="female">여성</option>

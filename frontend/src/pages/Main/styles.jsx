@@ -70,48 +70,6 @@ export const CurrentLocationImg = styled.img`
     
 `;
 
-export const LoginModal = styled.div`
-    display: ${props => props.isOpen ? "block" : "none"}; // 모달 열기/닫기 상태에 따라 표시 여부 결정
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 35px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    border:2px solid black;
-`;
-
-export const ModalContent = styled.div`
-    padding: 30px;
-
-`;
-
-export const CloseButton = styled.button`
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: gray;
-`;
-
-export const Button = styled.button`
-    background-color:  #CDF0ED;
-    width: 100%;
-`;
-
-export const Text = styled.text`
-    text-align: center;
-    display: block;
-    margin:10px;
-    font-size: 30px;
-`;
-
 export const ModalBackground = styled.div`
     position: fixed;
     top: 0;
