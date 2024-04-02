@@ -57,6 +57,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         }
     }
     return(
+        
         <div className="SearchPlaceModalForm">
             <div className="SearchPlaceWrapper">
                 <div className="SearchPlaceBox">

@@ -33,7 +33,7 @@
 }
 
 .MenuToggleBtnBox:hover {
-    border-color: tomato;
+    border-color: var(--primary-color);
 }
 
 .MenuToggleBtn {
@@ -84,12 +84,12 @@
 }
 
 .InputField:focus {
-    border-color: #ff6347;
+    border-color: var(--primary-color);
 }
 
 .SearchBtn {
     padding: 10px 20px;
-    background-color: #ff6347;
+    background-color: var(--primary-color);
     color: #ffffff;
     border: none;
     border-radius: 20px;
@@ -99,7 +99,7 @@
 }
 
 .SearchBtn:hover {
-    background-color: #e55347;
+    background-color: #5582cc;
 }
 
 .ResultContainer {
@@ -136,6 +136,6 @@
 }
 
 .PageButton:hover, .PageButton.active {
-    background-color: tomato;
+    background-color: var(--primary-color);
     color: #ffffff;
 }

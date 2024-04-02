@@ -50,9 +50,7 @@ function Form(){
                 </div>
             </div>
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            <dlv className="LOGO">
-                <img className="LogoImg" src={MainLogo} alt=""/>
-            </dlv>
+            <Logo  alt="logo" width="140px" height="140px" color1="#3e6ab3" color2="#5582cc"/>
             <div className="FormBox">
                 <div className="FormField">
                     <input

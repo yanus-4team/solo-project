@@ -1,6 +1,17 @@
 import styled, { css, keyframes } from "styled-components";
 
-
+const slideDown = keyframes`
+  0% {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    opacity: 1;
+    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+    overflow: visible;
+  }
+`;
 export const SignUpContainer = styled.div`
     position: fixed;
     top: 0;
@@ -426,18 +437,6 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
-const slideDown = keyframes`
-  0% {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-  }
-  100% {
-    opacity: 1;
-    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
-    overflow: visible;
-  }
-`;
 
 export const PersonalInfoContainer = styled.div`
   width: 100%;
