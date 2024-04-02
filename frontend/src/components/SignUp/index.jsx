@@ -41,6 +41,14 @@ const SignUpModal = (props) => {
 const [isNicknameValid, setIsNicknameValid] = useState(true);
 const [nicknameError, setNicknameError] = useState('');
 
+const [phoneNumber, setPhoneNumber] = useState('');
+
+// 전화번호 입력 핸들러
+const handlePhoneNumberChange = (event) => {
+  setPhoneNumber(event.target.value);
+  // 전화번호 유효성 검사 로직 추가 (옵션)
+};
+
 const handleNicknameChange = (event) => {
   const newNickname = event.target.value;
   setNickname(newNickname);
@@ -366,13 +374,13 @@ const validateEmail = (email) => {
               <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </S.InputGroup>
             {isNicknameValid && nickname && (
-              <S.CertiRight>사용가능한 닉네임 입니다.</S.CertiRight>
+              <S.Nicknameright>사용가능한 닉네임 입니다.</S.Nicknameright>
             )}
             {!isNicknameValid && (
               <S.CertiError>{nicknameError}</S.CertiError>
             )}
             <S.InputGroup>
-              <S.InputLabel>닉네임</S.InputLabel>
+              <S.InputNickname>닉네임</S.InputNickname>
               <S.TextInput2
                 type="text"
                 value={nickname}
@@ -381,7 +389,18 @@ const validateEmail = (email) => {
               <S.SignButton2 onClick={verifyNickname}>중복 확인</S.SignButton2>
             </S.InputGroup>
             <S.InputGroup>
-              <S.InputLabel>생년월일</S.InputLabel>
+              <S.InputNumber>전화번호</S.InputNumber>
+              <S.TextInput
+                type="tel" // 전화번호에 맞는 input 타입 설정
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                // 필요하다면 전화번호 형식을 지정하는 pattern 속성 사용
+                // pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                placeholder="010-1234-5678" // 사용자에게 입력 형식을 알려줄 수 있는 플레이스홀더 추가
+              />
+            </S.InputGroup>
+            <S.InputGroup>
+              <S.InputBirth>생년월일</S.InputBirth>
               <S.DateInput
                 type="date"
                 value={birthDate}
@@ -389,7 +408,7 @@ const validateEmail = (email) => {
               />
             </S.InputGroup>
             <S.InputGroup>
-              <S.InputLabel>성별</S.InputLabel>
+              <S.InputSex>성별</S.InputSex>
               <S.SelectInput value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="">선택...</option>
                 <option value="male">남성</option>
