@@ -40,7 +40,6 @@ export const MainLogo = styled.svg`
     /* width: 200px; */
     width: 160px;
     margin-bottom: 20px;
-    fill: tomato;
 `
 
 export const Wrapper = styled.div`
@@ -52,6 +51,7 @@ export const Wrapper = styled.div`
 
 export const TopHeader = styled.div`
     margin-top: 80px;
+    margin-bottom: 40px;
 `;
 
 export const LoginBtnList = styled.div`
@@ -60,6 +60,7 @@ export const LoginBtnList = styled.div`
 
 export const BottomContainer = styled.div`
     text-align: center;
+    margin-top: 80px;
 `;
 
 export const NoLoginLink = styled(Link)`

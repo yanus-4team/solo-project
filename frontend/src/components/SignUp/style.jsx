@@ -8,7 +8,11 @@ const slideDown = keyframes`
   }
   100% {
     opacity: 1;
+<<<<<<< HEAD
     max-height: 540px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+=======
+    max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+>>>>>>> 9c5b93acb1f019e9d8db32bca46b761a9c8c33bb
     overflow: visible;
   }
 `;
@@ -437,8 +441,6 @@ export const TimerText = styled.span`
   font-size: 0.7rem;
   font-weight: normal;
 `;
-
-
 
 export const PersonalInfoContainer = styled.div`
   width: 100%;
