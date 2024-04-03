@@ -50,7 +50,7 @@ function Form(){
                 </div>
             </div>
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            <Logo  alt="logo" width="140px" height="140px" color1="#3e6ab3" color2="#5582cc"/>
+            <Logo  alt="logo" width="140px" height="140px" color1="#0a58ca" color2="#3d8bfd"/>
             <div className="FormBox">
                 <div className="FormField">
                     <input
@@ -63,7 +63,8 @@ function Form(){
                     <div className="ResultContainer">
                         {currentItems.map((value,index)=>(
                             <div className="ListBox" key={index}>
-                                {value[0]} {value[1]}
+                                <span className="PlaceName">{value[0]} </span>
+                                <span>| {value[1]}</span>
                             </div>
                         ))}
                     </div>
