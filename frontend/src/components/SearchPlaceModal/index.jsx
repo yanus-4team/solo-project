@@ -29,6 +29,8 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         const placeData=result.split("_")
         const placeName=placeData[0]
         const placeAddress=placeData[1]
+        const latitude=placeData[2]
+        const longitude=placeData[3]
 
         searchPlaceResult(placeData);
         // showSearchModalClick(false);
@@ -69,7 +71,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
                     {
                         isSearch && searchResult.map((value,index)=>
                         (
-                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}`}>
+                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}_${value.x}_${value.y}`}>
                                 <p className="PlaceName">{value.place_name}</p>
                                 <p>지번주소 : {value.address_name}</p>
                                 <p>도로명 주소 : {value.road_address_name}</p>
