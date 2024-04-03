@@ -16,10 +16,10 @@
 }
 
 :root {
-    /* --main-color: #CDF0ED;
-    --primary-color: #0B7F7B; */
     --main-color: #ffffff;
-    --primary-color: #3e6ab3;
+    --primary-color: #0d6efd;
+    --sub-color1:#3D8BFD;
+    --sub-color2:#0A58CA;
 }
 
 body {

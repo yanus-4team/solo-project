@@ -82,7 +82,7 @@ function LoginPage() {
         <S.PageContainer> 
             <S.TopContainer>
                 <S.TopHeader>
-                    <Logo  alt="logo" width="160px" height="160px" color1="#3e6ab3" color2="#5582cc"/>
+                    <Logo  alt="logo" width="160px" height="160px" color1="#0a58ca" color2="#3d8bfd"/>
                 </S.TopHeader>
                 <S.Wrapper>
                     <S.TopDescription >

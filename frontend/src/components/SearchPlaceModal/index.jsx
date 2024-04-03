@@ -46,7 +46,8 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
     }
     const callbackFn=(data,status,pafination)=>{
         if(status===kakao.maps.services.Status.OK){
-            const result=data.slice(0,8);
+            // const result=data.slice(0,8);
+            const result=data
             setSearchResult(result);
             searchResult.map((value,index)=>{
                 // console.log(value.place_url)
@@ -61,7 +62,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         <div className="SearchPlaceModalForm">
             <div className="SearchPlaceWrapper">
                 <div className="SearchPlaceBox">
-                    <div className="CloseModal"><img src={closeIcon} onClick={closeModal}/></div>
+                    <div className="CloseModalButton"><img src={closeIcon} onClick={closeModal}/></div>
                     <input onKeyDown={handleKeyPress} onChange={onSearchQInput} className="searchQ" name="searchQ" type="text" placeholder="상호명을 입력해주세요."/>
                     <button className="SearchPlaceBtn" onClick={searchBtnClick} type="button">검색</button>
                     <div className="Line"></div>
@@ -69,7 +70,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
                         isSearch && searchResult.map((value,index)=>
                         (
                             <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}`}>
-                                <p>{value.place_name}</p>
+                                <p className="PlaceName">{value.place_name}</p>
                                 <p>지번주소 : {value.address_name}</p>
                                 <p>도로명 주소 : {value.road_address_name}</p>
                             </div>
