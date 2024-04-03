@@ -42,7 +42,7 @@ public class Member {
     private List<Report> reportList;
 
     @Builder
-    public Member(Long id, String memberEmail, String memberPassword, String memberName, String memberNickName, String memberPhone, LocalDate memberBirth, StatusType status, Authority authority) {
+    public Member(Long id, String memberEmail, String memberPassword, String memberName, String memberNickName, String memberPhone, LocalDate memberBirth, StatusType status, Authority authority, List<PlaceHeader> placeHeaderList, List<Report> reportList) {
         this.id = id;
         this.memberEmail = memberEmail;
         this.memberPassword = memberPassword;
@@ -52,7 +52,10 @@ public class Member {
         this.memberBirth = memberBirth;
         this.status = status;
         this.authority = authority;
+        this.placeHeaderList = placeHeaderList;
+        this.reportList = reportList;
     }
+
 
     public void setMemberStatus(StatusType status) {
         this.status = status;
