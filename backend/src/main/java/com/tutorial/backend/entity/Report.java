@@ -16,5 +16,15 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String reportTitle;
 
+    private String reportContent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reported_member_id")
+    private Member reportedMember;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 }

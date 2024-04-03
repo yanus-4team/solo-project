@@ -24,5 +24,8 @@ public class Place {
 
     private String placeLocalNameAddress;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_header_id")
+    private PlaceHeader placeHeader;
 
 }

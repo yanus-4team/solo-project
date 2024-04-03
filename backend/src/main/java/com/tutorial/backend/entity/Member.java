@@ -36,9 +36,10 @@ public class Member {
     private Authority authority;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JsonBackReference
     private List<PlaceHeader> placeHeaderList;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Report> reportList;
 
     @Builder
     public Member(Long id, String memberEmail, String memberPassword, String memberName, String memberNickName, String memberPhone, LocalDate memberBirth, StatusType status, Authority authority) {

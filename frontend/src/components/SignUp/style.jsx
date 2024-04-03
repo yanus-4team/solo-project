@@ -1,6 +1,17 @@
 import styled, { css, keyframes } from "styled-components";
 
-
+const slideDown = keyframes`
+  0% {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  100% {
+    opacity: 1;
+    max-height: 540px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
+    overflow: visible;
+  }
+`;
 export const SignUpContainer = styled.div`
     position: fixed;
     top: 0;
@@ -53,7 +64,7 @@ export const Text = styled.h1`
 `;
 
 export const EmailAlreadyUseError = styled.h1`
-    margin-top:-0.8rem;
+    margin-top:-1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -62,7 +73,7 @@ export const EmailAlreadyUseError = styled.h1`
     margin-right: 10.3rem;
 `;
 export const EmailFormatError = styled.h1`
-    margin-top:-0.8rem;
+    margin-top:-1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -86,7 +97,7 @@ export const ExpiredMessage = styled.span`
 
 
 export const EmailSended = styled.h1`
-    margin-top: -1.2em;
+    margin-top: -1.4em;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
@@ -97,7 +108,7 @@ export const EmailSended = styled.h1`
 
 
 export const CertiError = styled.h1`
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -108,7 +119,7 @@ export const CertiError = styled.h1`
 
 export const PasswordError1 = styled.h1`
     position: absolute;
-    top: 60px;
+    top: 36px;
     margin-top: 1rem;
     margin-bottom: 0rem;
     color: red;
@@ -129,7 +140,7 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
-    top: 146px;
+    top: 122px;
     position: absolute;
     margin-top: 0.7rem;
     margin-bottom: -1rem;
@@ -143,20 +154,8 @@ export const CheckError = styled.h1`
 
 export const CertiRight = styled.h1`
     position: absolute;
-    top: 260px;
-    margin-top: 1.2rem;
-    margin-bottom: 0rem;
-    color: green;
-    font-size: 0.7rem;
-    font-weight: normal;
-    text-align: left;
-    margin-right: 9.6rem;
-`;
-
-export const NickNameRight = styled.h1`
-    position: absolute;
-    top: 430px;
-    margin-top: 1.2rem;
+    top: 246px;
+    margin-top: 1rem;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
@@ -175,7 +174,7 @@ export const TitleEmail = styled.h1`
 `;
 
 export const TitleCerti = styled.h1`
-    margin-top: 10px;
+    margin-top: 2px;
     margin-bottom: -1.8rem;
     margin-right: 13rem;
     color: #333;
@@ -185,7 +184,7 @@ export const TitleCerti = styled.h1`
 `;
 
 export const TitlePassword = styled.h1`
-    margin-top: 15px;
+    margin-top: -6px;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -257,7 +256,6 @@ export const CheckInput = styled.input`
         border:1px solid green;
         outline: none;
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
-
     }
 `;
 
@@ -293,7 +291,6 @@ export const CertificationContainer = styled.div`
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
     position: relative;
-    overflow: hidden;
 `;
 
 
@@ -375,6 +372,7 @@ export const PasswordContainer = styled.div`
     justify-content: center;
     width: 100%;
     background-color: #fff;
+    animation: ${slideDown} 0.5s ease-out forwards; // 애니메이션 적용
 `;
 
 
@@ -440,18 +438,7 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
-const slideDown = keyframes`
-  0% {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-  }
-  100% {
-    opacity: 1;
-    max-height: 552px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
-    overflow: visible;
-  }
-`;
+
 
 export const PersonalInfoContainer = styled.div`
   width: 100%;
@@ -461,11 +448,37 @@ export const PersonalInfoContainer = styled.div`
 
 export const InputGroup = styled.div`
   margin-bottom: 15px;
+  margin-top:10px
 `;
 
 export const InputLabel = styled.label`
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
+  margin-top: -25px;
+`;
+
+export const InputNickname = styled.label`
+  display: block;
+  margin-bottom: 2px;
+  margin-top: -8px;
+`;
+
+export const InputNumber = styled.label`
+  display: block;
+  margin-bottom: 2px;
+  margin-top: 0px;
+`;
+
+export const InputBirth = styled.label`
+  display: block;
+  margin-bottom: 2px;
+  margin-top: -9px;
+`;
+
+export const InputSex = styled.label`
+  display: block;
+  margin-bottom: 2px;
+  margin-top: -8px;
 `;
 
 export const TextInput = styled.input`
@@ -479,6 +492,16 @@ export const TextInput = styled.input`
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
 
     }
+`;
+
+export const NickNameRight = styled.h1`
+    position: absolute;
+    top: 357px;
+    color: green;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 9.6rem;
 `;
 
 export const TextInput2 = styled.input`
@@ -556,4 +579,3 @@ export const DateInput = styled.input`
 
     }
 `;
-

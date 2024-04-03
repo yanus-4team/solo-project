@@ -1,11 +1,11 @@
 package com.tutorial.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -26,9 +26,10 @@ public class PlaceHeader {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    @JsonBackReference
     private Member member;
 
+    @OneToMany(mappedBy = "placeHeader", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Place> placeList;
 
 
 
