@@ -50,7 +50,7 @@ function Form(){
         new kakao.maps.Marker({
           map: map,
           position: options.center,
-          image: new kakao.maps.MarkerImage(pinImage, new kakao.maps.Size(40, 40)),
+          image: new kakao.maps.MarkerImage(pinImage, new kakao.maps.Size(50, 50)),
         });
     
         return () => {
@@ -75,11 +75,15 @@ function Form(){
     };
 
     const handleDeletePlace=(index)=>{
-        const updatedPlaceResultArr=placeResultArr.filter((_,i)=>i !== index);
-        setPlaceResultArr(updatedPlaceResultArr);
-        toast.success('장소가 삭제되었습니다.', {
-            autoClose:1500
-        })
+        const isConfirmed=window.confirm("이 장소를 삭제하시겠습니까?")
+        if(isConfirmed){
+            const updatedPlaceResultArr=placeResultArr.filter((_,i)=>i !== index);
+            setPlaceResultArr(updatedPlaceResultArr);
+
+            toast.success('장소가 삭제되었습니다.', {
+                autoClose:1500
+            })
+        }
     }
 
     const handlePageChange=(pageNumber)=>{
@@ -136,7 +140,7 @@ function Form(){
                                 <span className="PlaceName">{value[0]} </span>
                                 <span>| {value[1]}</span>
                                 <button className="DeleteBtn" onClick={()=>handleDeletePlace(index+startIndex)}>
-                                    <Trash width="20px" height="20px" color="var(--primary-color)"/>
+                                    <Trash width="24px" height="24px" color="var(--primary-color)"/>
                                 </button>
                             </div>
                         ))}
