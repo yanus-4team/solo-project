@@ -67,6 +67,7 @@
     display: flex;
     flex-direction: column;
     padding: 30px;
+    margin-top: 20px;
 }
 
 .FormField {
@@ -116,15 +117,37 @@
     padding: 15px;
     margin: 10px 0;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .ListBox:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
+.ListBox:hover .DeleteBtn {
+    right: 10px; /* hover 시 리스트 항목 내부의 오른쪽으로 이동 */
+    opacity: 1; /* 완전히 불투명하게 */
+    visibility: visible; /* 보이도록 */
+}
+
 .PlaceName{
     font-weight: 900;
 }
+
+.DeleteBtn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: -30px; /* 초기에는 보이지 않도록 오른쪽으로 숨김 */
+    transition: right 0.3s ease, opacity 0.3s ease; /* 부드러운 이동과 투명도 변화를 위한 transition */
+    opacity: 0; /* 초기 상태에서는 완전히 투명하게 */
+    visibility: hidden; /* 초기 상태에서는 보이지 않도록 */
+
+}
+
+
 .Pagination {
     display: flex;
     justify-content: center;
