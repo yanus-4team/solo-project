@@ -35,6 +35,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+//	oauth2.0용
+	implementation ("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+
 //	DB
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'mysql:mysql-connector-java'

@@ -45,7 +45,7 @@ public class AuthService {
         }
 
         Member member = loginForm.toMember(passwordEncoder);
-        member.setMemberStatus(StatusType.ABLE);
+        member.setStatus(StatusType.ABLE);
         return MemberResponseDto.of(memberRepository.save(member));
     }
 

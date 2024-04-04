@@ -1,5 +1,8 @@
 package com.tutorial.backend.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -7,6 +10,8 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Document(collection = "tbl_message")
+@Getter @Setter
+@NoArgsConstructor
 public class Message {
 
     @Id
