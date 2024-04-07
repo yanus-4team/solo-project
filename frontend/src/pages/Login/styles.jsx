@@ -18,21 +18,24 @@ export const TopContainer = styled.div`
 
 export const TopDescription = styled.div`
     text-align: left;
-    /* color: var(--primary-color); */
-    color: transparent;
+    color: var(--primary-color);
+    /* color: transparent;
     background: linear-gradient(to right,#052c65,#92c5fe);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
 `
 export const Welcome = styled.h1`
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 5px;
+    /* font-size: 24px;
+    color: #0056b3;
+    margin-bottom: 10px; */
 
 `
 export const Underline = styled.div`
     /* background-color: var(--primary-color); */
-    background-image: linear-gradient(to right, #052c65,#92c5fe);
+    background-image: linear-gradient(to right, var(--sub-color2),#92c5fe);
     height: 4px;
     width: 100%;
     margin:12px 0;
@@ -43,6 +46,8 @@ export const Text = styled.p`
     font-size: 30px;
     word-spacing: 2px;
     line-height: 40px;
+    /* color: #666;
+    font-size: 16px; */
 `
 
 export const MainLogo = styled.svg`
@@ -64,7 +69,7 @@ export const TopHeader = styled.div`
 `;
 
 export const LoginBtnList = styled.div`
-
+    
 `;
 
 export const BottomContainer = styled.div`
