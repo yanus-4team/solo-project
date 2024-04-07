@@ -120,7 +120,7 @@ export const CertiError = styled.h1`
 export const PasswordError1 = styled.h1`
     position: absolute;
     top: 36px;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -140,7 +140,7 @@ export const PasswordLengthError = styled.h1`
 `;
 
 export const CheckError = styled.h1`
-    top: 122px;
+    top: 115px;
     position: absolute;
     margin-top: 0.7rem;
     margin-bottom: -1rem;
@@ -182,7 +182,7 @@ export const TitleCerti = styled.h1`
 `;
 
 export const TitlePassword = styled.h1`
-    margin-top: -6px;
+    margin-top: -3px;
     color: #333;
     font-size: 1rem;
     font-weight: normal;
@@ -191,7 +191,7 @@ export const TitlePassword = styled.h1`
 `;
 
 export const TitleCheck = styled.h1`
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 0rem;
     margin-right: 11.6rem;
     color: #333;
@@ -451,31 +451,31 @@ export const InputGroup = styled.div`
 export const InputLabel = styled.label`
   display: block;
   margin-bottom: 2px;
-  margin-top: -25px;
+  margin-top: -23px;
 `;
 
 export const InputNickname = styled.label`
   display: block;
   margin-bottom: 2px;
-  margin-top: -8px;
+  margin-top: -3px;
 `;
 
 export const InputNumber = styled.label`
   display: block;
   margin-bottom: 2px;
-  margin-top: 0px;
+  margin-top: -0px;
 `;
 
 export const InputBirth = styled.label`
   display: block;
   margin-bottom: 2px;
-  margin-top: -9px;
+  margin-top: -2px;
 `;
 
 export const InputSex = styled.label`
   display: block;
   margin-bottom: 2px;
-  margin-top: -8px;
+  margin-top: -2px;
 `;
 
 export const TextInput = styled.input`
@@ -493,7 +493,7 @@ export const TextInput = styled.input`
 
 export const Nicknameright = styled.h1`
     position: absolute;
-    margin-top: 50px;
+    margin-top: 55px;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
