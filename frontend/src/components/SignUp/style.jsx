@@ -349,7 +349,7 @@ export const SignButton = styled.button`
     width: 270px;
     padding: 10px;
     border: none;
-    margin-top: 40px;
+    margin-top: 30px;
     border-radius: 30px;
     background-color:  var(--primary-color);
     color: white;
@@ -515,7 +515,7 @@ export const TextInput2 = styled.input`
     }
 `;
 
-export const SignButton2 = styled.button`
+export const NicknameButton = styled.button`
     width: 100px;
     padding: 10px;
     border: none;

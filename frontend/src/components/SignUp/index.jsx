@@ -413,7 +413,7 @@ const validateEmail = (email) => {
                 value={nickname}
                 onChange={handleNicknameChange}
               />
-              <S.SignButton2 onClick={verifyNickname}>중복 확인</S.SignButton2>
+              <S.NicknameButton onClick={verifyNickname}>중복 확인</S.NicknameButton>
             </S.InputGroup>
             <S.InputGroup>
               <S.InputNumber>전화번호</S.InputNumber>
