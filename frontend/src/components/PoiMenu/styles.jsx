@@ -4,10 +4,9 @@ export const PoiContainer = styled.div`
   position: fixed;
   top: 0;
   left: -350px;
-  width: 300px;
+  width: 250px;
   margin-left: 8px;
   margin-top: 100px;
-  height: 200px;
   border-radius: 30px;
   background-color: #fff;
   transition: left 0.5s ease;
@@ -15,17 +14,6 @@ export const PoiContainer = styled.div`
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
   &.open {
     left: 0;
-  }
-  @media (max-width: 768px) {
-    width: 300px;
-    left: -350px;
-    margin-left: 8px;
-    margin-top: 100px;
-    height: 130px;
-    border-radius: 30px;
-    &.open {
-      left: 0;
-    }
   }
 `;
 
@@ -43,7 +31,7 @@ export const PoiContent = styled.div`
 `;
 
 export const Title = styled.div`
-    margin-left: 100px;
+    margin-left: 73px;
     margin-bottom: 2rem;
     margin-top: 50px;
     color: #333;
@@ -59,7 +47,7 @@ export const MemberContainer = styled.div`
 export const Member = styled.div`
   color: #333;
   font-weight: normal;
-  margin-left: 5px;
+  margin-left: 25px;
   font-size: 17px;
   margin-top: -18px;
 `;
@@ -70,10 +58,19 @@ export const MemberInput = styled.input`
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-left: 5px;
+    margin-left: 40px; /* 최대 입력값 제한 */
     &:focus {
         border:1px solid green;
         outline: none;
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
     }
+`;
+
+export const ErrorMessage = styled.div`
+    font-weight: normal;
+    color: red;
+    font-size: 0.7rem;
+    margin-top: -2rem;
+    margin-left: 3.2rem;
+    position: absolute;
 `
