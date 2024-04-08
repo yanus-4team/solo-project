@@ -6,19 +6,32 @@ import pinImage from '../../assets/current.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import SearchIcon from "../../components/Search";
 import { useCookieManager } from "../../storage/cookieManager";
+import PoiImage from "../../assets/pin.png"
+import PoiMenu from '../../components/PoiMenu';
+import Logo from "../../assets/main_logo.png"
 const { kakao } = window;
 
 const Main = () => {
     const [isOpen, setIsOpen ] = useState(false);
+    const [isPoiOpen, setIsPoiOpen] = useState(false);
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
     const { getCookies } = useCookieManager();
+
     const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
+        if (isPoiOpen) { // POI 모달이 열려 있는지 확인
+            setIsPoiOpen(false); // 열려 있으면 닫기
+        }
+        setIsOpen(!isOpen); // 기존 메뉴 상태 변경 로직은 유지
+    };
+    const togglePoiMenu = () => setIsPoiOpen(!isPoiOpen);
 
     const handleCloseMenu = () => {
         setIsOpen(false); // 메뉴 닫기
+    };
+
+    const handleClosePoiMenu = () => {
+        setIsPoiOpen(false); // 메뉴 닫기
     };
 
     useEffect(() => {
@@ -106,6 +119,7 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
+            <S.Test src={Logo} alt="로고" />
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
@@ -119,6 +133,14 @@ const Main = () => {
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
                 </S.CurrentLocationBtn>
             )}
+            <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
+                <S.PoiToggleBtn onClick={togglePoiMenu}>
+                    <S.PoiImage src={PoiImage} alt="POI" />
+                </S.PoiToggleBtn>
+            </S.PoiToggleBtnBox>
+            <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
+            
+
         </S.MapContainer>
     )
 }
