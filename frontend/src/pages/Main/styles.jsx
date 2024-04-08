@@ -113,10 +113,6 @@ export const PoiImage = styled.img`
 export const LogoContainer=styled.div`
     position: absolute;
     width: 40px;
-    z-index: 2;
-    top: 44px;
-    left: 20px;
-    z-index: 101;
 `
 
 export const TapContainer = styled.div`
