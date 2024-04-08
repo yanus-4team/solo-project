@@ -17,6 +17,7 @@ const Main = () => {
     const [isPoiOpen, setIsPoiOpen] = useState(false);
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
+    const [isActive, setIsActive] = useState(false);
     const { getCookies } = useCookieManager();
 
     const toggleMenu = () => {
@@ -26,6 +27,10 @@ const Main = () => {
         setIsOpen(!isOpen); // 기존 메뉴 상태 변경 로직은 유지
     };
     const togglePoiMenu = () => setIsPoiOpen(!isPoiOpen);
+
+    const handleClick = () => {
+        setIsActive(!isActive); // 클릭 시 isActive 상태를 토글
+    };
 
     const handleCloseMenu = () => {
         setIsOpen(false); // 메뉴 닫기
@@ -116,14 +121,10 @@ const Main = () => {
         }
     };
 
-
-
+    
     return (
         <S.MapContainer id="map">
             {/* <S.Test src={Logo} alt="로고" /> */}
-            <S.LogoContainer>
-                <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
-            </S.LogoContainer>
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
@@ -138,9 +139,13 @@ const Main = () => {
                 </S.CurrentLocationBtn>
             )}
             <S.TapContainer>
-                <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
+            <S.LogoContainer>
+                <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+            </S.LogoContainer>
+                <S.PoiToggleBtnBox isActive={isActive} onClick={handleClick}> {/* POI 메뉴 위치 조정 */}
                     <S.PoiToggleBtn onClick={togglePoiMenu}>
                         <S.PoiImage src={PoiImage} alt="POI" />
+                        <S.PoiText>필터</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
                 <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
