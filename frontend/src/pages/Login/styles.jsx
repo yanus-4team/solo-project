@@ -1,5 +1,34 @@
-import styled  from "styled-components";
+import styled, { createGlobalStyle, keyframes }  from "styled-components";
 import { Link } from "react-router-dom";
+
+const fadeIn=keyframes`
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+`
+const moveFromLeft=keyframes`
+    from{
+        transform: translateX(-32%);
+        opacity: 0.4;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+`;
+const moveFromRight=keyframes`
+    from{
+        transform: translateX(32%);
+        opacity: 0.4;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+`
 
 export const PageContainer = styled.div`
     max-width: 500px;
@@ -8,8 +37,9 @@ export const PageContainer = styled.div`
 
     @media (max-width: 390px) {
         width: 100%; 
-        padding: 0 10px; 
+        padding: 0 10px;
     }
+    animation: ${fadeIn} 3s forwards;
 `;
 
 export const TopContainer = styled.div`
@@ -25,9 +55,11 @@ export const TopDescription = styled.div`
     -webkit-text-fill-color: transparent; */
 `
 export const Welcome = styled.h1`
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 500;
     margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
     /* font-size: 24px;
     color: #0056b3;
     margin-bottom: 10px; */
@@ -40,14 +72,33 @@ export const Underline = styled.div`
     width: 100%;
     margin:12px 0;
 `
-export const Text = styled.p`
-    margin-top: 5px;
+// export const Text = styled.p`
+//     margin-top: 5px;
+//     font-weight: bold;
+//     font-size: 30px;
+//     word-spacing: 2px;
+//     line-height: 40px;
+//     /* color: #666;
+//     font-size: 16px; */
+// `
+
+
+export const Text1=styled.p`
+    margin: 5px 0 0 0;
+    font-weight: bold;
+    font-size: 24px;
+    word-spacing: 2px;
+    animation: ${moveFromLeft} 1.5s ease-in-out;
+    text-align: center;
+`
+
+export const Text2=styled.p`
+    margin-top: 8px;
     font-weight: bold;
     font-size: 30px;
     word-spacing: 2px;
-    line-height: 40px;
-    /* color: #666;
-    font-size: 16px; */
+    /* text-align: end; */
+    animation: ${moveFromRight} 1.5s ease-in-out;
 `
 
 export const MainLogo = styled.svg`
