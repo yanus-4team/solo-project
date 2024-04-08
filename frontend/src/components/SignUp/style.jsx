@@ -108,7 +108,8 @@ export const EmailSended = styled.h1`
 
 
 export const CertiError = styled.h1`
-    margin-top: 1rem;
+    position: absolute;
+    top: 405px;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -290,6 +291,7 @@ export const CertificationContainer = styled.div`
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
     position: relative;
+    overflow: hidden;
 `;
 
 
@@ -493,7 +495,7 @@ export const TextInput = styled.input`
 
 export const NickNameRight = styled.h1`
     position: absolute;
-    margin-top: 55px;
+    top:405px;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;

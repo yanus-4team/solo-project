@@ -5,7 +5,6 @@ import Menu from '../../components/Menu';
 import pinImage from '../../assets/current.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import SearchIcon from "../../components/Search";
-import { useCookieManager } from "../../storage/cookieManager";
 import PoiImage from "../../assets/pin.png"
 import PoiMenu from '../../components/PoiMenu';
 import Logo from "../../assets/main_logo.png"
@@ -16,7 +15,6 @@ const Main = () => {
     const [isPoiOpen, setIsPoiOpen] = useState(false);
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
-    const { getCookies } = useCookieManager();
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
@@ -73,30 +71,6 @@ const Main = () => {
             }
         };
         geoLocation();
-        if(getCookies().accessToken) {
-            const localAccessToken = getCookies().accessToken;
-        fetch('http://localhost:8080/auth/user', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              // 예를 들어, JWT 토큰을 헤더에 추가하는 방법
-              'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
-            }
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json(); // JSON 형식으로 응답 데이터를 파싱
-          })
-          .then(data => {
-            // 응답 데이터(data)를 처리
-            console.log('User details:', data);
-          })
-          .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-          });
-        }
     }, []);
 
     // 현재 위치로 이동하는 함수

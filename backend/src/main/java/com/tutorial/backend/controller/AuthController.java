@@ -1,9 +1,11 @@
 package com.tutorial.backend.controller;
 
 
+import com.sun.mail.iap.Response;
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.service.AuthService;
+import com.tutorial.backend.service.MemberService;
 import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -30,6 +33,7 @@ public class AuthController {
 
     private final AuthService authService;
     private final MailService mailService;
+    private final MemberService memberService;
 
     @PostMapping("verifyEmail")
     public ResponseEntity<ResultDto<String>> emailCheck(@RequestBody String email) {
@@ -78,7 +82,7 @@ public class AuthController {
         return ResponseEntity.ok(authService.reissue(tokenRequestDto));
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public ResponseEntity<ResultDto<Member>> getUserDetails(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         // 사용자 정보를 기반으로 회원 정보를 조회하여 반환
@@ -97,6 +101,11 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/verifyNickname")
+    public ResponseEntity<Boolean> verifyNickname(@RequestBody String nickname){
+        log.info(nickname);
+        return ResponseEntity.ok().body(memberService.isNicknameOk(nickname));
+    }
 
 
     private static final String REDIRECT_URI = "http://localhost:3000/login/moreInfo";
@@ -127,5 +136,7 @@ public class AuthController {
                 log.info("principal is null");
             }
     }
+
+
 
 }

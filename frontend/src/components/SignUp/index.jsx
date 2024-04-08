@@ -20,10 +20,7 @@ const SignUpModal = (props) => {
   const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
-  const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");
@@ -49,23 +46,6 @@ const [phoneError, setPhoneError] = useState('');
 const [birthDateError, setBirthDateError] = useState('');
 const [genderError, setGenderError] = useState('');
 
-// 각 입력 필드의 유효성 검사 함수
-const validateName = (name) => name.trim() !== '';
-const validateNickname = (nickname) => nickname.trim() !== '';
-const validatePhone = (phone) => /^\d{10,11}$/.test(phone); // 예시: 한국 전화번호 형식
-const validateBirthDate = (birthDate) => birthDate.trim() !== '';
-const validateGender = (gender) => ['male', 'female'].includes(gender);
-
-// 예시: 이름 입력 변경 핸들러
-const handleNameChange = (e) => {
-  const newName = e.target.value;
-  setName(newName);
-  if (!validateName(newName)) {
-    setNameError('이름을 입력해주세요.');
-  } else {
-    setNameError('');
-  }
-};
 
 // 회원가입 버튼 활성화 조건
 const canProceed = name && nickname && phoneNumber && birthDate && gender &&
@@ -74,7 +54,6 @@ const canProceed = name && nickname && phoneNumber && birthDate && gender &&
 // 전화번호 입력 핸들러
 const handlePhoneNumberChange = (event) => {
   setPhoneNumber(event.target.value);
-  // 전화번호 유효성 검사 로직 추가 (옵션)
 };
 
 const handleNicknameChange = (event) => {
@@ -86,23 +65,22 @@ const handleNicknameChange = (event) => {
 const verifyNickname = async () => {
   // 닉네임 인증 로직, 예를 들어 서버로 검증 요청을 보내고 응답을 처리
   try {
-    const response = await fetch('/path-to-nickname-verification', {
+    const response = await fetch('http://localhost:8080/auth/verifyNickname', {
       method: 'POST',
-      body: JSON.stringify({ nickname }),
+      body:  nickname,
       headers: {
         'Content-Type': 'application/json'
       },
     });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
+    
     const data = await response.json();
-    if (data.isAvailable) {
+    console.log(data);
+    if (!data) {
+      console.log('사용 가능한 닉네임입니다.');
       setIsNicknameValid(true);
       setNicknameError('');
     } else {
+      console.log('사용중인 닉네임입니다.');
       setIsNicknameValid(false);
       setNicknameError('사용중인 닉네임 입니다.');
     }
@@ -112,14 +90,10 @@ const verifyNickname = async () => {
   }
 };
 
-  
-
-
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   
-    // 기존의 유효성 검사 로직...
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
     const hasSpecialChar = /[*?]/.test(newPassword);
     const hasLowerCase = /[a-z]/.test(newPassword);
@@ -154,7 +128,6 @@ const validatePassword = () => {
 
 const completeSignUp = () => {
   if (!validatePassword()) {
-      // 조건을 충족하지 못한 경우 메시지 표시 로직
       toast.error("비밀번호 조건을 확인해주세요.");
       return;
   }
@@ -406,12 +379,7 @@ const validateEmail = (email) => {
               <S.InputLabel>이름</S.InputLabel>
               <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </S.InputGroup>
-            {isNicknameValid && nickname && (
-              <S.NickNameRight>사용가능한 닉네임 입니다.</S.NickNameRight>
-            )}
-            {!isNicknameValid && (
-              <S.CertiError>{nicknameError}</S.CertiError>
-            )}
+            
             <S.InputGroup>
               <S.InputNickname>닉네임</S.InputNickname>
               <S.TextInput2
@@ -421,6 +389,12 @@ const validateEmail = (email) => {
               />
               <S.NicknameButton onClick={verifyNickname}>중복 확인</S.NicknameButton>
             </S.InputGroup>
+            {isNicknameValid && nickname && (
+              <S.NickNameRight>사용가능한 닉네임 입니다.</S.NickNameRight>
+            )}
+            {!isNicknameValid && (
+              <S.CertiError>{nicknameError}</S.CertiError>
+            )}
             <S.InputGroup>
               <S.InputNumber type="number">전화번호</S.InputNumber>
               <S.TextInput
