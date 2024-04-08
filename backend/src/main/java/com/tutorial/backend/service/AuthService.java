@@ -53,7 +53,6 @@ public class AuthService {
     public TokenDto login(JoinForm loginForm) {
         // 1. Login ID/PW 를 기반으로 AuthenticationToken 생성
         UsernamePasswordAuthenticationToken authenticationToken = loginForm.toAuthentication();
-        log.info("들어옴");
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
         //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
         log.info(authenticationToken.toString());
@@ -77,7 +76,6 @@ public class AuthService {
     @Transactional
     public TokenDto socialLogin(String email,String provider) {
         // 1. 이메일을 기반으로 사용자 정보 조회
-        log.info("여기까진 옴");
         Optional<Member> member = memberRepository.findByMemberEmailAndMemberProvider(email, provider);
 
         log.info(member.toString());

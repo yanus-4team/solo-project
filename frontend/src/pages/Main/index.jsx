@@ -86,7 +86,7 @@ const Main = () => {
             headers: {
               'Content-Type': 'application/json',
               // 예를 들어, JWT 토큰을 헤더에 추가하는 방법
-              'Authorization': ` ${localAccessToken}` // jwtToken은 JWT 토큰 값
+              'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
             }
           })
           .then(response => {
