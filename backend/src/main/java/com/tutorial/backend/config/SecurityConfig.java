@@ -1,9 +1,11 @@
 package com.tutorial.backend.config;
 
 import com.tutorial.backend.entity.Authority;
+import com.tutorial.backend.handler.MyAuthenticationSuccessHandler;
 import com.tutorial.backend.jwt.JwtAccessDeniedHandler;
 import com.tutorial.backend.jwt.JwtAuthenticationEntryPoint;
 import com.tutorial.backend.jwt.TokenProvider;
+import com.tutorial.backend.service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @Configuration
@@ -26,8 +31,11 @@ public class SecurityConfig {
 
     private static final String FAVICON_PATH = "/favicon.ico";
     private static final String AUTH_PATH = "/auth/**";
+    private static final String OAUTH_PATH = "/oauth/**";
     private static final String MEMBER_PATH = "/member/**";
     private static final String ADMIN_PATH = "/admin/**";
+
+    private final OAuthService oAuthService;
 
 
 
@@ -45,8 +53,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-            // CSRF 설정 Disable
+        // CSRF 설정 Disable
         http
+                .cors()
+                .and()
+
                 .csrf().disable()
 
                 // exception handling 할 때 만든 클래스를 추가
@@ -69,6 +80,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_PATH).permitAll()
+                .antMatchers(OAUTH_PATH).permitAll()
                 .antMatchers(MEMBER_PATH).hasRole(Authority.USER.name())
                 .antMatchers(ADMIN_PATH).hasRole(Authority.USER.name())
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
@@ -78,8 +90,30 @@ public class SecurityConfig {
                 .apply(new JwtSecurityConfig(tokenProvider))
 
                 .and()
-                .cors();
+                .oauth2Login()
+//                .defaultSuccessUrl("/oauth/loginInfo", true)
+                .successHandler(new MyAuthenticationSuccessHandler())
+                .userInfoEndpoint()
+                .userService(oAuthService);
 
         return http.build();
     }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
+
+
+
+
 }

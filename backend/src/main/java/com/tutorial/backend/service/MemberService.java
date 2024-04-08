@@ -10,6 +10,7 @@ public interface MemberService {
 
     Member saveMember(JoinForm loginForm);
 
+    Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider);
     default Member toEntity(JoinForm loginForm){
         return Member.builder().memberEmail(loginForm.getEmail())
                 .memberPassword(loginForm.getPassword())
