@@ -152,11 +152,17 @@ export const PoiImage = styled.img`
     height: 30px;
 `;
 
-
-export const Test = styled.img`
+export const LogoContainer=styled.div`
     position: absolute;
     width: 40px;
     z-index: 2;
-    top: 10px;
-    left: 10px;
+    top: 44px;
+    left: 20px;
 `
+// export const Test = styled.img`
+//     position: absolute;
+//     width: 40px;
+//     z-index: 2;
+//     top: 10px;
+//     left: 10px;
+// `
