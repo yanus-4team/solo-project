@@ -136,13 +136,14 @@ const Main = () => {
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
                 </S.CurrentLocationBtn>
             )}
-            <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
-                <S.PoiToggleBtn onClick={togglePoiMenu}>
-                    <S.PoiImage src={PoiImage} alt="POI" />
-                </S.PoiToggleBtn>
-            </S.PoiToggleBtnBox>
-            <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
-            
+            <S.TapContainer>
+                <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
+                    <S.PoiToggleBtn onClick={togglePoiMenu}>
+                        <S.PoiImage src={PoiImage} alt="POI" />
+                    </S.PoiToggleBtn>
+                </S.PoiToggleBtnBox>
+                <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
+            </S.TapContainer>
 
         </S.MapContainer>
     )
