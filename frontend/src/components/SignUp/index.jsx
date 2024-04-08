@@ -19,10 +19,7 @@ const SignUpModal = (props) => {
   const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
-  const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");
@@ -400,12 +397,7 @@ const validateEmail = (email) => {
               <S.InputLabel>이름</S.InputLabel>
               <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </S.InputGroup>
-            {isNicknameValid && nickname && (
-              <S.Nicknameright>사용가능한 닉네임 입니다.</S.Nicknameright>
-            )}
-            {!isNicknameValid && (
-              <S.CertiError>{nicknameError}</S.CertiError>
-            )}
+           
             <S.InputGroup>
               <S.InputNickname>닉네임</S.InputNickname>
               <S.TextInput2
@@ -415,10 +407,16 @@ const validateEmail = (email) => {
               />
               <S.NicknameButton onClick={verifyNickname}>중복 확인</S.NicknameButton>
             </S.InputGroup>
+            {isNicknameValid && nickname && (
+              <S.NickNameRight>사용가능한 닉네임 입니다.</S.NickNameRight>
+            )}
+            {!isNicknameValid && (
+              <S.CertiError>{nicknameError}</S.CertiError>
+            )}
             <S.InputGroup>
               <S.InputNumber>전화번호</S.InputNumber>
               <S.TextInput
-                type="tel" // 전화번호에 맞는 input 타입 설정
+                type="number" // 전화번호에 맞는 input 타입 설정
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
                 // 필요하다면 전화번호 형식을 지정하는 pattern 속성 사용
@@ -472,4 +470,3 @@ const validateEmail = (email) => {
 };
 
 export default SignUpModal;
-

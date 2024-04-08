@@ -5,7 +5,6 @@ import * as S from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import SignUpModal from '../../components/SignUp';
-import { toast } from 'react-toastify';
 import Logo from "../../components/icons/Logo";
 function LoginPage() {
     const navigate = useNavigate();
@@ -13,6 +12,10 @@ function LoginPage() {
     const { getCookies } = useCookieManager();
     const [initialCheckDone, setInitialCheckDone] = useState(false);
 
+    const NAVER_LOGIN_URL= "http://localhost:8080/oauth2/authorization/naver"; 
+    const KAKAO_LOGIN_URL= "http://localhost:8080/oauth2/authorization/kakao"; 
+    const GOOGLE_LOGIN_URL= "http://localhost:8080/oauth2/authorization/google"; 
+    
     // 페이지 로딩 시 쿠키 확인하여 로그인 여부 파악 후 자동으로 이동
     useEffect(() => {
         // 이미 초기 체크가 완료되었다면, 이후의 변경사항에는 반응하지 않음
@@ -71,10 +74,13 @@ function LoginPage() {
     const handleLoginBtnClick = (index) => {
         if (oauthLogin[index].id === 1) { // 이메일로 로그인하기 버튼일 때만 showModal 함수 호출
             showModalFn();
-        }else{
-            toast("준비중인 서비스입니다.");
-    };
-    
+        }else if(oauthLogin[index].id === 2){
+            window.location.href = NAVER_LOGIN_URL;
+        }else if(oauthLogin[index].id === 3){
+            window.location.href = KAKAO_LOGIN_URL;
+        }else if(oauthLogin[index].id === 4){
+            window.location.href = GOOGLE_LOGIN_URL;
+        }
     };
     
 

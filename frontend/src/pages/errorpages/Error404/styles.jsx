@@ -1,44 +1,45 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 
 export const Container = styled.div`
     display: flex;
-    flex-direction: column; // 추가된 코드
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f1f1f1;
+    background-color: #e7deb5;
 `;
 export const ErrorMessage = styled.h1`
-    font-size: 36px;
-    color: #ff0000;
+    font-size: 40px;
+    color: #d56810;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     display: block;
-    font-size: 36px;
-    color: #ff0000;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 export const ErrorCode = styled.h1`
+    font-family: 'TTLaundryGothicB';
     display: block;
-    font-size: 36px;
-    color: #ff0000;
+    margin:0;
+    font-size: 140px;
+    color: #4c95b9;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-export const GoMainPage = styled(Link)`
-    display: block;
-    font-size: 36px;
-    color: #ff0000;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    text-decoration: none;
+
+export const Image = styled.img`
+    width: 400px;
+    margin-bottom: 20px;
+`;  
+
+export const GoMainPage = styled.button`
+    font-size: 20px;
+    margin-top: 20px;
+    color: #dc7520;
+    border-radius: 50px;
+    padding: 10px 20px;
+    background-color: #eeba6b;
     &:hover {
-        color: #ff0000;
-        text-decoration: underline;
+        filter: brightness(0.8);
     }
 `;
