@@ -2,6 +2,7 @@ package com.tutorial.backend.entity;
 
 import lombok.*;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String memberEmail;
 
     private String memberPassword;

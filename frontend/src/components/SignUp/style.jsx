@@ -8,11 +8,7 @@ const slideDown = keyframes`
   }
   100% {
     opacity: 1;
-<<<<<<< HEAD
-    max-height: 540px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
-=======
     max-height: 500px; /* 충분히 커버할 수 있는 최대 높이, 실제 내용에 맞게 조정 필요 */
->>>>>>> 9c5b93acb1f019e9d8db32bca46b761a9c8c33bb
     overflow: visible;
   }
 `;
@@ -157,8 +153,6 @@ export const CheckError = styled.h1`
 
 
 export const CertiRight = styled.h1`
-    position: absolute;
-    top: 246px;
     margin-top: 1rem;
     margin-bottom: 0rem;
     color: green;
@@ -260,6 +254,7 @@ export const CheckInput = styled.input`
         border:1px solid green;
         outline: none;
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
     }
 `;
 
@@ -442,6 +437,7 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
+
 export const PersonalInfoContainer = styled.div`
   width: 100%;
   animation: ${slideDown} 1s ease-out forwards;
@@ -450,7 +446,6 @@ export const PersonalInfoContainer = styled.div`
 
 export const InputGroup = styled.div`
   margin-bottom: 15px;
-  margin-top:10px
 `;
 
 export const InputLabel = styled.label`
@@ -556,6 +551,17 @@ export const SelectInput = styled.select`
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
 
     }
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 export const DateInput = styled.input`
