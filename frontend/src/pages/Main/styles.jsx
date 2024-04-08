@@ -152,17 +152,29 @@ export const PoiImage = styled.img`
     height: 30px;
 `;
 
+
 export const LogoContainer=styled.div`
     position: absolute;
     width: 40px;
     z-index: 2;
     top: 44px;
     left: 20px;
+    z-index: 101;
 `
-// export const Test = styled.img`
-//     position: absolute;
-//     width: 40px;
-//     z-index: 2;
-//     top: 10px;
-//     left: 10px;
-// `
+
+export const TapContainer = styled.div`
+    position: absolute;
+    width: 77px;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 44px; /* 로고와 위의 간격 */
+    padding-bottom: 20px; /* 하단 여백 조정 */
+    top: 0;
+    left: 0;
+    z-index: 100; /* 기존 스타일에 없던 z-index 추가 */
+    border-right: 1px solid black;
+`
