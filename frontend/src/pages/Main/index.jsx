@@ -116,8 +116,7 @@ const Main = () => {
         }
     };
 
-
-
+    
     return (
         <S.MapContainer id="map">
             {/* <S.Test src={Logo} alt="로고" /> */}
@@ -141,6 +140,7 @@ const Main = () => {
                 <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
                     <S.PoiToggleBtn onClick={togglePoiMenu}>
                         <S.PoiImage src={PoiImage} alt="POI" />
+                        <S.PoiText>필터</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
                 <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
