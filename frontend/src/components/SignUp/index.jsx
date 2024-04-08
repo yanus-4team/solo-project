@@ -19,10 +19,7 @@ const SignUpModal = (props) => {
   const [isCertificationWrong, setIsCertificationWrong] = useState(false); // 새로운 상태 추가
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isSpecialCharValid, setIsSpecialCharValid] = useState(true);
   const [isCodeExpired, setIsCodeExpired] = useState(true);
-  const passwordLengthRegex = /^[A-Za-z\d*?]{8,15}$/; // 길이 8~15 사이
-  const passwordSpecialCharRegex = /^[A-Za-z\d*?]{8,15}$/; // 특수 문자는 * 또는 ?만 허용
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const [passwordError, setPasswordError] = useState("비밀번호를 입력하십시오.");

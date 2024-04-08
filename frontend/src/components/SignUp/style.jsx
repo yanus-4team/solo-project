@@ -558,17 +558,6 @@ export const SelectInput = styled.select`
     }
 `;
 
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 export const DateInput = styled.input`
   width: 100%;
   padding: 10px;

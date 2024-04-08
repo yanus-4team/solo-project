@@ -29,6 +29,10 @@ public class MemberServiceImpl implements MemberService{
         return toEntity(loginForm);
     }
 
+    @Override
+    public Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider) {
+        return memberRepository.findByMemberEmailAndMemberProvider(memberEmail, memberProvider);
+    }
 
 
 }

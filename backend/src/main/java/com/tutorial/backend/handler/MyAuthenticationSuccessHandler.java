@@ -2,7 +2,7 @@ package com.tutorial.backend.handler;
 
 import com.tutorial.backend.controller.dto.TokenDto;
 import com.tutorial.backend.service.AuthService;
-import lombok.RequiredArgsConstructor;
+import com.tutorial.backend.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,10 +21,9 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private static final String REDIRECT_URI = "http://localhost:3000/login/moreInfo";
+    private static final String REDIRECT_URI = "/oauth/loginInfo";
 
-    @Autowired
-    private AuthService authService;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -34,16 +33,12 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
 
             OAuth2User oAuth2User = (OAuth2User) principal;
             String email = oAuth2User.getAttribute("email");
-            String provider = (String) oAuth2User.getAttribute("provider");
-            log.info("");
-            TokenDto tokenDto = authService.socialLogin(email,provider); // AuthService를 통해 소셜 로그인 처리
-//            String accessToken = tokenDto.getAccessToken();
-//            String refreshToken = tokenDto.getRefreshToken();
+            String provider = oAuth2User.getAttribute("provider");
+            log.info("email : " + email + ", provider : " + provider);
             System.out.println("SuccessHandler oAuth2User: " + oAuth2User);
-//
             String redirectUrl = UriComponentsBuilder.fromUriString(REDIRECT_URI)
-//                    .queryParam("accessToken", accessToken)
-//                    .queryParam("refreshToken", refreshToken)
+                    .queryParam("email", email)
+                    .queryParam("provider", provider)
                     .build()
                     .encode(StandardCharsets.UTF_8)
                     .toUriString();

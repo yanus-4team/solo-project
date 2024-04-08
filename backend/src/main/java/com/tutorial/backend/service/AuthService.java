@@ -77,7 +77,6 @@ public class AuthService {
     @Transactional
     public TokenDto socialLogin(String email,String provider) {
         // 1. 이메일을 기반으로 사용자 정보 조회
-         try{
         log.info("여기까진 옴");
         Optional<Member> member = memberRepository.findByMemberEmailAndMemberProvider(email, provider);
 
@@ -103,14 +102,6 @@ public class AuthService {
 
         // 6. 토큰 발급
         return tokenDto;
-    }catch(NullPointerException e){
-
-
-             Authentication authentication = new UsernamePasswordAuthenticationToken(null, null, null);
-
-             // 4. 인증 정보를 기반으로 JWT 토큰 생성
-             return tokenProvider.generateTokenDto(authentication);
-         }
     }
 
     @Transactional
