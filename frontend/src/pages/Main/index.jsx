@@ -35,6 +35,10 @@ const Main = () => {
         setIsPoiOpen(false); // 메뉴 닫기
     };
 
+    const SearchPOIbtn=()=>{
+        
+    }
+
     useEffect(() => {
         const geoLocation = () => {
             if (navigator.geolocation) {
