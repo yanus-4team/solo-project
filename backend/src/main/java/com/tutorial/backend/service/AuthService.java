@@ -4,11 +4,12 @@ import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.controller.dto.MemberResponseDto;
 import com.tutorial.backend.controller.dto.TokenDto;
 import com.tutorial.backend.controller.dto.TokenRequestDto;
-import com.tutorial.backend.repository.MemberRepository;
-import com.tutorial.backend.repository.RefreshTokenRepository;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.entity.RefreshToken;
+import com.tutorial.backend.entity.StatusType;
 import com.tutorial.backend.jwt.TokenProvider;
+import com.tutorial.backend.repository.MemberRepository;
+import com.tutorial.backend.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +45,7 @@ public class AuthService {
         }
 
         Member member = loginForm.toMember(passwordEncoder);
+        member.setStatus(StatusType.ABLE);
         return MemberResponseDto.of(memberRepository.save(member));
     }
 
@@ -69,6 +71,36 @@ public class AuthService {
         refreshTokenRepository.save(refreshToken);
 
         // 5. 토큰 발급
+        return tokenDto;
+    }
+
+    @Transactional
+    public TokenDto socialLogin(String email,String provider) {
+        // 1. 이메일을 기반으로 사용자 정보 조회
+        log.info("여기까진 옴");
+        Optional<Member> member = memberRepository.findByMemberEmailAndMemberProvider(email, provider);
+
+        log.info(member.toString());
+        // 2. 사용자 정보가 없으면 예외 처리
+        if (member.isEmpty()) {
+            throw new RuntimeException("등록되지 않은 사용자입니다.");
+        }
+
+        // 3. 사용자 정보를 기반으로 Authentication 객체 생성
+        Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, null);
+
+        // 4. 인증 정보를 기반으로 JWT 토큰 생성
+        TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
+
+        // 5. RefreshToken 저장
+        RefreshToken refreshToken = RefreshToken.builder()
+                .key(email) // 사용자의 이메일을 key로 사용합니다.
+                .value(tokenDto.getRefreshToken())
+                .build();
+
+        refreshTokenRepository.save(refreshToken);
+
+        // 6. 토큰 발급
         return tokenDto;
     }
 
@@ -104,3 +136,4 @@ public class AuthService {
 
 
 }
+

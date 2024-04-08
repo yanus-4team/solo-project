@@ -4,6 +4,7 @@ import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = false)
-public class MemberServiceImpl  implements MemberService{
+@Slf4j
+public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
 
@@ -26,5 +28,11 @@ public class MemberServiceImpl  implements MemberService{
         memberRepository.save(toEntity(loginForm));
         return toEntity(loginForm);
     }
+
+    @Override
+    public Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider) {
+        return memberRepository.findByMemberEmailAndMemberProvider(memberEmail, memberProvider);
+    }
+
 
 }

@@ -34,14 +34,25 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+//	oauth2.0용
+	implementation ("org.springframework.boot:spring-boot-starter-oauth2-client")
+
+
+//	DB
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'mysql:mysql-connector-java'
+
+// 	메일용
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+//	JWT용
 	compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
 	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
 	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 
 
-
+//	queryDSL 설정
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 
