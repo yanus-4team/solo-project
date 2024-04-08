@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import logOutIcon from "../../assets/logout-icon.png";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import ConfirmModal from "../ConfirmModal";
+import User from "../icons/User";
 
 function Menu({ isOpen, onClose }) {
     const [isLogin, setIsLogin] = useState(false);
@@ -41,12 +42,13 @@ function Menu({ isOpen, onClose }) {
         <S.Container className={`${isOpen ? "open": ""}`}>
             <S.CloseBtn src={closeIcon} onClick={handleClose} />
             <S.UserContainer>
-                <S.UserImage src={user} alt="User" />
+                {/* <S.UserImage src={user} alt="User" /> */}
+                <User alt="user" width="100px" height="100px" color="#6c757d"/>
             </S.UserContainer>
             <S.GoLogin to="/login">로그인을 해주세요</S.GoLogin>
-            <Link to="/myPage"><S.Text2>마이페이지</S.Text2></Link>
-            <S.Text2>방문 기록</S.Text2>
-            <S.Text2>내 리뷰</S.Text2>
+            <S.HoverBox><S.Text2>마이페이지</S.Text2></S.HoverBox>
+            <S.HoverBox><S.GoForm to="/myPage">방문 기록</S.GoForm></S.HoverBox>
+            <S.HoverBox><S.Text2>내 리뷰</S.Text2></S.HoverBox>
             {isLogin && (
                 <S.LogOutContainer onClick={handleLogOut}>
                     <S.LogOutIcon src={logOutIcon} />

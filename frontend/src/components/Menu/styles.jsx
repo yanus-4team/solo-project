@@ -31,9 +31,17 @@ export const UserImage = styled.img`
     height: 100px;
 `;
 
+export const HoverBox=styled.div`
+    padding:8px 0;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+`
+
 export const GoLogin = styled(Link)`
     text-align: center;
-    margin-top: 265px;
+    margin-top: 260px;
+    margin-bottom: 16px;
     display: block;
     text-decoration: none;
     cursor: pointer;
@@ -42,8 +50,18 @@ export const GoLogin = styled(Link)`
 
 export const Text2 = styled.div`
     text-align: center;
-    margin-top: 20px;
     color: black;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+`;
+
+export const GoForm = styled(Link)`
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
 `;
 
 export const CloseBtn = styled.img`
