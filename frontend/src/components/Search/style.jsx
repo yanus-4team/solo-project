@@ -21,7 +21,7 @@ export const SearchInput = styled.input`
     padding: 10px;
     font-size: 20px;
     border-radius: 10px;
-    border: 3px solid #36454F;
+    border: 3px solid #495057;
     width: 400px;
     background-image: url(${props => props.icon});
     background-size: 25px 25px;

@@ -8,8 +8,9 @@ import SearchIcon from "../../components/Search";
 import { useCookieManager } from "../../storage/cookieManager";
 import PoiImage from "../../assets/pin.png"
 import PoiMenu from '../../components/PoiMenu';
-import Logo from "../../assets/main_logo.png"
+import Logo from "../../components/icons/Logo";
 const { kakao } = window;
+
 
 const Main = () => {
     const [isOpen, setIsOpen ] = useState(false);
@@ -119,7 +120,10 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
-            <S.Test src={Logo} alt="로고" />
+            {/* <S.Test src={Logo} alt="로고" /> */}
+            <S.LogoContainer>
+                <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+            </S.LogoContainer>
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
