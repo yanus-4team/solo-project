@@ -117,7 +117,6 @@ const Main = () => {
     };
 
 
-
     return (
         <S.MapContainer id="map">
             {/* <S.Test src={Logo} alt="로고" /> */}
