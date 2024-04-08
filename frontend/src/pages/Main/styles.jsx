@@ -82,21 +82,19 @@ export const ModalBackground = styled.div`
 
 export const PoiToggleBtnBox = styled.div`
     position: absolute;
-    width: fit-content;
-    height: fit-content;
+    width: 70px;
+    height: 60px;
     z-index: 5;
-    left: 15px;
+    left: 0px;
     top: 110px;
-    background-color: #fff;
-    border-radius: 23px 23px 23px 23px;
-    transition: left 0.5s ease;
+    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')}; /* isActive 상태에 따라 배경색 변경 */
+    border-radius: 0px 0px 0px 0px;
+    transition: background-color 0.5s ease; /* 배경색 변경에 대한 transition 추가 */
     flex-direction: column;
     display:flex;
     padding:8px 3px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
-    &:hover {
-        ${focusStyles}
-    }
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0);
+    cursor: pointer; /* 클릭 가능한 요소로 설정 */
 `;
 
 export const PoiToggleBtn = styled.button`
@@ -106,15 +104,35 @@ export const PoiToggleBtn = styled.button`
 export const PoiImage = styled.img`
     width: 30px;
     display: block;
-
     height: 30px;
+    margin-left: 15px;
+    margin-top: 8px;
 `;
 
 
-export const Test = styled.img`
+export const LogoContainer=styled.div`
     position: absolute;
     width: 40px;
-    z-index: 2;
-    top: 10px;
-    left: 10px;
+`
+
+export const TapContainer = styled.div`
+    position: absolute;
+    width: 77px;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 44px; /* 로고와 위의 간격 */
+    padding-bottom: 20px; /* 하단 여백 조정 */
+    top: 0;
+    left: 0;
+    z-index: 100; /* 기존 스타일에 없던 z-index 추가 */
+    border-right: 1px solid black;
+`
+
+export const PoiText = styled.div`
+    font-size: 14px;
+    margin-left: 2px;
 `
