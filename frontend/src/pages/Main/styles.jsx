@@ -121,3 +121,42 @@ export const ModalBackground = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 7; 
 `;
+
+export const PoiToggleBtnBox = styled.div`
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    z-index: 5;
+    left: 15px;
+    top: 110px;
+    background-color: #fff;
+    border-radius: 23px 23px 23px 23px;
+    transition: left 0.5s ease;
+    flex-direction: column;
+    display:flex;
+    padding:8px 3px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+    &:hover {
+        ${focusStyles}
+    }
+`;
+
+export const PoiToggleBtn = styled.button`
+    background-color: transparent;
+`;
+
+export const PoiImage = styled.img`
+    width: 30px;
+    display: block;
+
+    height: 30px;
+`;
+
+
+export const Test = styled.img`
+    position: absolute;
+    width: 40px;
+    z-index: 2;
+    top: 10px;
+    left: 10px;
+`
