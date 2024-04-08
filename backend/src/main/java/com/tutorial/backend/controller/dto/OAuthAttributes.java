@@ -1,84 +1,51 @@
 package com.tutorial.backend.controller.dto;
 
-
-import com.tutorial.backend.entity.Authority;
-import com.tutorial.backend.entity.Member;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
+import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;
 
-@Getter
-@Builder
-@Slf4j
-@RequiredArgsConstructor
-public class OAuthAttributes {
-    private final Map<String , Object> attributes;
-    private final String nameAttributeKey;
-    private final String name;
-    private final String email;
-    private final String mobile;
+public enum OAuthAttributes {
+    GOOGLE("google", (attributes) -> {
+        MemberProfile memberProfile = new MemberProfile();
+        memberProfile.setName((String) attributes.get("name"));
+        memberProfile.setEmail((String) attributes.get("email"));
+        return memberProfile;
+    }),
 
-    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
-//        userNameAttributeName 은 yml에 등록되어있는 user-name-attribute 값이다.
-        log.info("================={}",userNameAttributeName);
+    NAVER("naver", (attributes) -> {
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        System.out.println(response);
+        MemberProfile memberProfile = new MemberProfile();
+        memberProfile.setName((String) response.get("name"));
+        memberProfile.setEmail(((String) response.get("email")));
+        return memberProfile;
+    }),
 
-//      registrationId는 네이버 로그인일 경우 naver 이고, 카카오 로그인일 경우 kakao이다.
-        log.info("================{}",registrationId);
+    KAKAO("kakao", (attributes) -> {
+        // kakao는 kakao_account에 유저정보가 있다. (email)
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        // kakao_account안에 또 profile이라는 JSON객체가 있다. (nickname, profile_image)
+        Map<String, Object> kakaoProfile = (Map<String, Object>)kakaoAccount.get("profile");
 
-        if("naver".equals(registrationId)){
-            return ofNaver(userNameAttributeName, attributes);
-        }else if("google".equals(registrationId)){
-            return ofGoogle(userNameAttributeName, attributes);
-        }
-        return ofKaKao(userNameAttributeName, attributes);
+        MemberProfile memberProfile = new MemberProfile();
+        memberProfile.setName((String) kakaoProfile.get("nickname"));
+        memberProfile.setEmail((String) kakaoAccount.get("email"));
+        return memberProfile;
+    });
 
-    }
-    private static OAuthAttributes ofKaKao(String userNameAttributeName, Map<String, Object> attributes){
-        Map<String, Object> kaKaoAccount = (Map<String ,Object>)attributes.get(userNameAttributeName);
-        log.info("***************************");
-        log.info(kaKaoAccount.toString());
-        return OAuthAttributes.builder()
-                .email((String)kaKaoAccount.get("email"))
-                .name((String) ((Map)kaKaoAccount.get("profile")).get("nickname"))
-                .mobile((String) ((Map)kaKaoAccount.get("profile")).get("thumbnail_image_url"))
-                .nameAttributeKey(userNameAttributeName)
-                .attributes(attributes)
-                .build();
-    }
-    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes){
+    private final String registrationId;
+    private final Function<Map<String, Object>, MemberProfile> of;
 
-        log.info("***************************");
-        log.info(attributes.toString());
-        return OAuthAttributes.builder()
-                .email((String)attributes.get("email"))
-                .name((String)(attributes.get("name")))
-                .mobile(null)
-                .nameAttributeKey(userNameAttributeName)
-                .attributes(attributes)
-                .build();
-    }
-    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes){
-        Map<String, Object> naverAccount = (Map<String ,Object>)attributes.get(userNameAttributeName);
-        log.info("***************************");
-        log.info(naverAccount.toString());
-        return OAuthAttributes.builder()
-                .email((String)naverAccount.get("email"))
-                .name((String)naverAccount.get("name"))
-                .mobile((String)naverAccount.get("mobile"))
-                .nameAttributeKey(userNameAttributeName)
-                .attributes(attributes)
-                .build();
+    OAuthAttributes(String registrationId, Function<Map<String, Object>, MemberProfile> of) {
+        this.registrationId = registrationId;
+        this.of = of;
     }
 
-    public Member toEntity(){
-        return Member.builder()
-                .memberName(name)
-                .memberEmail(email)
-                .memberPhone(mobile)
-                .authority(Authority.USER)
-                .build();
+    public static MemberProfile extract(String registrationId, Map<String, Object> attributes) {
+        return Arrays.stream(values())
+                .filter(provider -> registrationId.equals(provider.registrationId))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new)
+                .of.apply(attributes);
     }
 }

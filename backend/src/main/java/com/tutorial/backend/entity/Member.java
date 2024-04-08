@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "tbl_member")
 @Entity
 public class Member {
@@ -111,5 +111,9 @@ public class Member {
     }
 
 
-
+    public Member update(String name, String email) {
+        this.memberName = name;
+        this.memberEmail = email;
+        return this;
+    }
 }

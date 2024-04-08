@@ -18,22 +18,31 @@ export const TopContainer = styled.div`
 
 export const TopDescription = styled.div`
     text-align: left;
-    color: var(--primary-color);
+    /* color: var(--primary-color); */
+    color: transparent;
+    background: linear-gradient(to right,#052c65,#92c5fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 `
 export const Welcome = styled.h1`
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 5px;
+
 `
 export const Underline = styled.div`
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background-image: linear-gradient(to right, #052c65,#92c5fe);
     height: 4px;
     width: 100%;
+    margin:12px 0;
 `
 export const Text = styled.p`
     margin-top: 5px;
     font-weight: bold;
     font-size: 30px;
+    word-spacing: 2px;
+    line-height: 40px;
 `
 
 export const MainLogo = styled.svg`
