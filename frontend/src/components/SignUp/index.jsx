@@ -43,6 +43,33 @@ const [nicknameError, setNicknameError] = useState('');
 
 const [phoneNumber, setPhoneNumber] = useState('');
 
+const [nameError, setNameError] = useState('');
+const [phoneError, setPhoneError] = useState('');
+const [birthDateError, setBirthDateError] = useState('');
+const [genderError, setGenderError] = useState('');
+
+// 각 입력 필드의 유효성 검사 함수
+const validateName = (name) => name.trim() !== '';
+const validateNickname = (nickname) => nickname.trim() !== '';
+const validatePhone = (phone) => /^\d{10,11}$/.test(phone); // 예시: 한국 전화번호 형식
+const validateBirthDate = (birthDate) => birthDate.trim() !== '';
+const validateGender = (gender) => ['male', 'female'].includes(gender);
+
+// 예시: 이름 입력 변경 핸들러
+const handleNameChange = (e) => {
+  const newName = e.target.value;
+  setName(newName);
+  if (!validateName(newName)) {
+    setNameError('이름을 입력해주세요.');
+  } else {
+    setNameError('');
+  }
+};
+
+// 회원가입 버튼 활성화 조건
+const canProceed = name && nickname && phoneNumber && birthDate && gender &&
+                    !nameError && !nicknameError && !phoneError && !birthDateError && !genderError;
+
 // 전화번호 입력 핸들러
 const handlePhoneNumberChange = (event) => {
   setPhoneNumber(event.target.value);
@@ -386,7 +413,7 @@ const validateEmail = (email) => {
                 value={nickname}
                 onChange={handleNicknameChange}
               />
-              <S.SignButton2 onClick={verifyNickname}>중복 확인</S.SignButton2>
+              <S.NicknameButton onClick={verifyNickname}>중복 확인</S.NicknameButton>
             </S.InputGroup>
             <S.InputGroup>
               <S.InputNumber>전화번호</S.InputNumber>
@@ -396,7 +423,8 @@ const validateEmail = (email) => {
                 onChange={handlePhoneNumberChange}
                 // 필요하다면 전화번호 형식을 지정하는 pattern 속성 사용
                 // pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                placeholder="010-1234-5678" // 사용자에게 입력 형식을 알려줄 수 있는 플레이스홀더 추가
+                pattern="[0-9]{3}[0-9]{4}[0-9]{4}"
+                placeholder="01012345678" // 사용자에게 입력 형식을 알려줄 수 있는 플레이스홀더 추가
               />
             </S.InputGroup>
             <S.InputGroup>
@@ -433,7 +461,7 @@ const validateEmail = (email) => {
                   <S.TitleCheck>비밀번호 확인</S.TitleCheck>
                   <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
                   {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-                  <S.SignButton onClick={handleSubmit}>회원가입</S.SignButton>
+                  <S.SignButton onClick={handleSubmit} disabled={!canProceed}>회원가입</S.SignButton>
               </S.BottomContainer>
             )}
           </S.PersonalInfoContainer>
