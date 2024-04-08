@@ -16,7 +16,6 @@ function PoiMenu({ isPoiOpen, onClose }) {
 
   return (
     <S.PoiContainer className={`${isPoiOpen ? "open" : ""}`}>
-      <S.CloseBtn src={closeIcon} onClick={onClose} />
       {/* POI 관련 정보를 여기에 표시 */}
       <S.PoiContent>
         <S.Title>
@@ -33,6 +32,9 @@ function PoiMenu({ isPoiOpen, onClose }) {
         </S.MemberContainer>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
       </S.PoiContent>
+      <S.ComplectButton>
+        적용하기
+      </S.ComplectButton>
     </S.PoiContainer>
   );
 }
