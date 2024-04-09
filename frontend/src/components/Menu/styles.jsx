@@ -53,9 +53,9 @@ export const CloseBtn = styled.img`
     right:10px;
 `;
 export const LogOutContainer = styled.div`
-position: absolute;
-bottom: 50px;
-left: 70px;
+    position: absolute;
+    bottom: 50px;
+    left: 70px;
     display: flex;
     justify-content: center;
     align-items: center;

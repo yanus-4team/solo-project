@@ -44,7 +44,7 @@ function Menu({ isOpen, onClose }) {
               });
         }
         
-    }, [getCookies]);
+    }, [getCookies.accessToken, getCookies.refreshToken, getCookies.accessTokenExpiresIn]);
 
     const handleClose = () => {
         onClose();
