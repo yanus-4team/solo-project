@@ -29,11 +29,21 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         const placeData=result.split("_")
         const placeName=placeData[0]
         const placeAddress=placeData[1]
-        const latitude=placeData[2]
-        const longitude=placeData[3]
+        const placeRoadAddress=placeData[2]
+        const latitude=placeData[3]
+        const longitude=placeData[4]
 
-        searchPlaceResult(placeData);
-        // showSearchModalClick(false);
+        // 백엔드 전송 데이터
+        const sendVisitedData={
+            name:placeName,
+            latitude:latitude,
+            longitude:longitude,
+            roadAddress:placeRoadAddress,
+            address:placeAddress
+        };
+
+        // 상위컴포넌트로 데이터 전달
+        searchPlaceResult(sendVisitedData);
     }
     const onSearchQInput=(event)=>{
         setSearchQ(event.target.value);
@@ -71,7 +81,7 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
                     {
                         isSearch && searchResult.map((value,index)=>
                         (
-                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}_${value.x}_${value.y}`}>
+                            <div key={index} onClick={placeSelect} className={`SearchPlaceResult ${value.place_name}_${value.address_name}_${value.road_address_name}_${value.x}_${value.y}`}>
                                 <p className="PlaceName">{value.place_name}</p>
                                 <p>지번주소 : {value.address_name}</p>
                                 <p>도로명 주소 : {value.road_address_name}</p>

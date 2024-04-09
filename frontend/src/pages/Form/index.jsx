@@ -121,21 +121,67 @@ function Form(){
         setShowSearchModal(childEvent);
     }
 
-    const handleSearchPlaceResult=(childResult)=>{
+    // const handleSearchPlaceResult=(childResult)=>{
+    //     const isExist=placeResultArr.some((place)=>
+    //         place[0]===childResult[0] && place[1] === childResult[1]);
+    //     if (isExist){
+    //         toast.error('이미 등록된 장소입니다.',{
+    //             autoClose:1500
+    //         });
+    //     }
+    //     if(!isExist){
+    //         setPlaceResultArr([...placeResultArr,childResult]);
+    //         toast.success('새로운 장소가 등록되었습니다.',{
+    //             autoClose:1500
+    //         })
+            
+    //     }
+    // }
+
+    const handleSearchPlaceResult=async(childResult)=>{
         const isExist=placeResultArr.some((place)=>
-            place[0]===childResult[0] && place[1] === childResult[1]);
-        if (isExist){
+            place[0]===childResult[0] && place[1]===childResult[1]);
+        
+        if(isExist){
             toast.error('이미 등록된 장소입니다.',{
                 autoClose:1500
             });
         }
-        if(!isExist){
-            setPlaceResultArr([...placeResultArr,childResult]);
-            toast.success('새로운 장소가 등록되었습니다.',{
-                autoClose:1500
-            })
+        else{
+            try{
+                const response=await fetch('http://localhost:8080/place/save',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        name:childResult[0],
+                        latitude:childResult[1],
+                        longitude:childResult[2],
+                        roadAddress:childResult[3],
+                        address:childResult[4]
+                    })
+                });
+                if(response.ok){
+                    const result=await response.json();
+                    console.log(result);
+                    setPlaceResultArr([...placeResultArr,childResult]);
+                    toast.success('새로운 장소가 등록되었습니다.',{
+                        autoClose:1500
+                    });
+                }
+                else{
+                    throw new Error('데이터 전송에 실패했습니다.');
+                }
+            }
+            catch(error){
+                console.error('데이터 전송 중 오류 발생:',error);
+                toast.error('데이터 전송 중 오류가 발생했습니다.',{
+                    autoClose:1500
+                });
+            }
         }
-    }
+    };
 
     return(
         <div className="FormWrapper">
@@ -178,7 +224,6 @@ function Form(){
                             </button>
                         ))}
                     </div>
-                    <button className="Submit" onClick={handleSubmit}>저장</button>
             </div>
             {
                  showSearchModal && <SearchPlaceModal showSearchModalClick={showSearchModalClick} searchPlaceResult={handleSearchPlaceResult}/>
