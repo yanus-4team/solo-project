@@ -143,7 +143,7 @@ export const CertiNickError = styled.h1`
 export const PasswordError1 = styled.h1`
     position: absolute;
     top: 36px;
-    margin-top: 1.2rem;
+    margin-top: 1.1rem;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -165,7 +165,7 @@ export const PasswordLengthError = styled.h1`
 export const CheckError = styled.h1`
     top: 115px;
     position: absolute;
-    margin-top: 0.7rem;
+    margin-top: 0.8rem;
     margin-bottom: -1rem;
     color: red;
     font-size: 0.7rem;
@@ -258,6 +258,7 @@ export const PasswordInput = styled.input`
     padding: 10px;
     margin-bottom: -1rem;
     border-radius: 4px;
+    margin-top: 30px;
     border: 1px solid #ccc;
     &:focus {
         border:1px solid green;
@@ -394,6 +395,7 @@ export const PasswordContainer = styled.div`
     align-items: flex-start;
     justify-content: center;
     width: 100%;
+    margin-top: 2px;
     background-color: #fff;
     animation: ${slideDown} 0.5s ease-out forwards; // 애니메이션 적용
 `;

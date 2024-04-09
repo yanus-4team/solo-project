@@ -428,14 +428,7 @@ const validateEmail = (email) => {
                   
                     <S.PasswordContainer>
                       <S.TitlePassword>비밀번호</S.TitlePassword>
-                      <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
-                        ?
-                        {tooltipVisible && (
-                          <S.Tooltip>
-                            비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다.
-                          </S.Tooltip>
-                        )}
-                      </S.QuestionMark>
+                      
                       <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange} />
                       {passwordError && <S.PasswordError1>{passwordError}</S.PasswordError1>}
                     </S.PasswordContainer>
