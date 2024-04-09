@@ -13,7 +13,7 @@ export const SearchContainer = styled.div`
     top: 40px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 5;
+    z-index: 2;
     width:fit-content;
     
 `;

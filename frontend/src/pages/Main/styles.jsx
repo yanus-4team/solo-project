@@ -108,7 +108,7 @@ export const PoiToggleBtnBox = styled.div`
 
 export const PoiToggleBtn = styled.button`
     background-color: transparent;
-    padding-top: 11px;
+    padding-top: 13px;
 `;
 
 export const PoiImage = styled.img`
@@ -140,7 +140,7 @@ export const CourseToggleBtnBox=styled.div`
 
 export const CourseToggleBtn=styled.button`
     background-color: transparent;
-    padding-top: 11px;
+    padding-top: 12px;
 `
 
 export const CourseImage = styled.img`
