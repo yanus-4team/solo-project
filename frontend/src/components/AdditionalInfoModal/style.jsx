@@ -32,11 +32,10 @@ export const ModalTitle = styled.h3`
     margin: 0;
 `;
 
-export const CloseButton = styled.button`
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
+export const Subtitle = styled.p`
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
 `;
 
 export const ModalBody = styled.div``;
