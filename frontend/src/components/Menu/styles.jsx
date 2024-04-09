@@ -23,8 +23,7 @@ export const UserContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    background-color: var(--sub-color1);
+    margin-left: 50px;
 `;
 
 export const UserImage = styled.img`
