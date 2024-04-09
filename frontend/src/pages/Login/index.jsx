@@ -1,16 +1,20 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import LoginBtn from "../../components/LoginBtn";
 import LoginModal from "../../components/LoginModal";
 import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import SignUpModal from '../../components/SignUp';
 import Logo from "../../components/icons/Logo";
+import AdditionalInfoModal from "../../components/AdditionalInfoModal";
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const { getCookies } = useCookieManager();
     const [initialCheckDone, setInitialCheckDone] = useState(false);
+    const [socialLogin, setSocialLogin] = useState(false);
+    
+    const location = useLocation();
 
     const NAVER_LOGIN_URL= "http://localhost:8080/oauth2/authorization/naver"; 
     const KAKAO_LOGIN_URL= "http://localhost:8080/oauth2/authorization/kakao"; 
@@ -26,10 +30,20 @@ function LoginPage() {
             }
             setInitialCheckDone(true); // 초기 체크 완료 상태를 true로 설정
         }
-    }, [navigate, getCookies, initialCheckDone]);
+        if (location.pathname === '/login/moreInfo') {
+            setSocialLogin(true);
+        } else {
+            setSocialLogin(false);
+        }
+        console.log(socialLogin);
+    }, [navigate, getCookies, initialCheckDone, location.pathname]);
 
     const handleNoLoginClick = () => {
         navigate("/");
+    }
+    
+    const handleCloseAdditionalInfoModal = () => {  
+        setSocialLogin(false);
     }
 
     const oauthLogin = [
@@ -114,6 +128,7 @@ function LoginPage() {
             {/* showModal 상태에 따라 LoginModal을 조건부 렌더링 */}
             {showModal && <LoginModal onClose={handleCloseModal} onSignUp={handleShowSignUp} />}
             {showSignUpModal && <SignUpModal onClose={() => setShowSignUpModal(false)} />}
+            {socialLogin && <AdditionalInfoModal onClose={handleCloseAdditionalInfoModal} />}
         </S.PageContainer>
     );
 }
