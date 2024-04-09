@@ -29,7 +29,8 @@ function AdditionalInfoModal({ onClose }) {
                 <S.ModalHeader>
                     <S.ModalTitle>추가 정보 입력</S.ModalTitle>
                 </S.ModalHeader>
-                    <S.ModalTitle>소셜로그인시 추가정보를 받아야해요</S.ModalTitle>
+                    <S.ModalText1>소셜로그인시</S.ModalText1>
+                    <S.ModalText2>추가정보를 받아야해요</S.ModalText2>
                 <S.ModalBody>
                     <S.EmailContainer>
                         <S.EmailLabel>이메일</S.EmailLabel>
@@ -43,6 +44,13 @@ function AdditionalInfoModal({ onClose }) {
 
                     <S.PasswordContainer>
                         <S.PasswordLabel>비밀번호</S.PasswordLabel>
+                        <S.PasswordInput
+                            type="password"
+                            name="password"
+                            value={additionalInfo.password || ""}
+                            onChange={handleChange}
+                        />
+                        <S.PasswordcheckLabel>비밀번호 확인</S.PasswordcheckLabel>
                         <S.PasswordInput
                             type="password"
                             name="password"

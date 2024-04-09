@@ -14,22 +14,43 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
+    min-height: 200px;
+    position: relative;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    width: 300px;
+    padding: 45px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const ModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 `;
 
 export const ModalTitle = styled.h3`
-    margin: 0;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: #333;
+    font-weight: normal;
+    font-size: 30px;
+`;
+
+export const ModalText1 = styled.h3`
+    margin-top: 0.5rem;
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
+`;
+
+export const ModalText2 = styled.h3`
+    margin-top: -1.2rem;
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
 `;
 
 export const CloseButton = styled.button`
@@ -63,6 +84,12 @@ export const PasswordContainer = styled.div`
 
 export const PasswordLabel = styled.label`
     display: block;
+    margin-bottom: 5px;
+`;
+
+export const PasswordcheckLabel = styled.label`
+    display: block;
+    margin-top: 10px;
     margin-bottom: 5px;
 `;
 
