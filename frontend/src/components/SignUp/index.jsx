@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import closeBtn from "../../assets/close-icon.svg";
@@ -76,11 +75,9 @@ const verifyNickname = async () => {
     const data = await response.json();
     console.log(data);
     if (!data) {
-      console.log('사용 가능한 닉네임입니다.');
       setIsNicknameValid(true);
       setNicknameError('');
     } else {
-      console.log('사용중인 닉네임입니다.');
       setIsNicknameValid(false);
       setNicknameError('사용중인 닉네임 입니다.');
     }
@@ -131,7 +128,6 @@ const completeSignUp = () => {
       toast.error("비밀번호 조건을 확인해주세요.");
       return;
   }
-  // 회원가입 처리 로직
   setIsSignUpComplete(true);
 };
 
@@ -165,7 +161,6 @@ const completeSignUp = () => {
           setEmailFormatError(false);
           setIsEmailSent(false); // 이메일 전송 실패로 설정
         } else {
-          const errorMessage = await response.text();
           toast.error("이메일 전송에 실패했습니다");
           // 형식 오류 초기화
           setEmailFormatError(false);

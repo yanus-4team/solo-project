@@ -1,8 +1,7 @@
 import React, { useState } from "react"; // useState import 추가
 import * as S from "./styles";
-import closeIcon from "../../assets/close-icon.svg";
 
-function PoiMenu({ isPoiOpen, onClose }) {
+function PoiMenu({ isPoiOpen }) {
   const [errorMessage, setErrorMessage] = useState(""); // useState 사용
 
   const handleChange = (e) => {
