@@ -68,7 +68,8 @@ function AdditionalInfoModal({ onClose }) {
         e.preventDefault();
         // 여기에서 추가 정보를 서버로 전송하거나 필요한 작업을 수행하세요
         // 예: API 호출, 상태 업데이트 등
-        console.log("추가 정보:", additionalInfo);
+        
+        
         onClose(); // 모달 닫기
     };
 
@@ -135,16 +136,16 @@ function AdditionalInfoModal({ onClose }) {
                         {passwordError && <S.ErrorMessage>{passwordError}</S.ErrorMessage>}
                     </S.PasswordContainer>
 
-                    <S.PasswordcheckContainer>
-                        <S.PasswordcheckLabel>비밀번호 확인</S.PasswordcheckLabel>
-                        <S.PasswordcheckInput
+                    <S.PasswordCheckContainer>
+                        <S.PasswordCheckLabel>비밀번호 확인</S.PasswordCheckLabel>
+                        <S.PasswordCheckInput
                             type="password"
                             name="confirmPassword"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                         />
                         {!isConfirmPasswordValid && <S.ErrorMessage>비밀번호가 일치하지 않습니다.</S.ErrorMessage>}
-                    </S.PasswordcheckContainer>
+                    </S.PasswordCheckContainer>
 
 
                     <S.NickNameContainer>
@@ -161,7 +162,7 @@ function AdditionalInfoModal({ onClose }) {
                             </S.NickNameCheckButton>
                         </S.NickNameInputContainer>
                         {isNicknameValid && isNicknameChecked && <S.SuccessMessage>사용가능한 닉네임 입니다.</S.SuccessMessage>}
-                        {!isNicknameValid && isNicknameChecked && <S.ErrornickMessage>{nicknameError}</S.ErrornickMessage>}
+                        {!isNicknameValid && isNicknameChecked && <S.ErrorNickMessage>{nicknameError}</S.ErrorNickMessage>}
                     </S.NickNameContainer>
 
                     <S.BirthContainer> 
