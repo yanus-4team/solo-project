@@ -87,7 +87,7 @@ function AdditionalInfoModal({ onClose }) {
 
         try {
             // 예시: 서버로부터 응답을 받는 부분
-            const response = await fetch('http://yourapi.com/signup', {
+            const response = await fetch('http://localhost:8080/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
