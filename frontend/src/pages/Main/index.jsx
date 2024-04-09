@@ -204,6 +204,12 @@ const Main = () => {
                         <S.PoiText>POI 찾기</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
+                <S.CourseToggleBtnBox {...(isactive ? { isactive: "true" } : {})} onClick={togglePoiMenu}>
+                    <S.CourseToggleBtn>
+                        <S.CourseImage src={PoiImage} alt="COURSE" />
+                        <S.CourseText>코스 찾기</S.CourseText>
+                    </S.CourseToggleBtn>
+                </S.CourseToggleBtnBox>
                 <S.MemberToggleBtnBox className={`${isOpen ? "open": ""}` }>
                     <S.MenuToggleBtn onClick={toggleMenu}>
                         <User alt="user" width="40px" height="40px" color="#6c757d"/>

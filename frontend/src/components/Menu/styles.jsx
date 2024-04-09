@@ -8,8 +8,7 @@ export const Container = styled.div`
     left: -200px;
     width: 200px;
     height: 100vh;
-    border-radius: 0px 30px 30px 0px;
-    /* background-color: #CDF0ED; */
+    border-radius: 0px 12px 12px 0px;
     background-color: #fff;
     transition: all 0.5s ease;
     z-index: 7;
@@ -68,6 +67,6 @@ export const LogOutIcon = styled.img`
     margin-right: 5px;
 `;
 export const LogOutText = styled.div`
-    color: #6c757d;
+    color: black;
 
 `;

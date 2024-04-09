@@ -95,12 +95,11 @@ export const LogoContainer=styled.div`
 export const PoiToggleBtnBox = styled.div`
     position: absolute;
     width : 76px;
-    height: 70px;
-    top: 133px;
+    height: 76px;
+    top: 132px;
     background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')};
     flex-direction: column;
     display:flex;
-   
     cursor: pointer;
     border: 1px solid #ced4da;
 `;
@@ -121,4 +120,33 @@ export const PoiText = styled.div`
     font-size: 13px;
     margin-top: 3px;
     text-align: center;
+`
+
+export const CourseToggleBtnBox=styled.div`
+    position: absolute;
+    width : 76px;
+    height: 76px;
+    top: 208px;
+    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')};
+    flex-direction: column;
+    display:flex;
+    cursor: pointer;
+    border: 1px solid #ced4da;
+`
+
+export const CourseToggleBtn=styled.button`
+    background-color: transparent;
+    padding-top: 11px;
+`
+
+export const CourseImage = styled.img`
+    width: 30px;
+    height:32px;
+    display: block;
+    margin:0 auto;
+`;
+
+export const CourseText = styled.div`
+    font-size: 13px;
+    margin-top: 3px;
 `

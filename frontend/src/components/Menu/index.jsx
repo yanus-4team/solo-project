@@ -90,7 +90,7 @@ function Menu({ isOpen, onClose }) {
             <S.Text2>내 리뷰</S.Text2>
             {isLogin && (
                 <S.LogOutContainer onClick={handleLogOut}>
-                    <S.LogOutIcon src={logOutIcon} />
+                    {/* <S.LogOutIcon src={logOutIcon} /> */}
                     <S.LogOutText>로그아웃</S.LogOutText>
                 </S.LogOutContainer>
             )}
