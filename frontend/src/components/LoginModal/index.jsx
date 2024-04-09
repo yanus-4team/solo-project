@@ -20,9 +20,7 @@ const LoginModal = (props) => {
     const handleCloseSignUpModal = () => {
         setIsSignUpModalVisible(false);
     };
-
-
-
+    
     const closeModal = () => {
         setIsModalOpen(false);
     };
