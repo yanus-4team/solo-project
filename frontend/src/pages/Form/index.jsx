@@ -28,6 +28,23 @@ function Form(){
 
 
     useEffect(() => {
+        const fetchPlaces = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/place/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch places');
+                }
+                const data = await response.json();
+                setPlaceResultArr(data);
+            }
+            catch (error) {
+                console.error("Error fetching places: ", error);
+            }
+        };
+        fetchPlaces();
+    }, []);
+
+    useEffect(() => {
         if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];

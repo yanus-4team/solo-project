@@ -45,22 +45,20 @@ export const MemberContainer = styled.div`
   margin-top:40px;
   display: flex;
   align-items: center; // 자식 요소들을 세로 중앙에 정렬
-  margin-bottom: 1rem; // 입력칸과 다음 요소 사이의 간격을 조정
-`;
-
+`
 export const Member = styled.div`
   color: #333;
   font-weight: normal;
-  margin-left: 20px;
+  margin-left: 28px;
   font-size: 17px;
   margin-top: -17px;
 `;
 
 export const MemberInput = styled.input`
-    width: 40px;
-    padding: 10px;
-    margin-left:30px;
-    margin-bottom: 10px;
+    width: 36px;
+    padding: 4px;
+    margin-left:15px;
+    margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right:20px;
@@ -76,8 +74,7 @@ export const ErrorMessage = styled.div`
     font-weight: normal;
     color: red;
     font-size: 0.7rem;
-    margin-top: -2rem;
-    margin-left: 1.6rem;
+    margin-left: 40px;
     position: absolute;
 `
 
@@ -85,7 +82,7 @@ export const ComplectButton = styled.button`
     width: 120px;
     padding: 10px;
     border: none;
-    margin: 0px 64px;
+    margin: 36px 64px;
     border-radius: 30px;
     background-color:  var(--primary-color);
     color: white;
