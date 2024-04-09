@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./style";
 import { toast } from "react-toastify";
+import SignComplete from "./SignComplete"
 
 function AdditionalInfoModal({ onClose }) {
     const [additionalInfo, setAdditionalInfo] = useState({});
@@ -18,8 +19,8 @@ function AdditionalInfoModal({ onClose }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const birth = useRef('');
-    const gender = useRef('');
+    const [birth, setBirth] = useState('');
+    const [gender, setGender] = useState('');
 
     const nickname = useRef('');
 
@@ -31,7 +32,17 @@ function AdditionalInfoModal({ onClose }) {
         // 여기에 닉네임 유효성 검사 로직 추가 (예: 길이 제한)
       };
 
-      
+      const handleBirthChange = (e) => {
+        setBirth(e.target.value);
+    };
+
+    const handleGenderChange = (e) => {
+        setGender(e.target.value);
+    };
+
+    const canSubmit = memberNickName && birth && gender && password && confirmPassword && isNicknameValid && isConfirmPasswordValid && !passwordError;
+
+    
 
 
     const verifyNickname = async () => {
@@ -64,13 +75,20 @@ function AdditionalInfoModal({ onClose }) {
         }
     };
 
+    const [isSignupComplete, setIsSignupComplete] = useState(false);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // 여기에서 추가 정보를 서버로 전송하거나 필요한 작업을 수행하세요
         // 예: API 호출, 상태 업데이트 등
         console.log("추가 정보:", additionalInfo);
         onClose(); // 모달 닫기
+        setIsSignupComplete(true); 
     };
+
+    if (isSignupComplete) {
+        return <SignComplete onClose={onClose} />; // SignComplete 컴포넌트를 렌더링하고, onClose 함수를 props로 전달합니다.
+    }
 
     const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
@@ -169,19 +187,20 @@ function AdditionalInfoModal({ onClose }) {
                         <S.BirthInput
                             type="date"
                             name="birth"
-                            ref={birth}
+                            value={birth}
+                            onChange={handleBirthChange}
                         />
                     </S.BirthContainer>
 
                     <S.GenderContainer>
                         <S.GenderLabel>성별</S.GenderLabel>
-                        <S.SelectInput ref={gender}>
+                        <S.SelectInput value={gender} onChange={handleGenderChange}>
                             <option value="">선택...</option>
                             <option value="남성">남성</option>
                             <option value="여성">여성</option>
                         </S.SelectInput>
                     </S.GenderContainer>
-                    <S.ConfirmButton onClick={handleSubmit}>완료</S.ConfirmButton>
+                    <S.ConfirmButton onClick={handleSubmit} disabled={!canSubmit}>완료</S.ConfirmButton>
 
                 </S.ModalBody>
             </S.ModalContent>
