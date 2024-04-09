@@ -7,7 +7,7 @@ export const PoiContainer = styled.div`
   width: 250px;
   height: 100vh;
   margin-left: 78px;
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 12px 12px 0px;
   background-color: #fff;
   transition: left 0.5s ease;
   z-index: 4;
