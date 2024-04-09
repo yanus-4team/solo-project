@@ -69,6 +69,18 @@ public class AuthController {
                     .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "가입 실패했어요"));
         }
     }
+    @PostMapping("/oauth-signup")
+    public ResponseEntity<ResultDto<String>> oauthSignUp(@RequestBody JoinForm joinForm) {
+        try {
+            log.info(joinForm.toString());
+            MemberResponseDto member = authService.signup(joinForm);
+            return ResponseEntity.ok().body(ResultDto.res(HttpStatus.OK, "회원가입을 축하합니다!"));
+        } catch (Exception e) {
+            // 예외가 발생한 경우 처리
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "가입 실패했어요"));
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody JoinForm joinForm) {

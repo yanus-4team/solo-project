@@ -7,6 +7,7 @@ import { useCookieManager } from '../../storage/cookieManager';
 import SignUpModal from '../../components/SignUp';
 import Logo from "../../components/icons/Logo";
 import AdditionalInfoModal from "../../components/AdditionalInfoModal";
+import SoloLetter from "../../assets/sololetter.jpg"
 function LoginPage() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -106,7 +107,7 @@ function LoginPage() {
                 </S.TopHeader>
                 <S.Wrapper>
                     <S.TopDescription >
-                        <S.Welcome>SO-LO</S.Welcome>
+                        <S.Welcome><S.SoloLetterLogo src={SoloLetter} /></S.Welcome>
                         <S.Underline className="underline"></S.Underline>
                         <S.Text1>매일 같은 길에서 벗어나</S.Text1>
                         <S.Text2>새로운 세상을 만나다</S.Text2>

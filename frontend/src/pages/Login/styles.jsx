@@ -58,14 +58,16 @@ export const TopDescription = styled.div`
 export const Welcome = styled.h1`
     font-size: 23px;
     font-weight: 500;
-    margin-top:0;
+    margin-top:20px;
     margin-bottom: 5px;
     text-align: center;
     font-weight: bold;
     /* font-size: 24px;
     color: #0056b3;
     margin-bottom: 10px; */
-
+`
+export const SoloLetterLogo=styled.img`
+    height: 60px;
 `
 export const Underline = styled.div`
     /* background-color: var(--primary-color); */
@@ -88,7 +90,7 @@ export const Underline = styled.div`
 export const Text1=styled.p`
     margin: 5px 0 0 0;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 28px;
     word-spacing: 2px;
     animation: ${moveFromLeft} 1.5s ease-in-out;
     text-align: center;
@@ -97,7 +99,7 @@ export const Text1=styled.p`
 export const Text2=styled.p`
     margin-top: 0px;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 28px;
     word-spacing: 2px;
     text-align: center;
     animation: ${moveFromRight} 1.5s ease-in-out;
