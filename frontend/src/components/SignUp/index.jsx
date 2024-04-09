@@ -423,29 +423,25 @@ const validateEmail = (email) => {
               </S.SelectInput>
             </S.InputGroup>
             {name && birthDate && gender && (
-              <S.BottomContainer visible="true">
-                {isCertificationCorrect && isAllInfoEnteredAndNicknameValid && (
-                  <>
-                    <S.PasswordContainer>
-                      <S.TitlePassword>비밀번호</S.TitlePassword>
-                      <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
-                        ?
-                        {tooltipVisible && (
-                          <S.Tooltip>
-                            비밀번호는 8~15자 사이, 특수문자와 대문자 소문자 영문이 포함되어야 합니다.
-                          </S.Tooltip>
-                        )}
-                      </S.QuestionMark>
-                      <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange} />
-                      {passwordError && <S.PasswordError1>{passwordError}</S.PasswordError1>}
-                    </S.PasswordContainer>
-                    <S.TitleCheck>비밀번호 확인</S.TitleCheck>
-                    <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
-                    {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
-                    <S.SignButton onClick={handleSubmit} disabled={!canProceed}>회원가입</S.SignButton>
-                  </>
-)}
-              </S.BottomContainer>
+              {isCertificationCorrect && isAllInfoEnteredAndNicknameValid && (
+                <S.BottomContainer visible="true">
+                  <S.PasswordContainer>
+                    <S.TitlePassword>비밀번호</S.TitlePassword>
+                    <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>?</S.QuestionMark>
+                    {tooltipVisible && (
+                      <S.Tooltip>
+                        비밀번호는 8~15자 사이, 특수문자와 대문자, 소문자 영문이 포함되어야 합니다.
+                      </S.Tooltip>
+                    )}
+                    <S.PasswordInput type="password" placeholder="" ref={passwordInputRef} onKeyUp={handlePasswordChange} />
+                    {passwordError && <S.PasswordError>{passwordError}</S.PasswordError>}
+                  </S.PasswordContainer>
+                  <S.TitleCheck>비밀번호 확인</S.TitleCheck>
+                  <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
+                  {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
+                  <S.SignButton onClick={handleSubmit} disabled={!canProceed}>회원가입</S.SignButton>
+                </S.BottomContainer>
+              )}
             )}
           </S.PersonalInfoContainer>
         )}
