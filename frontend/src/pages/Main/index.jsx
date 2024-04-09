@@ -24,7 +24,9 @@ const Main = () => {
         }
         setIsOpen(!isOpen); // 기존 메뉴 상태 변경 로직은 유지
     };
-    const togglePoiMenu = () => setIsPoiOpen(!isPoiOpen);
+    const togglePoiMenu = () =>{
+        if(isOpen){setIsOpen(false)}
+        setIsPoiOpen(!isPoiOpen)};
 
     const handleClick = () => {
         setIsactive(!isactive); // 클릭 시 isActive 상태를 토글
@@ -34,9 +36,6 @@ const Main = () => {
         setIsOpen(false); // 메뉴 닫기
     };
 
-    const handleClosePoiMenu = () => {
-        setIsPoiOpen(false); // 메뉴 닫기
-    };
 
     const SearchPOIBtn=()=>{
         var POIImageSrc=PoiImage,
