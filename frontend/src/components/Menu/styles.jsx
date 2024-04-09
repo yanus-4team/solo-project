@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 export const Container = styled.div`
     position: fixed;
     top: 0;
-    right: -200px;
+    left: -200px;
     width: 200px;
     height: 100vh;
+    border-radius: 0px 30px 30px 0px;
     /* background-color: #CDF0ED; */
     background-color: #fff;
-    transition: right 0.5s ease;
+    transition: all 0.5s ease;
     z-index: 7;
     &.open {
-        right: 0;
+        left: 76px;
     }
 `;
 
@@ -31,17 +32,9 @@ export const UserImage = styled.img`
     height: 100px;
 `;
 
-export const HoverBox=styled.div`
-    padding:8px 0;
-    &:hover{
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-`
-
 export const GoLogin = styled(Link)`
     text-align: center;
-    margin-top: 260px;
-    margin-bottom: 16px;
+    margin-top: 265px;
     display: block;
     text-decoration: none;
     cursor: pointer;
@@ -50,24 +43,14 @@ export const GoLogin = styled(Link)`
 
 export const Text2 = styled.div`
     text-align: center;
+    margin-top: 20px;
     color: black;
-    text-decoration: none;
-    cursor: pointer;
-    display: block;
-`;
-
-export const GoForm = styled(Link)`
-    text-align: center;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    display: block;
 `;
 
 export const CloseBtn = styled.img`
     position:absolute;
     width:25px;
-    top:55px;
+    top: 15px;
     right:10px;
 `;
 export const LogOutContainer = styled.div`

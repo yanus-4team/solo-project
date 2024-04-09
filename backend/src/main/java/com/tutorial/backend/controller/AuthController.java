@@ -1,7 +1,6 @@
 package com.tutorial.backend.controller;
 
 
-import com.sun.mail.iap.Response;
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.service.AuthService;
@@ -17,9 +16,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -34,6 +31,8 @@ public class AuthController {
     private final AuthService authService;
     private final MailService mailService;
     private final MemberService memberService;
+
+    private static final String REDIRECT_URI = "http://localhost:3000/login/moreInfo";
 
     @PostMapping("verifyEmail")
     public ResponseEntity<ResultDto<String>> emailCheck(@RequestBody String email) {
@@ -106,9 +105,6 @@ public class AuthController {
         log.info(nickname);
         return ResponseEntity.ok().body(memberService.isNicknameOk(nickname));
     }
-
-
-    private static final String REDIRECT_URI = "http://localhost:3000/login/moreInfo";
 
     @GetMapping("/loginInfo")
     public void createToken(HttpServletResponse response, Authentication authentication) throws IOException{

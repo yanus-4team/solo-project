@@ -23,27 +23,21 @@ export const ModalBackground = styled.div`
     z-index: 7; 
 `;
 
-export const MenuToggleBtnBox = styled.div`
+export const MemberToggleBtnBox = styled.div`
     position: absolute;
     width: fit-content;
     height: fit-content;
-    z-index: 5;
-    right: 0;
-    top: 43px;
+    bottom: 43px;
     background-color: #fff;
-    border-radius: 13px 0 0 13px;
     transition: right 0.5s ease;
     flex-direction: column;
+    border-radius: 50px;
     display:flex;
-    padding:8px 3px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    &:hover {
-        ${focusStyles}
-    }
 `;
 
 export const MenuToggleBtn = styled.button`
     background-color: transparent;
+    padding:0px;
 `;
 
 export const MenuImage = styled.img`
@@ -89,7 +83,7 @@ export const TapContainer = styled.div`
     justify-content: space-between;
     top: 0;
     left: 0;
-    z-index: 15; /* 기존 스타일에 없던 z-index 추가 */
+    z-index: 7; 
     border-right: 1px solid #ced4da;
 `
 
@@ -102,13 +96,12 @@ export const PoiToggleBtnBox = styled.div`
     position: absolute;
     width : 76px;
     height: 70px;
-    /* z-index: 5; */
     top: 133px;
-    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')}; /* isActive 상태에 따라 배경색 변경 */
+    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')};
     flex-direction: column;
     display:flex;
-    /* padding:8px 3px; */
-    cursor: pointer; /* 클릭 가능한 요소로 설정 */
+   
+    cursor: pointer;
     border: 1px solid #ced4da;
 `;
 

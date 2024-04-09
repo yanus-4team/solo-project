@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles"; // 스타일 파일 가져오기
-import menuImage from '../../assets/hamburger-icon.svg';
 import Menu from '../../components/Menu';
+import User from '../../components/icons/User';
 import pinImage from '../../assets/current.png';
 import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.svg" 이미지 import
 import SearchIcon from "../../components/Search";
 import PoiImage from "../../assets/pin.png"
 import PoiMenu from '../../components/PoiMenu';
 import Logo from "../../components/icons/Logo";
-import { useCookieManager } from "../../storage/cookieManager";
 const { kakao } = window;
 
 
@@ -17,8 +16,7 @@ const Main = () => {
     const [isPoiOpen, setIsPoiOpen] = useState(false);
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
-    const [isActive, setIsActive] = useState(false);
-    const { getCookies } = useCookieManager();
+    const [isactive, setIsactive] = useState(false);
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
@@ -29,7 +27,7 @@ const Main = () => {
     const togglePoiMenu = () => setIsPoiOpen(!isPoiOpen);
 
     const handleClick = () => {
-        setIsActive(!isActive); // 클릭 시 isActive 상태를 토글
+        setIsactive(!isactive); // 클릭 시 isActive 상태를 토글
     };
 
     const handleCloseMenu = () => {
@@ -95,20 +93,20 @@ const Main = () => {
                 });
 
                 // 인포윈도우로 설명 표시
-                var infowindow = new kakao.maps.InfoWindow({
+                var infoWindow = new kakao.maps.InfoWindow({
                     content: '<div style="width:150px;text-align:center;padding:6px 0;font-weight:bold;">POI임</div>'
                 });
                 
                 // 마우스오버 이벤트
                 kakao.maps.event.addListener(POIMarker, 'mouseover', function() {
                     // 마우스오버 이벤트가 발생시 인포윈도우 표시
-                    infowindow.open(map, POIMarker);
+                    infoWindow.open(map, POIMarker);
                 });
   
                 // 마우스아웃 이벤트
                 kakao.maps.event.addListener(POIMarker, 'mouseout', function() {
                     // 마우스아웃 이벤트가 발생시 인포윈도우 제거
-                    infowindow.close();
+                    infoWindow.close();
                 });
 
                 // 지도의 중심을 결과값으로 받은 위치로 이동
@@ -188,16 +186,10 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
-            {/* <S.Test src={Logo} alt="로고" /> */}
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
-            <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
-                <S.MenuToggleBtn onClick={toggleMenu}>
-                    <S.MenuImage src={menuImage} alt="Menu" className="menu-image" />
-                </S.MenuToggleBtn>
-            </S.MenuToggleBtnBox>
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            {isCurrentLocationVisible && map && ( // 현재 위치 버튼이 보이고 map이 정의되어 있을 때만 버튼을 렌더링합니다.
+            {isCurrentLocationVisible && map && (
                 <S.CurrentLocationBtn onClick={moveToCurrentLocation}  className={`${isOpen ? "open": ""}` }>
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
                 </S.CurrentLocationBtn>
@@ -206,14 +198,19 @@ const Main = () => {
                 <S.LogoContainer onClick={SearchPOIBtn}>
                     <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
                 </S.LogoContainer>
-                <S.PoiToggleBtnBox isActive={isActive} onClick={handleClick}> {/* POI 메뉴 위치 조정 */}
-                    <S.PoiToggleBtn onClick={togglePoiMenu}>
+                <S.PoiToggleBtnBox {...(isactive ? { isactive: "true" } : {})} onClick={togglePoiMenu}>
+                    <S.PoiToggleBtn>
                         <S.PoiImage src={PoiImage} alt="POI" />
                         <S.PoiText>POI 찾기</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
-                <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
+                <S.MemberToggleBtnBox className={`${isOpen ? "open": ""}` }>
+                    <S.MenuToggleBtn onClick={toggleMenu}>
+                        <User alt="user" width="40px" height="40px" color="#6c757d"/>
+                    </S.MenuToggleBtn>
+                </S.MemberToggleBtnBox>
             </S.TapContainer>
+            <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
         </S.MapContainer>
     )
 }

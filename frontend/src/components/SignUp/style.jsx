@@ -109,6 +109,28 @@ export const EmailSended = styled.h1`
 
 export const CertiError = styled.h1`
     position: absolute;
+    top: 257px;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 1.6rem;
+`;
+
+export const CertiCodeError = styled.h1`
+    position: absolute;
+    top: 257px;
+    margin-bottom: 0rem;
+    color: red;
+    font-size: 0.7rem;
+    font-weight: normal;
+    text-align: left;
+    margin-right: 1.6rem;
+`;
+
+export const CertiNickError = styled.h1`
+    position: absolute;
     top: 405px;
     margin-bottom: 0rem;
     color: red;
@@ -555,16 +577,6 @@ export const SelectInput = styled.select`
     }
 `;
 
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 export const DateInput = styled.input`
   width: 100%;
