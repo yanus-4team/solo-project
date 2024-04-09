@@ -66,7 +66,13 @@ const LoginModal = (props) => {
                 <S.CloseButton src={closeBtn} onClick={props.onClose}/>
                 <S.Title>로그인 해주세요</S.Title>
                 <S.Input type="email" placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <S.Input type="password" placeholder="비밀번호" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <S.Input
+                    type="password"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleLogin(e)} // 엔터 키 감지
+                />
                 <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
                 {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
                 <S.TextContainer>

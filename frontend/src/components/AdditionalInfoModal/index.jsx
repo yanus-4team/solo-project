@@ -205,6 +205,7 @@ function AdditionalInfoModal({ onClose }) {
                                 name="nickName"
                                 value={memberNickName}
                                 onChange={handleNicknameChange}
+                                onKeyDown={(e) => e.key === 'Enter' && verifyNickname(e)}
                             />
                             <S.NickNameCheckButton onClick={verifyNickname}>
                                 중복확인
