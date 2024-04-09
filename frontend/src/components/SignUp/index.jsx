@@ -35,7 +35,7 @@ const SignUpModal = (props) => {
   const [gender, setGender] = useState('');
 
   const [nickname, setNickname] = useState('');
-const [isNicknameValid, setIsNicknameValid] = useState(true);
+const [isNicknameValid, setIsNicknameValid] = useState(false);
 const [nicknameError, setNicknameError] = useState('');
 
 const [phoneNumber, setPhoneNumber] = useState('');
@@ -80,6 +80,7 @@ const verifyNickname = async () => {
     if (!data) {
       setIsNicknameValid(true);
       setNicknameError('');
+      console.log(isNicknameValid);
     } else {
       setIsNicknameValid(false);
       setNicknameError('사용중인 닉네임 입니다.');
@@ -422,10 +423,9 @@ const validateEmail = (email) => {
                 <option value="여성">여성</option>
               </S.SelectInput>
             </S.InputGroup>
-            {name && birthDate && gender && (
-              <S.BottomContainer visible="true">
-                {isCertificationCorrect && isAllInfoEnteredAndNicknameValid && (
-                  <>
+            {name && birthDate && gender && phoneNumber && isNicknameValid && (
+              <S.BottomContainer>
+                  
                     <S.PasswordContainer>
                       <S.TitlePassword>비밀번호</S.TitlePassword>
                       <S.QuestionMark onClick={() => setTooltipVisible(!tooltipVisible)}>
@@ -443,8 +443,7 @@ const validateEmail = (email) => {
                     <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
                     {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
                     <S.SignButton onClick={handleSubmit} disabled={!canProceed}>회원가입</S.SignButton>
-                  </>
-)}
+                  
               </S.BottomContainer>
             )}
           </S.PersonalInfoContainer>
