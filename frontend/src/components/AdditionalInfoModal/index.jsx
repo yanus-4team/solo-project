@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./style";
 import { toast } from "react-toastify";
-import SignComplete from "./SignComplete"
+import SignComplete from "../SignComplete"
 
 function AdditionalInfoModal({ onClose }) {
     const [additionalInfo, setAdditionalInfo] = useState({});

@@ -169,18 +169,3 @@
     background-color: var(--primary-color);
     color: #ffffff;
 }
-
-.Submit{
-    margin-top: 28px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    min-width: 64px;
-}
-.SearchBtn:hover {
-    background-color: var(--sub-color1);
-}

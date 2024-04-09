@@ -204,7 +204,7 @@ const Main = () => {
                         <S.PoiText>POI 찾기</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
-                <S.CourseToggleBtnBox  onClick={togglePoiMenu}>
+                <S.CourseToggleBtnBox onClick={togglePoiMenu}>
                     <S.CourseToggleBtn>
                         <S.CourseImage src={PoiImage} alt="COURSE" />
                         <S.CourseText>코스 찾기</S.CourseText>
