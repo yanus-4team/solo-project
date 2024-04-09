@@ -60,6 +60,7 @@ export const LoginButton = styled.button`
 `;
 
 export const TextContainer = styled.div`
+  margin-top: 0.5rem;
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
@@ -97,9 +98,10 @@ export const LinkText = styled.span`
 
 export const ErrorMessage = styled.p`
   color: red;
-  margin-top: 5px;
+  margin-top: 242px;
   font-size: 14px;
   text-align: center;
+  position: absolute;
 `;
 
 export const SuccessMessage = styled.p`
