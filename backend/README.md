@@ -4,19 +4,17 @@
 
 Refresh Token 로직을 추가하고 전체적으로 수정을 조금 했습니다.
 
-전체적인 정리글은 [여기](https://github.com/ParkJiwoon/PrivateStudy/blob/master/spring/spring-security.md) 에서 확인할 수 있습니다.
-
 <br>
 
 # Spring Initializr
 
 - Gradle
 - Java 11
-- Spring Boot 2.4.3
+- Spring Boot 2.7.5
 - Jar
 - Dependency
   - Spring Web
   - Spring Security
   - Spring Data JPA
   - Lombok
-  - H2 Database
+    

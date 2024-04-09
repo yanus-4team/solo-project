@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import * as S from "./style";
 import closeBtn from "../../assets/close-icon.svg";
@@ -45,23 +46,6 @@ const [phoneError, setPhoneError] = useState('');
 const [birthDateError, setBirthDateError] = useState('');
 const [genderError, setGenderError] = useState('');
 
-// 각 입력 필드의 유효성 검사 함수
-const validateName = (name) => name.trim() !== '';
-const validateNickname = (nickname) => nickname.trim() !== '';
-const validatePhone = (phone) => /^\d{10,11}$/.test(phone); // 예시: 한국 전화번호 형식
-const validateBirthDate = (birthDate) => birthDate.trim() !== '';
-const validateGender = (gender) => ['male', 'female'].includes(gender);
-
-// 예시: 이름 입력 변경 핸들러
-const handleNameChange = (e) => {
-  const newName = e.target.value;
-  setName(newName);
-  if (!validateName(newName)) {
-    setNameError('이름을 입력해주세요.');
-  } else {
-    setNameError('');
-  }
-};
 
 // 회원가입 버튼 활성화 조건
 const canProceed = name && nickname && phoneNumber && birthDate && gender &&
@@ -70,7 +54,6 @@ const canProceed = name && nickname && phoneNumber && birthDate && gender &&
 // 전화번호 입력 핸들러
 const handlePhoneNumberChange = (event) => {
   setPhoneNumber(event.target.value);
-  // 전화번호 유효성 검사 로직 추가 (옵션)
 };
 
 const handleNicknameChange = (event) => {
@@ -82,23 +65,22 @@ const handleNicknameChange = (event) => {
 const verifyNickname = async () => {
   // 닉네임 인증 로직, 예를 들어 서버로 검증 요청을 보내고 응답을 처리
   try {
-    const response = await fetch('/path-to-nickname-verification', {
+    const response = await fetch('http://localhost:8080/auth/verifyNickname', {
       method: 'POST',
-      body: JSON.stringify({ nickname }),
+      body:  nickname,
       headers: {
         'Content-Type': 'application/json'
       },
     });
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
+    
     const data = await response.json();
-    if (data.isAvailable) {
+    console.log(data);
+    if (!data) {
+      console.log('사용 가능한 닉네임입니다.');
       setIsNicknameValid(true);
       setNicknameError('');
     } else {
+      console.log('사용중인 닉네임입니다.');
       setIsNicknameValid(false);
       setNicknameError('사용중인 닉네임 입니다.');
     }
@@ -108,14 +90,10 @@ const verifyNickname = async () => {
   }
 };
 
-  
-
-
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
     setPassword(newPassword);
   
-    // 기존의 유효성 검사 로직...
     const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
     const hasSpecialChar = /[*?]/.test(newPassword);
     const hasLowerCase = /[a-z]/.test(newPassword);
@@ -150,7 +128,6 @@ const validatePassword = () => {
 
 const completeSignUp = () => {
   if (!validatePassword()) {
-      // 조건을 충족하지 못한 경우 메시지 표시 로직
       toast.error("비밀번호 조건을 확인해주세요.");
       return;
   }
@@ -228,7 +205,12 @@ const completeSignUp = () => {
                 },
                 body: JSON.stringify({  
                   email: emailInputRef.current.value,
-                   password: passwordInputRef.current.value 
+                  password: passwordInputRef.current.value,
+                  name: name,
+                  nickName: nickname,
+                  phoneNum: phoneNumber,
+                  birth: birthDate,
+                  gender: gender
                   })
             });
             if (!response.ok) {
@@ -397,7 +379,7 @@ const validateEmail = (email) => {
               <S.InputLabel>이름</S.InputLabel>
               <S.TextInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </S.InputGroup>
-           
+            
             <S.InputGroup>
               <S.InputNickname>닉네임</S.InputNickname>
               <S.TextInput2
@@ -414,9 +396,9 @@ const validateEmail = (email) => {
               <S.CertiError>{nicknameError}</S.CertiError>
             )}
             <S.InputGroup>
-              <S.InputNumber>전화번호</S.InputNumber>
+              <S.InputNumber type="number">전화번호</S.InputNumber>
               <S.TextInput
-                type="number" // 전화번호에 맞는 input 타입 설정
+                type="tel" // 전화번호에 맞는 input 타입 설정
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
                 // 필요하다면 전화번호 형식을 지정하는 pattern 속성 사용
@@ -437,8 +419,8 @@ const validateEmail = (email) => {
               <S.InputSex>성별</S.InputSex>
               <S.SelectInput value={gender} onChange={(e) => setGender(e.target.value)}>
                 <option value="">선택...</option>
-                <option value="male">남성</option>
-                <option value="female">여성</option>
+                <option value="남성">남성</option>
+                <option value="여성">여성</option>
               </S.SelectInput>
             </S.InputGroup>
             {name && birthDate && gender && (

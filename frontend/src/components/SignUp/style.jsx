@@ -108,7 +108,8 @@ export const EmailSended = styled.h1`
 
 
 export const CertiError = styled.h1`
-    margin-top: 1rem;
+    position: absolute;
+    top: 405px;
     margin-bottom: 0rem;
     color: red;
     font-size: 0.7rem;
@@ -153,8 +154,6 @@ export const CheckError = styled.h1`
 
 
 export const CertiRight = styled.h1`
-    position: absolute;
-    top: 246px;
     margin-top: 1rem;
     margin-bottom: 0rem;
     color: green;
@@ -256,6 +255,7 @@ export const CheckInput = styled.input`
         border:1px solid green;
         outline: none;
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
     }
 `;
 
@@ -291,6 +291,7 @@ export const CertificationContainer = styled.div`
 export const BottomContainer = styled.div`
     animation: ${({ visible }) => visible ? css`${slideDownBottom} 0.5s ease-out forwards` : "none"};
     position: relative;
+    overflow: hidden;
 `;
 
 
@@ -438,6 +439,7 @@ export const TimerText = styled.span`
   font-weight: normal;
 `;
 
+
 export const PersonalInfoContainer = styled.div`
   width: 100%;
   animation: ${slideDown} 1s ease-out forwards;
@@ -446,7 +448,6 @@ export const PersonalInfoContainer = styled.div`
 
 export const InputGroup = styled.div`
   margin-bottom: 15px;
-  margin-top:10px
 `;
 
 export const InputLabel = styled.label`
@@ -494,7 +495,7 @@ export const TextInput = styled.input`
 
 export const NickNameRight = styled.h1`
     position: absolute;
-    margin-top: 55px;
+    top:405px;
     margin-bottom: 0rem;
     color: green;
     font-size: 0.7rem;
@@ -552,6 +553,17 @@ export const SelectInput = styled.select`
         box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
 
     }
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 export const DateInput = styled.input`

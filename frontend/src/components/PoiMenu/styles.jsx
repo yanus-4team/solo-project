@@ -14,7 +14,7 @@ export const PoiContainer = styled.div`
   &.open {
     left: 0;
   }
-  z-index: 2; /* TapContainer 내의 모든 요소보다 뒤에 표시되도록 설정 */
+  z-index: 10; /* TapContainer 내의 모든 요소보다 뒤에 표시되도록 설정 */
 `;
 
 export const CloseBtn = styled.img`
@@ -50,7 +50,7 @@ export const Member = styled.div`
   font-weight: normal;
   margin-left: 30px;
   font-size: 17px;
-  margin-top: -17px;
+  margin-top: -14px;
 `;
 
 export const MemberInput = styled.input`
@@ -72,7 +72,7 @@ export const ErrorMessage = styled.div`
     color: red;
     font-size: 0.7rem;
     margin-top: -2rem;
-    margin-left: 1.6rem;
+    margin-left: 2rem;
     position: absolute;
 `
 
@@ -90,7 +90,7 @@ export const ComplectButton = styled.button`
     cursor: pointer;
     transition: filter 0.3s ease;
     display:block;
-  
+    
     &:hover {
         filter: brightness(0.9) !important;
     }

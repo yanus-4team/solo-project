@@ -14,4 +14,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByMemberEmailAndMemberProvider(String email, String provider);
 
     Optional<Member> findAllByMemberEmail(String username);
+
+    Boolean existsByMemberNickName(String nickname);
 }

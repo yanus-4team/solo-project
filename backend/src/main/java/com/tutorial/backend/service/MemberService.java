@@ -10,6 +10,8 @@ public interface MemberService {
 
     Member saveMember(JoinForm loginForm);
 
+    Boolean isNicknameOk(String nickname);
+
     Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider);
     default Member toEntity(JoinForm loginForm){
         return Member.builder().memberEmail(loginForm.getEmail())

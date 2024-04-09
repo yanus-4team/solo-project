@@ -30,6 +30,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public Boolean isNicknameOk(String nickname) {
+        return memberRepository.existsByMemberNickName(nickname);
+    }
+
+    @Override
     public Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider) {
         return memberRepository.findByMemberEmailAndMemberProvider(memberEmail, memberProvider);
     }
