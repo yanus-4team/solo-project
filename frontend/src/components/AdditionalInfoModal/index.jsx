@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./style";
 import { toast } from "react-toastify";
-import SignComplete from "./SignComplete"
+import SignComplete from "../SignComplete"
+import { useCookieManager } from "../../storage/cookieManager";
 
 function AdditionalInfoModal({ onClose }) {
     const [additionalInfo, setAdditionalInfo] = useState({});
@@ -25,6 +26,7 @@ function AdditionalInfoModal({ onClose }) {
     const nickname = useRef('');
 
     const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+    const { setCookies } = useCookieManager();
 
     const handleNicknameChange = (event) => {
         const newNickname = event.target.value;
@@ -77,17 +79,47 @@ function AdditionalInfoModal({ onClose }) {
 
     const [isSignupComplete, setIsSignupComplete] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
-        // 여기에서 추가 정보를 서버로 전송하거나 필요한 작업을 수행하세요
-        // 예: API 호출, 상태 업데이트 등
+        // 서버로 데이터 전송 로직 등
         console.log("추가 정보:", additionalInfo);
-        onClose(); // 모달 닫기
-        setIsSignupComplete(true); 
+        setIsSignupComplete(true);
+
+        try {
+            // 예시: 서버로부터 응답을 받는 부분
+            const response = await fetch('http://yourapi.com/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: memberEmail,
+                    password: password,
+                    nickName: memberNickName,
+                    birth: birth,
+                    gender: gender,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // 쿠키 설정
+                setCookies(data.accessToken, data.refreshToken, data.accessTokenExpiresIn);
+
+                setIsSignupComplete(true);
+                navigate('/main'); // 회원가입 성공 후 리디렉션
+            } else {
+                // 서버로부터 오류 응답 처리
+                toast.error('회원가입 실패');
+            }
+        } catch (error) {
+            console.error('회원가입 에러:', error);
+            toast.error('회원가입 중 에러 발생');
+        }
     };
 
     if (isSignupComplete) {
-        return <SignComplete onClose={onClose} />; // SignComplete 컴포넌트를 렌더링하고, onClose 함수를 props로 전달합니다.
+        return <SignComplete onClose={onClose} />;
     }
 
     const handlePasswordChange = (event) => {
