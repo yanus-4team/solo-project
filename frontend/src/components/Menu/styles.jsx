@@ -8,6 +8,7 @@ export const Container = styled.div`
     left: -200px;
     width: 200px;
     height: 100vh;
+    border-radius: 0px 30px 30px 0px;
     /* background-color: #CDF0ED; */
     background-color: #fff;
     transition: all 0.5s ease;
@@ -49,7 +50,7 @@ export const Text2 = styled.div`
 export const CloseBtn = styled.img`
     position:absolute;
     width:25px;
-    top:55px;
+    top: 15px;
     right:10px;
 `;
 export const LogOutContainer = styled.div`
