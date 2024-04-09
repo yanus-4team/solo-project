@@ -96,7 +96,6 @@ function LoginPage() {
                         <S.Underline className="underline"></S.Underline>
                         <S.Text1>매일 같은 길에서 벗어나</S.Text1>
                         <S.Text2>새로운 세상을 만나다</S.Text2>
-
                     </S.TopDescription>
                 </S.Wrapper>
             </S.TopContainer>
