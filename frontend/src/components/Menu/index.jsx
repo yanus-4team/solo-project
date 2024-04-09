@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logOutIcon from "../../assets/logout-icon.png";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import ConfirmModal from "../ConfirmModal";
+import User from "../icons/User";
 
 
 function Menu({ isOpen, onClose }) {
@@ -80,7 +81,8 @@ function Menu({ isOpen, onClose }) {
         <S.Container className={`${isOpen ? "open": ""}`}>
             <S.CloseBtn src={closeIcon} onClick={handleClose} />
             <S.UserContainer>
-                <S.UserImage src={user} alt="User" />
+                {/* <S.UserImage src={user} alt="User" /> */}
+                <User alt="user" width="100px" height="100px" color="#6c757d"/>
             </S.UserContainer>
             { !isLogin && <S.GoLogin onClick={handleGoLogin}>로그인을 해주세요</S.GoLogin>}
             { isLogin && <S.GoLogin>{userNickName}</S.GoLogin>}

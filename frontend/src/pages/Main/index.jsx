@@ -7,14 +7,17 @@ import radioButtonImage from '../../assets/radio_button.svg'; // "radio_button.s
 import SearchIcon from "../../components/Search";
 import PoiImage from "../../assets/pin.png"
 import PoiMenu from '../../components/PoiMenu';
-import Logo from "../../assets/main_logo.png"
+import Logo from "../../components/icons/Logo";
 const { kakao } = window;
+
 
 const Main = () => {
     const [isOpen, setIsOpen ] = useState(false);
     const [isPoiOpen, setIsPoiOpen] = useState(false);
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
+    const [isActive, setIsActive] = useState(false);
+    const { getCookies } = useCookieManager();
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
@@ -24,6 +27,10 @@ const Main = () => {
     };
     const togglePoiMenu = () => setIsPoiOpen(!isPoiOpen);
 
+    const handleClick = () => {
+        setIsActive(!isActive); // 클릭 시 isActive 상태를 토글
+    };
+
     const handleCloseMenu = () => {
         setIsOpen(false); // 메뉴 닫기
     };
@@ -31,6 +38,83 @@ const Main = () => {
     const handleClosePoiMenu = () => {
         setIsPoiOpen(false); // 메뉴 닫기
     };
+
+    const SearchPOIBtn=()=>{
+        var POIImageSrc=PoiImage,
+            POIImageSize=new kakao.maps.Size(36,40),
+            POIImageOption={offset:new kakao.maps.Point(27,69)};
+
+        // POI 마커 이미지정보를 가진 마커이미지 생성
+        var POIMarkerImage=new kakao.maps.MarkerImage(POIImageSrc,POIImageSize,POIImageOption),
+            POIMarkerPosition=new kakao.maps.LatLng(37.54699,127.09598);
+
+        // POI 마커 생성
+        // var POIMarker=new kakao.maps.Marker({
+        //     position:POIMarkerPosition,
+        //     image:POIMarkerImage
+        // });
+
+        // POI 마커가 지도 위에 표시되도록 설정
+        // POIMarker.setMap(map);
+        
+        // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능
+        // var POIContent='<div class="customoverlay">' +
+        // '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
+        // '    <span class="title"></span>' +
+        // '  </a>' +
+        // '</div>';
+
+        // 커스텀 오버레이가 표시될 위치
+        // var POIPosition=new kakao.maps.LatLng(37.54699, 127.09598);
+
+        // 커스텀 오버레이 생성
+        // var customOverlay = new kakao.maps.CustomOverlay({
+        //     map: map,
+        //     position: POIPosition,
+        //     content: POIContent,
+        //     yAnchor: 1 
+        // });
+
+        // 주소-좌표 변환 객체 생성
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색
+        geocoder.addressSearch('경북 안동시 송천1길 146-9', function(result, status) {
+
+            // 정상적으로 검색이 완료시
+            if (status === kakao.maps.services.Status.OK) {
+                console.log(result)
+                var POIPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시
+                var POIMarker = new kakao.maps.Marker({
+                    map: map,
+                    position: POIPosition,
+                    image:POIMarkerImage
+                });
+
+                // 인포윈도우로 설명 표시
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;font-weight:bold;">POI임</div>'
+                });
+                
+                // 마우스오버 이벤트
+                kakao.maps.event.addListener(POIMarker, 'mouseover', function() {
+                    // 마우스오버 이벤트가 발생시 인포윈도우 표시
+                    infowindow.open(map, POIMarker);
+                });
+  
+                // 마우스아웃 이벤트
+                kakao.maps.event.addListener(POIMarker, 'mouseout', function() {
+                    // 마우스아웃 이벤트가 발생시 인포윈도우 제거
+                    infowindow.close();
+                });
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동
+                map.setCenter(POIPosition);
+            } 
+        });    
+    }
 
     useEffect(() => {
         const geoLocation = () => {
@@ -61,6 +145,16 @@ const Main = () => {
                         image: markerImage
                     });
                     marker.setMap(map);
+
+                    // 지도타입 컨트롤을 생성
+                    var mapTypeControl = new kakao.maps.MapTypeControl();
+
+                    // 지도에 컨트롤을 추가
+                    map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOM);
+
+                    // 줌 컨트롤을 생성
+                    var zoomControl = new kakao.maps.ZoomControl();
+                    map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 
                     setCurrentLocationVisible(true); // 현재 위치 버튼 표시
                 },(error) => {
@@ -93,7 +187,7 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
-            <S.Test src={Logo} alt="로고" />
+            {/* <S.Test src={Logo} alt="로고" /> */}
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
             <S.MenuToggleBtnBox className={`${isOpen ? "open": ""}` }>
@@ -107,14 +201,18 @@ const Main = () => {
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
                 </S.CurrentLocationBtn>
             )}
-            <S.PoiToggleBtnBox className={`${isPoiOpen ? "open" : ""}`}> {/* POI 메뉴 위치 조정 */}
-                <S.PoiToggleBtn onClick={togglePoiMenu}>
-                    <S.PoiImage src={PoiImage} alt="POI" />
-                </S.PoiToggleBtn>
-            </S.PoiToggleBtnBox>
-            <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
-            
-
+            <S.TapContainer>
+                <S.LogoContainer onClick={SearchPOIBtn}>
+                    <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+                </S.LogoContainer>
+                <S.PoiToggleBtnBox isActive={isActive} onClick={handleClick}> {/* POI 메뉴 위치 조정 */}
+                    <S.PoiToggleBtn onClick={togglePoiMenu}>
+                        <S.PoiImage src={PoiImage} alt="POI" />
+                        <S.PoiText>POI 찾기</S.PoiText>
+                    </S.PoiToggleBtn>
+                </S.PoiToggleBtnBox>
+                <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
+            </S.TapContainer>
         </S.MapContainer>
     )
 }

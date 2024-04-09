@@ -44,6 +44,7 @@ export const PageContainer = styled.div`
 
 export const TopContainer = styled.div`
     text-align: center;
+    margin-bottom: 0;
 `;
 
 export const TopDescription = styled.div`
@@ -55,8 +56,9 @@ export const TopDescription = styled.div`
     -webkit-text-fill-color: transparent; */
 `
 export const Welcome = styled.h1`
-    font-size: 21px;
+    font-size: 23px;
     font-weight: 500;
+    margin-top:0;
     margin-bottom: 5px;
     text-align: center;
     font-weight: bold;
@@ -70,7 +72,7 @@ export const Underline = styled.div`
     background-image: linear-gradient(to right, var(--sub-color2),#92c5fe);
     height: 4px;
     width: 100%;
-    margin:12px 0;
+    margin:20px 0;
 `
 // export const Text = styled.p`
 //     margin-top: 5px;
@@ -86,25 +88,25 @@ export const Underline = styled.div`
 export const Text1=styled.p`
     margin: 5px 0 0 0;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 30px;
     word-spacing: 2px;
     animation: ${moveFromLeft} 1.5s ease-in-out;
     text-align: center;
 `
 
 export const Text2=styled.p`
-    margin-top: 8px;
+    margin-top: 0px;
     font-weight: bold;
     font-size: 30px;
     word-spacing: 2px;
-    /* text-align: end; */
+    text-align: center;
     animation: ${moveFromRight} 1.5s ease-in-out;
 `
 
 export const MainLogo = styled.svg`
     /* width: 200px; */
     width: 160px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 `
 
 export const Wrapper = styled.div`
@@ -116,7 +118,7 @@ export const Wrapper = styled.div`
 
 export const TopHeader = styled.div`
     margin-top: 80px;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
 `;
 
 export const LoginBtnList = styled.div`
@@ -125,7 +127,7 @@ export const LoginBtnList = styled.div`
 
 export const BottomContainer = styled.div`
     text-align: center;
-    margin-top: 80px;
+    margin-top: 100px;
 `;
 
 export const NoLoginLink = styled(Link)`

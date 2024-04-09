@@ -15,13 +15,14 @@ export const SearchContainer = styled.div`
     transform: translateX(-50%);
     z-index: 5;
     width:fit-content;
+    
 `;
 
 export const SearchInput = styled.input`
     padding: 10px;
     font-size: 20px;
     border-radius: 10px;
-    border: 3px solid #36454F;
+    border: 3px solid #495057;
     width: 400px;
     background-image: url(${props => props.icon});
     background-size: 25px 25px;
@@ -29,9 +30,10 @@ export const SearchInput = styled.input`
     background-position: 15px center;
     padding-left: 48px;
     color: #36454F;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
     outline: none;
     transition: all 0.5s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     @media (max-width: 430px) {
         width: 48%;
     }
