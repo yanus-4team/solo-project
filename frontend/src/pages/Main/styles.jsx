@@ -13,6 +13,16 @@ export const MapContainer = styled.div`
     overflow: visible;
 `;
 
+export const ModalBackground = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 7; 
+`;
+
 export const MenuToggleBtnBox = styled.div`
     position: absolute;
     width: fit-content;
@@ -46,7 +56,7 @@ export const MenuImage = styled.img`
 export const CurrentLocationBtn = styled.button`
     position: absolute;
     bottom: 20px;
-    right: 10px;
+    right: 44px;
     z-index: 5;
     width: 45px;
     height: 45px;
@@ -66,73 +76,56 @@ export const CurrentLocationImg = styled.img`
     width: 100%;
     height: 100%;
     transition: right 0.5s ease;
-    
-    
 `;
-
-export const ModalBackground = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 7; 
-`;
-
-export const PoiToggleBtnBox = styled.div`
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    z-index: 5;
-    left: 15px;
-    top: 110px;
-    background-color: #fff;
-    border-radius: 23px 23px 23px 23px;
-    transition: left 0.5s ease;
-    flex-direction: column;
-    display:flex;
-    padding:8px 3px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
-    &:hover {
-        ${focusStyles}
-    }
-`;
-
-export const PoiToggleBtn = styled.button`
-    background-color: transparent;
-`;
-
-export const PoiImage = styled.img`
-    width: 30px;
-    display: block;
-
-    height: 30px;
-`;
-
-
-export const LogoContainer=styled.div`
-    position: absolute;
-    width: 40px;
-    z-index: 2;
-    top: 44px;
-    left: 20px;
-    z-index: 101;
-`
 
 export const TapContainer = styled.div`
     position: absolute;
-    width: 77px;
+    width: 76px;
     height: 100vh;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-top: 44px; /* 로고와 위의 간격 */
-    padding-bottom: 20px; /* 하단 여백 조정 */
     top: 0;
     left: 0;
     z-index: 100; /* 기존 스타일에 없던 z-index 추가 */
-    border-right: 1px solid black;
+    border-right: 1px solid #ced4da;
+`
+
+export const LogoContainer=styled.div`
+    border: 1px solid #ced4da;
+    padding:44px 18px;
+`
+
+export const PoiToggleBtnBox = styled.div`
+    position: absolute;
+    width : 76px;
+    height: 70px;
+    /* z-index: 5; */
+    top: 133px;
+    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')}; /* isActive 상태에 따라 배경색 변경 */
+    flex-direction: column;
+    display:flex;
+    /* padding:8px 3px; */
+    cursor: pointer; /* 클릭 가능한 요소로 설정 */
+    border: 1px solid #ced4da;
+`;
+
+export const PoiToggleBtn = styled.button`
+    background-color: transparent;
+    padding-top: 11px;
+`;
+
+export const PoiImage = styled.img`
+    width: 30px;
+    height:32px;
+    display: block;
+    margin:0 auto;
+`;
+
+export const PoiText = styled.div`
+    font-size: 13px;
+    margin-top: 3px;
+    text-align: center;
 `
