@@ -67,7 +67,7 @@ export const Welcome = styled.h1`
     margin-bottom: 10px; */
 `
 export const SoloLetterLogo=styled.img`
-    height: 60px;
+    height: 48px;
 `
 export const Underline = styled.div`
     /* background-color: var(--primary-color); */
