@@ -17,6 +17,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -34,6 +39,8 @@ public class PlaceController {
     public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         PlaceHeader placeHeader = new PlaceHeader();
+        log.info(placeDto.toString());
+        log.info(userDetails.toString());
         placeHeader.setHeaderName(placeDto.getName());
         Optional<Member> foundMember = memberService.getMemberByMemberEmailAndPassword(userDetails.getUsername(), userDetails.getPassword());
         if(foundMember.isPresent()){
@@ -44,6 +51,34 @@ public class PlaceController {
         return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "장소 등록에 성공했습니다!"));
 
     };
+
+    @PostMapping("/getPlaceRecomend")
+    public ResponseEntity<ResultDto<List<Place>>> getPlaceRecomend(@RequestParam int passengerNum,Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        
+        try {
+            URL url = new URL("http://localhost:3030/getPlaceRecomend");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            System.out.println("Response from server: " + response.toString());
+
+            conn.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
 }

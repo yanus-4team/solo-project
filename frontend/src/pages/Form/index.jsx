@@ -31,8 +31,8 @@ function Form(){
         if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
-        const lat = parseFloat(selectedPlace[4]);
-        const lng = parseFloat(selectedPlace[3]);
+        const lat = parseFloat(selectedPlace[3]);
+        const lng = parseFloat(selectedPlace[2]);
         const containerId='map-${selectedPlaceIndex}';
         let container=document.getElementById(containerId);
 
@@ -127,20 +127,21 @@ function Form(){
             });
         }
         else{
+            console.log(childResult);
             try{
                 const localAccessToken = getCookies().accessToken;
-                const response=await fetch('http://localhost:8080/place/save',{
+                const response = await fetch('http://localhost:8080/place/save',{
                     method:'POST',
                     headers:{
                         'Content-Type':'application/json',
                         'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
                     },
                     body:JSON.stringify({
-                        name:childResult[0],
-                        latitude:childResult[1],
-                        longitude:childResult[2],
-                        roadAddress:childResult[3],
-                        address:childResult[4]
+                        name: childResult.name,
+                        latitude: childResult.latitude,
+                        longitude: childResult.longitude,
+                        roadAddress: childResult.roadAddress,
+                        address: childResult.address
                     })
                 });
                 if(response.ok){
