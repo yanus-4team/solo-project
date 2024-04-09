@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import * as S from "./styles";
 import closeIcon from "../../assets/close-icon.svg";
-import user from '../../assets/user.png';
 import { Link, useNavigate } from "react-router-dom";
 import logOutIcon from "../../assets/logout-icon.png";
 import { useCookieManager } from '../../storage/cookieManager'; 
@@ -45,7 +44,7 @@ function Menu({ isOpen, onClose }) {
               });
         }
         
-    }, [getCookies]);
+    }, [getCookies.accessToken, getCookies.refreshToken, getCookies.accessTokenExpiresIn]);
 
     const handleClose = () => {
         onClose();
@@ -79,7 +78,7 @@ function Menu({ isOpen, onClose }) {
 
     return (
         <S.Container className={`${isOpen ? "open": ""}`}>
-            <S.CloseBtn src={closeIcon} onClick={handleClose} />
+            {/* <S.CloseBtn src={closeIcon} onClick={handleClose} /> */}
             <S.UserContainer>
                 {/* <S.UserImage src={user} alt="User" /> */}
                 <User alt="user" width="100px" height="100px" color="#6c757d"/>
