@@ -116,6 +116,8 @@ public class AuthController {
                 String email = principal.getAttribute("email");
                 String provider = (String) principal.getAttribute("provider");
                 TokenDto tokenDto = authService.socialLogin(email, provider); // AuthService를 통해 소셜 로그인 처리
+                Optional<Member> foundMember = memberService.getMemberByMemberEmailAndProvider(email,provider);
+                boolean isFirst = foundMember.get().getMemberPassword() == null;
                 String accessToken = tokenDto.getAccessToken();
                 String refreshToken = tokenDto.getRefreshToken();
                 System.out.println("SuccessHandler oAuth2User: " + principal);
@@ -123,6 +125,7 @@ public class AuthController {
                 String redirectUrl = UriComponentsBuilder.fromUriString(REDIRECT_URI)
                         .queryParam("accessToken", accessToken)
                         .queryParam("refreshToken", refreshToken)
+                        .queryParam("isFirst",isFirst)
                         .build()
                         .encode(StandardCharsets.UTF_8)
                         .toUriString();
