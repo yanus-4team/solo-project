@@ -10,11 +10,11 @@ export const PoiContainer = styled.div`
   border-radius: 0px 30px 30px 0px;
   background-color: #fff;
   transition: left 0.5s ease;
-  z-index: 4;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0); /* 그림자 추가 */
   &.open {
     left: 0;
   }
+  z-index: 2; /* TapContainer 내의 모든 요소보다 뒤에 표시되도록 설정 */
 `;
 
 export const CloseBtn = styled.img`
@@ -33,7 +33,7 @@ export const PoiContent = styled.div`
 export const Title = styled.div`
     margin-left: 70px;
     margin-bottom: 1.8rem;
-    margin-top: 50px;
+    margin-top: 10px;
     color: #333;
     font-weight: normal;
     font-size: 35px;
@@ -42,6 +42,7 @@ export const MemberContainer = styled.div`
   display: flex;
   align-items: center; // 자식 요소들을 세로 중앙에 정렬
   margin-bottom: 1rem; // 입력칸과 다음 요소 사이의 간격을 조정
+  z-index: 99;
 `;
 
 export const Member = styled.div`

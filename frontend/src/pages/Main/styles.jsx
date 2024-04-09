@@ -84,7 +84,7 @@ export const PoiToggleBtnBox = styled.div`
     position: absolute;
     width: 70px;
     height: 60px;
-    z-index: 5;
+    z-index: 2;
     left: 0px;
     top: 110px;
     background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')}; /* isActive 상태에 따라 배경색 변경 */
@@ -113,6 +113,7 @@ export const PoiImage = styled.img`
 export const LogoContainer=styled.div`
     position: absolute;
     width: 40px;
+    z-index: 2;
 `
 
 export const TapContainer = styled.div`
@@ -130,6 +131,7 @@ export const TapContainer = styled.div`
     left: 0;
     z-index: 100; /* 기존 스타일에 없던 z-index 추가 */
     border-right: 1px solid black;
+    z-index: 2;
 `
 
 export const PoiText = styled.div`

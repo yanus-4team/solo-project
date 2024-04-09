@@ -139,9 +139,9 @@ const Main = () => {
                 </S.CurrentLocationBtn>
             )}
             <S.TapContainer>
-            <S.LogoContainer>
-                <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
-            </S.LogoContainer>
+                <S.LogoContainer>
+                    <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+                </S.LogoContainer>
                 <S.PoiToggleBtnBox isActive={isActive} onClick={handleClick}> {/* POI 메뉴 위치 조정 */}
                     <S.PoiToggleBtn onClick={togglePoiMenu}>
                         <S.PoiImage src={PoiImage} alt="POI" />
