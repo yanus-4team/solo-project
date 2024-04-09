@@ -14,28 +14,36 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContent = styled.div`
+    min-height: 200px;
+    position: relative;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    width: 300px;
+    padding: 45px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const ModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 `;
 
 export const ModalTitle = styled.h3`
-    margin: 0;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    color: #333;
+    font-weight: normal;
+    font-size: 30px;
 `;
 
 export const Subtitle = styled.p`
-    font-size: 14px;
+    font-size: 16px;
     color: #555;
     margin-bottom: 10px;
+    margin-left: 17px;
 `;
 
 export const ModalBody = styled.div``;
@@ -47,38 +55,96 @@ export const EmailContainer = styled.div`
 export const EmailLabel = styled.label`
     display: block;
     margin-bottom: 5px;
+    margin-top: 30px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
 `;
 
 export const EmailInput = styled.input`
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 0.1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const PasswordContainer = styled.div`
     margin-bottom: 15px;
 `;
 
+export const PasswordcheckContainer = styled.div`
+    margin-bottom: 15px;
+`;
+
 export const PasswordLabel = styled.label`
     display: block;
     margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
+`;
+
+export const PasswordcheckLabel = styled.label`
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
 `;
 
 export const PasswordInput = styled.input`
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 0.2rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
-export const NickNameContainer = styled.div`
+export const PasswordcheckInput = styled.input`
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 0.2rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
+`;
+
+export const ErrorMessage = styled.div`
+    position: absolute;
+    color: red;
+    font-size: 11px;
+    margin-top: -2px;
+`;
+
+export const NickNameContainer = styled.div` 
     margin-bottom: 15px;
 `;
 
 export const NickNameLabel = styled.label`
     display: block;
     margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
 `;
 
 export const NickNameInputContainer = styled.div`
@@ -86,20 +152,40 @@ export const NickNameInputContainer = styled.div`
 `;
 
 export const NickNameInput = styled.input`
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    width: 130px;
+    padding: 10px;
+    margin-bottom: 0.1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const NickNameCheckButton = styled.button`
-    background-color: var(--primary-color);
-    color: #fff;
+    width: 100px;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 30px;
+    background-color: var(--primary-color);
+
+    color: white;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    margin-left: 1rem;
     cursor: pointer;
-    margin-left: 5px;
+    transition: filter 0.3s ease;
+  
+    &:hover {
+        filter: brightness(0.9) !important;
+    }
+    &:disabled{
+        background-color: #dfdddd;
+        color: #a7a7a7;
+    }
 `;
 
 export const BirthContainer = styled.div`
@@ -109,13 +195,23 @@ export const BirthContainer = styled.div`
 export const BirthLabel = styled.label`
     display: block;
     margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
 `;
 
 export const BirthInput = styled.input`
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 0.1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
 export const GenderContainer = styled.div`
@@ -125,6 +221,9 @@ export const GenderContainer = styled.div`
 export const GenderLabel = styled.label`
     display: block;
     margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    font-weight: normal;
 `;
 
 export const GenderInput = styled.input`
@@ -138,18 +237,49 @@ export const ModalFooter = styled.div`
 `;
 
 export const ConfirmButton = styled.button`
-    background-color: var(--primary-color);
-    color: #fff;
+    width: 270px;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    margin-top: 20px;
+    border-radius: 30px;
+    background-color:  var(--primary-color);
+    color: white;
+    margin-bottom: -1.6rem;
     cursor: pointer;
+    transition: filter 0.3s ease;
+    display:block;
+  
+    &:hover {
+        filter: brightness(0.9) !important;
+    }
 `;
 
 export const SelectInput = styled.select`
-    width: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    width: 272px;
+    padding: 10px;
+    margin-bottom: 0.1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    &:focus {
+        border:1px solid green;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); 
+
+    }
 `;
 
+export const SuccessMessage = styled.div`
+    position: absolute;
+    top: 440px;
+    color: green;
+    font-size: 11px;
+    margin-top: 5px;
+`;
+
+export const ErrornickMessage = styled.div`
+    position: absolute;
+    color: red;
+    font-size: 0.8rem;
+    margin-top: -2px;
+    font-size: 11px;
+`;

@@ -15,17 +15,23 @@ function AdditionalInfoModal({ onClose }) {
     const navigate = useNavigate();
     
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const birth = useRef('');
     const gender = useRef('');
 
     const nickname = useRef('');
 
+    const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+
     const handleNicknameChange = (event) => {
         const newNickname = event.target.value;
         setMemberNickName(newNickname);
         // 여기에 닉네임 유효성 검사 로직 추가 (예: 길이 제한)
       };
+
+      
 
 
     const verifyNickname = async () => {
@@ -66,6 +72,40 @@ function AdditionalInfoModal({ onClose }) {
         onClose(); // 모달 닫기
     };
 
+    const handlePasswordChange = (event) => {
+        const newPassword = event.target.value;
+        setPassword(newPassword);
+      
+        const isValidLength = newPassword.length >= 8 && newPassword.length <= 15;
+        const hasSpecialChar = /[*?]/.test(newPassword);
+        const hasLowerCase = /[a-z]/.test(newPassword);
+      
+        if (!isValidLength || !hasSpecialChar || !hasLowerCase) {
+          if (!isValidLength) {
+            setPasswordError("비밀번호는 8~15자 사이여야 합니다.");
+          } else if (!hasSpecialChar) {
+            setPasswordError("특수문자(*, ?)가 포함되어야 합니다.");
+          } else if (!hasLowerCase) {
+            setPasswordError("비밀번호에는 최소 한 개의 소문자가 포함되어야 합니다.");
+          }
+        } else {
+          // 유효성 검사를 통과했을 때 에러 메시지를 비워줌
+          setPasswordError("");
+        }
+    };
+
+    const handleConfirmPasswordChange = (event) => {
+        const newConfirmPassword = event.target.value;
+        setConfirmPassword(newConfirmPassword);
+    
+        if (password !== newConfirmPassword) {
+            setIsConfirmPasswordValid(false);
+        } else {
+            setIsConfirmPasswordValid(true);
+        }
+    };
+    
+
     return (
         <S.ModalContainer>
             <S.ModalContent>
@@ -90,9 +130,22 @@ function AdditionalInfoModal({ onClose }) {
                             type="password"
                             name="password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handlePasswordChange}
                         />
+                        {passwordError && <S.ErrorMessage>{passwordError}</S.ErrorMessage>}
                     </S.PasswordContainer>
+
+                    <S.PasswordcheckContainer>
+                        <S.PasswordcheckLabel>비밀번호 확인</S.PasswordcheckLabel>
+                        <S.PasswordcheckInput
+                            type="password"
+                            name="confirmPassword"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                        />
+                        {!isConfirmPasswordValid && <S.ErrorMessage>비밀번호가 일치하지 않습니다.</S.ErrorMessage>}
+                    </S.PasswordcheckContainer>
+
 
                     <S.NickNameContainer>
                         <S.NickNameLabel>닉네임</S.NickNameLabel>
@@ -107,6 +160,8 @@ function AdditionalInfoModal({ onClose }) {
                                 중복확인
                             </S.NickNameCheckButton>
                         </S.NickNameInputContainer>
+                        {isNicknameValid && isNicknameChecked && <S.SuccessMessage>사용가능한 닉네임 입니다.</S.SuccessMessage>}
+                        {!isNicknameValid && isNicknameChecked && <S.ErrornickMessage>{nicknameError}</S.ErrornickMessage>}
                     </S.NickNameContainer>
 
                     <S.BirthContainer> 

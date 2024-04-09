@@ -8,8 +8,7 @@ export const Container = styled.div`
     left: -200px;
     width: 200px;
     height: 100vh;
-    border-radius: 0px 30px 30px 0px;
-    /* background-color: #CDF0ED; */
+    border-radius: 0px 12px 12px 0px;
     background-color: #fff;
     transition: all 0.5s ease;
     z-index: 7;
@@ -20,11 +19,12 @@ export const Container = styled.div`
 
 export const UserContainer = styled.div`
     position: absolute;
-    top: 100px;
+    top: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    background-color: var(--sub-color1);
 `;
 
 export const UserImage = styled.img`
@@ -34,17 +34,31 @@ export const UserImage = styled.img`
 
 export const GoLogin = styled(Link)`
     text-align: center;
-    margin-top: 265px;
+    margin-top: 210px;
+    margin-bottom: 20px;
     display: block;
     text-decoration: none;
     cursor: pointer;
     color: black;
 `;
+export const HoverBox=styled.div`
+    padding:12px 0;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+`
 
 export const Text2 = styled.div`
-    text-align: center;
+    /* text-align: center;
     margin-top: 20px;
+    color: black; */
+    text-align: center;
     color: black;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+
 `;
 
 export const CloseBtn = styled.img`
@@ -54,9 +68,9 @@ export const CloseBtn = styled.img`
     right:10px;
 `;
 export const LogOutContainer = styled.div`
-position: absolute;
-bottom: 50px;
-left: 70px;
+    position: absolute;
+    bottom: 50px;
+    left: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,5 +83,6 @@ export const LogOutIcon = styled.img`
 `;
 export const LogOutText = styled.div`
     color: black;
+    font-size: 14px;
 
 `;

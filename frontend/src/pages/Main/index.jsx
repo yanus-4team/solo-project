@@ -17,6 +17,7 @@ const Main = () => {
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
     const [isactive, setIsactive] = useState(false);
+    const [isHovered, setIsHovered]=useState(false);
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
@@ -197,15 +198,24 @@ const Main = () => {
                 <S.LogoContainer onClick={SearchPOIBtn}>
                     <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
                 </S.LogoContainer>
-                <S.PoiToggleBtnBox {...(isactive ? { isactive: "true" } : {})} onClick={togglePoiMenu}>
+                <S.PoiToggleBtnBox onClick={togglePoiMenu}>
                     <S.PoiToggleBtn>
                         <S.PoiImage src={PoiImage} alt="POI" />
                         <S.PoiText>POI 찾기</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
+                <S.CourseToggleBtnBox  onClick={togglePoiMenu}>
+                    <S.CourseToggleBtn>
+                        <S.CourseImage src={PoiImage} alt="COURSE" />
+                        <S.CourseText>코스 찾기</S.CourseText>
+                    </S.CourseToggleBtn>
+                </S.CourseToggleBtnBox>
                 <S.MemberToggleBtnBox className={`${isOpen ? "open": ""}` }>
-                    <S.MenuToggleBtn onClick={toggleMenu}>
-                        <User alt="user" width="40px" height="40px" color="#6c757d"/>
+                    <S.MenuToggleBtn onClick={toggleMenu}
+                        onMouseEnter={()=>setIsHovered(true)}
+                        onMouseLeave={()=>setIsHovered(false)}
+                    >
+                        <User alt="user" width="40px" height="40px" color={isHovered ? "#6c757d" : "#adb5bd"}/>
                     </S.MenuToggleBtn>
                 </S.MemberToggleBtnBox>
             </S.TapContainer>
