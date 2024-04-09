@@ -97,11 +97,13 @@ export const PoiToggleBtnBox = styled.div`
     width : 76px;
     height: 76px;
     top: 132px;
-    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')};
     flex-direction: column;
     display:flex;
     cursor: pointer;
-    border: 1px solid #ced4da;
+    border: 0 1px solid #ced4da;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 `;
 
 export const PoiToggleBtn = styled.button`
@@ -127,11 +129,13 @@ export const CourseToggleBtnBox=styled.div`
     width : 76px;
     height: 76px;
     top: 208px;
-    background-color: ${({ isActive }) => (isActive ? '#f0f0f0' : '#fff')};
     flex-direction: column;
     display:flex;
     cursor: pointer;
     border: 1px solid #ced4da;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 `
 
 export const CourseToggleBtn=styled.button`

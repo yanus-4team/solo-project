@@ -68,9 +68,17 @@ function Menu({ isOpen, onClose }) {
         navigate('/login');
     };
     
-    const handleGoMyPage = () => {
+    // const handleGoMyPage = () => {
+    //     if (accessToken && refreshToken && accessTokenExpiresIn) {
+    //         navigate('/myPage');
+    //     }else{
+    //         navigate('/login');
+    //     }
+    // };
+
+    const handleGoVisitedLog = () => {
         if (accessToken && refreshToken && accessTokenExpiresIn) {
-            navigate('/myPage');
+            navigate('/visitedLog');
         }else{
             navigate('/login');
         }
@@ -85,9 +93,10 @@ function Menu({ isOpen, onClose }) {
             </S.UserContainer>
             { !isLogin && <S.GoLogin onClick={handleGoLogin}>로그인을 해주세요</S.GoLogin>}
             { isLogin && <S.GoLogin>{userNickName}</S.GoLogin>}
-            <Link onClick={handleGoMyPage}><S.Text2>마이페이지</S.Text2></Link>
-            <S.Text2>방문 기록</S.Text2>
-            <S.Text2>내 리뷰</S.Text2>
+            <S.HoverBox><S.Text2>마이페이지</S.Text2></S.HoverBox>
+            <S.HoverBox onClick={handleGoVisitedLog}><S.Text2>방문 기록</S.Text2></S.HoverBox>
+            <S.HoverBox><S.Text2>내 리뷰</S.Text2></S.HoverBox>
+            
             {isLogin && (
                 <S.LogOutContainer onClick={handleLogOut}>
                     {/* <S.LogOutIcon src={logOutIcon} /> */}

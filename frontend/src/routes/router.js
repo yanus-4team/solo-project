@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         socialLogin: false  
     },
     {
-        path: '/myPage',
+        path: '/visitedLog',
         Component: Form
     },
     {
