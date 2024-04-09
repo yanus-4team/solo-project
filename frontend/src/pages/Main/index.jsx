@@ -186,12 +186,10 @@ const Main = () => {
 
     return (
         <S.MapContainer id="map">
-            {/* <S.Test src={Logo} alt="로고" /> */}
             {isOpen && <S.ModalBackground onClick={toggleMenu} />}
             <SearchIcon />
-           
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            {isCurrentLocationVisible && map && ( // 현재 위치 버튼이 보이고 map이 정의되어 있을 때만 버튼을 렌더링합니다.
+            {isCurrentLocationVisible && map && (
                 <S.CurrentLocationBtn onClick={moveToCurrentLocation}  className={`${isOpen ? "open": ""}` }>
                     <S.CurrentLocationImg src={radioButtonImage} alt="Current Location" />
                 </S.CurrentLocationBtn>
@@ -200,18 +198,17 @@ const Main = () => {
                 <S.LogoContainer onClick={SearchPOIBtn}>
                     <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
                 </S.LogoContainer>
-                <S.PoiToggleBtnBox {...(isactive ? { isactive: "true" } : {})} onClick={handleClick}>
-                    <S.PoiToggleBtn onClick={togglePoiMenu}>
+                <S.PoiToggleBtnBox {...(isactive ? { isactive: "true" } : {})} onClick={togglePoiMenu}>
+                    <S.PoiToggleBtn>
                         <S.PoiImage src={PoiImage} alt="POI" />
                         <S.PoiText>POI 찾기</S.PoiText>
                     </S.PoiToggleBtn>
                 </S.PoiToggleBtnBox>
-               
                 <S.MemberToggleBtnBox className={`${isOpen ? "open": ""}` }>
-                <S.MenuToggleBtn onClick={toggleMenu}>
-                    <User alt="user" width="40px" height="40px" color="#6c757d"/>
-                </S.MenuToggleBtn>
-            </S.MemberToggleBtnBox>
+                    <S.MenuToggleBtn onClick={toggleMenu}>
+                        <User alt="user" width="40px" height="40px" color="#6c757d"/>
+                    </S.MenuToggleBtn>
+                </S.MemberToggleBtnBox>
             </S.TapContainer>
             <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
         </S.MapContainer>
