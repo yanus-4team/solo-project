@@ -1,8 +1,6 @@
 import React, { useState, useEffect} from "react";
 import * as S from "./styles";
-import closeIcon from "../../assets/close-icon.svg";
-import { Link, useNavigate } from "react-router-dom";
-import logOutIcon from "../../assets/logout-icon.png";
+import { useNavigate } from "react-router-dom";
 import { useCookieManager } from '../../storage/cookieManager'; 
 import ConfirmModal from "../ConfirmModal";
 import User from "../icons/User";
@@ -45,10 +43,6 @@ function Menu({ isOpen, onClose }) {
         }
         
     }, [getCookies.accessToken, getCookies.refreshToken, getCookies.accessTokenExpiresIn]);
-
-    const handleClose = () => {
-        onClose();
-    };
 
     const handleLogOut = () => {
         setShowConfirmModal(true);

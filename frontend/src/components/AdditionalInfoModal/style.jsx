@@ -79,7 +79,7 @@ export const PasswordContainer = styled.div`
     margin-bottom: 15px;
 `;
 
-export const PasswordcheckContainer = styled.div`
+export const PasswordCheckContainer = styled.div`
     margin-bottom: 15px;
 `;
 
@@ -91,7 +91,7 @@ export const PasswordLabel = styled.label`
     font-weight: normal;
 `;
 
-export const PasswordcheckLabel = styled.label`
+export const PasswordCheckLabel = styled.label`
     display: block;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -114,7 +114,7 @@ export const PasswordInput = styled.input`
     }
 `;
 
-export const PasswordcheckInput = styled.input`
+export const PasswordCheckInput = styled.input`
     width: 250px;
     padding: 10px;
     margin-bottom: 0.2rem;
@@ -276,7 +276,7 @@ export const SuccessMessage = styled.div`
     margin-top: 5px;
 `;
 
-export const ErrornickMessage = styled.div`
+export const ErrorNickMessage = styled.div`
     position: absolute;
     color: red;
     font-size: 0.8rem;

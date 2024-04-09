@@ -8,6 +8,8 @@ import Logo from "../../components/icons/Logo";
 import { toast } from 'react-toastify';
 import Trash from "../../components/icons/Trash";
 import pinImage from '../../assets/current.png';
+import { useCookieManager } from '../../storage/cookieManager'; 
+
 const { kakao } = window;
 
 function Form(){
@@ -22,38 +24,15 @@ function Form(){
     const startIndex=(currentPage-1)*itemsPerPage;
     const endIndex=startIndex+itemsPerPage;
     const currentItems=placeResultArr.slice(startIndex,endIndex);
+    const { getCookies , removeCookies} = useCookieManager();
 
-    const handleSubmit=async()=>{
-        try{
-            const response=await fetch('http://localhost:8080/auth/form',{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application.json'
-                },
-                body:JSON.stringify(placeResultArr)
-            });
-
-            if(response.ok){
-                const result=await response.json();
-                console.log(result);
-                toast.success('데이터가 성공적으로 전송되었습니다.');
-            }
-            else{
-                toast.error('데이터 전송에 실패했습니다.')
-            }
-        }
-        catch(error){
-            console.error('데이터 전송 중 오류 발생:',error);
-            toast.error('데이터 전송 중 오류가 발생했습니다.');
-        }
-    }
 
     useEffect(() => {
-        if (selectedPlaceIndex===null) return;
+        if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
-        const lat = parseFloat(selectedPlace[4]);
-        const lng = parseFloat(selectedPlace[3]);
+        const lat = parseFloat(selectedPlace[3]);
+        const lng = parseFloat(selectedPlace[2]);
         const containerId='map-${selectedPlaceIndex}';
         let container=document.getElementById(containerId);
 
@@ -141,25 +120,28 @@ function Form(){
     const handleSearchPlaceResult=async(childResult)=>{
         const isExist=placeResultArr.some((place)=>
             place[0]===childResult[0] && place[1]===childResult[1]);
-        
+          
         if(isExist){
             toast.error('이미 등록된 장소입니다.',{
                 autoClose:1500
             });
         }
         else{
+            console.log(childResult);
             try{
-                const response=await fetch('http://localhost:8080/place/save',{
+                const localAccessToken = getCookies().accessToken;
+                const response = await fetch('http://localhost:8080/place/save',{
                     method:'POST',
                     headers:{
-                        'Content-Type':'application/json'
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
                     },
                     body:JSON.stringify({
-                        name:childResult[0],
-                        latitude:childResult[1],
-                        longitude:childResult[2],
-                        roadAddress:childResult[3],
-                        address:childResult[4]
+                        name: childResult.name,
+                        latitude: childResult.latitude,
+                        longitude: childResult.longitude,
+                        roadAddress: childResult.roadAddress,
+                        address: childResult.address
                     })
                 });
                 if(response.ok){
