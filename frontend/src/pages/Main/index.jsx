@@ -17,7 +17,7 @@ const Main = () => {
     const [map, setMap] = useState(null); // map 변수 추가
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
     const [isActive, setIsActive] = useState(false);
-    const { getCookies } = useCookieManager();
+    // const { getCookies } = useCookieManager();
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
