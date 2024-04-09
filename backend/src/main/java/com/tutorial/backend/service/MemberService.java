@@ -13,6 +13,9 @@ public interface MemberService {
     Boolean isNicknameOk(String nickname);
 
     Optional<Member> getMemberByMemberEmailAndProvider(String memberEmail, String memberProvider);
+
+    Optional<Member> getMemberByMemberEmailAndPassword(String memberEmail, String memberPassword);
+
     default Member toEntity(JoinForm loginForm){
         return Member.builder().memberEmail(loginForm.getEmail())
                 .memberPassword(loginForm.getPassword())

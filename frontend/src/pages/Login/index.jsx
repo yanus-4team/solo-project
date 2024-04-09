@@ -37,7 +37,7 @@ function LoginPage() {
             setSocialLogin(false);
         }
         console.log(socialLogin);
-    }, [navigate, getCookies, initialCheckDone, location.pathname]);
+    }, [navigate, getCookies, initialCheckDone, location.pathname, socialLogin]);
 
     const handleNoLoginClick = () => {
         navigate("/");

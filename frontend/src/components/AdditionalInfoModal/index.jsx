@@ -6,7 +6,6 @@ import SignComplete from "../SignComplete"
 import { useCookieManager } from "../../storage/cookieManager";
 
 function AdditionalInfoModal({ onClose }) {
-    const [additionalInfo, setAdditionalInfo] = useState({});
     const location = useLocation();
     const [memberNickName, setMemberNickName] = useState(''); 
     const params = new URLSearchParams(location.search);
@@ -82,7 +81,6 @@ function AdditionalInfoModal({ onClose }) {
     const handleSubmit = async (e) => { 
         e.preventDefault();
         // 서버로 데이터 전송 로직 등
-        console.log("추가 정보:", additionalInfo);
         setIsSignupComplete(true);
 
         try {
@@ -185,16 +183,16 @@ function AdditionalInfoModal({ onClose }) {
                         {passwordError && <S.ErrorMessage>{passwordError}</S.ErrorMessage>}
                     </S.PasswordContainer>
 
-                    <S.PasswordcheckContainer>
-                        <S.PasswordcheckLabel>비밀번호 확인</S.PasswordcheckLabel>
-                        <S.PasswordcheckInput
+                    <S.PasswordCheckContainer>
+                        <S.PasswordCheckLabel>비밀번호 확인</S.PasswordCheckLabel>
+                        <S.PasswordCheckInput
                             type="password"
                             name="confirmPassword"
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                         />
                         {!isConfirmPasswordValid && <S.ErrorMessage>비밀번호가 일치하지 않습니다.</S.ErrorMessage>}
-                    </S.PasswordcheckContainer>
+                    </S.PasswordCheckContainer>
 
 
                     <S.NickNameContainer>
@@ -212,7 +210,7 @@ function AdditionalInfoModal({ onClose }) {
                             </S.NickNameCheckButton>
                         </S.NickNameInputContainer>
                         {isNicknameValid && isNicknameChecked && <S.SuccessMessage>사용가능한 닉네임 입니다.</S.SuccessMessage>}
-                        {!isNicknameValid && isNicknameChecked && <S.ErrornickMessage>{nicknameError}</S.ErrornickMessage>}
+                        {!isNicknameValid && isNicknameChecked && <S.ErrorNickMessage>{nicknameError}</S.ErrorNickMessage>}
                     </S.NickNameContainer>
 
                     <S.BirthContainer> 

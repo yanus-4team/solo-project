@@ -8,6 +8,8 @@ import Logo from "../../components/icons/Logo";
 import { toast } from 'react-toastify';
 import Trash from "../../components/icons/Trash";
 import pinImage from '../../assets/current.png';
+import { useCookieManager } from '../../storage/cookieManager'; 
+
 const { kakao } = window;
 
 function Form(){
@@ -22,11 +24,11 @@ function Form(){
     const startIndex=(currentPage-1)*itemsPerPage;
     const endIndex=startIndex+itemsPerPage;
     const currentItems=placeResultArr.slice(startIndex,endIndex);
-
+    const { getCookies , removeCookies} = useCookieManager();
 
 
     useEffect(() => {
-        if (selectedPlaceIndex===null) return;
+        if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
         const lat = parseFloat(selectedPlace.latitude);
@@ -125,11 +127,14 @@ function Form(){
             });
         }
         else{
+            console.log(childResult);
             try{
-                const response=await fetch('http://localhost:8080/place/save',{
+                const localAccessToken = getCookies().accessToken;
+                const response = await fetch('http://localhost:8080/place/save',{
                     method:'POST',
                     headers:{
-                        'Content-Type':'application/json'
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
                     },
                     body:JSON.stringify({
                         name:childResult.name,
