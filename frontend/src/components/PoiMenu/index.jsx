@@ -12,16 +12,20 @@ function PoiMenu({ isPoiOpen }) {
       setErrorMessage("");
     }
   };
+  const applyFilter=()=>{
+
+  }
 
   return (
     <S.PoiContainer className={`${isPoiOpen ? "open" : ""}`}>
       {/* POI 관련 정보를 여기에 표시 */}
       <S.PoiContent>
         <S.Title>
-          필터
+          탐색 옵션 설정
         </S.Title>
+        <S.HelperText>동행자 수에 맞는 POI를 추천받으세요.</S.HelperText>
         <S.MemberContainer>
-          <S.Member>동승자수</S.Member>
+          <S.Member>동행자 수 :</S.Member>
           <S.MemberInput
             type="number"
             min="0"
@@ -32,7 +36,7 @@ function PoiMenu({ isPoiOpen }) {
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
       </S.PoiContent>
       <S.ComplectButton>
-        적용하기
+        설정 적용
       </S.ComplectButton>
     </S.PoiContainer>
   );

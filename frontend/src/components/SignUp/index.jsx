@@ -301,7 +301,7 @@ const validateEmail = (email) => {
         <S.TitleEmail>이메일</S.TitleEmail>
         <S.EmailInputButtonContainer>
 
-          <S.EmailInput ref={emailInputRef} type="text" placeholder="" onChange={() => setEmailFormatError(false)}/* 형식 오류 초기화*/ /> 
+          <S.EmailInput ref={emailInputRef} type="text" placeholder="" onChange={() => setEmailFormatError(false)} onKeyDown={(e) => e.key === 'Enter' && sendEmail(e)}/* 형식 오류 초기화*/ /> 
 
           {isEmailSent ? isCertificationCorrect ?   <S.EmailButton
           ref={emailButtonRef}
@@ -351,6 +351,7 @@ const validateEmail = (email) => {
                 placeholder="" 
                 onChange={(e) => setCertificationCode(e.target.value)}
                 disabled={isCodeExpired || isCertificationCorrect}
+                onKeyDown={(e) => e.key === 'Enter' && handleCertificationCheck(e)}
               />
               <S.CertiButton 
                 ref={certiButtonRef} 
@@ -386,6 +387,7 @@ const validateEmail = (email) => {
                 type="text"
                 value={nickname}
                 onChange={handleNicknameChange}
+                onKeyDown={(e) => e.key === 'Enter' && verifyNickname(e)}
               />
               <S.NicknameButton onClick={verifyNickname}>중복 확인</S.NicknameButton>
             </S.InputGroup>
@@ -433,7 +435,7 @@ const validateEmail = (email) => {
                       {passwordError && <S.PasswordError1>{passwordError}</S.PasswordError1>}
                     </S.PasswordContainer>
                     <S.TitleCheck>비밀번호 확인</S.TitleCheck>
-                    <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} />
+                    <S.CheckInput type="password" placeholder="" onChange={handleConfirmPasswordChange} onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}/>
                     {!isConfirmPasswordValid && <S.CheckError>비밀번호가 일치하지 않습니다.</S.CheckError>}
                     <S.SignButton onClick={handleSubmit} disabled={!canProceed}>회원가입</S.SignButton>
                   

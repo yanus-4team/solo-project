@@ -31,8 +31,8 @@ function Form(){
         if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
-        const lat = parseFloat(selectedPlace[3]);
-        const lng = parseFloat(selectedPlace[2]);
+        const lat = parseFloat(selectedPlace[4]);
+        const lng = parseFloat(selectedPlace[3]);
         const containerId='map-${selectedPlaceIndex}';
         let container=document.getElementById(containerId);
 

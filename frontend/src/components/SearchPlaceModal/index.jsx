@@ -30,8 +30,8 @@ function SearchPlaceModal({showSearchModalClick,searchPlaceResult}){
         const placeName=placeData[0]
         const placeAddress=placeData[1]
         const placeRoadAddress=placeData[2]
-        const latitude=placeData[3]
-        const longitude=placeData[4]
+        const latitude=placeData[4]
+        const longitude=placeData[3]
 
         // 백엔드 전송 데이터
         const sendVisitedData={
