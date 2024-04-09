@@ -23,33 +23,9 @@ function Form(){
     const endIndex=startIndex+itemsPerPage;
     const currentItems=placeResultArr.slice(startIndex,endIndex);
 
-    const handleSubmit=async()=>{
-        try{
-            const response=await fetch('http://localhost:8080/auth/form',{
-                method:'POST',
-                headers:{
-                    'Content-Type':'application.json'
-                },
-                body:JSON.stringify(placeResultArr)
-            });
-
-            if(response.ok){
-                const result=await response.json();
-                console.log(result);
-                toast.success('데이터가 성공적으로 전송되었습니다.');
-            }
-            else{
-                toast.error('데이터 전송에 실패했습니다.')
-            }
-        }
-        catch(error){
-            console.error('데이터 전송 중 오류 발생:',error);
-            toast.error('데이터 전송 중 오류가 발생했습니다.');
-        }
-    }
 
     useEffect(() => {
-        if (selectedPlaceIndex===null) return;
+        if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
         const lat = parseFloat(selectedPlace[3]);
@@ -141,7 +117,7 @@ function Form(){
     const handleSearchPlaceResult=async(childResult)=>{
         const isExist=placeResultArr.some((place)=>
             place[0]===childResult[0] && place[1]===childResult[1]);
-        
+          
         if(isExist){
             toast.error('이미 등록된 장소입니다.',{
                 autoClose:1500
