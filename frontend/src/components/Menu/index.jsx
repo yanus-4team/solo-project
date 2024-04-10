@@ -6,7 +6,7 @@ import ConfirmModal from "../ConfirmModal";
 import User from "../icons/User";
 
 
-function Menu({ isOpen, onClose }) {
+function Menu({ isOpen }) {
     const [isLogin, setIsLogin] = useState(false);
     const { getCookies , removeCookies} = useCookieManager();
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -23,8 +23,7 @@ function Menu({ isOpen, onClose }) {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json',
-                  // 예를 들어, JWT 토큰을 헤더에 추가하는 방법
-                  'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
+                  'Authorization': `Bearer ${localAccessToken}` 
                 }
               })
               .then(response => {
@@ -35,7 +34,7 @@ function Menu({ isOpen, onClose }) {
               })
               .then(data => {
                 // 응답 데이터(data)를 처리
-                setUserNickName(data.resultData.memberNickName);
+                setUserNickName(data.resultData);
               })
               .catch(error => {
                 console.error('There was a problem with your fetch operation:', error);

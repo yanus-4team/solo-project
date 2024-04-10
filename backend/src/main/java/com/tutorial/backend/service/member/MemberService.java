@@ -1,4 +1,4 @@
-package com.tutorial.backend.service;
+package com.tutorial.backend.service.member;
 
 import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.entity.Member;
@@ -21,4 +21,6 @@ public interface MemberService {
                 .memberPassword(loginForm.getPassword())
                 .build();
     }
+
+    Optional<Member> getMemberById(Long id);
 }

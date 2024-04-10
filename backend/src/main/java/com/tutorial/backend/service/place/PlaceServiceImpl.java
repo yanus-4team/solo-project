@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -29,4 +30,16 @@ public class PlaceServiceImpl implements PlaceService {
         }
 
     }
+
+
+    @Override
+    public List<Place> getPlaceListByMemberId(Long memberId) {
+        return placeRepository.findPlaceListByMemberId(memberId);
+    }
+
+    @Override
+    public List<Place> getAll() {
+        return placeRepository.findAll();
+    }
+
 }

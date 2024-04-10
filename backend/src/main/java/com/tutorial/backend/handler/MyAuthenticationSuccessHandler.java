@@ -1,10 +1,6 @@
 package com.tutorial.backend.handler;
 
-import com.tutorial.backend.controller.dto.TokenDto;
-import com.tutorial.backend.service.AuthService;
-import com.tutorial.backend.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

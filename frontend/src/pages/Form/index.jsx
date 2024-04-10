@@ -24,7 +24,7 @@ function Form(){
     const startIndex=(currentPage-1)*itemsPerPage;
     const endIndex=startIndex+itemsPerPage;
     const currentItems=placeResultArr.slice(startIndex,endIndex);
-    const { getCookies , removeCookies} = useCookieManager();
+    const { getCookies } = useCookieManager();
 
 
     useEffect(() => {

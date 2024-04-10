@@ -6,7 +6,8 @@ import com.tutorial.backend.controller.dto.ResultDto;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.entity.Place;
 import com.tutorial.backend.entity.PlaceHeader;
-import com.tutorial.backend.service.MemberService;
+import com.tutorial.backend.provider.MemberDetail;
+import com.tutorial.backend.service.member.MemberService;
 import com.tutorial.backend.service.place.PlaceService;
 import com.tutorial.backend.service.placeHeader.PlaceHeaderService;
 import lombok.RequiredArgsConstructor;
@@ -14,14 +15,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,50 +36,38 @@ public class PlaceController {
     private final MemberService memberService;
 
     @PostMapping("/save")
-    public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication){
+        MemberDetail principal = (MemberDetail) authentication.getPrincipal();
         PlaceHeader placeHeader = new PlaceHeader();
-        log.info(placeDto.toString());
-        log.info(userDetails.toString());
         placeHeader.setHeaderName(placeDto.getName());
-        Optional<Member> foundMember = memberService.getMemberByMemberEmailAndPassword(userDetails.getUsername(), userDetails.getPassword());
-        if (foundMember.isPresent()) {
-            placeHeader.setMember(foundMember.get());
+            placeHeader.setMember(principal.getMember());
             PlaceHeader foundPlaceHeader = placeHeaderService.saveOnePlaceHeader(placeHeader);
             placeService.saveOnePlace(foundPlaceHeader.getId(), placeDto);
-        }
-        return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "장소 등록에 성공했습니다!"));
+            return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "장소 등록에 성공했습니다!"));
 
-    }
+    };
+    @GetMapping("/getAll")
+    public ResponseEntity<ResultDto<Map<String, Object>>> getAllPlace(Authentication authentication){
+        if(authentication != null) {
+            MemberDetail memberDetail = (MemberDetail) authentication.getPrincipal();
+            log.info("MemberDetail: " + memberDetail.toString());
+            Optional<Member> foundMember = memberService.getMemberById(memberDetail.getId());
+            if(foundMember.isPresent()){
+                List<Place> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
 
-    ;
+                Map<String, Object> responseData = new HashMap<>();
+                responseData.put("placeList", placeList);
+                responseData.put("member", foundMember.orElse(null));
 
-    @PostMapping("/getPlaceRecomend")
-    public ResponseEntity<ResultDto<List<Place>>> getPlaceRecomend(@RequestParam int passengerNum, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        try {
-            URL url = new URL("http://localhost:3030/getPlaceRecomend");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공", responseData));
+            } else {
+                log.info("회원 정보를 찾을 수 없습니다.");
             }
-            reader.close();
-
-            System.out.println("Response from server: " + response.toString());
-
-            conn.disconnect();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            log.info("인증된 사용자 정보를 찾을 수 없습니다.");
         }
-        return null;
+        return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다.", null));
     }
-
 
 
 }

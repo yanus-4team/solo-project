@@ -5,7 +5,6 @@ import SignComplete from "../SignComplete";
 import { toast } from 'react-toastify';
 
 const SignUpModal = (props) => {
-  const [tooltipVisible, setTooltipVisible] = useState(false);
   const [isSignUpComplete, setIsSignUpComplete] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [timer, setTimer] = useState(180);
