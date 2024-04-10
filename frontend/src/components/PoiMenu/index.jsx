@@ -1,9 +1,10 @@
 import React, { useState } from "react"; // useState import 추가
 import * as S from "./styles";
+import { toast } from 'react-toastify';
 
-function PoiMenu({ isPoiOpen }) {
+function PoiMenu({ isPoiOpen,onFilterApllied }) {
   const [errorMessage, setErrorMessage] = useState(""); // useState 사용
-
+  const [companions,setCompanion]=useState("")
   const handleChange = (e) => {
     const value = e.target.value.trim(); // 입력 값의 앞뒤 공백을 제거
     if (!/^\d+$/.test(value) || value < 0 || value > 50) {
@@ -12,8 +13,33 @@ function PoiMenu({ isPoiOpen }) {
       setErrorMessage("");
     }
   };
-  const applyFilter=()=>{
+  const applyFilter=async()=>{
+    if(errorMessage){
+      alert("입력값을 확인해주세요.")
+      return;
+    }
+    try{
+      const response=await fetch("http://localhost:8080/",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body:JSON.stringify({companions:companions}),
+      });
 
+      if(!response.ok){
+        throw new Error("Failed to apply filter.")
+      }
+      
+      const result=await response.json();
+      console.log("Filter apllied: ",result);
+      onFilterApllied(result);
+      toast.success("설정이 적용되었습니다.",{autoClose:1500})
+    }
+    catch(error){
+      console.error("Error applying filter : ",error)
+      toast.error("설정 적용에 실패했습니다.",{autoClose:1500})
+    }
   }
 
   return (
@@ -30,12 +56,13 @@ function PoiMenu({ isPoiOpen }) {
             type="number"
             min="0"
             max="50"
+            value={companions}
             onChange={handleChange}
           />
         </S.MemberContainer>
         {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
       </S.PoiContent>
-      <S.ComplectButton>
+      <S.ComplectButton onClick={applyFilter}>
         설정 적용
       </S.ComplectButton>
     </S.PoiContainer>

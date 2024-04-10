@@ -34,28 +34,30 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceHeaderService placeHeaderService;
     private final MemberService memberService;
-    
+
     @PostMapping("/save")
-    public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication){
+    public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         PlaceHeader placeHeader = new PlaceHeader();
         log.info(placeDto.toString());
         log.info(userDetails.toString());
         placeHeader.setHeaderName(placeDto.getName());
         Optional<Member> foundMember = memberService.getMemberByMemberEmailAndPassword(userDetails.getUsername(), userDetails.getPassword());
-        if(foundMember.isPresent()){
+        if (foundMember.isPresent()) {
             placeHeader.setMember(foundMember.get());
             PlaceHeader foundPlaceHeader = placeHeaderService.saveOnePlaceHeader(placeHeader);
             placeService.saveOnePlace(foundPlaceHeader.getId(), placeDto);
         }
         return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "장소 등록에 성공했습니다!"));
 
-    };
+    }
+
+    ;
 
     @PostMapping("/getPlaceRecomend")
-    public ResponseEntity<ResultDto<List<Place>>> getPlaceRecomend(@RequestParam int passengerNum,Authentication authentication){
+    public ResponseEntity<ResultDto<List<Place>>> getPlaceRecomend(@RequestParam int passengerNum, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        
+
         try {
             URL url = new URL("http://localhost:3030/getPlaceRecomend");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -75,9 +77,8 @@ public class PlaceController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return null;
     }
-
 
 
 
