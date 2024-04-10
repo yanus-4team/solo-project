@@ -1,6 +1,6 @@
 package com.tutorial.backend.controller;
 
-import com.tutorial.backend.service.MemberService;
+import com.tutorial.backend.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;

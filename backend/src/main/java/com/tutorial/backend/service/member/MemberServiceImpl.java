@@ -1,8 +1,9 @@
-package com.tutorial.backend.service;
+package com.tutorial.backend.service.member;
 
 import com.tutorial.backend.controller.dto.JoinForm;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.repository.MemberRepository;
+import com.tutorial.backend.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = false)
 @Slf4j
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
 
@@ -42,6 +43,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Optional<Member> getMemberByMemberEmailAndPassword(String memberEmail, String memberPassword) {
         return memberRepository.findByMemberEmailAndMemberPassword(memberEmail, memberPassword);
+    }
+
+    @Override
+    public Optional<Member> getMemberById(Long id) {
+        return memberRepository.findById(id);
     }
 
 

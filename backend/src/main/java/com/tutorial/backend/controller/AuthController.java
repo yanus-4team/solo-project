@@ -3,14 +3,17 @@ package com.tutorial.backend.controller;
 
 import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
+import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.service.AuthService;
-import com.tutorial.backend.service.MemberService;
+import com.tutorial.backend.service.member.MemberService;
 import com.tutorial.backend.service.email.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +87,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody JoinForm joinForm) {
-        log.info(authService.login(joinForm).toString());
         return ResponseEntity.ok(authService.login(joinForm));
     }
 
@@ -94,21 +96,16 @@ public class AuthController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<ResultDto<Member>> getUserDetails(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    public ResponseEntity<ResultDto<String>> getUserDetails( Authentication authentication) {
         // 사용자 정보를 기반으로 회원 정보를 조회하여 반환
-        try{
-            Optional<Member> member = authService.getMemberByEmail(userDetails.getUsername());
-            return member.map(value ->
-                    ResponseEntity.ok()
-                            .body(ResultDto.res(HttpStatus.ACCEPTED, "회원정보를 조회해왔습니다", value)))
-                    .orElseGet(() -> ResponseEntity.badRequest()
-                            .body(ResultDto.res(HttpStatus.NOT_FOUND, "회원이 존재하지 않습니다."))
-                    );
+        MemberDetail principal = (MemberDetail) authentication.getPrincipal();
+        try {
+            return ResponseEntity.ok()
+                    .body(ResultDto.res(HttpStatus.ACCEPTED, "회원정보를 조회해왔습니다", principal.getName()));
         } catch (Exception exception) {
-            log.error("An unexpected error occurred while sending verification email.", exception);
+            log.error("회원 정보를 조회하는 중에 오류가 발생했습니다.", exception);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "예상치 못한 문제가 생겼습니다. 다시 시도해주세요"));
+                    .body(ResultDto.res(HttpStatus.INTERNAL_SERVER_ERROR, "회원 정보를 조회하는 중에 오류가 발생했습니다."));
         }
     }
 
