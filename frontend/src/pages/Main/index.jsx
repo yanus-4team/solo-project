@@ -40,7 +40,8 @@ const Main = () => {
     };
 
     const searchKeyword=()=>{
-        const keywords=['선비촌','시일 북스앤웍스','남산공원 강릉','런던베이글뮤지엄','멘야이로']
+        // const keywords=['선비촌','시일 북스앤웍스','남산공원 강릉','런던베이글뮤지엄','멘야이로']
+        const keywords=['서귀포올래시장']
         
         if(keywords.length===0){
             alert('적합한 장소가 없습니다.');
