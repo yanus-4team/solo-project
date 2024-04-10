@@ -40,7 +40,7 @@ const Main = () => {
     };
 
     const searchKeyword=()=>{
-        const keywords=['멘야이로', '어서어서','남산공원 강릉','성심당 본점','이케아 고양점']
+        const keywords=['선비촌','시일 북스앤웍스','남산공원 강릉','런던베이글뮤지엄','멘야이로']
         
         if(keywords.length===0){
             alert('적합한 장소가 없습니다.');

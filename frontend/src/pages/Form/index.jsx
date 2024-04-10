@@ -191,7 +191,7 @@ function Form(){
                 </div>
             </div>
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            <Logo  alt="logo" width="140px" height="140px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+            <a  href='/'><Logo  alt="logo" width="140px" height="140px" color1="var(--sub-color2)" color2="var(--sub-color1)"/></a>
             <div className="FormBox">
                 <div className="FormField">
                     <input
