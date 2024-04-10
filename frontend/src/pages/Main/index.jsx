@@ -18,6 +18,8 @@ const Main = () => {
     const [isCurrentLocationVisible, setCurrentLocationVisible] = useState(false); // 현재 위치 버튼 보이기 여부 상태 추가
     const [isactive, setIsactive] = useState(false);
     const [isHovered, setIsHovered]=useState(false);
+    const ps=new kakao.maps.services.Places();
+    var infowindow = new kakao.maps.InfoWindow();
 
     const toggleMenu = () => {
         if (isPoiOpen) { // POI 모달이 열려 있는지 확인
@@ -37,84 +39,113 @@ const Main = () => {
         setIsOpen(false); // 메뉴 닫기
     };
 
-
-    const SearchPOIBtn=()=>{
-        var POIImageSrc=PoiImage,
-            POIImageSize=new kakao.maps.Size(36,40),
-            POIImageOption={offset:new kakao.maps.Point(27,69)};
-
-        // POI 마커 이미지정보를 가진 마커이미지 생성
-        var POIMarkerImage=new kakao.maps.MarkerImage(POIImageSrc,POIImageSize,POIImageOption),
-            POIMarkerPosition=new kakao.maps.LatLng(37.54699,127.09598);
-
-        // POI 마커 생성
-        // var POIMarker=new kakao.maps.Marker({
-        //     position:POIMarkerPosition,
-        //     image:POIMarkerImage
-        // });
-
-        // POI 마커가 지도 위에 표시되도록 설정
-        // POIMarker.setMap(map);
+    const searchKeyword=()=>{
+        const keywords=['멘야이로', '어서어서','남산공원 강릉','성심당 본점','이케아 고양점']
         
-        // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능
-        // var POIContent='<div class="customoverlay">' +
-        // '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-        // '    <span class="title"></span>' +
-        // '  </a>' +
-        // '</div>';
+        if(keywords.length===0){
+            alert('적합한 장소가 없습니다.');
+            return(false);
+        }
 
-        // 커스텀 오버레이가 표시될 위치
-        // var POIPosition=new kakao.maps.LatLng(37.54699, 127.09598);
-
-        // 커스텀 오버레이 생성
-        // var customOverlay = new kakao.maps.CustomOverlay({
-        //     map: map,
-        //     position: POIPosition,
-        //     content: POIContent,
-        //     yAnchor: 1 
-        // });
-
-        // 주소-좌표 변환 객체 생성
-        var geocoder = new kakao.maps.services.Geocoder();
-
-        // 주소로 좌표를 검색
-        geocoder.addressSearch('경북 안동시 송천1길 146-9', function(result, status) {
-
-            // 정상적으로 검색이 완료시
-            if (status === kakao.maps.services.Status.OK) {
-                console.log(result)
-                var POIPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                // 결과값으로 받은 위치를 마커로 표시
-                var POIMarker = new kakao.maps.Marker({
-                    map: map,
-                    position: POIPosition,
-                    image:POIMarkerImage
-                });
-
-                // 인포윈도우로 설명 표시
-                var infoWindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;font-weight:bold;">POI임</div>'
-                });
-                
-                // 마우스오버 이벤트
-                kakao.maps.event.addListener(POIMarker, 'mouseover', function() {
-                    // 마우스오버 이벤트가 발생시 인포윈도우 표시
-                    infoWindow.open(map, POIMarker);
-                });
-  
-                // 마우스아웃 이벤트
-                kakao.maps.event.addListener(POIMarker, 'mouseout', function() {
-                    // 마우스아웃 이벤트가 발생시 인포윈도우 제거
-                    infoWindow.close();
-                });
-
-                // 지도의 중심을 결과값으로 받은 위치로 이동
-                map.setCenter(POIPosition);
-            } 
-        });    
+        keywords.forEach(function(keyword){
+            keyword=keyword.trim();
+            if(keyword){
+                ps.keywordSearch(keyword,placeSearchCB)
+            }
+        });
     }
 
+    const placeSearchCB=(data,status)=>{
+        console.log(data)
+        if(status===kakao.maps.services.Status.OK){
+            displayPlaces(data);
+        }
+        else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+            alert('검색 결과가 존재하지 않습니다.');
+        }
+        else if (status === kakao.maps.services.Status.ERROR) {
+            alert('검색 결과 중 오류가 발생했습니다.');
+        }
+    }
+
+    // 마커 표출 함수
+    const displayPlaces=(places)=>{
+        const fragment = document.createDocumentFragment()
+        const bounds = new kakao.maps.LatLngBounds()
+        const listStr = ''
+
+        for ( var i=0; i<places.length; i++ ) {
+            // 첫 번째 검색 결과만 처리합니다.
+            if (places.length > 0) {
+                var firstPlace = places[0];
+                var placePosition = new kakao.maps.LatLng(firstPlace.y, firstPlace.x),
+                marker = addMarker(placePosition);
+
+                // LatLngBounds 객체에 좌표를 추가
+                bounds.extend(placePosition);
+
+                // 마커 mouseover
+                kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    displayInfowindow(marker, firstPlace.place_name);
+                });
+                kakao.maps.event.addListener(marker, 'mouseout', function() {
+                infowindow.close();
+                });
+            }
+        }
+        // 지도 범위 재설정
+        map.setBounds(bounds);
+
+        //     // 마커를 생성하고 지도에 표시
+        //     var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+        //         marker = addMarker(placePosition, i);
+    
+        //     // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
+        //     bounds.extend(placePosition);
+    
+        //     // 마커 mouseover
+        //     (function(marker, title) {
+        //         kakao.maps.event.addListener(marker, 'mouseover', function() {
+        //             displayInfowindow(marker, title);
+        //         });
+    
+        //         kakao.maps.event.addListener(marker, 'mouseout', function() {
+        //             infowindow.close();
+        //         });
+        //     })(marker, places[i].place_name);
+        // }
+        // map.setBounds(bounds);
+    }
+
+
+    // 마커생성 및 지도에 마커 표시
+    const addMarker=(position,idx,title)=>{
+        const imageSrc=PoiImage;
+        const imageSize=new kakao.maps.Size(36,38);
+        const imgOptions={offset:new kakao.maps.Point(27,69)};
+
+        const markerImage=new kakao.maps.MarkerImage(imageSrc,imageSize,imgOptions);
+
+        const marker=new kakao.maps.Marker({
+            position:position,
+            image:markerImage
+        });
+
+        marker.setMap(map);
+        // marker.push(marker);
+
+        return marker;
+    }
+
+    // 인포윈도우에 장소명 표시
+    const displayInfowindow=(marker,title)=>{
+        const content='<div style="width:150px;text-align:center;padding:6px 0;font-weight:bold;">'+title+'</div>';
+
+        infowindow.setContent(content);
+        infowindow.open(map,marker)
+    }
+
+    // 지도 기능 추가 함수
     useEffect(() => {
         const geoLocation = () => {
             if (navigator.geolocation) {
@@ -195,7 +226,7 @@ const Main = () => {
                 </S.CurrentLocationBtn>
             )}
             <S.TapContainer>
-                <S.LogoContainer onClick={SearchPOIBtn}>
+                <S.LogoContainer onClick={searchKeyword}>
                     <Logo  alt="logo" width="40px" height="40px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
                 </S.LogoContainer>
                 <S.PoiToggleBtnBox onClick={togglePoiMenu}>
@@ -220,6 +251,7 @@ const Main = () => {
                 </S.MemberToggleBtnBox>
             </S.TapContainer>
             <PoiMenu isPoiOpen={isPoiOpen} onClose={() => setIsPoiOpen(false)} />
+            {/* <PoiMenu isPoiOpen={isPoiOpen} onFilterApplied={searchPOIBtn} /> */}
         </S.MapContainer>
     )
 }

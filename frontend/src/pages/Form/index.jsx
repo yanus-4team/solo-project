@@ -28,11 +28,28 @@ function Form(){
 
 
     useEffect(() => {
+        const fetchPlaces = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/place/');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch places');
+                }
+                const data = await response.json();
+                setPlaceResultArr(data);
+            }
+            catch (error) {
+                console.error("Error fetching places: ", error);
+            }
+        };
+        fetchPlaces();
+    }, []);
+
+    useEffect(() => {
         if (selectedPlaceIndex === null) return;
 
         const selectedPlace=placeResultArr[selectedPlaceIndex];
-        const lat = parseFloat(selectedPlace[3]);
-        const lng = parseFloat(selectedPlace[2]);
+        const lat = parseFloat(selectedPlace.latitude);
+        const lng = parseFloat(selectedPlace.longitude);
         const containerId='map-${selectedPlaceIndex}';
         let container=document.getElementById(containerId);
 
@@ -102,7 +119,7 @@ function Form(){
 
     // const handleSearchPlaceResult=(childResult)=>{
     //     const isExist=placeResultArr.some((place)=>
-    //         place[0]===childResult[0] && place[1] === childResult[1]);
+    //         place.name===childResult.name && place.address === childResult.address);
     //     if (isExist){
     //         toast.error('이미 등록된 장소입니다.',{
     //             autoClose:1500
@@ -119,8 +136,8 @@ function Form(){
 
     const handleSearchPlaceResult=async(childResult)=>{
         const isExist=placeResultArr.some((place)=>
-            place[0]===childResult[0] && place[1]===childResult[1]);
-          
+            place.name===childResult.name && place.address===childResult.address);
+        
         if(isExist){
             toast.error('이미 등록된 장소입니다.',{
                 autoClose:1500
@@ -137,11 +154,11 @@ function Form(){
                         'Authorization': `Bearer ${localAccessToken}` // jwtToken은 JWT 토큰 값
                     },
                     body:JSON.stringify({
-                        name: childResult.name,
-                        latitude: childResult.latitude.toString(),
-                        longitude: childResult.longitude.toString(),
-                        roadAddress: childResult.roadAddress.toString(),
-                        address: childResult.address.toString()
+                        name:childResult.name,
+                        latitude:childResult.latitude,
+                        longitude:childResult.longitude,
+                        roadAddress:childResult.roadAddress,
+                        address:childResult.address
                     })
                 });
                 if(response.ok){
@@ -190,8 +207,8 @@ function Form(){
                                 className="ListBox"
                                 key={index}
                                 onClick={()=>handlePlaceClick(index+(currentPage-1)*itemsPerPage)}>
-                                <span className="PlaceName">{value[0]} </span>
-                                <span>| {value[1]}</span>
+                                <span className="PlaceName">{value.name} </span>
+                                <span>| {value.address}</span>
                                 <button className="DeleteBtn" onClick={()=>handleDeletePlace(index+startIndex)}>
                                     <Trash width="24px" height="24px" color="var(--primary-color)"/>
                                 </button>

@@ -34,7 +34,7 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceHeaderService placeHeaderService;
     private final MemberService memberService;
-    
+
     @PostMapping("/save")
     public ResponseEntity<ResultDto<String>> saveOnePlace(@RequestBody PlaceDto placeDto, Authentication authentication){
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
