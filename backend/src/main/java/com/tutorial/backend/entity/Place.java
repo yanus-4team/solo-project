@@ -18,9 +18,9 @@ public class Place {
 
     private String placeName;
 
-    private String placeLatitude;
+    private double placeLatitude;
 
-    private String placeLongtitude;
+    private double placeLongtitude;
 
     private String placeStreetNameAddress;
 
@@ -31,7 +31,7 @@ public class Place {
     private PlaceHeader placeHeader;
 
     @Builder
-    public Place(Long id, String placeName, String placeLatitude, String placeLongtitude, String placeStreetNameAddress, String placeLocalNameAddress, PlaceHeader placeHeader) {
+    public Place(Long id, String placeName, double placeLatitude, double placeLongtitude, String placeStreetNameAddress, String placeLocalNameAddress, PlaceHeader placeHeader) {
         this.id = id;
         this.placeName = placeName;
         this.placeLatitude = placeLatitude;
@@ -40,4 +40,16 @@ public class Place {
         this.placeLocalNameAddress = placeLocalNameAddress;
         this.placeHeader = placeHeader;
     }
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id=" + id +
+                ", placeName='" + placeName + '\'' +
+                ", placeLatitude='" + placeLatitude + '\'' +
+                ", placeLongitude='" + placeLongtitude + '\'' +
+                ", placeStreetNameAddress='" + placeStreetNameAddress + '\'' +
+                ", placeLocalNameAddress='" + placeLocalNameAddress + '\'' +
+                '}';
+    }
+
 }

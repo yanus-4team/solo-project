@@ -1,11 +1,14 @@
 package com.tutorial.backend.service.placeHeader;
 
+import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.entity.PlaceHeader;
 import com.tutorial.backend.repository.PlaceHeaderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -20,4 +23,5 @@ public class PlaceHeaderServiceImpl implements PlaceHeaderService {
     public PlaceHeader saveOnePlaceHeader(PlaceHeader placeHeader) {
         return placeHeaderRepository.save(placeHeader);
     }
+
 }
