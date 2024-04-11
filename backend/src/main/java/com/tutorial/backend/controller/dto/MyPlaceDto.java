@@ -20,17 +20,17 @@ public class MyPlaceDto {
 
     private double longitude;
 
-    private String streetNameAddress;
+    private String roadAddress;
 
-    private String localNameAddress;
+    private String address;
 
     @Builder
-    public MyPlaceDto(Long id, String name, double latitude, double longitude, String streetNameAddress, String localNameAddress) {
+    public MyPlaceDto(Long id, String name, double latitude, double longitude, String roadAddress, String address) {
         this.id = id;
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.streetNameAddress = streetNameAddress;
-        this.localNameAddress = localNameAddress;
+        this.roadAddress = roadAddress;
+        this.address = address;
     }
 }

@@ -1,12 +1,9 @@
 package com.tutorial.backend.controller.dto;
 
 
-import com.tutorial.backend.entity.Place;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
