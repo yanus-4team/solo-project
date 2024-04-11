@@ -6,9 +6,9 @@ import SignComplete from "../SignComplete"
 import { useCookieManager } from "../../storage/cookieManager";
 
 function AdditionalInfoModal({ onClose }) {
-    const location = useLocation();
-    const [memberNickName, setMemberNickName] = useState(''); 
+    const location = useLocation(); // useLocation 훅을 이용해 location 가져오기
     const params = new URLSearchParams(location.search);
+    const [memberNickName, setMemberNickName] = useState(''); 
     const [memberEmail] = useState(params.get('email'));
     const [isNicknameChecked, setIsNicknameChecked] = useState(false);
     const [isNicknameValid, setIsNicknameValid] = useState(false);

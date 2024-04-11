@@ -112,37 +112,6 @@ public class AuthController {
         return ResponseEntity.ok().body(memberService.isNicknameOk(nickname));
     }
 
-    @GetMapping("/loginInfo")
-    public void createToken(HttpServletResponse response, Authentication authentication) throws IOException{
-        //oAuth2User.toString() 예시 : Name: [2346930276], Granted Authorities: [[USER]], User Attributes: [{id=2346930276, provider=kakao, name=김준우, email=bababoll@naver.com}]
-
-            MemberDetail principal = (MemberDetail) authentication.getPrincipal();
-            log.info(principal.toString());
-            if (principal != null) {
-
-                String email = principal.getUsername();
-                String provider =  principal.getMember().getMemberProvider();
-                TokenDto tokenDto = authService.socialLogin(email, provider); // AuthService를 통해 소셜 로그인 처리
-                Optional<Member> foundMember = memberService.getMemberByMemberEmailAndProvider(email,provider);
-                boolean isFirst = foundMember.get().getMemberPassword() == null;
-                String accessToken = tokenDto.getAccessToken();
-                String refreshToken = tokenDto.getRefreshToken();
-                System.out.println("SuccessHandler oAuth2User: " + principal);
-
-                String redirectUrl = UriComponentsBuilder.fromUriString(REDIRECT_URI)
-                        .queryParam("accessToken", accessToken)
-                        .queryParam("refreshToken", refreshToken)
-                        .queryParam("isFirst",isFirst)
-                        .build()
-                        .encode(StandardCharsets.UTF_8)
-                        .toUriString();
-
-                response.sendRedirect(redirectUrl);
-            } else {
-                log.info("principal is null");
-            }
-    }
-
 
 
 }

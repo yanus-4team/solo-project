@@ -8,6 +8,7 @@ import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.entity.RefreshToken;
 import com.tutorial.backend.entity.StatusType;
 import com.tutorial.backend.jwt.TokenProvider;
+import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.repository.MemberRepository;
 import com.tutorial.backend.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +57,7 @@ public class AuthService {
         // 2. 실제로 검증 (사용자 비밀번호 체크) 이 이루어지는 부분
         //    authenticate 메서드가 실행이 될 때 CustomUserDetailsService 에서 만들었던 loadUserByUsername 메서드가 실행됨
         log.info("Service login"+authenticationToken.toString());
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        MemberDetail authentication =(MemberDetail) authenticationManagerBuilder.getObject().authenticate(authenticationToken).getPrincipal();
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
@@ -85,10 +86,13 @@ public class AuthService {
         }
 
         // 3. 사용자 정보를 기반으로 Authentication 객체 생성
-        Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, null);
+        Authentication principal = new UsernamePasswordAuthenticationToken(email, null, null);
 
+        MemberDetail memberDetail = new MemberDetail( member.get()); // 사용자 정보를 생성자에 전달하여 MemberDetail 객체를 생성
+
+        log.info(memberDetail.toString());
         // 4. 인증 정보를 기반으로 JWT 토큰 생성
-        TokenDto tokenDto = tokenProvider.generateTokenDto(authentication);
+        TokenDto tokenDto = tokenProvider.generateTokenDto(memberDetail);
 
         // 5. RefreshToken 저장
         RefreshToken refreshToken = RefreshToken.builder()
@@ -110,7 +114,7 @@ public class AuthService {
         }
 
         // 2. Access Token 에서 Member ID 가져오기
-        Authentication authentication = tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
+        MemberDetail authentication =(MemberDetail) tokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
 
         // 3. 저장소에서 Member ID 를 기반으로 Refresh Token 값 가져옴
         RefreshToken refreshToken = refreshTokenRepository.findByKey(authentication.getName())

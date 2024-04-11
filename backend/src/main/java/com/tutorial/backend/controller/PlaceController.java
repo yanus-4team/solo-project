@@ -46,26 +46,14 @@ public class PlaceController {
             placeService.saveOnePlace(foundPlaceHeader.getId(), placeDto);
             return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "장소 등록에 성공했습니다!"));
 
-    };
-    @GetMapping("/getAll")
-    public ResponseEntity<ResultDto<List<MyPlaceDto>>> getAllPlace(Authentication authentication){
-        if(authentication != null) {
-            MemberDetail memberDetail = (MemberDetail) authentication.getPrincipal();
-            Optional<Member> foundMember = memberService.getMemberById(memberDetail.getId());
-            if(foundMember.isPresent()){
-                List<MyPlaceDto> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
-                log.info("컨트롤러에서 뽑은 placeList : "+placeList.toString());
-
-                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공", placeList));
-            } else {
-                log.info("회원 정보를 찾을 수 없습니다.");
-                return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다."));
-            }
-        } else {
-            log.info("인증된 사용자 정보를 찾을 수 없습니다.");
-            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다."));
-        }
     }
+    @GetMapping("/getAll")
+    public ResponseEntity<ResultDto<List<MyPlaceDto>>> getAllPlace(Authentication authentication) {
+            MemberDetail memberDetail = (MemberDetail) authentication.getPrincipal();
+            List<MyPlaceDto> placeList = placeService.getPlaceListByMemberId(memberDetail.getId());
+            log.info("컨트롤러에서 뽑은 placeList : " + placeList.toString());
 
+            return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공", placeList));
+    }
 
 }
