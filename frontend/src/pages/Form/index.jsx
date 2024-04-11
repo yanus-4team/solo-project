@@ -90,7 +90,6 @@ function Form(){
                 }
                 const data = await response.json();
                 setPlaceResultArr(data.resultData);
-                console.log(data.resultData);
             }
             catch (error) {
                 console.error("Error fetching places: ", error);
