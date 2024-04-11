@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Trash from "../../components/icons/Trash";
 import pinImage from '../../assets/current.png';
 import { useCookieManager } from '../../storage/cookieManager'; 
+import { useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 
@@ -18,6 +19,7 @@ function Form(){
     const [placeResultArr,setPlaceResultArr]=useState([]);
     const [currentPage,setCurrentPage]=useState(1);
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState(null);
+    const navigate = useNavigate();
 
     const itemsPerPage=7;
     const pages=Math.ceil(placeResultArr.length/itemsPerPage);
@@ -26,23 +28,6 @@ function Form(){
     const currentItems=placeResultArr.slice(startIndex,endIndex);
     const { getCookies } = useCookieManager();
 
-
-    useEffect(() => {
-        const fetchPlaces = async () => {
-            try {
-                const response = await fetch('http://localhost:8080/place/');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch places');
-                }
-                const data = await response.json();
-                setPlaceResultArr(data);
-            }
-            catch (error) {
-                console.error("Error fetching places: ", error);
-            }
-        };
-        fetchPlaces();
-    }, []);
 
     useEffect(() => {
         if (selectedPlaceIndex === null) return;
@@ -77,7 +62,46 @@ function Form(){
         return () => {
           container.remove();
         };
-    }, [selectedPlaceIndex,currentPage]);
+    }, [selectedPlaceIndex,currentPage,placeResultArr]);
+
+    useEffect(() => {
+        const fetchPlaces = async () => {
+            try {
+                const localAccessToken = getCookies().accessToken;
+                if(!localAccessToken){
+                    toast.error('액세스 토큰이 없습니다. 다시 로그인해주세요.', {
+                        autoClose: 1500,
+                    });
+                    navigate('/login'); // 로그인 페이지로 이동
+                    return;
+                }
+
+                const response = await fetch('http://localhost:8080/place/getAll',{
+                    method:'GET',
+                    headers:{
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localAccessToken}`
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData=await response.json();
+                    throw new Error(`[${response.status}] ${errorData.message}`);
+                }
+                const data = await response.json();
+                setPlaceResultArr(data.resultData);
+                console.log(data.resultData);
+            }
+            catch (error) {
+                console.error("Error fetching places: ", error);
+                toast.error('방문기록을 가져오는 중 오류가 발생했습니다.', {
+                    autoClose: 1500,
+                });
+            }
+        };
+        fetchPlaces();
+    }, []);
+
 
     const handlePlaceClick = (index) => {
         if (selectedPlaceIndex === index) {
@@ -191,7 +215,7 @@ function Form(){
                 </div>
             </div>
             <Menu isOpen={isOpen} onClose={handleCloseMenu} />
-            <Logo  alt="logo" width="140px" height="140px" color1="var(--sub-color2)" color2="var(--sub-color1)"/>
+            <a  href='/'><Logo  alt="logo" width="140px" height="140px" color1="var(--sub-color2)" color2="var(--sub-color1)"/></a>
             <div className="FormBox">
                 <div className="FormField">
                     <input

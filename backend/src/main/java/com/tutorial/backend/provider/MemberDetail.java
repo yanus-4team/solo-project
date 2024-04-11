@@ -32,6 +32,9 @@ public class MemberDetail implements UserDetails {
         return member.getMemberName();
     }
 
+    public String getNickName(){
+        return member.getMemberNickName();
+    }
 
     @Override
     public String getPassword() {

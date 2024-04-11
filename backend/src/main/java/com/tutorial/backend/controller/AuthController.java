@@ -5,16 +5,13 @@ import com.tutorial.backend.controller.dto.*;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.provider.MemberDetail;
 import com.tutorial.backend.service.AuthService;
-import com.tutorial.backend.service.member.MemberService;
 import com.tutorial.backend.service.email.MailService;
+import com.tutorial.backend.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -101,7 +98,7 @@ public class AuthController {
         MemberDetail principal = (MemberDetail) authentication.getPrincipal();
         try {
             return ResponseEntity.ok()
-                    .body(ResultDto.res(HttpStatus.ACCEPTED, "회원정보를 조회해왔습니다", principal.getName()));
+                    .body(ResultDto.res(HttpStatus.ACCEPTED, "회원정보를 조회해왔습니다", principal.getNickName()));
         } catch (Exception exception) {
             log.error("회원 정보를 조회하는 중에 오류가 발생했습니다.", exception);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -118,12 +115,13 @@ public class AuthController {
     @GetMapping("/loginInfo")
     public void createToken(HttpServletResponse response, Authentication authentication) throws IOException{
         //oAuth2User.toString() 예시 : Name: [2346930276], Granted Authorities: [[USER]], User Attributes: [{id=2346930276, provider=kakao, name=김준우, email=bababoll@naver.com}]
-            OAuth2User principal = (OAuth2User) authentication.getPrincipal();
+
+            MemberDetail principal = (MemberDetail) authentication.getPrincipal();
             log.info(principal.toString());
             if (principal != null) {
 
-                String email = principal.getAttribute("email");
-                String provider = (String) principal.getAttribute("provider");
+                String email = principal.getUsername();
+                String provider =  principal.getMember().getMemberProvider();
                 TokenDto tokenDto = authService.socialLogin(email, provider); // AuthService를 통해 소셜 로그인 처리
                 Optional<Member> foundMember = memberService.getMemberByMemberEmailAndProvider(email,provider);
                 boolean isFirst = foundMember.get().getMemberPassword() == null;

@@ -1,5 +1,6 @@
 package com.tutorial.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class PlaceHeader {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @JsonBackReference
     private Member member;
 
     @OneToMany(mappedBy = "placeHeader", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
