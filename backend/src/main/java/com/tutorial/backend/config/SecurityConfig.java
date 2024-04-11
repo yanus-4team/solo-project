@@ -63,7 +63,9 @@ public class SecurityConfig {
                 .cors()
                 .and()
 
+//                csrf 공격 방어
                 .csrf().disable()
+
 
                 // exception handling 할 때 만든 클래스를 추가
                 .exceptionHandling()
@@ -88,8 +90,10 @@ public class SecurityConfig {
                 .antMatchers(AUTH_PATH).permitAll()
                 .antMatchers(OAUTH_PATH).permitAll()
                 .antMatchers(PLACE_PATH).permitAll()
+//                 member로 시작하는 경로는 USER라는 권한이 있어야 접근 가능
                 .antMatchers(MEMBER_PATH).hasRole(Authority.USER.name())
-                .antMatchers(ADMIN_PATH).hasRole(Authority.USER.name())
+//                ADMIN으로 시작하는 경로는 ADMIN이라는 권한이 있어야 접근 가능
+                .antMatchers(ADMIN_PATH).hasRole(Authority.ADMIN.name())
                 .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
                 // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
@@ -97,6 +101,7 @@ public class SecurityConfig {
                 .apply(new JwtSecurityConfig(tokenProvider))
 
                 .and()
+//                OAuth2.0사용을 시작하겠다.
                 .oauth2Login()
                 .successHandler(new MyAuthenticationSuccessHandler())
                 .userInfoEndpoint()

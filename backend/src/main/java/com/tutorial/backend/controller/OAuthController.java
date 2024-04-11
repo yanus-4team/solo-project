@@ -33,6 +33,7 @@ public class OAuthController {
         String accessToken = tokenDto.getAccessToken();
         String refreshToken = tokenDto.getRefreshToken();
 
+
         // 토큰 정보를 포함하여 리다이렉트
         String redirectUrl = UriComponentsBuilder.fromUriString(REDIRECT_URI)
                 .queryParam("email", email)
