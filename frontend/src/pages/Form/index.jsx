@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Trash from "../../components/icons/Trash";
 import pinImage from '../../assets/current.png';
 import { useCookieManager } from '../../storage/cookieManager'; 
+import { useNavigate } from "react-router-dom";
 
 const { kakao } = window;
 
@@ -18,6 +19,7 @@ function Form(){
     const [placeResultArr,setPlaceResultArr]=useState([]);
     const [currentPage,setCurrentPage]=useState(1);
     const [selectedPlaceIndex, setSelectedPlaceIndex] = useState(null);
+    const navigate = useNavigate();
 
     const itemsPerPage=7;
     const pages=Math.ceil(placeResultArr.length/itemsPerPage);
@@ -70,6 +72,7 @@ function Form(){
                     toast.error('액세스 토큰이 없습니다. 다시 로그인해주세요.', {
                         autoClose: 1500,
                     });
+                    navigate('/login'); // 로그인 페이지로 이동
                     return;
                 }
 
@@ -86,7 +89,7 @@ function Form(){
                     throw new Error(`[${response.status}] ${errorData.message}`);
                 }
                 const data = await response.json();
-                setPlaceResultArr(data.data.placeList);
+                setPlaceResultArr(data.resultData);
             }
             catch (error) {
                 console.error("Error fetching places: ", error);
@@ -96,7 +99,7 @@ function Form(){
             }
         };
         fetchPlaces();
-    }, [getCookies]);
+    }, []);
 
 
     const handlePlaceClick = (index) => {

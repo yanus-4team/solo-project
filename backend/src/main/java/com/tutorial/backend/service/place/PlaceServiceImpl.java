@@ -1,5 +1,6 @@
 package com.tutorial.backend.service.place;
 
+import com.tutorial.backend.controller.dto.MyPlaceDto;
 import com.tutorial.backend.controller.dto.PlaceDto;
 import com.tutorial.backend.entity.Place;
 import com.tutorial.backend.entity.PlaceHeader;
@@ -33,7 +34,7 @@ public class PlaceServiceImpl implements PlaceService {
 
 
     @Override
-    public List<Place> getPlaceListByMemberId(Long memberId) {
+    public List<MyPlaceDto> getPlaceListByMemberId(Long memberId) {
         return placeRepository.findPlaceListByMemberId(memberId);
     }
 

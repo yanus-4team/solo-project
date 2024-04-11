@@ -1,6 +1,7 @@
 package com.tutorial.backend.controller;
 
 
+import com.tutorial.backend.controller.dto.MyPlaceDto;
 import com.tutorial.backend.controller.dto.PlaceDto;
 import com.tutorial.backend.controller.dto.ResultDto;
 import com.tutorial.backend.entity.Member;
@@ -47,26 +48,23 @@ public class PlaceController {
 
     };
     @GetMapping("/getAll")
-    public ResponseEntity<ResultDto<Map<String, Object>>> getAllPlace(Authentication authentication){
+    public ResponseEntity<ResultDto<List<MyPlaceDto>>> getAllPlace(Authentication authentication){
         if(authentication != null) {
             MemberDetail memberDetail = (MemberDetail) authentication.getPrincipal();
-            log.info("MemberDetail: " + memberDetail.toString());
             Optional<Member> foundMember = memberService.getMemberById(memberDetail.getId());
             if(foundMember.isPresent()){
-                List<Place> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
+                List<MyPlaceDto> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
+                log.info("컨트롤러에서 뽑은 placeList : "+placeList.toString());
 
-                Map<String, Object> responseData = new HashMap<>();
-                responseData.put("placeList", placeList);
-                responseData.put("member", foundMember.orElse(null));
-
-                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공", responseData));
+                return ResponseEntity.ok().body(ResultDto.res(HttpStatus.ACCEPTED, "성공", placeList));
             } else {
                 log.info("회원 정보를 찾을 수 없습니다.");
+                return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다."));
             }
         } else {
             log.info("인증된 사용자 정보를 찾을 수 없습니다.");
+            return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다."));
         }
-        return ResponseEntity.badRequest().body(ResultDto.res(HttpStatus.BAD_REQUEST, "사용자 정보를 찾을 수 없습니다.", null));
     }
 
 

@@ -1,5 +1,6 @@
 package com.tutorial.backend.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tutorial.backend.controller.dto.MyPlaceDto;
 import com.tutorial.backend.controller.dto.ResultDto;
 import com.tutorial.backend.entity.Member;
 import com.tutorial.backend.entity.Place;
@@ -40,7 +41,7 @@ public class RecommendController {
             Optional<Member> foundMember = memberService.getMemberByMemberEmailAndPassword(userDetails.getUsername(),userDetails.getPassword());
 
             if(foundMember.isPresent()){
-                List<Place> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
+                List<MyPlaceDto> placeList = placeService.getPlaceListByMemberId(foundMember.get().getId());
 
                 // JSON 형식으로 요청 파라미터를 만듭니다.
                 MultiValueMap<String, String> requestParams = new LinkedMultiValueMap<>();

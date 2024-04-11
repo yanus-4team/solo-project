@@ -1,5 +1,6 @@
 package com.tutorial.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,10 +37,10 @@ public class Member {
     private Authority authority;
 
     private String memberProvider;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<PlaceHeader> placeHeaderList;
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Report> reportList;
 
